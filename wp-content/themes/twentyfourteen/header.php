@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
     <meta property="og:description" content="<?php bloginfo('description'); ?>" />
     <meta property="og:locale" content="en_GB" />
-    <meta property="og:site_name" content="Martin Costello&#039;s Blog" />
+    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
     <meta property="og:title" content="<?php the_title(); ?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="" />
