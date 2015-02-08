@@ -29,8 +29,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
     <meta property="og:description" content="<?php bloginfo('description'); ?>" />
     <meta property="og:locale" content="en_GB" />
-    <meta property="og:site_name" content="Martin Costello's Blog" />
-    <meta property="og:title" content="<?php wp_title( '|', true, 'right' ); ?>" />
+    <meta property="og:site_name" content="Martin Costello&#039;s Blog" />
+    <meta property="og:title" content="<?php get_the_title(); ?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="" />
     <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
     <meta name="twitter:description" content="<?php bloginfo('description'); ?>">
     <meta name="twitter:domain" content="blog.martincostello.com" />
     <meta name="twitter:site" content="@martin_costello">
-    <meta name="twitter:title" content="<?php wp_title( '|', true, 'right' ); ?>">
+    <meta name="twitter:title" content="<?php get_the_title(); ?>">
     <meta name="google-site-verification" content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0" />
     <meta name="msvalidate.01" content="D6C2E7551C902F1A396D8564C6452930" />
     <title><?php wp_title( '|', true, 'right' ); ?></title>
