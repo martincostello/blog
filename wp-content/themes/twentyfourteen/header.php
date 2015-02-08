@@ -21,7 +21,7 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="<?php get_the_author(); ?>" />
+    <meta name="author" content="<?php the_author(); ?>" />
     <meta name="copyright" content="&copy; Martin Costello 2014-2015" />
     <meta name="description" content="<?php bloginfo('description'); ?>" />
     <meta name="language" content="en" />
@@ -30,7 +30,7 @@
     <meta property="og:description" content="<?php bloginfo('description'); ?>" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="Martin Costello&#039;s Blog" />
-    <meta property="og:title" content="<?php get_the_title(); ?>" />
+    <meta property="og:title" content="<?php the_title(); ?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="" />
     <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
     <meta name="twitter:description" content="<?php bloginfo('description'); ?>">
     <meta name="twitter:domain" content="blog.martincostello.com" />
     <meta name="twitter:site" content="@martin_costello">
-    <meta name="twitter:title" content="<?php get_the_title(); ?>">
+    <meta name="twitter:title" content="<?php the_title(); ?>">
     <meta name="google-site-verification" content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0" />
     <meta name="msvalidate.01" content="D6C2E7551C902F1A396D8564C6452930" />
     <title><?php wp_title( '|', true, 'right' ); ?></title>
