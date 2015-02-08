@@ -47,6 +47,3 @@ get_header(); ?>
 get_sidebar();
 get_footer();
 ?>
-<?php
-header_remove('x-powered-by');
-?>
