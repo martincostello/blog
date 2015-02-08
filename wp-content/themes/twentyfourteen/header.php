@@ -19,17 +19,34 @@
 <html <?php language_attributes(); ?>>
 <!--<![endif]-->
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
-        <meta name="google-site-verification" content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0" />
-        <meta name="msvalidate.01" content="D6C2E7551C902F1A396D8564C6452930" />
-	<title><?php wp_title( '|', true, 'right' ); ?></title>
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<!--[if lt IE 9]>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
-	<![endif]-->
-	<?php wp_head(); ?>
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Martin Costello" />
+    <meta name="copyright" content="&copy; Martin Costello 2014-2015" />
+    <meta name="description" content="<?php wp_title( '|', true, 'right' ); ?>" />
+    <meta name="language" content="en" />
+    <meta name="robots" content="INDEX" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
+    <meta property="og:description" content="<?php wp_title( '|', true, 'right' ); ?>" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="@siteName" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@canonicalUri" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@martin_costello">
+    <meta name="twitter:domain" content="blog.martincostello.com" />
+    <meta name="twitter:site" content="@martin_costello">
+    <meta name="twitter:title" content="<?php wp_title( '|', true, 'right' ); ?>">
+    <meta name="google-site-verification" content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0" />
+    <meta name="msvalidate.01" content="D6C2E7551C902F1A396D8564C6452930" />
+    <title><?php wp_title( '|', true, 'right' ); ?></title>
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+    <!--[if lt IE 9]>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
+    <![endif]-->
+    <?php wp_head(); ?>
         <script type="text/javascript">
         if (self == top) {
             document.documentElement.className = document.documentElement.className.replace(/\bjs-flash\b/, '');
@@ -42,34 +59,34 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
-	<?php if ( get_header_image() ) : ?>
-	<div id="site-header">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-			<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
-		</a>
-	</div>
-	<?php endif; ?>
+    <?php if ( get_header_image() ) : ?>
+    <div id="site-header">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+            <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
+        </a>
+    </div>
+    <?php endif; ?>
 
-	<header id="masthead" class="site-header" role="banner">
-		<div class="header-main">
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+    <header id="masthead" class="site-header" role="banner">
+        <div class="header-main">
+            <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 
-			<div class="search-toggle">
-				<a href="#search-container" class="screen-reader-text"><?php _e( 'Search', 'twentyfourteen' ); ?></a>
-			</div>
+            <div class="search-toggle">
+                <a href="#search-container" class="screen-reader-text"><?php _e( 'Search', 'twentyfourteen' ); ?></a>
+            </div>
 
-			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
-				<button class="menu-toggle"><?php _e( 'Primary Menu', 'twentyfourteen' ); ?></button>
-				<a class="screen-reader-text skip-link" href="#content"><?php _e( 'Skip to content', 'twentyfourteen' ); ?></a>
-				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
-			</nav>
-		</div>
+            <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+                <button class="menu-toggle"><?php _e( 'Primary Menu', 'twentyfourteen' ); ?></button>
+                <a class="screen-reader-text skip-link" href="#content"><?php _e( 'Skip to content', 'twentyfourteen' ); ?></a>
+                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
+            </nav>
+        </div>
 
-		<div id="search-container" class="search-box-wrapper hide">
-			<div class="search-box">
-				<?php get_search_form(); ?>
-			</div>
-		</div>
-	</header><!-- #masthead -->
+        <div id="search-container" class="search-box-wrapper hide">
+            <div class="search-box">
+                <?php get_search_form(); ?>
+            </div>
+        </div>
+    </header><!-- #masthead -->
 
-	<div id="main" class="site-main">
+    <div id="main" class="site-main">
