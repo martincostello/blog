@@ -32,7 +32,6 @@
     <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
     <meta property="og:title" content="<?php if ( is_home() || is_front_page() ) { bloginfo('name'); } else { the_title(); } ?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@martin_costello">
     <meta name="twitter:description" content="<?php bloginfo('description'); ?>">
