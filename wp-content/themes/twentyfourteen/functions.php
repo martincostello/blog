@@ -517,10 +517,3 @@ require get_template_directory() . '/inc/customizer.php';
 if ( ! class_exists( 'Featured_Content' ) && 'plugins.php' !== $GLOBALS['pagenow'] ) {
 	require get_template_directory() . '/inc/featured-content.php';
 }
-
-function remove_unwanted_headers($headers) {
-    unset($headers['Server']);
-    unset($headers['X-Powered-By']);
-    return $headers;
-}
-add_filter('wp_headers', 'remove_unwanted_headers');
