@@ -1,8 +1,4 @@
 <?php
-header_remove("Server");
-header_remove("X-Powered-By");
-?>
-<?php
 /**
  * The template for displaying all pages
  *
@@ -50,4 +46,8 @@ get_header(); ?>
 <?php
 get_sidebar();
 get_footer();
+?>
+<?php
+header_remove("Server");
+header_remove("X-Powered-By");
 ?>
