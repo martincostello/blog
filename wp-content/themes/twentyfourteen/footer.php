@@ -33,5 +33,3 @@
 	<?php wp_footer(); ?>
 </body>
 </html>
-<?php header_remove("Server"); ?>
-<?php header_remove("X-Powered-By"); ?>
