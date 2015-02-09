@@ -26,7 +26,7 @@ define('WP_SETUP_CONFIG', true);
  *
  * Set this to error_reporting( E_ALL ) or error_reporting( E_ALL | E_STRICT ) for debugging
  */
-error_reporting(E_ALL);
+error_reporting(0);
 
 function setup_get_url() {
 	return ( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . str_replace('wp-content/mu-plugins/wp-db-abstraction/setup-config.php', '', $_SERVER['PHP_SELF']) );
@@ -40,7 +40,7 @@ function setup_get_url() {
 define('ABSPATH', dirname(dirname(dirname(dirname(__FILE__)))).'/');
 define('WPINC', 'wp-includes');
 define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 /**#@-*/
 
 require_once(ABSPATH . WPINC . '/load.php');
