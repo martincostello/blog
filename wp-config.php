@@ -24,7 +24,7 @@
 
 /** SQL Server */
 define('DB_NAME', 'wordpress');
-define('DB_USER', 'wordpress_user');
+define('DB_USER', 'wordpress_user@vuhhxypltc');
 define('DB_PASSWORD', '?Oe8QeqKj2UWVWS');
 define('DB_HOST', 'vuhhxypltc.database.windows.net,1433');
 define('DB_TYPE', 'sqlsrv');
