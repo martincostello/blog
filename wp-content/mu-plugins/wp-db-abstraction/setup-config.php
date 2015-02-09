@@ -153,22 +153,22 @@ switch($step) {
 	<table class="form-table">
 		<tr>
 			<th scope="row"><label for="dbname">Database Name</label></th>
-			<td><input name="dbname" id="dbname" type="text" size="25" value="wordpress" autocomplete="false" /></td>
+			<td><input name="dbname" id="dbname" type="text" size="25" value="wordpress" autocomplete="off" /></td>
 			<td>The name of the database you want to run WP in. </td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="uname">User Name</label></th>
-			<td><input name="uname" id="uname" type="text" size="25" value="username" autocomplete="false" /></td>
+			<td><input name="uname" id="uname" type="text" size="25" value="username" autocomplete="off" /></td>
 			<td>Your Database username</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="pwd">Password</label></th>
-			<td><input name="pwd" id="pwd" type="text" size="25" value="password" autocomplete="false" type="password" /></td>
+			<td><input name="pwd" id="pwd" type="password" size="25" value="password" autocomplete="off" /></td>
 			<td>...and Database password.</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="dbhost">Database Host</label></th>
-			<td><input name="dbhost" id="dbhost" type="text" size="25" value="localhost" autocomplete="false" /></td>
+			<td><input name="dbhost" id="dbhost" type="text" size="25" value="localhost" autocomplete="off" /></td>
 			<td>You should be able to get this info from your web host, if <code>localhost</code> does not work.</td>
 		</tr>
 		<tr>
