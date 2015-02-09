@@ -14,18 +14,20 @@
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
+/** MySQL */
 define('DB_NAME', 'martincARcOLsU3E');
-
-/** MySQL database username */
 define('DB_USER', 'b5fb59b7f9b92a');
-
-/** MySQL database password */
 define('DB_PASSWORD', '6d3ffb93');
-
-/** MySQL hostname */
 define('DB_HOST', 'eu-cdbr-azure-north-b.cloudapp.net');
+
+/** SQL Server */
+/**
+ * define('DB_NAME', '');
+ * define('DB_USER', '');
+ * define('DB_PASSWORD', '');
+ * define('DB_HOST', '');
+ * define('DB_TYPE', 'sqlsrv');
+*/
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
