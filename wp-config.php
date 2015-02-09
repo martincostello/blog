@@ -25,7 +25,7 @@ define('DB_HOST', 'eu-cdbr-azure-north-b.cloudapp.net');
 define('DB_NAME', 'wordpress');
 define('DB_USER', 'wordpress_user@vuhhxypltc');
 define('DB_PASSWORD', '?Oe8QeqKj2UWVWS');
-define('DB_HOST', 'vuhhxypltc.database.windows.net,1433');
+define('DB_HOST', 'vuhhxypltc.database.windows.net');
 define('DB_TYPE', 'sqlsrv');
 */
 
