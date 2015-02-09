@@ -50,10 +50,10 @@ require_once(ABSPATH . WPINC . '/functions.php');
 require_once(ABSPATH . WPINC . '/class-wp-error.php');
 require_once(ABSPATH . WPINC . '/version.php');
 
-if (!file_exists(ABSPATH . 'wp-config-sample.php'))
+if (!file_exists(ABSPATH . 'wp-config-sample2.php'))
 	wp_die('Sorry, I need a wp-config-sample.php file to work from. Please re-upload this file from your WordPress installation.');
 
-$configFile = file(ABSPATH . 'wp-config-sample.php');
+$configFile = file(ABSPATH . 'wp-config-sample2.php');
 
 // Check if wp-config.php has been created
 if (file_exists(ABSPATH . 'wp-config.php'))
