@@ -1,9 +1,10 @@
 <?php
-phpinfo();
+# phpinfo();
 ?>
 <?php
-$serverName = "vuhhxypltc.database.windows.net,1433";
-$connOptions = array("UID"=>"wordpress_user@vuhhxypltc", "PWD"=>"?Oe8QeqKj2UWVWS", "Database"=>"wordpress");
+/**
+$serverName = "CHANGEME.database.windows.net,1433";
+$connOptions = array("UID"=>"CHANGEME@CHANGEME", "PWD"=>"CHANGEME", "Database"=>"CHANGEME");
 $conn = sqlsrv_connect( $serverName, $connOptions );
 
 if( $conn === false ) {
@@ -17,4 +18,5 @@ if( $client_info = sqlsrv_client_info( $conn)) {
 } else {
     echo "Error in retrieving client info.<br />";
 }
+*/
 ?>
