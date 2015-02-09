@@ -26,7 +26,7 @@ define('WP_SETUP_CONFIG', true);
  *
  * Set this to error_reporting( E_ALL ) or error_reporting( E_ALL | E_STRICT ) for debugging
  */
-error_reporting(0);
+error_reporting(E_ALL | E_STRICT);
 
 function setup_get_url() {
 	return ( ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . str_replace('wp-content/mu-plugins/wp-db-abstraction/setup-config.php', '', $_SERVER['PHP_SELF']) );
