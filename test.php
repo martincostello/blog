@@ -1,3 +1,4 @@
 <?php
-# phpinfo();
+phpinfo();
+sqlsrv_client_info();
 ?>
