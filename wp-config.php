@@ -15,19 +15,19 @@
  */
 
 /** MySQL */
-define('DB_NAME', 'martincARcOLsU3E');
-define('DB_USER', 'b5fb59b7f9b92a');
-define('DB_PASSWORD', '6d3ffb93');
-define('DB_HOST', 'eu-cdbr-azure-north-b.cloudapp.net');
+/**
+ * define('DB_NAME', 'martincARcOLsU3E');
+ * define('DB_USER', 'b5fb59b7f9b92a');
+ * define('DB_PASSWORD', '6d3ffb93');
+ * define('DB_HOST', 'eu-cdbr-azure-north-b.cloudapp.net');
+*/
 
 /** SQL Server */
-/**
- * define('DB_NAME', '');
- * define('DB_USER', '');
- * define('DB_PASSWORD', '');
- * define('DB_HOST', '');
- * define('DB_TYPE', 'sqlsrv');
-*/
+define('DB_NAME', 'wordpress');
+define('DB_USER', 'wordpress_user');
+define('DB_PASSWORD', '?Oe8QeqKj2UWVWS');
+define('DB_HOST', 'vuhhxypltc.database.windows.net,1433');
+define('DB_TYPE', 'sqlsrv');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
