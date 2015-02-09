@@ -54,15 +54,14 @@ if (!file_exists(ABSPATH . 'wp-config-sample.php'))
 	wp_die('Sorry, I need a wp-config-sample.php file to work from. Please re-upload this file from your WordPress installation.');
 
 $configFile = file(ABSPATH . 'wp-config-sample.php');
-$outputConfigFile = file(ABSPATH . 'wp-config-sqlsrv.php');
 
-// Check if wp-config-sqlsrv.php has been created
-if (file_exists($outputConfigFile))
-	wp_die("<p>The file 'wp-config-sqlsrv.php' already exists. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='" . setup_get_url() . "wp-admin/install.php'>installing now</a>.</p>");
+// Check if wp-config.php has been created
+if (file_exists(ABSPATH . 'wp-config2.php'))
+	wp_die("<p>The file 'wp-config2.php' already exists. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='" . setup_get_url() . "wp-admin/install.php'>installing now</a>.</p>");
 
-// Check if wp-config-sqlsrv.php exists above the root directory but is not part of another install
-if (file_exists(ABSPATH . '../wp-config-sqlsrv.php') && ! file_exists(ABSPATH . '../wp-settings.php'))
-	wp_die("<p>The file 'wp-config-sqlsrv.php' already exists one level above your WordPress installation. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='" . setup_get_url() . "install.php'>installing now</a>.</p>");
+// Check if wp-config.php exists above the root directory but is not part of another install
+if (file_exists(ABSPATH . '../wp-config.php') && ! file_exists(ABSPATH . '../wp-settings.php'))
+	wp_die("<p>The file 'wp-config.php' already exists one level above your WordPress installation. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='" . setup_get_url() . "install.php'>installing now</a>.</p>");
 
 if ( version_compare( $required_php_version, phpversion(), '>' ) )
 	wp_die( sprintf( /*WP_I18N_OLD_PHP*/'Your server is running PHP version %1$s but WordPress requires at least %2$s.'/*/WP_I18N_OLD_PHP*/, phpversion(), $required_php_version ) );
@@ -320,12 +319,12 @@ switch($step) {
 <p class="step"><a href="<?php echo setup_get_url() ?>wp-admin/install.php" class="button">Run the install</a></p>
 <?php
 	else :
-		$handle = fopen($outputConfigFile, 'w');
+		$handle = fopen(ABSPATH . 'wp-config2.php', 'w');
 		foreach( $configFile as $line ) {
 			fwrite($handle, $line);
 		}
 		fclose($handle);
-		chmod($outputConfigFile, 0666);
+		chmod(ABSPATH . 'wp-config2.php', 0666);
 		display_header();
 ?>
 <p>All right sparky! You've made it through this part of the installation. WordPress can now communicate with your database. If you are ready, time now to&hellip;</p>
