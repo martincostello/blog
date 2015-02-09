@@ -40,7 +40,7 @@ function setup_get_url() {
 define('ABSPATH', dirname(dirname(dirname(dirname(__FILE__)))).'/');
 define('WPINC', 'wp-includes');
 define('WP_CONTENT_DIR', ABSPATH . 'wp-content');
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 /**#@-*/
 
 require_once(ABSPATH . WPINC . '/load.php');
