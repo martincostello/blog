@@ -3,7 +3,7 @@ phpinfo();
 ?>
 <?php
 $serverName = "vuhhxypltc.database.windows.net,1433";
-$connOptions = array("UID"=>"wordpress_user@vuhhxypltc", "PWD"=>"?Oe8QeqKj2UWVWS");
+$connOptions = array("UID"=>"wordpress_user@vuhhxypltc", "PWD"=>"?Oe8QeqKj2UWVWS", "Database"=>"wordpress");
 $conn = sqlsrv_connect( $serverName, $connOptions );
 
 if( $conn === false ) {
