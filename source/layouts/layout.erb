@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>">
     <meta name="google-site-verification" content="<%= site_verification_google %>" />
     <meta name="msvalidate.01" content="<%= site_verification_bing %>" />
-    <link rel="canonical" href="<%= site_root_uri + (current_page.path != "index.html" ? current_page.path : "") %>" />
+    <link rel="canonical" href="<%= URI.join(site_root_uri, (current_page.path != "index.html" ? current_page.path : "")) %>" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom" %>
