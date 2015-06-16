@@ -103,3 +103,9 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 end
+
+##
+# Custom Configuration
+##
+
+set :site_root_uri, "https://blog.martincostello.com/"
