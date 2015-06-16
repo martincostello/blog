@@ -28,10 +28,9 @@
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom" %>
     <%=
-        stylesheet_link_tag "jquery-2.1.4.min",
-                            "modernizr-2.8.3",
-                            "respond.min",
-                            "bootstrap.min",
+        stylesheet_link_tag "bootstrap-theme.min",
+                            "font-awesome.min",
+                            "site",
                             { type: nil, rel: "prefetch" }
     %>
     <%=
