@@ -8,6 +8,12 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
     xml.priority "0.5"
   end
 
+  xml.url do
+    xml.loc URI.join(site_url, "about-me.html")
+    xml.changefreq "monthly"
+    xml.priority "0.5"
+  end
+
   blog.articles.each do |article|
     xml.url do
       xml.loc URI.join(site_url, article.url)
