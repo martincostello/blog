@@ -73,6 +73,30 @@
             <p>&copy; <%= blog_author %> 2014-2015 | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a></p>
         </footer>
     </div>
+    <!--
+    <aside>
+      <h2>Recent Posts</h2>
+      <ol>
+        <% blog.articles[0...10].each do |article| %>
+          <li><%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span></li>
+        <% end %>
+      </ol>
+
+      <h2>Tags</h2>
+      <ol>
+        <% blog.tags.each do |tag, articles| %>
+          <li><%= link_to "#{tag} (#{articles.size})", tag_path(tag) %></li>
+        <% end %>
+      </ol>
+
+      <h2>By Year</h2>
+      <ol>
+        <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+          <li><%= link_to "#{year} (#{articles.size})", blog_year_path(year) %></li>
+        <% end %>
+      </ol>
+    </aside>
+    -->
     <%=
         javascript_include_tag "jquery-2.1.4.min",
                                "respond.min",
