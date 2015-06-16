@@ -4,6 +4,8 @@ date: 2014-03-04
 tags: security
 ---
 
+# Ensuring Your ASP.NET Website Is Secure
+
 ## Introduction
 
 So recently I've been doing some work ensuring some websites I work on are secure. This has been from a mix of hands-on testing of them myself, dealing with feedback from dedicated security testers testing the applications, and this week attending a "ASP.NET Secure Coding" training course.
