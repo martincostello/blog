@@ -109,6 +109,7 @@ end
 ##
 
 set :site_root_uri, "https://blog.martincostello.com/"
+set :analytics_domain, "blog.martincostello.com"
 set :analytics_id, "UA-42907618-1"
 set :blog_author, "Martin Costello"
 set :blog_title, "Martin Costello's Blog"
