@@ -9,7 +9,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
   end
 
   xml.url do
-    xml.loc URI.join(site_url, "about-me.html")
+    xml.loc URI.join(site_url, "about-me")
     xml.changefreq "monthly"
     xml.priority "0.5"
   end
