@@ -80,7 +80,7 @@ page "/feed.xml", layout: false
 #   end
 # end
 
-set :css_dir, 'stylesheets'
+set :css_dir, 'styles'
 
 set :js_dir, 'scripts'
 
