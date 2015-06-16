@@ -5,20 +5,17 @@
 Time.zone = "UTC"
 
 activate :blog do |blog|
-  # This will add a prefix to all links, template references and source paths
-  # blog.prefix = "blog"
 
-  # blog.permalink = "{year}/{month}/{day}/{title}.html"
-  # Matcher for blog source files
-  # blog.sources = "{year}-{month}-{day}-{title}.html"
-  # blog.taglink = "tags/{tag}.html"
+  blog.permalink = "{title}.html"
+  blog.sources = "{year}-{month}-{day}-{title}.html"
+  blog.taglink = "tags/{tag}.html"
   # blog.layout = "layout"
-  # blog.summary_separator = /(READMORE)/
-  # blog.summary_length = 250
-  # blog.year_link = "{year}.html"
-  # blog.month_link = "{year}/{month}.html"
-  # blog.day_link = "{year}/{month}/{day}.html"
-  # blog.default_extension = ".markdown"
+  blog.summary_separator = /(READMORE)/
+  blog.summary_length = 250
+  blog.year_link = "{year}.html"
+  blog.month_link = "{year}/{month}.html"
+  blog.day_link = "{year}/{month}/{day}.html"
+  blog.default_extension = ".md"
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
@@ -110,7 +107,8 @@ end
 ##
 
 set :site_domain, "blog.martincostello.com"
-set :site_root_uri, "https://blog.martincostello.com/"
+set :site_root_uri, "http://martin-laptop-3:4567/"
+#set :site_root_uri, "https://blog.martincostello.com/"
 set :analytics_id, "UA-42907618-1"
 set :blog_author, "Martin Costello"
 set :blog_title, "Martin Costello's Blog"
