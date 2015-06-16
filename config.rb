@@ -109,3 +109,4 @@ end
 ##
 
 set :site_root_uri, "https://blog.martincostello.com/"
+set :analytics_id, "UA-42907618-1"
