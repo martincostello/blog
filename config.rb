@@ -117,7 +117,8 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true
 ##
 
 set :site_domain, "blog.martincostello.com"
-set :site_root_uri, "http://martin-laptop-3:4567/"
+#set :site_root_uri, "http://martin-laptop-3:4567/"
+set :site_root_uri, "http://blogmartincostello.azurewebsites.net/"
 #set :site_root_uri, "https://blog.martincostello.com/"
 set :analytics_id, "UA-42907618-1"
 set :blog_author, "Martin Costello"
