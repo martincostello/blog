@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <title><%= current_page.data.title || "Martin Costello's Blog | The blog of a software developer and tester." %></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Martin Costello" />
+    <meta name="copyright" content="&copy; Martin Costello 2014-2015" />
+    <meta name="description" content="<%= current_page.data.title || "Martin Costello's Blog | The blog of a software developer and tester." %>" />
+    <meta name="language" content="en" />
+    <meta name="robots" content="INDEX" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
+    <meta property="og:description" content="<%= current_page.data.title || "Martin Costello's Blog | The blog of a software developer and tester." %>" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Martin Costello&#039;s Blog" />
+    <meta property="og:title" content="<%= current_page.data.title || "Martin Costello's Blog | The blog of a software developer and tester." %>" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@martin_costello">
+    <meta name="twitter:description" content="<%= current_page.data.title || "Martin Costello's Blog | The blog of a software developer and tester." %>">
+    <meta name="twitter:domain" content="blog.martincostello.com" />
+    <meta name="twitter:site" content="@martin_costello">
+    <meta name="twitter:title" content="<%= current_page.data.title || "Martin Costello's Blog | The blog of a software developer and tester." %>">
+    <meta name="google-site-verification" content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0" />
+    <meta name="msvalidate.01" content="D6C2E7551C902F1A396D8564C6452930" />
+    <link rel="canonical" href="/" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/sitemap.xml" rel="sitemap" type="application/xml" />
+    <link href="{0}" rel="prefetch" />
+    <%= javascript_include_tag "jquery-2.1.4" %>
+    <%= javascript_include_tag "modernizr-2.8.3" %>
+    <%= javascript_include_tag "respond" %>
+    <%= javascript_include_tag "bootstrap" %>
+    <%= stylesheet_link_tag "bootstrap-theme" %>
+    <%= stylesheet_link_tag "font-awesome" %>
+    <%= stylesheet_link_tag "site" %>
+    <script type="text/javascript">
+        if (self == top) {
+            document.documentElement.className = document.documentElement.className.replace(/\bjs-flash\b/, '');
+        }
+        else {
+            top.location = self.location;
+        }
+    </script>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">blog.martincostello.com</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <%= yield %>
+        <hr />
+        <footer>
+            <p>&copy; Martin Costello 2014-2015 | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a></p>
+        </footer>
+    </div>
+    <!--
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @if (this.Request.IsLocal)
+    {
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+    </script>
+    }
+    else
+    {
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-42907618-1']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    }
+    -->
+    </body>
+</html>
