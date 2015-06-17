@@ -25,17 +25,7 @@
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom" %>
-    <%=
-        stylesheet_link_tag "bootstrap-theme.min",
-                            "font-awesome.min",
-                            "site",
-                            { type: nil, rel: "prefetch" }
-    %>
-    <%=
-        stylesheet_link_tag "bootstrap-theme.min",
-                            "font-awesome.min",
-                            "site"
-    %>
+    <%= partial "css" %>
     <script type="text/javascript">
         if (self == top) {
             document.documentElement.className = document.documentElement.className.replace(/\bjs-flash\b/, '');
