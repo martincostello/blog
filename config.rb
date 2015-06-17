@@ -4,11 +4,9 @@
 
 Time.zone = "UTC"
 
-activate :directory_indexes
-
 activate :blog do |blog|
 
-  blog.permalink = "{title}"
+  blog.permalink = "{title}.html"
   blog.sources = "{year}-{month}-{day}-{title}.html"
   blog.taglink = "tags/{tag}.html"
   # blog.layout = "layout"
@@ -27,6 +25,8 @@ activate :blog do |blog|
   # blog.per_page = 10
   # blog.page_link = "page/{num}"
 end
+
+activate :directory_indexes
 
 page "/feed.xml", layout: false
 page "/sitemap.xml", layout: false
