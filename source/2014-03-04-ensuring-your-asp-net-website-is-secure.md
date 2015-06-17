@@ -290,6 +290,10 @@ protected void Application_PreSendRequestHeaders()
 
 In the above example, this instructs the browser to use strict transport security for a year, though this is specified for each request so essentially regenerates itself.
 
+*Updated 17/06/2015*
+
+If you can't run custom .NET code (e.g. a static site or a PHP site), you can use a URL Rewrite rule as suggested [here](http://www.hanselman.com/blog/HowToEnableHTTPStrictTransportSecurityHSTSInIIS7.aspx) by Scott Hanselman.
+
 ## Use HTTP-Only and SSL-Only Cookies
 
 To protect your sites users' cookies from being accessed by scripts in other domains and protect against them being read from min-in-the-middle attackers, ensure the following settings is enabled in Web.config:
