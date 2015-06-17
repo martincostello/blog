@@ -59,3 +59,7 @@ textarea
   white-space: pre;
   word-wrap: normal
 }
+
+div.fb-share-button.fb_iframe_widget > span {
+    vertical-align: initial !important;
+}
