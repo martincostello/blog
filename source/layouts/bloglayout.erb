@@ -9,11 +9,13 @@
         <p><%= partial "facebook" %>&nbsp;<%= partial "twitter" %>&nbsp;<%= partial "googleplus" %></p>
         <%= yield %>
         <p><%= partial "facebook" %>&nbsp;<%= partial "twitter" %>&nbsp;<%= partial "googleplus" %></p>
+        <div id="disqus_thread"></div>
         <hr />
         <%= partial "footer" %>
     </div>
     <%= partial "aside" %>
     <%= partial "scripts" %>
     <%= partial "analytics" %>
+    <%= partial "disqusthread" %>
     </body>
 </html>

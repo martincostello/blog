@@ -118,13 +118,15 @@ set :markdown, :fenced_code_blocks => true
 ##
 
 set :site_domain, "blog.martincostello.com"
-#set :site_root_uri, "http://martin-laptop-3:4567/"
-set :site_root_uri, "https://blogmartincostello.azurewebsites.net/"
+set :site_root_uri_canonical, "https://blog.martincostello.com/"
 #set :site_root_uri, "https://blog.martincostello.com/"
+set :site_root_uri, "https://blogmartincostello.azurewebsites.net/"
+#set :site_root_uri, "http://martin-laptop-3:4567/"
 set :analytics_id, "UA-42907618-1"
 set :blog_author, "Martin Costello"
 set :blog_title, "Martin Costello's Blog"
 set :blog_subtitle, "The blog of a software developer and tester."
+set :disqus_shortname, "martincostelloblog"
 set :site_verification_bing, "D6C2E7551C902F1A396D8564C6452930"
 set :site_verification_google, "ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"
 set :twitter_handle, "martin_costello"
