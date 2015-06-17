@@ -11,8 +11,9 @@ title: Martin Costello's Blog
     <% blog.articles[0..2].each do |article| %>
     <div class="col-md-<%= article_count == 1 ? "12" : (article_count == 2 ? "6" : "4") %>">
         <h2><%= link_to article.title, article %></h2>
-        <h3><%= article.date.strftime('%e %B %Y') %></h3>
-        <p><%= article.body %></p>
+        <p><%= article.date.strftime('%e %B %Y') %></p>
+        <p><%= article.summary %></p>
+        <p><a href="<%= article.url %>" alt="Read more" title="Read more">Read more...</a></p>
     </div>
     <% end %>
 </div>
