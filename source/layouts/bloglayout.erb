@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <%= partial "head" %>
+  <body>
+    <%= partial "navbar" %>
+    <div class="container body-content">
+        <h1><%= current_page.data.title %></h1>
+        <p><%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a></p>
+        <p><%= partial "facebook" %>&nbsp;<%= partial "twitter" %>&nbsp;<%= partial "googleplus" %></p>
+        <%= yield %>
+        <p><%= partial "facebook" %>&nbsp;<%= partial "twitter" %>&nbsp;<%= partial "googleplus" %></p>
+        <hr />
+        <%= partial "footer" %>
+    </div>
+    <%= partial "aside" %>
+    <%= partial "scripts" %>
+    <%= partial "analytics" %>
+    </body>
+</html>
