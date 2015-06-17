@@ -252,7 +252,7 @@ MvcHandler.DisableMvcResponseHeader = true;
 
 ## Secure The Root Of Your Site
 
-If you use a virtual directory for your site, you might have the root of the website just pointing to ```C:\Inetpub\wwwroot``` and it's default settings. This will undo all of the changes you make in your sub-directory for security if someone just navigates to the root.
+If you use a virtual directory for your site, you might have the root of the website just pointing to ```C:\Inetpub\wwwroot``` and its default settings. This will undo all of the changes you make in your sub-directory for security if someone just navigates to the root.
 
 The best way to deal with this is to manually configure the root site to:
 
