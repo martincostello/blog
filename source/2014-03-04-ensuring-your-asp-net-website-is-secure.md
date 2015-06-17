@@ -229,6 +229,19 @@ If you don't have access to the full IIS configuration (for example you are usin
 </configuration>
 ```
 
+*Updated 17/06/2015*
+
+You can also remove this using the following setting:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.web>
+    <httpRuntime enableVersionHeader="false" />
+  </system.web>
+</configuration>
+```
+
 ## Don't Expose the ASP.NET MVC Version
 
 As above (again), you should also hide the MVC version you're using. This is a simple one-line code change:
