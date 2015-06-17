@@ -6,6 +6,19 @@
     <meta name="copyright" content="&copy; <%= blog_author %> 2014-2015" />
     <meta name="description" content="<%= current_page.data.title || blog_title %>" />
     <meta name="language" content="en" />
+    <%
+      keywords = []      
+      if current_page.data.tags
+        current_page.data.tags.split(",").each do |tag|
+          keywords.push(tag)
+        end
+      else
+        blog.tags.each do |tag, articles|
+          keywords.push("#{tag}")
+        end
+      end
+    %>
+    <meta name="keywords" content="<%= keywords.join(",") %>" />
     <meta name="robots" content="INDEX" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
     <meta property="og:description" content="<%= current_page.data.title || blog_title %>" />
