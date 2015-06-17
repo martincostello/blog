@@ -182,7 +182,7 @@ To make sure this is suppressed for all requests (e.g. for static content such a
 
 *Updated 08/02/2015*
 
-If you're using Azure Websites, you can also use the following setting in Web.config as documented here to remove the Server HTTP response header:
+If you're using Azure Websites, you can also use the following setting in Web.config as documented here to remove the ```Server``` HTTP response header:
 
 ```
 <configuration>
