@@ -276,7 +276,7 @@ If you do this, two things to consider:
 
 This is again designed to help prevent man-in-the-middle and HTTPS Strip attacks. More information can be found [here](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security).
 
-To enable this, add the following to your Global.asax file:
+To enable this, add the following to your ```Global.asax.cs``` file:
 
 ```
 protected void Application_PreSendRequestHeaders()
