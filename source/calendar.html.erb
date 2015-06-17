@@ -22,7 +22,7 @@ pageable: true
 
 <ul>
   <% page_articles.each_with_index do |article, i| %>
-    <li><%= link_to article.title, article %> - <span><%= article.date.strftime('%d/%m/%y') %></span></li>
+    <li><%= link_to article.title, article %> - <span><%= article.date.strftime('%d/%m/%y') %></span> | <a href="<%= article.url %>#disqus_thread"></a></li>
   <% end %>
 </ul>
 
