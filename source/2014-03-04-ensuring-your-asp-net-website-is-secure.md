@@ -374,7 +374,7 @@ To help further framing, you can use the following Javascript in your page layou
 
 ## Don't Cache Secure Content
 
-If you have secure content on your site (i.e. content you need to be logged in to see), then you should not cache this content. It provides a way for an attacker to potentially access this content via the browser cache, even if the user is not logged in in the current session. The easiest way to do this is to update your Master page or _Layout.cshtml file to add the following HTTP meta tags:
+If you have secure content on your site (i.e. content you need to be logged in to see), then you should not cache this content. It provides a way for an attacker to potentially access this content via the browser cache, even if the user is not logged in in the current session. The easiest way to do this is to update your Master page or ```_Layout.cshtml``` file to add the following HTTP meta tags:
 
 ```
 <meta http-equiv="Cache-Control" content="no-cache, no-store" />
