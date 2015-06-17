@@ -27,8 +27,9 @@ With no further ado, the things to make sure you do...
 
 ## Require SSL
 
-This is an IIS setting, and it's pretty easy to enable. This ensures your IIS server returns a 302 HTTP code and redirects to the HTTPS version of your site. This is to protect against main-in-the-middle and Strip HTTPS attacks.
-For example if a user browses to *http://mysite.com* they will receive an HTTP 302 response and be redirected to *https://mysite.com* instead.
+This is an IIS setting, and it's pretty easy to enable. This ensures your IIS server returns a HTTP ```301 Moved Permanently``` or ```302 Found``` HTTP code and redirects to the HTTPS version of your site. This is to protect against main-in-the-middle and Strip HTTPS attacks.
+
+For example if a user browses to [http://martincostello.com/](http://martincostello.com/) they will receive an HTTP ```301 Moved Permanently``` and be redirected to [https://martincostello.com/](https://martincostello.com/) instead.
 
 *Updated 08/02/2015*
 
@@ -59,15 +60,36 @@ If you can't easily run any custom code like the MVC example above, you can use 
         <rule name="Redirect to HTTPS" stopProcessing="true">
           <match url="(.*)" />
           <conditions>
-            <add input="{HTTPS}" pattern="^OFF$" />
+            <add input="{HTTPS}" pattern="off" ignoreCase="true" />
           </conditions>
-          <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="SeeOther" />
+          <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
         </rule>
       </rules>
     </rewrite>
   </system.webServer>
 </configuration>
 ```
+
+*Updated 17/06/2015*
+
+If you are using MVC, as of [ASP.NET 5.2.4](http://aspnetwebstack.codeplex.com/SourceControl/changeset/9efcaf3315962488823acead507db18bf5c3e29d) you can issue an HTTP ```301``` instead of a HTTP ```302``` in the following way:
+
+```
+using System.Web.Mvc;
+ 
+namespace MyWebsite
+{
+    internal static class FilterConfig
+    {
+        internal static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new RequireHttpsAttribute(permanent: true));
+        }
+    }
+}
+```
+
+As of ASP.NET MVC 6 only permanent redirects are supported.
 
 ## Use Anti-Forgery Tokens
 
