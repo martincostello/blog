@@ -7,9 +7,11 @@ title: Martin Costello's Blog
     <p class="lead"><%= blog_subtitle %></p>
 </div>
 <div class="row">
-    <% blog.articles[0..3].each do |article| %>
-    <div class="col-md-4">
+    <% article_count = blog.articles.length %>
+    <% blog.articles[0..2].each do |article| %>
+    <div class="col-md-<%= article_count == 1 ? "12" : (article_count == 2 ? "6" : "4") %>">
         <h2><%= link_to article.title, article %></h2>
+        <h3><%= article.date.strftime('%e %B %Y') %></h3>
         <p><%= article.body %></p>
     </div>
     <% end %>
