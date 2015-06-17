@@ -29,7 +29,9 @@ end
 activate :directory_indexes
 
 page "/feed.xml", layout: false
+page "/humans.txt", layout: false, :directory_index => false
 page "/hostingstart.html", layout: false, :directory_index => false
+page "/robots.txt", layout: false, :directory_index => false
 page "/sitemap.xml", layout: false
 
 ###
