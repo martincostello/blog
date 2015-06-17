@@ -32,9 +32,7 @@
     <meta property="og:site_name" content="<%= blog_title %>" />
     <meta property="og:title" content="<%= current_page.data.title || blog_title %>" />
     <meta property="og:type" content="article" />
-    <!--
-    <meta property="og:updated_time" content="" />
-    -->
+    <meta property="og:updated_time" content="<%= File.mtime(current_page.source_file).iso8601 %>" />
     <meta property="og:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@<%= twitter_handle %>">
