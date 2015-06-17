@@ -21,7 +21,7 @@ READMORE
 
 I've arranged them by flaw/requirement, with a quick explanation for each and then the steps to fix. Some fixes are code, some are Web.config settings, and others require digging around in the Registry. After that there's some links to resources you can use to help test your site to check for a number of vulnerabilities you want to be protected against.
 
-In the spirit of Scott Hanselman I'd just like to point out: **any changes you make are at your own risk**. While these changes worked for me, make sure you test them yourself to ensure they solve the issue for you. Also, these fixes may not solve a particular vulnerability fully. I believe they do, but I don't have the full resources to exhaustively test every single one. Also, some may not be appropriate for your website. If that's true, that's your call - after all, it's your website. Basically *caveat emptor*.
+In the spirit of [Scott Hanselman](http://www.hanselman.com/) I'd just like to point out: **any changes you make are at your own risk**. While these changes worked for me, make sure you test them yourself to ensure they solve the issue for you. Also, these fixes may not solve a particular vulnerability fully. I believe they do, but I don't have the full resources to exhaustively test every single one. Also, some may not be appropriate for your website. If that's true, that's your call - after all, it's your website. Basically *caveat emptor*.
 
 With no further ado, the things to make sure you do...
 
