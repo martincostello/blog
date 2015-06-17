@@ -31,6 +31,41 @@ This is an IIS setting, and it's pretty easy to enable. This ensures your IIS se
 
 For example if a user browses to [http://martincostello.com/](http://martincostello.com/) they will receive an HTTP ```301 Moved Permanently``` and be redirected to [https://martincostello.com/](https://martincostello.com/) instead.
 
+Here's the output from a cURL request to my website ```http://martincostello.com/``` for example:
+
+```
+c:\Tools\Curl>curl http://martincostello.com/ -v
+* Adding handle: conn: 0x1fe3148
+* Adding handle: send: 0
+* Adding handle: recv: 0
+* Curl_addHandleToPipeline: length: 1
+* - Conn 0 (0x1fe3148) send_pipe: 1, recv_pipe: 0
+* About to connect() to martincostello.com port 80 (#0)
+*   Trying 94.245.106.104...
+* Connected to martincostello.com (94.245.106.104) port 80 (#0)
+> GET / HTTP/1.1
+> User-Agent: curl/7.31.0
+> Host: martincostello.com
+> Accept: */*
+>
+< HTTP/1.1 301 Moved Permanently
+< Content-Length: 150
+< Content-Type: text/html; charset=UTF-8
+< Location: https://martincostello.com/
+< Arr-Disable-Session-Affinity: True
+< X-Frame-Options: DENY
+< Date: Wed, 17 Jun 2015 17:56:08 GMT
+< <head><title>Document Moved</title></head><body><h1>Object Moved</h1>This document may be found <a HREF="https://martincostello.com/">here</a></body>
+* Connection #0 to host martincostello.com left intact
+```
+
+The parts of interest are the following two parts of the response:
+
+```
+< HTTP/1.1 301 Moved Permanently
+< Location: https://martincostello.com/
+```
+
 *Updated 08/02/2015*
 
 If you don't have access to the full IIS configuration (for example you are using Azure Websites), and are using ASP.NET MVC, you can use the [RequireHttpsAttribute](https://msdn.microsoft.com/en-us/library/system.web.mvc.requirehttpsattribute%28v=vs.118%29.aspx) attribute in your filters as shown below. This only works for requests processed by the MVC pipeline, so won't work for static content, for example.
@@ -90,6 +125,12 @@ namespace MyWebsite
 ```
 
 As of ASP.NET MVC 6 only permanent redirects are supported.
+
+To force MVC to require HTTPS for anti-forgery tokens, you can set this line of code:
+
+```
+AntiForgeryConfig.RequireSsl = true;
+```
 
 ## Use Anti-Forgery Tokens
 
@@ -461,5 +502,60 @@ var options = new CookieAuthenticationOptions()
     CookieHttpOnly = true,
     CookieSecure = CookieSecureOption.Always,
     ExpireTimeSpan = TimeSpan.FromMinutes(10),  // Set whatever appropriate lifetime your site requires for your security needs
+};
+```
+
+## Updated 17/06/2015
+
+Over the last few months I've found *even more* things that are a good idea to do (security is a face-paced world huh?). Here's some more bits and pieces you should consider.
+
+## Rename Your Cookies
+
+In the same way that hiding the ```Server``` HTTP response header disguises the fact that you are using ASP.NET, cookies served by your site can give the game away due to the default naming schemes used for the default cookies for things like Forms Authentication, Role Manager, ASP.NET Identity etc. Below are some example code snippets and configuration settings you can use to rename your cookies to disguise your technology stack further.
+
+### Rename the Forms Authentication Cookie
+
+```
+<configuration>
+  <system.web>
+    <authentication>
+      <forms name="myformscookie" />
+    </authentication>
+  </system.web>
+</configuration>
+```
+
+### Rename the Role Manager Cookie
+
+```
+<configuration>
+  <system.web>
+    <roleManager cookieName="myrolescookie" />
+  </system.web>
+</configuration>
+```
+
+### Rename the Session State Cookie
+
+```
+<configuration>
+  <system.web>
+    <sessionState cookieName="mysessioncookie" />
+  </system.web>
+</configuration>
+```
+
+### Rename the MVC Anti-Forgery Cookie
+
+```
+AntiForgeryConfig.CookieName = "myxsrfcookie";
+```
+
+### Rename the ASP.NET Identity Cookie
+
+```
+var options = new CookieAuthenticationOptions()
+{
+    CookieName = "myauthcookie",
 };
 ```
