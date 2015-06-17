@@ -152,21 +152,12 @@ RC4 ciphers are also considered to be [cryptographically broken](https://en.wiki
 
 ## HTML Encode User-Supplied Input
 
-You should never trust user input, **ever**, and never "mirror" it back to the user without HTML encoding it first. In MVC using the Razor view engine, this is handled for you automatically - you have to opt-in to shooting yourself in the foot.
+You should never trust user input, **ever**, and never "mirror" it back to the user without HTML encoding it first. If MVC using the Razor view engine, this is handled for you automatically - you have to opt-in to shooting yourself in the foot.
 
-For the first MVC view engine and for ASP.NET Forms, you need to ensure your HTML escape it yourself using one of the two syntaxes:
+For the non-Razor MVC view engine and for ASP.NET Web Forms, you need to ensure your HTML escape it yourself using one of the two syntaxes:
 
-### ASP.NET Forms
-
-```
-HttpUtility.HtmlEncode(Model.Value)
-```
-
-### MVC
-
-```
-HtmlHelper.Encode(Model.Value)
-```
+  1. ASP.NET Web Forms: ```HttpUtility.HtmlEncode(Model.Value)```
+  1. ASP.NET MVC: ```HtmlHelper.Encode(Model.Value)```
 
 ## Don't Expose the IIS Version
 
