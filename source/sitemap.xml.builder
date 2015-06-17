@@ -4,12 +4,14 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
 
   xml.url do
     xml.loc site_url
+    xml.lastmod File.mtime(blog.articles[0].source_file).iso8601
     xml.changefreq "monthly"
     xml.priority "0.5"
   end
 
   xml.url do
     xml.loc URI.join(site_url, "about-me")
+    xml.lastmod File.mtime("source/about-me.html.erb").iso8601
     xml.changefreq "monthly"
     xml.priority "0.5"
   end
