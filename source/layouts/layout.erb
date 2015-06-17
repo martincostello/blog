@@ -69,6 +69,10 @@
         </div>
     </div>
     <div class="container body-content">
+        <% if current_page.data.showTitle %>
+            <h1><%= current_page.data.title %></h1>
+            <p><%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a></p>
+        <% end %>
         <%= yield %>
         <hr />
         <footer>
