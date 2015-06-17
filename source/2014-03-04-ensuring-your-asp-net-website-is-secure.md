@@ -5,7 +5,7 @@ tags: security
 showTitle: true
 ---
 
-So recently I've been doing some work ensuring some websites I work on are secure. This has been from a mix of hands-on testing of them myself, dealing with feedback from dedicated security testers testing the applications, and this week attending a "ASP.NET Secure Coding" training course.
+So recently I've been doing some work ensuring some websites I work on are secure. This has been from a mix of hands-on testing of them myself, dealing with feedback from dedicated security testers testing the applications, and this week attending an "ASP.NET Secure Coding" training course.
 
 From my own testing I found the odd thing here and there during development based on what I've read in the past is best-practice. These were exclusively application/coding changes. Fixing these was a mix of "Oh yeah" realisations or a quick Google leading to MSDN or Stack Overflow, leading to some simple one-line changes here and there.
 
@@ -17,13 +17,13 @@ However, after three rounds of realisation, fixing and testing, there was one co
 
 So, Dear Reader, why have I written this? Well, I thought it would be a good idea to collate all the stuff that's best practice into a single blog post, and then include for each one the instructions of how to fix it. Helpful right? Well, at least I hope so.
 
+READMORE
+
 I've arranged them by flaw/requirement, with a quick explanation for each and then the steps to fix. Some fixes are code, some are Web.config settings, and others require digging around in the Registry. After that there's some links to resources you can use to help test your site to check for a number of vulnerabilities you want to be protected against.
 
 In the spirit of Scott Hanselman I'd just like to point out: **any changes you make are at your own risk**. While these changes worked for me, make sure you test them yourself to ensure they solve the issue for you. Also, these fixes may not solve a particular vulnerability fully. I believe they do, but I don't have the full resources to exhaustively test every single one. Also, some may not be appropriate for your website. If that's true, that's your call - after all, it's your website. Basically *caveat emptor*.
 
 With no further ado, the things to make sure you do...
-
-READMORE
 
 ## Require SSL
 
