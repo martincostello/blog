@@ -17,22 +17,35 @@
           keywords.push("#{tag}")
         end
       end
+      keywordsMeta = keywords.join(",")
     %>
-    <meta name="keywords" content="<%= keywords.join(",") %>" />
+    <meta name="keywords" content="<%= keywordsMeta %>" />
     <meta name="robots" content="INDEX" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
     <meta property="article:author" content="<%= blog_author %>" />
+    <meta property="article:tag" content="<%= keywordsMeta %>" />
     <meta property="og:description" content="<%= current_page.data.title || blog_title %>" />
+    <!--
+    <meta property="og:image" content="" />
+    -->
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="<%= blog_title %>" />
     <meta property="og:title" content="<%= current_page.data.title || blog_title %>" />
     <meta property="og:type" content="article" />
+    <!--
+    <meta property="og:updated_time" content="" />
+    -->
+    <meta property="og:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="<%= twitter_handle %>">
     <meta name="twitter:description" content="<%= current_page.data.title || blog_title %>">
     <meta name="twitter:domain" content="<%= site_domain %>" />
+    <!--
+    <meta name="twitter:image" content="" />
+    -->
     <meta name="twitter:site" content="<%= twitter_handle %>">
     <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>">
+    <meta name="twitter:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
     <meta name="google-site-verification" content="<%= site_verification_google %>" />
     <meta name="msvalidate.01" content="<%= site_verification_bing %>" />
     <link rel="canonical" href="<%= URI.join(site_root_uri, current_page.url) %>" />
