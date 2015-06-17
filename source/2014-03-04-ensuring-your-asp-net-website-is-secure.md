@@ -2,11 +2,8 @@
 title: Ensuring Your ASP.NET Website Is Secure
 date: 2014-03-04
 tags: security
+showTitle: true
 ---
-
-# Ensuring Your ASP.NET Website Is Secure
-
-## Introduction
 
 So recently I've been doing some work ensuring some websites I work on are secure. This has been from a mix of hands-on testing of them myself, dealing with feedback from dedicated security testers testing the applications, and this week attending a "ASP.NET Secure Coding" training course.
 
@@ -16,15 +13,17 @@ The same was true of the results from the dedicated security testers. This was s
 
 Then there was the security testing course. The title was a bit of a misnomer, as it wasn't so much "how to code securely" as "how to find security problems". It was very useful as it was quite eye-opening to discover what seemingly innocent "oh that's not important" small niggly things could actually, in the hands of a skilled "hacker", could actually lead to your machine being completely owned by an attacker.
 
-However, after three rounds of realisation, fixing and testing, there was one common theme I found with all of this "" there was no central resource detailing how to fix all of the issues that came up. There were a lot of resources where just one problem would be described (and sometimes a fix for it described), but a lot of the time there'd be a page about a problem, but you'd need to go to a completely different one for the fix. Some required some creative Googling to find, others were right there (if you knew what you were looking for).
+However, after three rounds of realisation, fixing and testing, there was one common theme I found with all of this - there was no central resource detailing how to fix all of the issues that came up. There were a lot of resources where just one problem would be described (and sometimes a fix for it described), but a lot of the time there'd be a page about a problem, but you'd need to go to a completely different one for the fix. Some required some creative Googling to find, others were right there (if you knew what you were looking for).
 
 So, Dear Reader, why have I written this? Well, I thought it would be a good idea to collate all the stuff that's best practice into a single blog post, and then include for each one the instructions of how to fix it. Helpful right? Well, at least I hope so.
 
 I've arranged them by flaw/requirement, with a quick explanation for each and then the steps to fix. Some fixes are code, some are Web.config settings, and others require digging around in the Registry. After that there's some links to resources you can use to help test your site to check for a number of vulnerabilities you want to be protected against.
 
-In the spirit of Scott Hanselman I'd just like to point out: **any changes you make are at your own risk**. While these changes worked for me, make sure you test them yourself to ensure they solve the issue for you. Also, these fixes may not solve a particular vulnerability fully. I believe they do, but I don't have the full resources to exhaustively test every single one. Also, some may not be appropriate for your website. If that's true, that's your call "" after all, it's your website. Basically *caveat emptor*.
+In the spirit of Scott Hanselman I'd just like to point out: **any changes you make are at your own risk**. While these changes worked for me, make sure you test them yourself to ensure they solve the issue for you. Also, these fixes may not solve a particular vulnerability fully. I believe they do, but I don't have the full resources to exhaustively test every single one. Also, some may not be appropriate for your website. If that's true, that's your call - after all, it's your website. Basically *caveat emptor*.
 
 With no further ado, the things to make sure you do...
+
+READMORE
 
 ## Require SSL
 
@@ -96,7 +95,7 @@ Something to watch out for here is if you do AJAX POST requests from your views.
 
 ## Enable IIS Custom Errors
 
-This is a pretty simple one. As well as improving the user-experience, it makes sure you don't accidentally leak error details (e.g. stack traces) to clients in the event of an exception occurring. There's two settings for this, one for IIS 6 and one for IIS 7. It's best to set both of these, so the below should be present as a bare minimum. Obviously, you can customise these further "" see MSDN for details.
+This is a pretty simple one. As well as improving the user-experience, it makes sure you don't accidentally leak error details (e.g. stack traces) to clients in the event of an exception occurring. There's two settings for this, one for IIS 6 and one for IIS 7. It's best to set both of these, so the below should be present as a bare minimum. Obviously, you can customise these further - see MSDN for details.
 
 ```
 <configuration>
@@ -131,7 +130,7 @@ RC4 ciphers are also considered to be [cryptographically broken](https://en.wiki
 
 ## HTML Encode User-Supplied Input
 
-You should never trust user input, **ever**, and never "mirror" it back to the user without HTML encoding it first. In MVC using the Razor view engine, this is handled for you automatically "" you have to opt-in to shooting yourself in the foot.
+You should never trust user input, **ever**, and never "mirror" it back to the user without HTML encoding it first. In MVC using the Razor view engine, this is handled for you automatically - you have to opt-in to shooting yourself in the foot.
 
 For the first MVC view engine and for ASP.NET Forms, you need to ensure your HTML escape it yourself using one of the two syntaxes:
 
@@ -386,7 +385,7 @@ I recommend the following resources to help test your sites security after you a
 
 ### Qualys SSL Labs Server Tester
 
-[This site](https://www.ssllabs.com/ssltest/index.html) tests the server configuration to test for use of things like SSL 2, RC4 ciphers and invalid SSL certificates. It's well worth using "" I used it to validate that the changes for SSL v2 and RC4 being disabled as I described above had been accomplished correctly on our servers.
+[This site](https://www.ssllabs.com/ssltest/index.html) tests the server configuration to test for use of things like SSL 2, RC4 ciphers and invalid SSL certificates. It's well worth using - I used it to validate that the changes for SSL v2 and RC4 being disabled as I described above had been accomplished correctly on our servers.
 
 [This post is a re-post of the article that was originally published [here](http://martincostello.blogspot.co.uk/2013/09/ensuring-your-aspnet-website-is-secure.html).]
 
