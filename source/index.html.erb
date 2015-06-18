@@ -6,13 +6,13 @@ title: Martin Costello's Blog
     <h1><%= blog_title %></h1>
     <p class="lead"><%= blog_subtitle %></p>
 </div>
+<% blog.articles[0..9].each do |article| %>
 <div class="row">
-    <% blog.articles[0..0].each do |article| %>
     <div class="col-md-12">
         <h2><%= link_to article.title, article %></h2>
         <p><%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> | <a href="<%= article.url %>#disqus_thread">0 comments</a></p>
         <p><%= article.summary %></p>
         <p><a href="<%= article.url %>" alt="Read more" title="Read more">Read more...</a></p>
     </div>
-    <% end %>
 </div>
+<% end %>
