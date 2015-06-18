@@ -22,7 +22,7 @@ The next hurdle was that I'm not really au-fait with MySQL management given I'm 
 
 Migrating to SQL Server it is then. Let's get started. Step one: where the hell is the website source?
 
-As everything had been set up for me in the Azure wizard, I'd never actually seen the website source itself, well, ever. Better get it then, which is pretty simple. I just had to FTP into the IIS website's directory in Azure and pull it out.
+As everything had been set up for me in the Azure wizard, I'd never actually seen the website source itself ever. Better get it then, which is pretty simple. I just had to FTP into the IIS website's directory in Azure and pull it out.
 
 Great I've got the source, now what do I do? Well I better put it in source control somewhere before I start tinkering. That way I can rollback if I mess everything up, plus I can setup a test slot somewhere where I can do testing without worrying about screwing up my "production" MySQL database. Azure has a nice [deploy from Git workflow](https://azure.microsoft.com/en-gb/documentation/articles/web-sites-publish-source-control/) so I'll go with a Git repo to look after it. There's some private configuration data for the site to run in Azure though (like connection strings) so I don't want it publicly available. GitHub don't allow private repositories for free but Visual Studio Online is always private, supports Git and is [free for up to 5 users](https://www.visualstudio.com/en-us/products/visual-studio-online-pricing-vs.aspx). I'm only one person, so great, sounds like the perfect fit. I'll get all the code checked in and branch and get to work then.
 
@@ -41,9 +41,9 @@ Cue montage of trying to get it to work to the theme of Murder She Wrote. I'll l
 
 As you can see, I gave up. The main problems and reasons being:
 
-  1. The WordPress plug-in was old and out-of-date (2 years+ since the last update) and didn't work properly with my version of WordPress;
+  1. The WordPress plug-in was out-of-date (2 years+ since the last update) and didn't work properly with my version of WordPress;
   1. The SQL Server PHP drivers didn't seem to want to run on PHP 5.5. After much banging my head against the wall I discovered that not only did they work fine with PHP 5.4, but also that the PHP drivers were already installed in Azure Websites meaning that lots of playing around trying to find the right binaries and get them to load were pointless;
-  1. I could not work out how to import the MySQL data in SQL Server successfully without violating unique constrains and/or losing data integrity.
+  1. I could not work out how to import the MySQL data in SQL Server successfully without violating unique constraints and/or losing data integrity.
 
 ## A Change Of Tack
 
@@ -228,7 +228,7 @@ You can also use partials in partials, which can be, erm, fun.
 
 ### Importing Content
 
-I was in the "lucky" situation of only having one extant blog post, so I didn't have to worry about a bulk import or conversion process, which you might not be so lucky to have the luxury of doing. Given this, I just copied the text from the old blog and then manually re-wrote it in Markdown in the new format to live in the new site. That was probably about a 30 minute job and wasn't overly taxing or vexing. There was also the homepage and "about me" pages in the old blog, but I just rewrote those from scratch.
+I was in the "lucky" situation of only having one extant blog post, so I didn't have to worry about a bulk import or conversion process, which you might not have the luxury of doing. Given this, I just copied the text from the old blog and then manually re-wrote it in Markdown in the new format to live in the new site. That was probably about a 30 minute job and wasn't overly taxing or vexing. There was also the homepage and "about me" pages in the old blog, but I just rewrote those from scratch.
 
 If you need to import content en-masse I'd suggest writing something in your language of choice to try and parse your existing articles and convert the text to Markdown. Alternatively you could just pull out the raw HTML and dump it into a Markdown file as-is and not worry about any dud formatting.
 
