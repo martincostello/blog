@@ -56,7 +56,7 @@ I didn't get my useful feedback from my followers, so I went to our friend Googl
    1. [Static Site Generators](https://staticsitegenerators.net/) - Just a big list, not very helpful;
    1. [StaticGen](https://www.staticgen.com/) - A much better curated list, ranked by the projects' GitHub star counts.
 
-The main one that lept out was [Jekyll](http://jekyllrb.com/) as I'd heard of it before and GitHub uses it to generate GitHub pages sites. However not long afterwards I discovered that [Jekyll doesn't officially support Windows](http://jekyllrb.com/docs/windows/). I'm mainly a Windows guy, and even though I have an Ubuntu VM in Hyper-V on my laptop, I'd rather stick with the environment and tools I know, so I ruled it out of the running.
+The main one that lept out was [Jekyll](http://jekyllrb.com/) as I'd heard of it before and GitHub uses it to generate GitHub pages sites. However not long afterwards I discovered that [Jekyll doesn't officially support Windows](http://jekyllrb.com/docs/windows/). I'm mainly a Windows guy, and even though I have an Ubuntu VM in Hyper-V on my laptop, I'd rather stick with the environment and tools I know. There are [guides for getting it to work on Windows](http://jekyll-windows.juthilo.com/), but as my heart wasn't set on Jekyll and I'd rather use something supported, so I ruled it out of the running.
 
 Cue some head-scratching, after which I did some further googling and found [this post by Scott Hanselman](http://www.hanselman.com/blog/RunningTheRubyMiddlemanStaticSiteGeneratorOnMicrosoftAzure.aspx). [Middleman](https://middlemanapp.com/) was in the second row on [StaticGen](https://www.staticgen.com/). Interesting...
 
@@ -89,16 +89,180 @@ This all looks very encouraging. In fact, this level of encouraging:
 
 ## Implementing The Blog
 
+So over the course of the next two evenings I set about in earnest migrating over from WordPress to Middleman. It involved a number of steps, and probably took about 10 hours' of effort in total. It was a mixture of migration, feature parity and some new features I fancied adding in because I was giving the blog some love so would be a good opportunity. I hadn't set myself a timescale or deadline for completing the work, but given I only had one extant blog post to worry about, I figured having it completed within a week would be reasonable.
 
-Then it was just a simple matter of pushing the final build of the site to Azure over FTP, reconfiguring my DNS and deleting the old Azure resources using the subscription I didn't want to use any more. Boom - Middleman static site in production.
+### Installing Ruby + DevKit
+
+Middleman uses some Ruby gems that need the Ruby DevKit so they can compile native extensions. While this is all [documented elsewhere on the internet](http://jekyll-windows.juthilo.com/1-ruby-and-devkit/), I'll just list the basic steps for doing this on Windows here:
+
+  1. [Download](http://rubyinstaller.org/downloads/) and install Ruby (I installed Ruby 2.2.2 (x64));
+  1. [Download]() and install the Ruby Development Kit (I installed the one for Ruby 2.0 (x64));
+  1. Run the following commands in a command-line window:
+
+  ```
+  ruby dk.rb init
+  ruby dk.rb install
+  ```
+
+### Setting Up Compilation
+
+I'm quite a big fan of being able to compile on the command-line, so I set myself up a ```Build.cmd``` and checked it into Git for compiling the site as I go. It's nothing ground-breaking, here's the content:
+
+```
+@echo off
+
+bundle exec middleman build %*
+```
+
+The it's just a simple command of:
+
+```
+c:\coding\blog>build
+```
+
+The ```%*``` on the end passes any arguments through to bundle, which is useful if compilation produces errors so you can do this to get more detail:
+
+```
+c:\coding\blog>build --verbose
+```
+
+### Feature Parity
+
+While WordPress has a plethora of plug-ins and being PHP is infinitely customisable, I never really ventured down that route as PHP isn't my thing. The only thing I'd be missing is a comments engine, but I'll cover that below. That means that all I really need to retain is the same site structure so that anything indexed by search engines doesn't result in a nasty 404. This was pretty much all covered by the examples in the Middleman example templates that got generated and just needed to be tweaked to my liking for how they rendered, like using proper UK date formats.
+
+Below are a few snippets and gotchas found in the process:
+
+#### Dropping .html From URLs
+
+Set this option on the blog in ```config.rb```:
+
+```
+blog.permalink = "{title}"
+```
+
+Then *after* the blog options, set this:
+
+```
+activate :directory_indexes
+```
+
+For a while I had blogs misbehaving but non-blog pages working as expected. This was fixed by turning on ```directory_indexes``` after the blog pages were considered when the directory indexes were created.
+
+#### Forcing CSS and Javascript Cache Updates
+
+```
+configure :build do
+  activate :asset_hash
+end
+```
+
+#### Fixing Timezone-related Errors
+
+Add this to ```Gemfile```:
+
+```
+gem "tzinfo-data"
+```
+
+#### Adding The Homepage To sitemap.xml With The Date Of The Lastest Blog Article
+
+```
+xml.url do
+  xml.loc site_url
+  xml.lastmod File.mtime(blog.articles[0].source_file).iso8601
+  xml.changefreq "monthly"
+  xml.priority "0.5"
+end
+```
+
+#### Adding Arbitrary Non-article Pages To sitemap.xml
+
+```
+xml.url do
+  xml.loc URI.join(site_url, "my-page")
+  xml.lastmod File.mtime("source/my-page.html.erb").iso8601
+  xml.changefreq "monthly"
+  xml.priority "0.5"
+end
+```
+
+#### Parameterise All The Things
+
+Put commonly used text, variables etc. as variables in your ```config.rb``` file. For example:
+
+```
+set :site_root_uri_canonical, "https://blog.martincostello.com/"
+set :blog_author, "Martin Costello"
+set :twitter_handle, "martin_costello"
+```
+
+I'm unlikely to change my name any time soon, but it makes the code a bit more readable that being hard-coded literals of my name all over the codebase.
+
+### Importing Content
+
+I was in the "lucky" situation of only having one extant blog post, so I didn't have to worry about a bulk import or conversion process, which you might not be so lucky to have the luxury of doing. Given this, I just copied the text from the old blog and then manually re-wrote it in Markdown in the new format to live in the new site. That was probably about a 30 minute job and wasn't overly taxing or vexing. There was also the homepage and "about me" pages in the old blog, but I just rewrote those from scratch.
+
+If you need to import content en-masse I'd suggest writing something in your language of choice to try and parse your existing articles and convert the text to Markdown. Alternatively you could just pull out the raw HTML and dump it into a Markdown file as-is and not worry about any dud formatting.
+
+### Syntax Highlighting
+
+My [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) uses a lot of code examples and when this blog was still running in its PHP incarnation I was never really happy with the styling.  For this new blog I did some digging around to find something to use. Again, it turns out there's a dedicated Middleman plug-in just for this: ```middleman-syntax```.
+
+You can wire-it up to use [Rouge]() just like GitHub pages, so that's exactly what I did.
+
+All it took was these lines in the gemfile:
+
+```
+gem "middleman-syntax"
+gem "redcarpet"
+```
+
+And these configuration settings in ```config.rb```:
+
+```
+activate :syntax
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true
+```
+
+### Security
+
+I like to ensure all my sites are best-practice secured, so I ran through the points in my [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) and sorted everything out. As there's no code in the site as it's static, this was purely ```Web.config``` jiggery-pokery to get IIS running in Azure doing what I wanted.
+
+### Eye-Candy
+
+As I was doing a relaunch and spruce-up, I figured I'd add a few nice-to-have features to the site to spruce it up. Namely:
+
+  1. Integration with [Disqus](https://disqus.com/) for comments;
+  1. Social sharing buttons for Facebook, Google+ and Twitter;
+  1. Review my SEO and Social Media related metadata (like OpenGraph ```<meta>``` tags).
+
+I won't get into the detail here as you can see the results here in the blog for yourself, but it was just simple following of the integration guides for Disqus and social sharing and using partials for the buttons and scripts etc. so they were centralised and I could re-use them as needed with minimal fuss.
+
+### Switching Over
+
+With all the feature and testing cards on my VS Online task board in the Done column, it was time to put the site live. Ideally I'd have done it with 100% uptime (just for the show-off factor), but I couldn't due to the need to migrate the SSL host name bindings between Azure Web Apps due to the subscription changeover. For my particular set up this involved:
+
+  1. Remove the host name binding for ```blog.martincostello.com``` from the old Web App;
+  1. Add the host name binding for ```blog.martincostello.com``` to the new Web App;
+  1. Setup the SSL certificate binding;
+  1. Update my DNS ```CNAME``` to point at the new Web App;
+  1. Flush my DNS cache.
+
+Then it was just a simple matter of pushing the final build of the site to Azure over FTP, checking it was working and deleting the old Azure resources using the subscription I didn't want to use any more. At which point I felt quite pleased with myself!
 
 <blockquote class="twitter-tweet" align="center" lang="en"><p lang="en" dir="ltr">So long Wordpress.&#10;Bye bye MySQL.&#10;Hello Middleman.</p>&mdash; Martin Costello (@martin_costello) <a href="https://twitter.com/martin_costello/status/611300636324462592">June 17, 2015</a></blockquote>
 
-## And The End Result?
+## Conclusion
 
-I think this tweet, and the fact that you are reading this blog post, speak for themselves:
+Middleman is a nice static site generator to use for a blog. It has a plug-in for blogging, lets you use Markdown for authoring, has built-in support for paging, sorting, tags and all the other goodness you'd expect in a simple blog. There's a bit of a learning curve if you're not that familiar with Ruby, but unless you want to do something *really* custom, you shouldn't need to learn anything beyond a few loops and string/date formatting. Most of the Ruby you'll write will be tag blocks to output dynamic content during the build process:
+
+```
+<%= current_page.data.title %>
+```
+
+The biggest selling point for me was being able to use Markdown to write posts. In fact, that's what I'm writing this very post in right now. I've got a few more things left to implement in the near future, such as automating deployment of the ```build``` folder to Azure using Git so I don't need to do manual FTP copies, and adding in a proper HTML sidebar to the pages to list the recent posts and the post archive. Other that that I'm a lot happier with the appearance of my blog, the management overhead, and the cost, than I ever was with the PHP incarnation.
+
+I think this tweet, and the fact that you are reading this blog post right now, speak for themselves:
 
 <blockquote class="twitter-tweet" align="center" lang="en"><p lang="en" dir="ltr">Two evenings of effort and my blog re-architecture is done and Wordpress is in the bin:  <a href="https://t.co/2gD4SGzE4p">https://t.co/2gD4SGzE4p</a></p>&mdash; Martin Costello (@martin_costello) <a href="https://twitter.com/martin_costello/status/611430850060812290">June 18, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-Happy Martin :)
