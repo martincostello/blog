@@ -1,6 +1,6 @@
 ---
 title: Why I Switched From WordPress To Middleman
-date: 2015-06-21
+date: 2015-06-18
 tags: blogging,middleman,wordpress
 layout: bloglayout
 ---
