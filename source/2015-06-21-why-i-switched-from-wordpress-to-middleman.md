@@ -7,7 +7,7 @@ layout: bloglayout
 
 A few years ago I thought I'd set up a blog. Initially I created a blog in [Blogspot](http://martincostello.blogspot.co.uk/) but I decided some time later that I'd rather host it myself with custom DNS, etc., mainly as a learning exercise. As I'm mostly a developer in the Microsoft stack, I decided I'd set it up in Windows Azure as an Azure Website (now a "Microsoft Azure Web App") as that was something I knew of and knew a little about. A few clicks through a wizard later and I had a WordPress blog running in Azure, backed by a MySQL database. Great - time to get blogging!
 
-Flash-foward a few years, and I've got a sum total of [one solitary blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/). Yeah, so I've been a bit slack on the whole writing a blog thing. However I've got an idea for a second blog post that I've been procrastinating over writing for a while, so I thought I'd start on that. By this point I'd grown two different Azure subscriptions and the blog was running in the wrong one and I was starting to hit limits on my free Azure credits due to other usage, so I figured I'd switch it around. The problems begin.
+Flash-foward a few years, and I had a sum total of [one solitary blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/). Yeah, so I'd been a bit slack on the whole writing a blog thing. However I've got an idea for a second blog post that I've been procrastinating over writing for a while, so I thought I'd start on that (aside: this isn't that blog post, that's coming soon). By this point I'd grown two different Azure subscriptions and the blog was running in the wrong one and I was starting to hit limits on my free Azure credits due to other usage, so I figured I'd switch it around. The problems begin.
 
 READMORE
 
@@ -16,7 +16,7 @@ READMORE
 So the first problem was that the MySQL database that Azure automatically provisioned for me when the WordPress blog was initially provisioned is through a third-party provider. I had no idea where this was, but eventually through some clicking of buried-away links in the Azure portal I found a link through to the third-party portal for the database. It was then that I discovered that the database was on a free tier with a paltry 20MB maximum size. 20MB seemed a bit pathetic considering with one post I'd already used 15MB, and I already wanted to move the database to a different subscription so why remove the limit and start paying more? So how do you move a MySQL database from one subscription to another? I don't know, I never found out - more on this later.
 
 The next hurdle was that I'm not really au-fait with MySQL management given I'm a Microsoft/Windows guy, and if I'm honest I wasn't particularly inclined to learn to do so either.  Microsoft have been pushing for SQL Server interoperability with PHP (which WordPress is written in) for [a while](http://blogs.technet.com/b/dataplatforminsider/archive/2014/11/06/available-today-preview-release-of-the-sql-server-php-driver.aspx) so I thought why not migrate to use SQL Server as the data store instead? That way I can host a SQL database (which I know how to do) in Azure in the right subscription and point WordPress at that instead. There's [PHP drivers for SQL Server]
-(https://msdn.microsoft.com/en-us/data/ff657782.aspx) now and a [WordPress plugin](https://wordpress.org/plugins/wordpress-database-abstraction/) for using SQL Server as well? Microsoft have even [blogged about](http://blogs.msdn.com/b/brian_swan/archive/2010/05/12/running-wordpress-on-sql-server.aspx) how to do it, so it can't be that hard, right? Wrong.
+(https://msdn.microsoft.com/en-us/data/ff657782.aspx) now and a [WordPress plugin](https://wordpress.org/plugins/wordpress-database-abstraction/) for using SQL Server as well? Microsoft have even [blogged about](http://blogs.msdn.com/b/brian_swan/archive/2010/05/12/running-wordpress-on-sql-server.aspx) how to do it, so it can't be that hard, right? **Wrong** as I was about to discover.
 
 ## The Abortive Attempt To Use SQL Server
 
@@ -96,7 +96,7 @@ So over the course of the next two evenings I set about in earnest migrating ove
 Middleman uses some Ruby gems that need the Ruby DevKit so they can compile native extensions. While this is all [documented elsewhere on the internet](http://jekyll-windows.juthilo.com/1-ruby-and-devkit/), I'll just list the basic steps for doing this on Windows here:
 
   1. [Download](http://rubyinstaller.org/downloads/) and install Ruby (I installed Ruby 2.2.2 (x64));
-  1. [Download]() and install the Ruby Development Kit (I installed the one for Ruby 2.0 (x64));
+  1. [Download](http://rubyinstaller.org/downloads/) and install the Ruby Development Kit (I installed the one for Ruby 2.0 (x64));
   1. Run the following commands in a command-line window:
 
   ```
@@ -114,7 +114,7 @@ I'm quite a big fan of being able to compile on the command-line, so I set mysel
 bundle exec middleman build %*
 ```
 
-The it's just a simple command of:
+Then it's just a simple command of:
 
 ```
 c:\coding\blog>build
@@ -134,7 +134,9 @@ Below are a few snippets and gotchas found in the process:
 
 #### Dropping .html From URLs
 
-Set this option on the blog in ```config.rb```:
+WordPress defaults to extensionless URLs. To keep my URLs I needed to get rid of them.
+
+To do this, set this option on the blog in ```config.rb```:
 
 ```
 blog.permalink = "{title}"
@@ -150,6 +152,8 @@ For a while I had blogs misbehaving but non-blog pages working as expected. This
 
 #### Forcing CSS and Javascript Cache Updates
 
+If you change your CSS browser caches might not pick-up the change and you'll end up with a screwy UX. If you activate asset hashing as described below, your CSS and Javascript paths (assuming you use the ```javascript_include_tag``` or ```stylesheet_link_tag``` helpers to render them) will have a hash added to the file name so that they move between deployments, forcing client caches to be invalidated.
+
 ```
 configure :build do
   activate :asset_hash
@@ -158,13 +162,15 @@ end
 
 #### Fixing Timezone-related Errors
 
-Add this to ```Gemfile```:
+The blog plug-in uses the ```tzinfo``` gem to handle timezones. However Windows doesn't include the data required for this that Linux has natively, which causes builds to fail. The remedy this add this line to ```Gemfile```:
 
 ```
 gem "tzinfo-data"
 ```
 
 #### Adding The Homepage To sitemap.xml With The Date Of The Lastest Blog Article
+
+The blog template comes with a ```sitemap.xml.builder``` file which renders a sitemap of articles in the blog for you. It won't render any other pages you might have though. There's probably a snazzier way to enumerate the pages during the build and list everything, but I only wanted two extra entries. To add them manually, you can add something like the code below. This adds an entry for the root of the site, and dates it as being updated at the same time as the latest blog entry (because it lists the last few posts on it).
 
 ```
 xml.url do
@@ -175,15 +181,10 @@ xml.url do
 end
 ```
 
-#### Adding Arbitrary Non-article Pages To sitemap.xml
+For other pages, I change ```<lastmod>``` to be the filetime of the relevant source file:
 
 ```
-xml.url do
-  xml.loc URI.join(site_url, "my-page")
-  xml.lastmod File.mtime("source/my-page.html.erb").iso8601
-  xml.changefreq "monthly"
-  xml.priority "0.5"
-end
+xml.lastmod File.mtime("source/my-page.html.erb").iso8601
 ```
 
 #### Parameterise All The Things
@@ -198,6 +199,33 @@ set :twitter_handle, "martin_costello"
 
 I'm unlikely to change my name any time soon, but it makes the code a bit more readable that being hard-coded literals of my name all over the codebase.
 
+#### Partial All The Things
+
+Similar to ASP.NET MVC, as well as full pages Middleman supports partial pages for snippet re-use. I've used this liberally throughout this site to try and keep to the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
+
+As an example here's the raw code for my entire layout page which contains 7 partials.
+
+```
+<!DOCTYPE html>
+<html lang="en-gb">
+  <%= partial "head" %>
+  <body>
+    <%= partial "navbar" %>
+    <div class="container body-content">
+        <%= yield %>
+        <hr />
+        <%= partial "footer" %>
+    </div>
+    <%= partial "aside" %>
+    <%= partial "scripts" %>
+    <%= partial "analytics" %>
+    <%= partial "disquscount" %>
+    </body>
+</html>
+```
+
+You can also use partials in partials, which can be, erm, fun.
+
 ### Importing Content
 
 I was in the "lucky" situation of only having one extant blog post, so I didn't have to worry about a bulk import or conversion process, which you might not be so lucky to have the luxury of doing. Given this, I just copied the text from the old blog and then manually re-wrote it in Markdown in the new format to live in the new site. That was probably about a 30 minute job and wasn't overly taxing or vexing. There was also the homepage and "about me" pages in the old blog, but I just rewrote those from scratch.
@@ -208,7 +236,7 @@ If you need to import content en-masse I'd suggest writing something in your lan
 
 My [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) uses a lot of code examples and when this blog was still running in its PHP incarnation I was never really happy with the styling.  For this new blog I did some digging around to find something to use. Again, it turns out there's a dedicated Middleman plug-in just for this: ```middleman-syntax```.
 
-You can wire-it up to use [Rouge]() just like GitHub pages, so that's exactly what I did.
+You can wire-it up to use [Rouge](https://github.com/jneen/rouge) just like GitHub pages, so that's exactly what I did.
 
 All it took was these lines in the gemfile:
 
