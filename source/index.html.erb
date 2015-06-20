@@ -11,7 +11,7 @@ description: "The blog of a software developer and tester based in London."
 <div class="row">
     <div class="col-md-12">
         <h2><%= link_to article.title, article %></h2>
-        <p><%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> | <a href="<%= article.url %>#disqus_thread">0 comments</a></p>
+        <p><%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> | <a href="<%= article.url %>#disqus_thread">0 Comments</a> | <a href="/feed.xml"><i class="fa fa-rss"></i></a></p>
         <p><%= article.summary %></p>
         <p><a href="<%= article.url %>" alt="Read more" title="Read more">Read more...</a></p>
     </div>
