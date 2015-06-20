@@ -1,4 +1,4 @@
 <footer>
   <p><a href="https://twitter.com/<%= twitter_handle %>" class="twitter-follow-button" data-show-count="false">Follow @<%= twitter_handle %></a></p>
-  <p>&copy; <%= blog_author %> 2014-2015 | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a></p>
+  <p>&copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %> | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a></p>
 </footer>
