@@ -33,10 +33,10 @@
     <link rel="canonical" href="<%= URI.join(site_root_uri, current_page.url) %>" />
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
-    <!--
+    <%#
     <link rel="next" href="" />
     <link rel="prev" href="" />
-    -->
+    %>
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom" %>
     <%= partial "css" %>
     <script type="text/javascript">
