@@ -9,10 +9,10 @@
             <p class="lead"><%= current_page.data.description %></p>
         </div>
         <p><%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> | <a href="<%= URI.join(site_root_uri, current_page.url) %>#disqus_thread">0 comments</a></p>
-        <p><%= partial "facebook" %>&nbsp;<%= partial "twittershare" %>&nbsp;<%= partial "googleplus" %></p>
+        <p><%= partial "facebookshare" %>&nbsp;<%= partial "twittershare" %>&nbsp;<%= partial "googleplusshare" %></p>
         <%= yield %>
         <hr />
-        <p><%= partial "facebook" %>&nbsp;<%= partial "twittershare" %>&nbsp;<%= partial "googleplus" %></p>
+        <p><%= partial "facebookshare" %>&nbsp;<%= partial "twittershare" %>&nbsp;<%= partial "googleplusshare" %></p>
         <div id="disqus_thread"></div>
         <hr />
         <%= partial "footer" %>
