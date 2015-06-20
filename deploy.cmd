@@ -56,6 +56,7 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 
 echo Building website.
 
+call :ExecuteCmd GetRuby.cmd
 call :ExecuteCmd Build.cmd
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
