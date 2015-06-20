@@ -6,6 +6,9 @@ REM Put Ruby in Path
 REM You can also use %TEMP% but it is cleared on site restart. Tools is persistent.
 SET PATH=%PATH%;D:\home\site\deployments\tools\r\ruby-2.1.5-x64-mingw32\bin
 
+SET _7ZIP="%PROGRAMFILES%\7-Zip\7z.exe"
+if not exist %_7ZIP% SET _7ZIP=d:\7zip\7za
+
 REM I am in the repository folder
 pushd D:\home\site\deployments\tools 
 if not exist r md r
@@ -21,14 +24,14 @@ REM 64bit
 curl -o ruby215.zip http://dl.bintray.com/oneclick/rubyinstaller/ruby-2.1.5-x64-mingw32.7z?direct
 REM Azure puts 7zip here!
 echo START Unzipping Ruby
-d:\7zip\7za x -xr!*.ri -y ruby215.zip > rubyout
+%_7ZIP% x -xr!*.ri -y ruby215.zip > rubyout
 echo DONE Unzipping Ruby
 
 REM Get DevKit to build Ruby native gems  
 REM If you don't need DevKit, rem this out.
 curl -o DevKit.zip http://cdn.rubyinstaller.org/archives/devkits/DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe
 echo START Unzipping DevKit
-d:\7zip\7za x -y -oDevKit DevKit.zip > devkitout
+%_7ZIP% x -y -oDevKit DevKit.zip > devkitout
 echo DONE Unzipping DevKit
 
 REM Init DevKit
