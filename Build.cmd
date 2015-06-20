@@ -1,4 +1,4 @@
 @echo off
 
-git rev-parse > version.txt
+git rev-parse HEAD > version.txt
 bundle exec middleman build %*
