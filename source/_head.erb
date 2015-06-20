@@ -28,26 +28,8 @@
     <meta name="msapplication-starturl" content="/" />
     <meta property="article:author" content="<%= blog_author %>" />
     <meta property="article:tag" content="<%= keywordsMeta %>" />
-    <meta property="og:description" content="<%= current_page.data.title || blog_title %>" />
-    <!--
-    <meta property="og:image" content="" />
-    -->
-    <meta property="og:locale" content="en_GB" />
-    <meta property="og:site_name" content="<%= blog_title %>" />
-    <meta property="og:title" content="<%= current_page.data.title || blog_title %>" />
-    <meta property="og:type" content="article" />
-    <meta property="og:updated_time" content="<%= File.mtime(current_page.source_file).iso8601 %>" />
-    <meta property="og:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:creator" content="@<%= twitter_handle %>">
-    <meta name="twitter:description" content="<%= current_page.data.title || blog_title %>">
-    <meta name="twitter:domain" content="<%= site_domain %>" />
-    <!--
-    <meta name="twitter:image" content="" />
-    -->
-    <meta name="twitter:site" content="@<%= twitter_handle %>">
-    <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>">
-    <meta name="twitter:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
+    <%= partial "opengraph" %>
+    <%= partial "twittermeta" %>
     <meta name="google-site-verification" content="<%= site_verification_google %>" />
     <meta name="msvalidate.01" content="<%= site_verification_bing %>" />
     <link rel="canonical" href="<%= URI.join(site_root_uri, current_page.url) %>" />
