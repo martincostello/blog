@@ -56,5 +56,3 @@ call bundle install
 
 cd %DEPLOYMENT_SOURCE%
 cd
-
-REM KuduSync is after this!
