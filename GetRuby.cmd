@@ -53,7 +53,7 @@ popd
 
 :end
 
-REM Need to be in Reposistory
+REM Need to be in Repository
 cd %DEPLOYMENT_SOURCE%
 cd
 
