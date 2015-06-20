@@ -1,14 +1,19 @@
 xml.instruct!
-xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
+xml.feed "xmlns" => "http://www.w3.org/2005/Atom", "xml:lang" => "en-GB" do
   site_url = site_root_uri
   xml.title blog_title
   xml.subtitle blog_subtitle
   xml.id URI.join(site_url, blog.options.prefix.to_s)
   xml.link "href" => URI.join(site_url, blog.options.prefix.to_s)
   xml.link "href" => URI.join(site_url, current_page.path), "rel" => "self"
+  xml.rights "&copy; " + blog_author + " 2014-" + Time.now.utc.strftime("%Y")
   xml.updated(blog.articles.first.date.to_time.iso8601) unless blog.articles.empty?
-  xml.author { xml.name blog_author }
-
+  xml.author do
+    xml.name blog_author
+    xml.uri "https://martincostello.com"
+    xml.email "martin@martincostello.com"
+  end
+  
   blog.articles[0..5].each do |article|
     xml.entry do
       xml.title article.title
