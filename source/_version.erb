@@ -1,0 +1,10 @@
+<%
+  file = File.open("version.txt", "rb")
+  git_sha = file.read
+  file.close()
+%>
+<!--
+
+  Build Timestamp: <%= Time.now.utc.iso8601 %>
+  Built From:      <%= git_sha %>
+-->
