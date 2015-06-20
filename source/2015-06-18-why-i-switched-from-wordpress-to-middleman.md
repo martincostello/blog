@@ -3,7 +3,7 @@ title: Why I Switched From WordPress To Middleman
 date: 2015-06-18
 tags: blogging,middleman,wordpress
 layout: bloglayout
-description: "Why I switched from using WordPress to the Middleman static site generating for writing my blog."
+description: "Why I switched from using WordPress to the Middleman static site generator for writing my blog."
 ---
 
 A few years ago I thought I'd set up a blog. Initially I created a blog in [Blogspot](http://martincostello.blogspot.co.uk/) but I decided some time later that I'd rather host it myself with custom DNS, etc., mainly as a learning exercise. As I'm mostly a developer in the Microsoft stack, I decided I'd set it up in Windows Azure as an Azure Website (now a "Microsoft Azure Web App") as that was something I knew of and knew a little about. A few clicks through a wizard later and I had a WordPress blog running in Azure, backed by a MySQL database. Great - time to get blogging!
