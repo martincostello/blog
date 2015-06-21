@@ -3,8 +3,8 @@
 <meta name="twitter:description" content="<%= current_page.data.description || current_page.data.title || blog_title %>">
 <meta name="twitter:domain" content="<%= site_domain %>" />
 <% if current_page.data.image %>
-<meta name="twitter:image" content="<%= URI.join(site_root_uri, current_page.data.image) %>" />
-<% end %>
+<meta name="twitter:image" content="<%= URI.join(site_root_uri, image_path(current_page.data.image)) %>" />
+  <% end %>
 <meta name="twitter:site" content="@<%= twitter_handle %>">
 <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>">
 <meta name="twitter:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
