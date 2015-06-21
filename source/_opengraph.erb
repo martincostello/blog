@@ -1,5 +1,7 @@
 <meta property="og:description" content="<%= current_page.data.description || current_page.data.title || blog_title %>" />
-<%#<meta property="og:image" content="" />%>
+<% if current_page.data.image %>
+<meta property="og:image" content="<%= URI.join(site_root_uri, current_page.data.image) %>" />
+<% end %>
 <meta property="og:locale" content="en_GB" />
 <meta property="og:site_name" content="<%= blog_title %>" />
 <meta property="og:title" content="<%= current_page.data.title || blog_title %>" />
