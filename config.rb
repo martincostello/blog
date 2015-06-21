@@ -72,9 +72,10 @@ page "/sitemap.xml", layout: false
 # activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
-# configure :development do
-#   activate :livereload
-# end
+configure :development do
+  activate :livereload
+  set :site_root_uri, "http://martin-laptop-3:4567/"
+end
 
 # Methods defined in the helpers block are available in templates
 # helpers do
@@ -105,6 +106,8 @@ configure :build do
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
+
+  set :site_root_uri, "https://blog.martincostello.com/"
 end
 
 ##
@@ -121,9 +124,6 @@ set :markdown, :fenced_code_blocks => true
 
 set :site_domain, "blog.martincostello.com"
 set :site_root_uri_canonical, "https://blog.martincostello.com/"
-set :site_root_uri, "https://blog.martincostello.com/"
-#set :site_root_uri, "https://blogmartincostello.azurewebsites.net/"
-#set :site_root_uri, "http://martin-laptop-3:4567/"
 set :analytics_id, "UA-42907618-4"
 set :blog_author, "Martin Costello"
 set :blog_title, "Martin Costello's Blog"
