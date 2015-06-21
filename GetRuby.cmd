@@ -21,7 +21,7 @@ REM Get Ruby and Rails
 curl -o ruby222.zip -L http://dl.bintray.com/oneclick/rubyinstaller/ruby-2.2.2-x64-mingw32.7z?direct
 REM Azure puts 7zip here!
 echo START Unzipping Ruby
-%_7ZIP% x -y ruby222.zip > rubyout
+SetLocal DisableDelayedExpansion & %_7ZIP% x -xr!*.ri -y ruby222.zip > rubyout
 echo DONE Unzipping Ruby
 
 REM Get DevKit to build Ruby native gems  
