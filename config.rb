@@ -75,6 +75,7 @@ page "/sitemap.xml", layout: false
 configure :development do
   activate :livereload
   set :site_root_uri, "http://martin-laptop-3:4567/"
+  set :render_analytics, false
 end
 
 # Methods defined in the helpers block are available in templates
@@ -108,6 +109,7 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 
   set :site_root_uri, "https://blog.martincostello.com/"
+  set :render_analytics, true
 end
 
 ##
