@@ -1,0 +1,17 @@
+---
+title: Archive
+description: "Post archive for Martin Costello's blog."
+---
+
+<div class="jumbotron">
+    <h1><%= current_page.data.title %></h1>
+    <p class="lead"><%= current_page.data.description %></p>
+</div>
+<% blog.articles.each do |article| %>
+<div class="row">
+    <div class="col-md-12">
+        <h2><%= link_to article.title, article %></h2>
+        <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> | <a href="<%= article.url %>#disqus_thread">0 Comments</a>
+    </div>
+</div>
+<% end %>
