@@ -32,6 +32,7 @@ As the cost of running all this infrastructure is coming out of my own pocket, I
 [Azure Table Storage](https://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-tables/) seems like a good fit for what I want to do, but I don't want to write a whole implementation of ASP.NET Identity that uses Azure Table Storage all by myself. Luckily I didn't have to as [one has already been written](https://identityazuretable.codeplex.com/)!
  
 <!--
+How to go about plugging in El Camino, including customising it to use a connection string.
 Not wanting to run my own authentication and authorization service - so using third party OAuth instead.
 Securing the page with roles.
 Creating apps for Microsoft and Google Authentication.
