@@ -7,4 +7,26 @@
     stylesheet_link_tag "bootstrap-theme.min",
                         "site"
 %>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<script>
+    var cb = function() {
+      var sheets = [
+        "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        ];
+      var h = document.getElementsByTagName('head')[0];
+      for (var i = 0; i < sheets.length; i++) {
+        var l = document.createElement("link");
+        l.rel = "stylesheet";
+        l.href = sheets[i];
+        h.appendChild(l);
+      }
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+    webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) {
+        raf(cb);
+    } else if (document.addEventListener) {
+        document.addEventListener("load", cb);
+    } else {
+        document.attachEvent("onload", cb);
+    }
+</script>
