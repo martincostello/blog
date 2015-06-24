@@ -73,7 +73,7 @@ page "/sitemap.xml", layout: false
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload
+  # activate :livereload
   set :site_root_uri, "http://martin-laptop-3:4567/"
   set :render_analytics, false
 end
