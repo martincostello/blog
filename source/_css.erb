@@ -10,6 +10,10 @@
 <script>
     var cb = function() {
       var sheets = [
+        <% if false %>
+        "<%= asset_path :css, "bootstrap-theme.min" %>",
+        "<%= asset_path :css, "site" %>",
+        <% end %>
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
         ];
       var h = document.getElementsByTagName('head')[0];
