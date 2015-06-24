@@ -21,7 +21,7 @@
       }
     };
     var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-    webkitRequestAnimationFrame || msRequestAnimationFrame;
+              webkitRequestAnimationFrame || msRequestAnimationFrame;
     if (raf) {
         raf(cb);
     } else if (document.addEventListener) {
