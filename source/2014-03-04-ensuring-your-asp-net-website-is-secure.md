@@ -73,7 +73,7 @@ If you don't have access to the full IIS configuration (for example you are usin
 
 ```
 using System.Web.Mvc;
- 
+
 namespace MyWebsite
 {
     internal static class FilterConfig
@@ -97,6 +97,7 @@ If you can't easily run any custom code like the MVC example above, you can use 
           <match url="(.*)" />
           <conditions>
             <add input="{HTTPS}" pattern="off" ignoreCase="true" />
+            <add input="{HTTP_HOST}" negate="true" pattern="localhost" />
           </conditions>
           <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
         </rule>
@@ -112,7 +113,7 @@ If you are using MVC, as of [ASP.NET 5.2.4](http://aspnetwebstack.codeplex.com/S
 
 ```
 using System.Web.Mvc;
- 
+
 namespace MyWebsite
 {
     internal static class FilterConfig
@@ -132,6 +133,10 @@ To force MVC to require HTTPS for anti-forgery tokens, you can set this line of 
 ```
 AntiForgeryConfig.RequireSsl = true;
 ```
+
+*Updated 30/11/2015*
+
+I've noticed that the redirect can be cached in some browsers (e.g. Chrome) and can prevent you from serving any content over HTTP on ```localhost```. You can prevent this by checking whether the request is for ```localhost``` (which the ```Web.config``` sample above has been adjusted to show).
 
 ## Use Anti-Forgery Tokens
 
@@ -323,7 +328,7 @@ To enable this, add the following to your ```Global.asax.cs``` file:
 ```
 protected void Application_PreSendRequestHeaders()
 {
-    if (this.Request.IsSecureConnection)
+    if (!this.Request.IsLocal && this.Request.IsSecureConnection)
     {
         this.Response.AppendHeader("Strict-Transport-Security", "max-age=31536000");
     }
@@ -335,6 +340,10 @@ In the above example, this instructs the browser to use strict transport securit
 *Updated 17/06/2015*
 
 If you can't run custom .NET code (e.g. a static site or a PHP site), you can use a URL Rewrite rule as suggested [here](http://www.hanselman.com/blog/HowToEnableHTTPStrictTransportSecurityHSTSInIIS7.aspx) by Scott Hanselman.
+
+*Updated 30/11/2015*
+
+I've noticed that this header can be cached in some browsers (e.g. Chrome) and can prevent you from serving any content over HTTP on ```localhost```. You can prevent this by bypassing the addition of the header of ```HttpRequest.IsLocal``` is ```true``` (which the code sample above has been adjusted to show).
 
 ## Use HTTP-Only and SSL-Only Cookies
 
