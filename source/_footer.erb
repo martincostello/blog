@@ -1,8 +1,13 @@
+<%
+  file = File.open("version.txt", "rb")
+  git_sha = file.read
+  file.close()
+%>
 <footer>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
-        &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %> | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a> | <a href="https://github.com/martincostello/blog"><img src="https://img.shields.io/github/forks/martincostello/blog.svg?style=social&label=View%20on%20GitHub" /></a>
+        &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %> | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a> | Built from <a href="https://github.com/martincostello/blog/commit/<%= git_sha %>"><%= git_sha[0,7] %></a>
       </div>
       <div class="col-md-2">
         <a href="https://twitter.com/<%= twitter_handle %>" class="twitter-follow-button" data-show-count="false">Follow @<%= twitter_handle %></a>
