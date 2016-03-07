@@ -3,7 +3,7 @@ title: This Blog Is Now Open Source!
 date: 2015-11-30
 tags: oss,open source,git,github
 layout: bloglayout
-description: "My blog is now open source, hosted on GitHub.com"
+description: "My personal blog is now open source, and hosted on GitHub."
 ---
 
 TL;DR - This blog is now hosted on [GitHub.com](https://github.com/martincostello/blog)!
