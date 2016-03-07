@@ -5,4 +5,6 @@
 %>
 <!--
   Build Timestamp: <%= Time.now.utc.iso8601 %>
-  Built From:      <%= git_sha %>-->
+  Built From:      <%= git_sha.strip! %>
+  Datacenter:      <%= ENV["Azure:Datacenter"] %>
+-->
