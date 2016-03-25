@@ -6,18 +6,18 @@ I hereby claim:
 
   * I am an admin of https://blog.martincostello.com
   * I am martincostello (https://keybase.io/martincostello) on keybase.
-  * I have a public key with fingerprint AB0A A912 7B54 14C9 5737  83D2 B4BB 84F5 6297 2575
+  * I have a public key with fingerprint 09E6 0E06 CD38 314B 9F25  1C62 74A5 B223 F73B 2AF3
 
 To do so, I am signing this object:
 
 {
     "body": {
         "key": {
-            "eldest_kid": "0101c4532c0a959957a86361a02d8356ce8bfaf6034f8a553aac7c67fec7631226f00a",
-            "fingerprint": "ab0aa9127b5414c9573783d2b4bb84f562972575",
+            "eldest_kid": "0101627969ba73e541a5f3d945416ea5f448053207380d6b5e64665461d9fce3f4ef0a",
+            "fingerprint": "09e60e06cd38314b9f251c6274a5b223f73b2af3",
             "host": "keybase.io",
-            "key_id": "b4bb84f562972575",
-            "kid": "0101c4532c0a959957a86361a02d8356ce8bfaf6034f8a553aac7c67fec7631226f00a",
+            "key_id": "74a5b223f73b2af3",
+            "kid": "0101627969ba73e541a5f3d945416ea5f448053207380d6b5e64665461d9fce3f4ef0a",
             "uid": "db5898b36f1d1c6b7cb496a98dd61919",
             "username": "martincostello"
         },
@@ -28,36 +28,36 @@ To do so, I am signing this object:
         "type": "web_service_binding",
         "version": 1
     },
-    "ctime": 1442936890,
+    "ctime": 1458916867,
     "expire_in": 157680000,
-    "prev": "063d8e6f9203f43ad9642ce47a6dd377728f81a1d2bbc19427fd637577f440e7",
-    "seqno": 4,
+    "prev": "3626c0785c4eb17f12be9cc54ce9a5af6bf7c0a8f8ef467fbe4ed983fc224e8a",
+    "seqno": 9,
     "tag": "signature"
 }
 
 which yields the signature:
 
 -----BEGIN PGP MESSAGE-----
-Version: Keybase OpenPGP v2.0.46
+Version: Keybase OpenPGP v2.0.51
 Comment: https://keybase.io/crypto
 
-yMI1AnicrZJZSFVBGMfvLdvEoiDqoQfplGEgt7PMmTlzyaS0KOqhaDFtuc3MmWMH
-r+fc7j1uhUUE0XKjeijypc2oDCRtp4U0KiNbzEhoo4QozCwoSSFb5kg9BD02Lx8z
-8/v+3//7Zm6OHBxIDSZTZuUd71vdGmxpOlkaWBasCG+QqGtWSiIW84HAoyZPeJFi
-25TCkqzICgO6pjKZYB1jHREDalAhsmoamg4ZN6hFLChrwDKIrmuEMMQgsjhDUFNU
-FVqyTKQsybKdIh6PxW3HE7KEyoRgRUVUBwpgQlZDhmaqFFBqAEuHKkaqjnSRuNZN
-+BnCHCUJHrJdcSY2kQF7/+D/s+/SATmT6gY2qAYtxVQYpIhRgCHBhmlCBSvYBxM8
-7pASLugSEvdshwnjPBp1paosSdyV2Yz74/X7+c3RqFsU+hsOMbdEiMXirucyNyqg
-tZ4XS4R9Ea8y5meVcxr5rRehtmOKwYqMMh5P2K4jhRVBMs/2CygAqFiDBpazJF4R
-s+M8YvuEjqAhi+XX4WX+tKBmGhxaWJU1C2jExBCojANEoGlqCCHVsAyFKOKBKFMw
-UJFlQg3pCFkAyBxJfofrHFcKA2GTFAnJhF3kEK80zqWqG40rUwLB1MDQIYP8DxdI
-HTH6zzc8+nR44NqY7nkdP49827KwJgNPba1dUrdwfv6OBrw4Y3PBR/nVsZETl5vl
-OS23a8ZGa5tvhUI13YGGrZnv07cdgIcmO8XXa9+x47tydxfs/7r3S2Eys+1COlfa
-kz/PNU+Zk3y85/nbnq4Pq8Glz83bti7dNP1Tz8zJudVp19fQcqui4/z4zCcfLu57
-WNg/+8LGFWdWLt0pN1+ae+T52fq8R1pq5+uGzN66yoagvi9v0eUHFffHLWj5FM1+
-lnPvWenLvKtT6vf0bx93v6s9o691Q2fyVf+0s00/OlbNahtVGx3eNSNbno2+n8hV
-T6C7V3qrqg+ePlyYNqz6VH7jpAndyanZvWkv1htv7Dt73/wCyX9Ogg==
-=ZNtA
+yMIyAnicrZJdSBVBFMfvzbS8ImUmEuVDa1DIRfdzdvcWpCRkUZEEknHjtjM7o4vX
+u7fd1Yy0sFCiSC1DMKiHsO+yD7CsDFL0IX0oQ63EQrp9UFGQoPYQ2azYQ9Bj8zJn
+Zn7nf/5zOL3JcR6fd3xm9Mjgafupd6D7coWnaHJb3AEGmvp+JnCAKcOzGw7r2HZC
+ZYbOBBiWYznAyypQoSYLWBI5TSKCroo0ApjGoqiwksCzsqCwOoASBiIAkgg4XSUI
+C0TEhNUYP0OMSAm2opYRcVxZFQMWswDpgiJwIlQJL3GIFhI1CfK8QGQB8hoRaGKp
+absZ1BzUbJxtmPSOHkKz9v7B/2ffFbNyOpQUVYECIJxOfUIZQVEFmqroOuBUTnVB
+G1sRrRxTulyzHCOCqHEcDptMjZ+hb5UGwm573f/McTBslmT/DWcjs5yKRS3TMZEZ
+plCp40TtgCvi7I+6WfswDM3phaAR0WljaUYltmzDjDABjpLIMdwCnEhdc0ABsp/B
+VVHDwiHDJSQZKCxdbh1cSSUFwAPEyoqERAw5mXA8xCpCkoiwqkkaAZDIiNUUomAi
+AplALGJdVQSCeF7EitsnG++NmExApTa1EippGyURzamwMFPT8zg43+P1eRLi57kD
+5/ElLv4zhg3VC35lV71rC68ZP9znj3ELm5eerz/a481YXURacracvHXd2/pSOjZd
+llj3aXtTyu7+L+2hyRwu68zynV1ad0/BuidtVwpxdEltd2Jvy+dvF2J3RzLfp2Xk
++1NAR0x7MFHsb/148XjfuZZddwbzFt0+cXZk+MfZgc6scG7cxrYX6wfVpj31vuQm
+a+s0TO8/GhwbGh2byD3RHtoMnmd+PVSXv7I4+PZgQ/vP8Y7XO1I/bNhXlf/sxq+h
+mpmH27pGY5uvDnim2MaGkbzaU1Obxnm7ehXzqrMp+XsOyp9K70ltvn/12s7osnut
+9oobhelpwzcvpV5r/PL5ZPBN+XTWUEFS46P4wYSktb8BQmpPTw==
+=zjwa
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
