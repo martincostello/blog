@@ -3,6 +3,7 @@
 <meta name="twitter:description" content="<%= current_page.data.description || current_page.data.title || blog_title %>" />
 <meta name="twitter:domain" content="<%= site_domain %>" />
 <meta name="twitter:image" content="<%= URI.join(site_root_uri, image_path(current_page.data.image || "/images/Martin_Small.png")) %>" />
+<meta name="twitter:image:alt" content="<%= current_page.data.image_alt_text || "Martin Costello" %>" />
 <meta name="twitter:site" content="@<%= twitter_handle %>" />
 <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>" />
 <meta name="twitter:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
