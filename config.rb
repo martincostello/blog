@@ -93,20 +93,12 @@ set :images_dir, 'images'
 
 # Build-specific configuration
 configure :build do
-  # For example, change the Compass output style for deployment
+
+  activate :minify_html, remove_input_attributes: false
   activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
-
-  # Enable cache buster
+  activate :minify_javascript
+  activate :gzip
   activate :asset_hash
-
-  # Use relative URLs
-  # activate :relative_assets
-
-  # Or use a different image path
-  # set :http_prefix, "/Content/images/"
 
   set :site_root_uri, "https://blog.martincostello.com/"
   set :render_analytics, true
