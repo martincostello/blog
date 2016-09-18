@@ -1,0 +1,12 @@
+language: ruby
+
+branches:
+  only:
+    - master
+
+rvm:
+ - 2.2
+
+script:
+  - git rev-parse HEAD > version.txt
+  - bundle exec middleman build
