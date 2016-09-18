@@ -1,5 +1,9 @@
 # Martin Costello's Blog
 
+[![Build status](https://img.shields.io/travis/martincostello/blog/master.svg)](https://travis-ci.org/martincostello/blog)
+
+[![Build history](https://ci-buildstats.azurewebsites.net/travisci/chart/martincostello/blog?branch=master&includeBuildsFromPullRequest=false)](https://travis-ci.org/martincostello/blog)
+
 ## Overview
 
 Source code for building and deploying [blog.martincostello.com](https://blog.martincostello.com/).
@@ -18,6 +22,8 @@ This project is licensed under the [MIT](https://github.com/martincostello/blog/
 
 ## Building and Testing
 
-To build the website run the following command (requires [Ruby](https://www.ruby-lang.org/en/downloads/) to be installed):
+To build the website run the following command (requires [Ruby](https://www.ruby-lang.org/en/downloads/)):
 
-    .\Build.cmd
+```sh
+bundle exec middleman build
+```
