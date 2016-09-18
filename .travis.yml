@@ -1,0 +1,6 @@
+language: ruby
+rvm:
+ - 2.3
+script:
+  - git rev-parse HEAD > version.txt
+  - bundle exec middleman build
