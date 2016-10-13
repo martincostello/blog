@@ -2,7 +2,7 @@
 
 [![Build status](https://img.shields.io/travis/martincostello/blog/master.svg)](https://travis-ci.org/martincostello/blog)
 
-[![Build history](https://ci-buildstats.azurewebsites.net/travisci/chart/martincostello/blog?branch=master&includeBuildsFromPullRequest=false)](https://travis-ci.org/martincostello/blog)
+[![Build history](https://buildstats.info/travisci/chart/martincostello/blog?branch=master&includeBuildsFromPullRequest=false)](https://travis-ci.org/martincostello/blog)
 
 ## Overview
 
