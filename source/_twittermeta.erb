@@ -2,7 +2,14 @@
 <meta name="twitter:creator" content="@<%= twitter_handle %>" />
 <meta name="twitter:description" content="<%= current_page.data.description || current_page.data.title || blog_title %>" />
 <meta name="twitter:domain" content="<%= site_domain %>" />
-<meta name="twitter:image" content="<%= URI.join(site_root_uri, image_path(current_page.data.image || "/images/Martin_Small.png")) %>" />
+<%
+if current_page.data.image
+  twitter_image = URI.join(site_root_uri, image_path(current_page.data.image))
+else
+  twitter_image = "https://" + cdn_domain + "/martin_small.png"
+end
+%>
+<meta name="twitter:image" content="<%= twitter_image %>" />
 <meta name="twitter:image:alt" content="<%= current_page.data.image_alt_text || "Martin Costello" %>" />
 <meta name="twitter:site" content="@<%= twitter_handle %>" />
 <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>" />

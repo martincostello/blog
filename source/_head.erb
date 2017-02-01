@@ -7,7 +7,7 @@
     <meta name="description" content="<%= current_page.data.description || current_page.data.title || blog_title %>" />
     <meta name="language" content="en" />
     <%
-      keywords = []      
+      keywords = []
       if current_page.data.tags
         current_page.data.tags.split(",").each do |tag|
           keywords.push(tag)
@@ -31,7 +31,7 @@
     <meta name="google-site-verification" content="<%= site_verification_google %>" />
     <meta name="msvalidate.01" content="<%= site_verification_bing %>" />
     <link rel="canonical" href="<%= URI.join(site_root_uri, current_page.url) %>" />
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://<%= cdn_domain %>/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
     <%#
     <link rel="next" href="" />

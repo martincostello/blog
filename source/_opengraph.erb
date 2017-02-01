@@ -1,5 +1,12 @@
 <meta property="og:description" content="<%= current_page.data.description || current_page.data.title || blog_title %>" />
-<meta property="og:image" content="<%= URI.join(site_root_uri, image_path(current_page.data.image || "/images/Martin_Small.png")) %>" />
+<%
+if current_page.data.image
+  og_image = URI.join(site_root_uri, image_path(current_page.data.image))
+else
+  og_image = "https://" + cdn_domain + "/martin_small.png"
+end
+%>
+<meta property="og:image" content="<%= og_image %>" />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:site_name" content="<%= blog_title %>" />
 <meta property="og:title" content="<%= current_page.data.title || blog_title %>" />
