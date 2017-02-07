@@ -20,6 +20,7 @@ textarea {
    resize: none;
 }
 
-div.fb-like > span {
+div.fb-like > span,
+div.fb-share-button > span {
     vertical-align: initial !important;
 }
