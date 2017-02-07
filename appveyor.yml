@@ -17,7 +17,7 @@ artifacts:
 
 deploy:
 - provider: WebDeploy
-  server: blogmartincostello-eastus.scm.azurewebsites.net:443
+  server: https://blogmartincostello-eastus.scm.azurewebsites.net:443/msdeploy.axd?site=blogmartincostello-eastus
   website: blogmartincostello-eastus
   username: $blogmartincostello-eastus
   password:
@@ -26,7 +26,7 @@ deploy:
   remove_files: true
   app_offline: true
 - provider: WebDeploy
-  server: blogmartincostello-uksouth.scm.azurewebsites.net:443
+  server: https://blogmartincostello-uksouth.scm.azurewebsites.net:443/msdeploy.axd?site=blogmartincostello-uksouth
   website: blogmartincostello-uksouth
   username: $blogmartincostello-uksouth
   password:
