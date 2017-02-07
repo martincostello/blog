@@ -1,0 +1,6 @@
+version: 1.0.{build}
+
+build_script:
+- cmd: Build.cmd
+
+test: off
