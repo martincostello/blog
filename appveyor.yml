@@ -25,6 +25,8 @@ deploy:
   artifact: blog
   remove_files: true
   app_offline: true
+  on:
+    branch: deploy
 - provider: WebDeploy
   server: https://blogmartincostello-uksouth.scm.azurewebsites.net:443/msdeploy.axd?site=blogmartincostello-uksouth
   website: blogmartincostello-uksouth
@@ -34,3 +36,5 @@ deploy:
   artifact: blog
   remove_files: true
   app_offline: true
+  on:
+    branch: deploy
