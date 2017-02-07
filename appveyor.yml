@@ -10,3 +10,7 @@ build_script:
 - cmd: Build.cmd
 
 test: off
+
+artifacts:
+- path: build
+  name: blog
