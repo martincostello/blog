@@ -1,0 +1,40 @@
+version: 1.0.{build}
+
+branches:
+  only:
+  - deploy
+  - master
+
+build_script:
+- cmd: bundle install
+- cmd: Build.cmd
+
+test: off
+
+artifacts:
+- path: build
+  name: blog
+
+deploy:
+- provider: WebDeploy
+  server: https://blogmartincostello-eastus.scm.azurewebsites.net:443/msdeploy.axd?site=blogmartincostello-eastus
+  website: blogmartincostello-eastus
+  username: $blogmartincostello-eastus
+  password:
+    secure: RYGxy/oS0/CWqdEg2L69agIjj0mnwukYczBSNVdH/nOJIBLJp6VWNh8pRszWLmbEm1qtYbWhcPRXQDCPRhASxg==
+  artifact: blog
+  remove_files: true
+  app_offline: true
+  on:
+    branch: deploy
+- provider: WebDeploy
+  server: https://blogmartincostello-uksouth.scm.azurewebsites.net:443/msdeploy.axd?site=blogmartincostello-uksouth
+  website: blogmartincostello-uksouth
+  username: $blogmartincostello-uksouth
+  password:
+    secure: pelYmu5y6b6vrBluZjO5uM6nvog7y+gg1x2IG/2uqTvWNM5FVBtceF/yQPb8/3nVRvwq6R0p9bzoMDr4B2IbCA==
+  artifact: blog
+  remove_files: true
+  app_offline: true
+  on:
+    branch: deploy
