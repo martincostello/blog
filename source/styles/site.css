@@ -20,6 +20,6 @@ textarea {
    resize: none;
 }
 
-div.fb-share-button.fb_iframe_widget > span {
+div.fb-like > span {
     vertical-align: initial !important;
 }

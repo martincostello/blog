@@ -6,16 +6,17 @@
 <footer>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="hidden-sm hidden-xs col-md-12 col-lg-12">
         &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %> | <a href="http://status.martincostello.com/" target="_blank">Site Status &amp; Uptime</a> | Built from <a href="https://github.com/martincostello/blog/commit/<%= git_sha %>"><%= git_sha[0,7] %></a>
       </div>
-      <div class="col-md-2">
+      <div class="hidden-md hidden-lg col-xs-12 col-sm-12">
+        <p>&copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div>
         <a href="https://twitter.com/<%= twitter_handle %>" class="twitter-follow-button" data-show-count="false">Follow @<%= twitter_handle %></a>
-      </div>
-      <div class="col-md-1">
         <div class="fb-like" data-href="<%= URI.join(site_root_uri, current_page.url) %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-      </div>
-      <div class="col-md-1">
         <g:plusone></g:plusone>
       </div>
     </div>

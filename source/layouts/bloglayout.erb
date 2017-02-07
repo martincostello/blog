@@ -8,11 +8,27 @@
             <h1><%= current_page.data.title %></h1>
             <p class="lead"><%= current_page.data.description %></p>
         </div>
-        <p><%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> | <a href="<%= URI.join(site_root_uri, current_page.url) %>#disqus_thread">0 Comments</a> | <a href="/feed.xml"><em class="fa fa-rss"></em></a></p>
-        <p><%= partial "facebookshare" %>&nbsp;<%= partial "twittershare" %>&nbsp;<%= partial "googleplusshare" %></p>
+        <p>
+            <div class="row hidden-xs hidden-sm">
+                <div class="col-md-6 col-lg-6">
+                    <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a> |
+                    <a href="<%= URI.join(site_root_uri, current_page.url) %>#disqus_thread">0 Comments</a> |
+                    <a href="/feed.xml"><em class="fa fa-rss"></em></a>
+                </div>
+            </div>
+            <div class="row hidden-md hidden-lg">
+                <div class="col-xs-12 col-sm-12">
+                    <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" title="<%= blog_author %>"><%= blog_author %></a>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <a href="<%= URI.join(site_root_uri, current_page.url) %>#disqus_thread">0 Comments</a> | <a href="/feed.xml"><em class="fa fa-rss"></em></a></p>
+                </div>
+            </div>
+        </p>
+        <%= partial "social" %>
         <%= yield %>
         <hr />
-        <p><%= partial "facebookshare" %>&nbsp;<%= partial "twittershare" %>&nbsp;<%= partial "googleplusshare" %></p>
+        <%= partial "social" %>
         <div id="disqus_thread"></div>
         <hr />
         <%= partial "footer" %>
