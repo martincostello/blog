@@ -1,7 +1,7 @@
 <p>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <%= partial "twittershare" %>
+      <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-size="large" data-text="<%= current_page.data.title || blog_title %>" data-via="<%= twitter_handle %>">Tweet</a>
     </div>
   </div>
 </p>
