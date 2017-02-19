@@ -1,6 +1,6 @@
 ---
 title: Publishing My First Alexa Skill
-date: 2017-02-19
+date: 2017-02-20
 tags: alexa,skill,tfl,travis,lambda,aws
 layout: bloglayout
 description: "Publishing my first Alexa skill using node.js, AWS Lambda, Travis CI and the TfL API."
