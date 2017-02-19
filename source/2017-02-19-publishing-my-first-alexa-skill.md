@@ -80,7 +80,48 @@ The first two were easy to fix, but the third was a bit tricker. The IAM policy 
 
 ```json
 {
-  "todo": ""
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DeployCode",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:*"
+      ],
+      "Resource": "{Your function ARN}"
+    },
+    {
+      "Sid": "ListFunctions",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:AddPermission",
+        "lambda:CreateEventSourceMapping",
+        "lambda:CreateFunction",
+        "lambda:DeleteEventSourceMapping",
+        "lambda:DeleteFunction",
+        "lambda:GetEventSourceMapping",
+        "lambda:GetFunction",
+        "lambda:GetFunctionConfiguration",
+        "lambda:GetPolicy",
+        "lambda:InvokeFunction",
+        "lambda:ListEventSourceMappings",
+        "lambda:ListFunctions",
+        "lambda:RemovePermission",
+        "lambda:UpdateEventSourceMapping",
+        "lambda:UpdateFunctionCode",
+        "lambda:UpdateFunctionConfiguration"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SetRole",
+      "Effect": "Allow",
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Resource": "{Your IAM role ARN}"
+    }
+  ]
 }
 ```
 
