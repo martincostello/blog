@@ -70,7 +70,7 @@ Sounds simple enough for now. I coded something basic to start with so I knew th
 
 As I've decided to open-source the skill, that means I can use [Travis CI](https://travis-ci.org/martincostello/alexa-london-travel "Alexa London Travel's Continuous Deployment on Travis CI") for free to do my Continuous Integration to run my tests. Travis CI also has built-in support for deploying node.js apps to an AWS Lambda function. I'm not using anything fancy for the JavaScript like TypeScript at the moment, so there's no much to the CI - it just needs to run tests in the long term, and out-of-the-box it already runs ```npm install``` and ```npm test``` for you as the standard build script.
 
-Setting up the [YAML file](https://github.com/martincostello/alexa-london-travel/blob/master/.travis.yml "My Travis CI configuration in GitHub") was simple enough, but the first deployment of the lambda function did not work. It turned out this was because [the documentation](https://docs.travis-ci.com/user/deployment/lambda "Travis CI Lambda deployment instructions") to deploy a Lambda was out of date (I need to do a Pull Request to fix it).
+Setting up the [YAML file](https://github.com/martincostello/alexa-london-travel/blob/master/.travis.yml "My Travis CI configuration in GitHub") was simple enough, but the first deployment of the lambda function did not work. It turned out this was because [the documentation](https://docs.travis-ci.com/user/deployment/lambda "Travis CI Lambda deployment instructions") to deploy a Lambda was out of date (I need to do a Pull Request to fix it. **_Updated 20/02/2017: [Pull Request](https://github.com/travis-ci/docs-travis-ci-com/pull/974 "GitHub Pull Request to update the Travis CI Lambda deployment documentation")_**).
 
 The missing bits were:
 
@@ -85,35 +85,32 @@ The first two were easy to fix, but the third was a bit trickier. The IAM policy
   "Version": "2012-10-17",
   "Statement": [
     {
+      "Sid": "ListExistingRolesAndPolicies",
+      "Effect": "Allow",
+      "Action": [
+        "iam:ListRolePolicies",
+        "iam:ListRoles"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CreateAndListFunctions",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:CreateFunction",
+        "lambda:ListFunctions"
+      ],
+      "Resource": "*"
+    },
+    {
       "Sid": "DeployCode",
       "Effect": "Allow",
       "Action": [
-        "lambda:*"
-      ],
-      "Resource": "{Your function ARN}"
-    },
-    {
-      "Sid": "ListFunctions",
-      "Effect": "Allow",
-      "Action": [
-        "lambda:AddPermission",
-        "lambda:CreateEventSourceMapping",
-        "lambda:CreateFunction",
-        "lambda:DeleteEventSourceMapping",
-        "lambda:DeleteFunction",
-        "lambda:GetEventSourceMapping",
-        "lambda:GetFunction",
-        "lambda:GetFunctionConfiguration",
-        "lambda:GetPolicy",
-        "lambda:InvokeFunction",
-        "lambda:ListEventSourceMappings",
-        "lambda:ListFunctions",
-        "lambda:RemovePermission",
-        "lambda:UpdateEventSourceMapping",
+        "lambda:UploadFunction",
         "lambda:UpdateFunctionCode",
         "lambda:UpdateFunctionConfiguration"
       ],
-      "Resource": "*"
+      "Resource": "arn:aws:lambda:{region}:{account-id}:function:{function-name}"
     },
     {
       "Sid": "SetRole",
@@ -121,13 +118,15 @@ The first two were easy to fix, but the third was a bit trickier. The IAM policy
       "Action": [
         "iam:PassRole"
       ],
-      "Resource": "{Your IAM role ARN}"
+      "Resource": "arn:aws:iam::{account-id}:role/{role-name}"
     }
   ]
 }
 ```
 
 **Note**: This policy _may_ be more permissive than it strictly needs to be, but less permissive settings didn't seem to work. If you know what the best IAM policy for this is, let me know and I'll update it. Otherwise, check that the policy meets your needs before using it yourself.
+
+_**Updated 20/02/2017**: The IAM policy has now been updated with the minimum permissions to deploy successfully from Travis CI._
 
 Once the Lambda deployment was working, I created a ```deploy``` branch and set up Travis to only update the Lambda function for builds on that branch. That way I still get the CI benefit while developing on the master branch, without worrying about updating the lambda unnecessarily.
 
