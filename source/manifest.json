@@ -1,9 +1,11 @@
 {
   "name": "blog.martincostello.com",
   "short_name": "Martin Costello's Blog",
-  "start_url": "/",
+  "start_url": "./index.html",
+  "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2c3e50",
+  "lang": "en-GB",
   "icons": [
     {
       "src": "https://martincostello.azureedge.net/android-chrome-36x36.png?v=477XzzYNy7",

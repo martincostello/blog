@@ -4,6 +4,7 @@ cache: bundler
 branches:
   only:
     - master
+    - deploy
 
 rvm:
  - 2.2
@@ -12,3 +13,30 @@ script:
   - git rev-parse HEAD > version.txt
   - git rev-parse --abbrev-ref HEAD > branch.txt
   - bundle exec middleman build
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_S3_ACCESS_KEY_ID
+    secret_access_key: $AWS_S3_SECRET_ACCESS_KEY
+    bucket: "blog.martincostello.com"
+    region: eu-west-2
+    skip_cleanup: true
+    local_dir: build
+    detect_encoding: true
+    cache_control: "max-age=604800"
+    on:
+      branch: master
+  - provider: lambda
+    access_key_id: $AWS_S3_ACCESS_KEY_ID
+    secret_access_key: $AWS_S3_SECRET_ACCESS_KEY
+    region: "us-east-1"
+    function_name: "blog-martincostello-com-response-headers"
+    role: "arn:aws:iam::492538393790:role/service-role/lambda_basic_execution_cloudfront_edge"
+    handler_name: "handler"
+    module_name: "cloudfront"
+    timeout: 1,
+    runtime: "nodejs6.10"
+    zip: "cloudfront.js"
+    publish: true
+    on:
+      branch: master
