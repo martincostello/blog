@@ -25,7 +25,21 @@ deploy:
     detect_encoding: true
     cache_control: "max-age=604800"
     on:
-      branch: master
+      branch: deploy
+  - provider: lambda
+    access_key_id: $AWS_S3_ACCESS_KEY_ID
+    secret_access_key: $AWS_S3_SECRET_ACCESS_KEY
+    region: "us-east-1"
+    function_name: "blog-martincostello-com-redirect-folders"
+    role: "arn:aws:iam::492538393790:role/service-role/lambda_basic_execution_cloudfront_edge"
+    handler_name: "handler"
+    module_name: "cloudfront-folders"
+    timeout: 1,
+    runtime: "nodejs6.10"
+    zip: "cloudfront-folders.js"
+    publish: true
+    on:
+      branch: deploy
   - provider: lambda
     access_key_id: $AWS_S3_ACCESS_KEY_ID
     secret_access_key: $AWS_S3_SECRET_ACCESS_KEY
@@ -33,10 +47,10 @@ deploy:
     function_name: "blog-martincostello-com-response-headers"
     role: "arn:aws:iam::492538393790:role/service-role/lambda_basic_execution_cloudfront_edge"
     handler_name: "handler"
-    module_name: "cloudfront"
+    module_name: "cloudfront-headers"
     timeout: 1,
     runtime: "nodejs6.10"
-    zip: "cloudfront.js"
+    zip: "cloudfront-headers.js"
     publish: true
     on:
-      branch: master
+      branch: deploy
