@@ -38,12 +38,4 @@
     <link href="https://<%= cdn_domain %>/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom" %>
-    <script type="text/javascript">
-        if (self == top) {
-            document.documentElement.className = document.documentElement.className.replace(/\bjs-flash\b/, '');
-        }
-        else {
-            top.location = self.location;
-        }
-    </script>
 </head>
