@@ -14,16 +14,12 @@ description: "The archive of blog posts for Martin Costello's blog."
         <p>
           <div class="row hidden-xs hidden-sm">
                 <div class="col-md-6 col-lg-6">
-                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a> |
-                    <a href="<%= article.url %>#disqus_thread" rel="noopener">0 Comments</a>
+                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
                 </div>
             </div>
             <div class="row hidden-md hidden-lg">
                 <div class="col-xs-12 col-sm-12">
                     <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
-                </div>
-                <div class="col-sm-12 col-xs-12">
-                    <a href="<%= article.url %>#disqus_thread" rel="noopener">0 Comments</a>
                 </div>
             </div>
         </p>

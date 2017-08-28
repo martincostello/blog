@@ -14,22 +14,21 @@ description: "The blog of a software developer and tester based in London."
         <p>
             <div class="row hidden-xs hidden-sm">
                 <div class="col-md-6 col-lg-6">
-                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a> |
-                    <a href="<%= article.url %>#disqus_thread" rel="noopener">0 Comments</a> |
-                    <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a>
+                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a> |
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fa fa-rss"></em></a>
                 </div>
             </div>
             <div class="row hidden-md hidden-lg">
                 <div class="col-xs-12 col-sm-12">
-                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
+                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a>
                 </div>
                 <div class="col-sm-12 col-xs-12">
-                    <a href="<%= article.url %>#disqus_thread" rel="noopener">0 Comments</a> | <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a></p>
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fa fa-rss"></em></a></p>
                 </div>
             </div>
         </p>
         <p><%= article.summary %></p>
-        <p><a href="<%= article.url %>" alt="Read more" rel="noopener" title="Read more">Read more...</a></p>
+        <p><a href="<%= article.url %>" alt="Read more" rel="noopener" title="Read more of this post">Read more...</a></p>
     </div>
 </div>
 <% end %>

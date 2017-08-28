@@ -4,7 +4,7 @@ date: 2017-02-20
 tags: alexa,skill,tfl,travis,lambda,aws
 layout: bloglayout
 description: "Publishing my first Alexa skill using node.js, AWS Lambda, Travis CI and the TfL API."
-image: "https://martincostello.azureedge.net/london-travel-108x108.png"
+image: "https://cdn.martincostello.com/london-travel-108x108.png"
 ---
 
 A few weeks ago at work it was our quarterly Hackathon. After a dearth of ideas I thought of an idea to extend our Alexa app to incorporate something I've been working on in the office over the last few months. Over the course of a few days a colleague and I tweaked the skill and achieved our aim, which was pretty fun. Did I mention we also won the technical category?
