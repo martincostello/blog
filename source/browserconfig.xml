@@ -2,10 +2,10 @@
 <browserconfig>
   <msapplication>
     <tile>
-      <square70x70logo src="https://martincostello.azureedge.net/tile_tiny.png"/>
-      <square150x150logo src="https://martincostello.azureedge.net/tile_square.png"/>
-      <wide310x150logo src="https://martincostello.azureedge.net/tile_wide.jpg"/>
-      <square310x310logo src="https://martincostello.azureedge.net/tile_large.jpg"/>
+      <square70x70logo src="https://cdn.martincostello.com/tile_tiny.png"/>
+      <square150x150logo src="https://cdn.martincostello.com/tile_square.png"/>
+      <wide310x150logo src="https://cdn.martincostello.com/tile_wide.jpg"/>
+      <square310x310logo src="https://cdn.martincostello.com/tile_large.jpg"/>
       <TileColor>#FFFFFF</TileColor>
     </tile>
     <notification>

@@ -116,7 +116,7 @@ set :markdown, :fenced_code_blocks => true
 # Custom Configuration
 ##
 
-set :cdn_domain, "martincostello.azureedge.net"
+set :cdn_domain, "cdn.martincostello.com"
 set :site_domain, "blog.martincostello.com"
 set :site_root_uri_canonical, "https://blog.martincostello.com/"
 set :analytics_id, "UA-42907618-4"
