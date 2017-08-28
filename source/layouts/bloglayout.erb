@@ -12,7 +12,6 @@
             <div class="row hidden-xs hidden-sm">
                 <div class="col-md-6 col-lg-6">
                     <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a> |
-                    <a href="<%= URI.join(site_root_uri, current_page.url) %>#disqus_thread" rel="noopener">0 Comments</a> |
                     <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a>
                 </div>
             </div>
@@ -21,7 +20,7 @@
                     <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
                 </div>
                 <div class="col-sm-12 col-xs-12">
-                    <a href="<%= URI.join(site_root_uri, current_page.url) %>#disqus_thread" rel="noopener">0 Comments</a> | <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a></p>
+                    <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a></p>
                 </div>
             </div>
         </p>
@@ -29,7 +28,6 @@
         <%= yield %>
         <hr />
         <%= partial "social" %>
-        <div id="disqus_thread"></div>
         <hr />
         <%= partial "footer" %>
     </div>
@@ -37,8 +35,5 @@
     <%= partial "css" %>
     <%= partial "scripts" %>
     <%= partial "analytics" %>
-    <%= partial "disquscount" %>
-    <%= partial "disqusthread" %>
   </body>
-<%= partial "version" %>
 </html>

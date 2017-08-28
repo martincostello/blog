@@ -15,7 +15,6 @@ description: "The blog of a software developer and tester based in London."
             <div class="row hidden-xs hidden-sm">
                 <div class="col-md-6 col-lg-6">
                     <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a> |
-                    <a href="<%= article.url %>#disqus_thread" rel="noopener">0 Comments</a> |
                     <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a>
                 </div>
             </div>
@@ -24,7 +23,7 @@ description: "The blog of a software developer and tester based in London."
                     <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
                 </div>
                 <div class="col-sm-12 col-xs-12">
-                    <a href="<%= article.url %>#disqus_thread" rel="noopener">0 Comments</a> | <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a></p>
+                    <a href="/feed.xml" rel="noopener"><em class="fa fa-rss"></em></a></p>
                 </div>
             </div>
         </p>
