@@ -9,18 +9,18 @@
             <p class="lead"><%= current_page.data.description %></p>
         </div>
         <p>
-            <div class="row hidden-xs hidden-sm">
-                <div class="col-md-6 col-lg-6">
+            <div class="row d-none d-md-block">
+                <div class="col-6">
                     <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a> |
-                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fa fa-rss"></em></a>
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a>
                 </div>
             </div>
-            <div class="row hidden-md hidden-lg">
-                <div class="col-xs-12 col-sm-12">
+            <div class="row d-md-none">
+                <div class="col-12">
                     <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a>
                 </div>
-                <div class="col-sm-12 col-xs-12">
-                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fa fa-rss"></em></a></p>
+                <div class="col-12">
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a></p>
                 </div>
             </div>
         </p>

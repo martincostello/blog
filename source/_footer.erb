@@ -9,13 +9,15 @@
 <footer>
   <p>
     <div class="row">
-      <div class="hidden-sm hidden-xs col-md-12 col-lg-12">
+      <div class="d-none d-md-block col">
         &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %> |
         <a href="http://status.martincostello.com/" rel="noopener" target="_blank" title="View site uptime information">Site Status &amp; Uptime</a> |
         Built from <a href="https://github.com/martincostello/blog/commit/<%= git_sha %>" rel="noopener" title="View commit <%= git_sha %> on GitHub"><%= git_sha[0,7] %></a> on <a href="https://github.com/martincostello/blog/tree/<%= git_branch %>" rel="noopener" title="View branch <%= git_branch %> on GitHub"><%= git_branch %></a>
       </div>
-      <div class="hidden-md hidden-lg col-xs-12 col-sm-12">
-        &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %>
+      <div class="d-md-none">
+        <div class="col">
+            &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %>
+        </div>
       </div>
     </div>
   </p>

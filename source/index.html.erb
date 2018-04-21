@@ -9,21 +9,21 @@ description: "The blog of a software developer and tester based in London."
 </div>
 <% blog.articles[0..9].each do |article| %>
 <div class="row">
-    <div class="col-md-12">
-        <h2><%= link_to article.title, article %></h2>
+    <div class="col">
+        <h2 class="display-4"><%= link_to article.title, article %></h2>
         <p>
-            <div class="row hidden-xs hidden-sm">
-                <div class="col-md-6 col-lg-6">
-                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a> |
-                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fa fa-rss"></em></a>
+            <div class="row d-none d-md-block">
+                <div class="col-lg-6">
+                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a> |
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a>
                 </div>
             </div>
-            <div class="row hidden-md hidden-lg">
+            <div class="row d-md-none">
                 <div class="col-xs-12 col-sm-12">
-                    <%= article.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a>
+                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a>
                 </div>
                 <div class="col-sm-12 col-xs-12">
-                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fa fa-rss"></em></a></p>
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a></p>
                 </div>
             </div>
         </p>
