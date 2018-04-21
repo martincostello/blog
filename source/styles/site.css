@@ -1,26 +1,31 @@
-body {
-    padding-top: 50px;
-}
-
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-top: 10px;
 }
 
-.code {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-  font-size: 1em;
+blockquote {
+    border-left: 5px solid #ecf0f1;
+    margin: 0 0 21px;
+    padding: 10.5px 21px;
 }
 
-.panel-heading {
-    font-weight: bold;
-}
-
-textarea {
-   resize: none;
+code {
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    padding: 2px 4px;
 }
 
 div.fb-like > span,
 div.fb-share-button > span {
     vertical-align: initial !important;
+}
+
+pre code {
+    background-color: #ecf0f1;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    display: block;
+    margin: 0 0 10.5px;
+    padding: 10px;
+    word-break: break-all;
+    word-wrap: break-word;
 }

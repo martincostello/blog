@@ -21,15 +21,19 @@ Things were already in a fairly good starting point for the migration. The code 
 
 So to start I needed an S3 bucket. I had actually already created an S3 bucket last year after I found out that your bucket has to have the _exact_ same name as your DNS hostname for the website you want to host, so I wanted to make sure it belonged to me. However, when I'd set it up I'd set it up in the wrong region. No biggie, I'll just delete it and recreate it right? Almost.
 
-<img class="center-block img-responsive" src="https://cdn.martincostello.com/blog_one-does-not-simply-recreate-an-s3-bucket.jpg" alt="One does not simply recreate an S3 bucket" title="One does not simply recreate an S3 bucket">
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_one-does-not-simply-recreate-an-s3-bucket.jpg" alt="One does not simply recreate an S3 bucket" title="One does not simply recreate an S3 bucket">
 
 Turns out that because S3 bucket names are global and because S3 is a distributed system, **fully** deleting an S3 bucket actually takes a non-trivial amount of time. Once I deleted the bucket from the AWS Console, I tried to recreate it in a new region. This failed immediately in the wizard for the first minute or so because it said that a DNS entry for the bucket already existed. Once that error resolved itself I could continue through the wizard to set things up, but it would then fail on the final step with the error:
 
-> A conflicting conditional operation is currently in progress against this resource. Please try again.
+<blockquote class="blockquote">
+  <p class="mb-0">
+    A conflicting conditional operation is currently in progress against this resource. Please try again.
+  </p>
+</blockquote>
 
 What? A quick search turns up this [answer on StackOverflow](https://stackoverflow.com/a/16553056/1064169 "Answer on StackOverflow for the error message"). Turns out I just need to wait. For an hour.
 
-<img class="center-block img-responsive" src="https://cdn.martincostello.com/blog_homer-simpson-chair-goes-round.gif" alt="Chair goes round, chair goes round..." title="Chair goes round, chair goes round...">
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_homer-simpson-chair-goes-round.gif" alt="Chair goes round, chair goes round..." title="Chair goes round, chair goes round...">
 
 With the S3 bucket effectively moved, it needs configuring to enable Static website hosting with the appropriate index and error pages.
 
@@ -62,9 +66,9 @@ One gotcha with Lambda@Edge though, is the way it handles deployment. The functi
 
 I hope that this is something AWS improve the developer experience for in the future so that it's easy to deploy on a rolling basis like the static content is to S3 from Travis CI, rather than something requiring continual manual intervention.
 
-<img class="center-block img-responsive" src="https://cdn.martincostello.com/blog_lambda-edge-function-trigger.png" alt="Lambda@Edge function trigger" title="Lambda@Edge function trigger">
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-edge-function-trigger.png" alt="Lambda@Edge function trigger" title="Lambda@Edge function trigger">
 
-<img class="center-block img-responsive" src="https://cdn.martincostello.com/blog_lambda-edge-function-replica.png" alt="Lambda@Edge function replica" title="Lambda@Edge function replica">
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-edge-function-replica.png" alt="Lambda@Edge function replica" title="Lambda@Edge function replica">
 
 ### Permissions Policy
 
