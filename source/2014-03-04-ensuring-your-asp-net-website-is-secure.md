@@ -140,7 +140,7 @@ I've noticed that the redirect can be cached in some browsers (e.g. Chrome) and 
 
 ## Use Anti-Forgery Tokens
 
-If using MVC you should use anti-forgery tokens when submitting your forms via HTTP POST. This protects against Cross-Site Request Forgery (CSRF) [attacks](https://en.wikipedia.org/wiki/Cross-site_request_forgery). This is a two-step process.
+If using MVC you should use anti-forgery tokens when submitting your forms via HTTP POST. This protects against Cross-Site Request Forgery (CSRF) [attacks](https://en.wikipedia.org/wiki/Cross-site_request_forgery "Read about CSRF on Wikipedia"). This is a two-step process.
 
 First, generate an anti-forgery token in your forms in your views:
 
@@ -321,7 +321,7 @@ If you do this, two things to consider:
 
 ## Use Strict Transport Security
 
-This is again designed to help prevent man-in-the-middle and HTTPS Strip attacks. More information can be found [here](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security).
+This is again designed to help prevent man-in-the-middle and HTTPS Strip attacks. More information can be found [here on Wikipedia](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security "Read about HSTS on Wikipedia").
 
 To enable this, add the following to your ```Global.asax.cs``` file:
 
@@ -339,7 +339,7 @@ In the above example, this instructs the browser to use strict transport securit
 
 *Updated 17/06/2015*
 
-If you can't run custom .NET code (e.g. a static site or a PHP site), you can use a URL Rewrite rule as suggested [here](http://www.hanselman.com/blog/HowToEnableHTTPStrictTransportSecurityHSTSInIIS7.aspx) by Scott Hanselman.
+If you can't run custom .NET code (e.g. a static site or a PHP site), you can use a URL Rewrite rule as [suggested here by Scott Hanselman](http://www.hanselman.com/blog/HowToEnableHTTPStrictTransportSecurityHSTSInIIS7.aspx "Enabling HSTS in II7").
 
 *Updated 30/11/2015*
 
@@ -468,7 +468,7 @@ I recommend the following resources to help test your sites security after you a
 
 [This site](https://www.ssllabs.com/ssltest/index.html) tests the server configuration to test for use of things like SSL 2, RC4 ciphers and invalid SSL certificates. It's well worth using - I used it to validate that the changes for SSL v2 and RC4 being disabled as I described above had been accomplished correctly on our servers.
 
-[This post is a re-post of the article that was originally published [here](http://martincostello.blogspot.co.uk/2013/09/ensuring-your-aspnet-website-is-secure.html).]
+[This post is a re-post of the article that was [originally published here](http://martincostello.blogspot.co.uk/2013/09/ensuring-your-aspnet-website-is-secure.html) "Original location of this blog post"].
 
 ## Updated 08/02/2015
 
