@@ -1,6 +1,6 @@
 {
-  "name": "blog.martincostello.com",
-  "short_name": "Martin Costello's Blog",
+  "name": "Martin Costello's Blog",
+  "short_name": "Martin's Blog",
   "start_url": "./index.html",
   "description": "The blog of a software developer and tester based in London, UK.",
   "display": "standalone",

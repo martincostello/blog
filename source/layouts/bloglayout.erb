@@ -3,7 +3,7 @@
   <%= partial "head" %>
   <body>
     <%= partial "navbar" %>
-    <div class="container body-content">
+    <main class="container body-content">
         <div class="jumbotron">
             <h1><%= current_page.data.title %></h1>
             <p class="lead"><%= current_page.data.description %></p>
@@ -30,7 +30,7 @@
         <%= partial "social" %>
         <hr />
         <%= partial "footer" %>
-    </div>
+    </main>
     <%= partial "aside" %>
     <%= partial "css" %>
     <%= partial "scripts" %>

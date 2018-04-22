@@ -1,3 +1,18 @@
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-size: 1rem;
+    }
+}
+
+a {
+    color: #0f7661;
+}
+
 .body-content {
     padding-top: 10px;
 }
@@ -10,6 +25,7 @@ blockquote {
 
 code {
     background-color: #f9f2f4;
+    color: #cd186d;
     border-radius: 4px;
     padding: 2px 4px;
 }
