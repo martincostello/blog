@@ -21,7 +21,7 @@ build_script:
   - bundle exec middleman build
 
 before_deploy:
-  - ps: $web = Resolve-Path .\build; [IO.Directory]::GetFiles($web.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($web.Path.Length + 1).ToLowerInvariant().Replace('\', '_') -DeploymentName build }
+  - ps: $web = Resolve-Path .\build; [IO.Directory]::GetFiles($web.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($web.Path.Length + 1).ToLowerInvariant() -DeploymentName build }
 
 deploy:
 - provider: AzureBlob
