@@ -2,10 +2,10 @@ version: "{build}"
 
 test: off
 
-#branches:
-#  only:
-#  - deploy
-#  - master
+branches:
+  only:
+  - deploy
+  - master
 
 cache:
   - vendor/bundle
@@ -32,5 +32,5 @@ deploy:
   artifact: build
   set_content_type: true
   unzip: true
-#  on:
-#    branch: deploy
+  on:
+    branch: deploy
