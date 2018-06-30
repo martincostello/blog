@@ -2,10 +2,10 @@ version: "{build}"
 
 test: off
 
-branches:
-  only:
-  - deploy
-  - master
+#branches:
+#  only:
+#  - deploy
+#  - master
 
 cache:
   - vendor/bundle
