@@ -19,4 +19,4 @@ gem "tzinfo-data"
 # For faster file watcher updates on Windows:
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
-gem "redcarpet"
+gem "redcarpet", ">= 3.3.2"
