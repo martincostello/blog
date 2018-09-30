@@ -101,5 +101,6 @@ As you can see below, the logging output is available in the test results in Vis
 There's also an example of registering the logger for a self-hosted ASP.NET Core application using `WebApplicationFactory<T>` for functional tests in the [sample integration tests](https://github.com/martincostello/xunit-logging/blob/c83d15591df4b5b31f2b40ee43d9b67cf8d628d5/tests/Logging.XUnit.Tests/Integration/HttpApplicationTests.cs "Example HTTP integration tests") in the library's own test project using a sample application.
 
 Further real usage of the library for both a library and an ASP.NET Core application are available for reference in the GitHub repositories linked to below:
+
   * [martincostello/sqllocaldb](https://github.com/martincostello/sqllocaldb/blob/fc3cd5d8539b5c8bb9d86896f0a2eae37ab6fa24/samples/TodoApp.Tests/TodoRepositoryTests.cs "martincostello/sqllocaldb sample tests on GitHub.com")
   * [martincostello/alexa-london-travel-site](https://github.com/martincostello/alexa-london-travel-site/tree/c43c297d903c04196cc8eb66caf70b1cb32aef25/tests/LondonTravel.Site.Tests/Integration "martincostello/alexa-london-travel-site integration tests on GitHub.com")
