@@ -50,7 +50,7 @@ That's definitely useful, but falls far short of a full solution. After all, ver
 
 While researching this, I also stumbled across how the .NET Core SDK tooling is localised [on GitHub](https://github.com/dotnet/sdk/tree/00c2243357023efc76c9ad5c6d12a96746a23bd5/src/Tasks/Common/Resources/xlf "XLIFF resource files for the .NET Core SDK"), which uses a file format called [XLIFF](https://en.wikipedia.org/wiki/XLIFF "XLIFF on Wikipedia"), which stands for _"XML Localization Interchange File Format"_.
 
-This file format is an industry standard for managing translation of text, and contains metadata for things like translations' state (translated, new, in need of review etc.), which makes it easier to manipulate and maintain with tooling than the `.resx` format.
+This file format is an industry standard for managing translation of text, and contains metadata for things like translations' state (translated, new, in need of review etc.), which makes it easier to manipulate and maintain with tooling compared to the `.resx` format.
 
 Digging through the open-source .NET Core repositories on GitHub lead me to [a repository](https://github.com/dotnet/xliff-tasks "xliff-tasks on GitHub.com") for a set of MSBuild-based tasks that operate on a source `.resx` file to generate `.xlf` files for all the languages required that can then be submitted for translation. It's also helpfully published in the public .NET Core [MyGet](https://dotnet.myget.org/feed/dotnet-core/package/nuget/XliffTasks "xliff-tasks on the .NET Core MyGet gallery") feed.
 
@@ -216,7 +216,7 @@ Add a custom MSBuild [task](https://github.com/martincostello/aspnet-core-pseudo
 
 ## Conclusion
 
-It took a few months of elapsed time from the initial idea to being able to use it in a production scenario, but it took just a few days of effort to update and publish PseudoLocalize and fix the compiler support to be able to plug p16n into an ASP.NET Core application.
+It took a few months of occasional work between the initial idea and being able to use it in a production scenario, but it took just a few days of effort to update and publish PseudoLocalize and fix the compiler support to be able to plug p16n into an ASP.NET Core application.
 
 It's also now available for use in the application my team maintains for checking for layout issues with UI localisation.
 
