@@ -1,6 +1,6 @@
 ---
 title: Pseudo-localization with ASP.NET Core
-date: 2018-12-15
+date: 2018-12-17
 tags: aspnetcore,dotnet,localization,pseudo localization,testing
 layout: bloglayout
 description: "Using pseudo-localization with ASP.NET Core to help test your application is ready for globalization, internationalization and localization."
