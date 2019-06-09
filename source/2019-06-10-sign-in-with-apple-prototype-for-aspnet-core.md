@@ -1,6 +1,6 @@
 ---
 title: Prototyping Sign In with Apple for ASP.NET Core
-date: 2019-06-09
+date: 2019-06-10
 tags: aspnetcore,dotnet,apple,sign in with apple
 layout: bloglayout
 description: "Prototyping an integration with ASP.NET Core for Sign In with Apple"
@@ -13,7 +13,7 @@ The main points of note about the new service are:
   * Users can sign in without having to give their email address to a third-party;
   * It will be required as an option in the future for apps that support third-party sign-in.
 
-Just _one day_ after the announcement at WWDC19, [@leastprivilege](https://github.com/leastprivilege "@leastprivilege on GitHub.com") of IdentityServer fame, opened a [GitHub issue](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/issues/314 "Support for Apple Sign-in on GitHub.com") over at the [_AspNet.Security.OAuth.Providers_](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers "AspNet.Security.OAuth.Providers on GitHub.com") repository requesting a provider to support _Sign In with Apple_.
+Just _one day_ after the announcement at WWDC19, [@leastprivilege](https://github.com/leastprivilege "@leastprivilege on GitHub.com") of Identity Server fame, opened a [GitHub issue](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/issues/314 "Support for Apple Sign-in on GitHub.com") over at the [_AspNet.Security.OAuth.Providers_](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers "AspNet.Security.OAuth.Providers on GitHub.com") repository requesting a provider to support _Sign In with Apple_.
 
 While the issue was opened slightly tongue-in-cheek, it's a valid start to the conversation about investigating support for this new technology (or not).
 
