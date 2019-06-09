@@ -27,9 +27,17 @@ Others have already blogged in great detail about the _what_ of _Sign In with Ap
 
 If you want to skip ahead, you can see the draft pull request for the _Sign In with Apple_ provider [here](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/pull/318 "Sign in With Apple provider"), and a working demo you can try out for yourself here: [signinwithapple.azurewebsites.net](https://signinwithapple.azurewebsites.net/ "Sign In with Apple demo application")
 
-## Integrating with Sign In with Apple
+## Integrating with _Sign In with Apple_
+
+_TODO_
 
 ## Conclusion
+
+So after a weekend's work, I think I've gotten a fairly nice prototype working that makes _Sign In with Apple_ easy to integrate into an existing ASP.NET Core 2.x application based on the currently available functionality and documentation.
+
+There's still a few rough edges, such as the disparate private key support between Windows (PKCS #8) and Linux/macOS (PKCS #12), and the lack of an ability to _actually_ get the signed-in user's name and email address. Otherwise things work and should be easy to tweak and build upon for later beta releases of the service between now and when it becomes generally available to Apple users later in 2019.
+
+If you've got any feedback on the provider prototype, feel free to leave a comment on the [Pull Request](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/pull/318 "Sign in With Apple provider Pull Request") over on GitHub!
 
 ## Links
 
