@@ -102,22 +102,20 @@ Once I was happy with the basic concept and had it working with my Alexa skill's
 
 ## Improvements
 
+In the course of implementing the first version there were a few bits I wasn't entirely happy with.
+
+The first was that I needed to use reflection to pass the `HttpClient` for the test server into `LambdaBootstrap` to get it wired-up. Not the end of the world, but not as neat as it could be.
+
+The second was that the Lambda runtime loop, depending on timing, would always wait for at least one more new message to process before terminating, even if your test was completed and didn't need to queue anything new. I worked around this by having the test server deliver a "fake" message with empty content to "break" the loop.
+
+These seemed like simple enough things to alter, and with the AWS SDK for Lambda being open source on GitHub, I [submitted a Pull Request](https://github.com/aws/aws-lambda-dotnet/pull/540 "Suggested changes for LambdaBootstrap testability") to refactor things a bit to allow the `HttpClient` to be injected and to have the message loop observe a thrown `OperationCanceledException` if the cancellation token for the loop was signalled.
+
+[Stuart Lang](https://twitter.com/stuartblang "Stuart Lang on Twitter"), an ex-colleague of mine I'd been discussing the test server with, [reached out](https://twitter.com/stuartblang/status/1190949491781914624) to AWS' [Norm Johanson](https://twitter.com/socketnorm "Norm Johanson on Twitter") to have him look at the PR. Just under three days later the PR had been merged and a new version of the library pushed to NuGet.org!
+
+<blockquote class="twitter-tweet" align="center"><p lang="en" dir="ltr">Closing the loop on this the PR has been released as part of version 1.1.0 of Amazon.Lambda.RuntimeSupport <a href="https://t.co/qJhP9B2hoB">pic.twitter.com/qJhP9B2hoB</a></p>&mdash; Norm Johanson (@socketnorm) <a href="https://twitter.com/socketnorm/status/1191966966183018496?ref_src=twsrc%5Etfw">November 6, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+With the changes made available, all that was left was to [remove the workarounds](https://github.com/martincostello/lambda-test-server/pull/17 "Remove workarounds for Amazon.Lambda.RuntimeSupport"), publish an updated version of _Lambda Test Server_ and [update my Alexa skill's tests to use it](https://github.com/martincostello/alexa-london-travel/pull/152 "Update lambda-test-server").
+
 ## Conclusion
 
 _TODO_
-
-<!--
-
-[](https://github.com/aws/aws-lambda-dotnet/pull/540 "Suggested changes for LambdaBootstrap testability")
-
-[](https://github.com/martincostello/lambda-test-server/pull/17 "Remove workarounds for Amazon.Lambda.RuntimeSupport")
-
-[](https://github.com/martincostello/alexa-london-travel/pull/152 "Update lambda-test-server")
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m here for the snooping 👀 I’m sure <a href="https://twitter.com/socketnorm?ref_src=twsrc%5Etfw">@socketnorm</a> would be interested to see what you have built.</p>&mdash; Stuart Lang (@stuartblang) <a href="https://twitter.com/stuartblang/status/1190949491781914624?ref_src=twsrc%5Etfw">November 3, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-[](https://twitter.com/stuartblang "Stuart Lang on Twitter")
-
-[](https://twitter.com/socketnorm "Norm Johanson on Twitter")
-
--->
