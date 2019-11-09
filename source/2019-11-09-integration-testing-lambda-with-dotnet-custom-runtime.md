@@ -68,11 +68,39 @@ After looking through [the code](https://github.com/aws/aws-lambda-dotnet/tree/m
 
 ## How It Works
 
-_TODO_
+Under-the-hood, the AWS Lambda runtime works by exposing an HTTP API with four resources that are used to drive a message-pump that processes messages, one of which is an "input" with the other three being for "output".
+
+The runtime code effectively runs an infinite while-loop which calls the `GET /{LambdaVersion}/runtime/invocation/next` resource and processes the content of the HTTP responses. The responses also contain metadata about the function in the headers, such as the AWS request Id and function ARN.
+
+Once the function code has handled the request, the runtime either calls the `POST /{LambdaVersion}/runtime/invocation/{AwsRequestId}/response` resource for successfully processed requests or the `POST /{LambdaVersion}/runtime/invocation/{AwsRequestId}/error` resource to report errors. The fourth resource is used to handle failed function initialization: `POST /{LambdaVersion}/runtime/init/error`.
+
+In theory this works like HTTP long-polling within your function, but in practice the AWS Lambda Runtime freezes the function process if there are no pending messages to invoke your code with.
+
+Equipped with this knowledge and further reverse-engineering of the .NET Lambda runtime support, I started to implement _Lambda Test Server_, starting with a [proof-of-concept](https://github.com/martincostello/alexa-london-travel/pull/139 "Add Lambda test server for integration tests") which I committed directly into the repo for my Alexa skill.
+
+It uses ASP.NET Core 3.0's `TestServer` and [endpoint routing](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-3.0 "Routing in ASP.NET Core") to implement an in-memory HTTP server exposed via `HttpClient`. Requests for the Lambda to process can be queued with the server and are delivered to the message pump sequentially over "HTTP" and are then passed to the Lambda function being tested, with the response being posted back into the runtime.
+
+Here's an excerpt of the code (tweaked for brevity) that sets up the HTTP endpoints for the emulated Lambda runtime:
+
+```
+protected virtual void Configure(IApplicationBuilder app)
+{
+    app.UseRouting();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapGet("/{Version}/runtime/invocation/next", OnNext);
+        endpoints.MapPost("/{Version}/runtime/init/error", OnInitializationError);
+        endpoints.MapPost("/{Version}/runtime/invocation/{RequestId}/error", OnInvocationError);
+        endpoints.MapPost("/{Version}/runtime/invocation/{RequestId}/response", OnResponse);
+    });
+}
+```
+
+The requests to pass to the function that are queued into the test server are routed through into a `Channel<T>` which provides a reader and writer that acts as a producer-consumer pair. Enqueueing a message places it into the `ChannelWriter<T>`, while the message pump consumes the `ChannelReader<T>`. You can read more about .NET's Channels in [this post](https://www.stevejgordon.co.uk/an-introduction-to-system-threading-channels "An Introduction to System.Threading.Channels") by fellow Microsoft MVP [Steve Gordon](https://twitter.com/stevejgordon "Steve Gordon on Twitter").
+
+Once I was happy with the basic concept and had it working with my Alexa skill's codebase, I started the process to make it its own open source repository and to publish it as a NuGet package. Once I'd shipped [version 0.1.0](https://github.com/martincostello/lambda-test-server/releases/tag/v0.1.0 "AWS Lambda Test Server v0.1.0") I then just needed to circle back around to my skill and [delete the proof-of-concept and consume the library instead](https://github.com/martincostello/alexa-london-travel/pull/140 "Use AwsLambdaTestServer NuGet package").
 
 ## Improvements
-
-_TODO_
 
 ## Conclusion
 
@@ -80,15 +108,13 @@ _TODO_
 
 <!--
 
-[](https://github.com/martincostello/alexa-london-travel/pull/139 "Add Lambda test server for integration tests")
-
-[](https://github.com/martincostello/alexa-london-travel/pull/140 "Use AwsLambdaTestServer NuGet package")
-
 [](https://github.com/aws/aws-lambda-dotnet/pull/540 "Suggested changes for LambdaBootstrap testability")
 
 [](https://github.com/martincostello/lambda-test-server/pull/17 "Remove workarounds for Amazon.Lambda.RuntimeSupport")
 
 [](https://github.com/martincostello/alexa-london-travel/pull/152 "Update lambda-test-server")
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I’m here for the snooping 👀 I’m sure <a href="https://twitter.com/socketnorm?ref_src=twsrc%5Etfw">@socketnorm</a> would be interested to see what you have built.</p>&mdash; Stuart Lang (@stuartblang) <a href="https://twitter.com/stuartblang/status/1190949491781914624?ref_src=twsrc%5Etfw">November 3, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 [](https://twitter.com/stuartblang "Stuart Lang on Twitter")
 
