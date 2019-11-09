@@ -1,6 +1,6 @@
 ---
 title: Integration testing AWS Lambda C# Functions with Lambda Test Server
-date: 2019-11-09
+date: 2019-11-11
 tags: aws,dotnet,lambda,testing
 layout: bloglayout
 description: "Using Lambda Test Server to integration test your C# AWS Lambda functions for .NET Core locally when using a custom runtime."
