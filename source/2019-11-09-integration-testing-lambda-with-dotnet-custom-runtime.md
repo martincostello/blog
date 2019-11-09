@@ -118,4 +118,10 @@ With the changes made available, all that was left was to [remove the workaround
 
 ## Conclusion
 
-_TODO_
+Using _Lambda Test Server_ in my Alexa skill, as well as the EC2 to Lambda migration at work, has allowed me to write a small number of acceptance-style integration tests for some Lambda functions while also providing high code coverage (>80%) and being able to target .NET Core 3.0 without the native Lambda runtime support.
+
+At the same time it's also taught me some things about how the AWS Lambda runtime works internally, which I've found interesting, as well as some experience coding with channels and the lower-level endpoint routing in ASP.NET Core 3.0 without the weight of using MVC controllers.
+
+With just some small refactoring of your function entrypoint to accept an `HttpClient` and `CancellationToken`, you can really boost the amount of code you can quickly test locally before committing your code to Continuous Integration and deploying it to your AWS account.
+
+I hope you find it useful in your own .NET Core Lambda functions!
