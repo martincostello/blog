@@ -1,4 +1,6 @@
+dist: bionic
 language: ruby
+os: linux
 cache: bundler
 
 branches:
