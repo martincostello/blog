@@ -76,7 +76,7 @@ One potential gotcha to watch out for is to make sure that requests to the test 
 </ItemGroup>
 ```
 
-Thanks to [Andrew Lock's blog post on Application Parts](https://andrewlock.net/when-asp-net-core-cant-find-your-controller-debugging-application-parts/#what-are-application-parts- "") for pointing me to towards the fix.
+Thanks to [Andrew Lock's blog post on Application Parts](https://andrewlock.net/when-asp-net-core-cant-find-your-controller-debugging-application-parts/#what-are-application-parts- "When ASP.NET Core can't find your controller: debugging application parts") for pointing me to towards the fix.
 
 This then allows tests to use the [`GetAntiforgeryTokensAsync()`](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/TestServerFixture.cs#L52-L64 "GetAntiforgeryTokensAsync method") helper method to perform an HTTP GET to the application to obtain valid CSRF tokens to use:
 
