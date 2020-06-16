@@ -63,6 +63,21 @@ protected override void ConfigureWebHost(IWebHostBuilder builder)
 }
 ```
 
+One potential gotcha to watch out for is to make sure that requests to the test controller don't return an HTTP 404. To fix this, make sure that the assembly containing the test controllers is decorated with the [`[ApplicationPart]` attribute](https://github.com/martincostello/antiforgery-testing-application-part/blob/5d8ed60e8874dc8403bb43a404a5a540362e5d07/tests/TodoApp.Tests/TodoApp.Tests.csproj#L24-L31 "Adding the ApplicationPart attribute"). One way you can achieve this is with adding a snippet like the below to your test project's `.csproj` file:
+
+```
+<!--
+  Add [ApplicationPart("TodoApp.Tests")] to the assembly so the controller is discovered.
+-->
+<ItemGroup>
+  <AssemblyAttribute Include="Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute">
+    <_Parameter1>TodoApp.Tests</_Parameter1>
+  </AssemblyAttribute>
+</ItemGroup>
+```
+
+Thanks to [Andrew Lock's blog post on Application Parts](https://andrewlock.net/when-asp-net-core-cant-find-your-controller-debugging-application-parts/#what-are-application-parts- "When ASP.NET Core can't find your controller: debugging application parts") for pointing me to towards the fix.
+
 This then allows tests to use the [`GetAntiforgeryTokensAsync()`](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/TestServerFixture.cs#L52-L64 "GetAntiforgeryTokensAsync method") helper method to perform an HTTP GET to the application to obtain valid CSRF tokens to use:
 
 ```
