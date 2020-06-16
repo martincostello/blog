@@ -10,7 +10,7 @@ To protect your POST resources in an ASP.NET Core application from [Cross-Site R
 
 A necessary downside of these protections is that they make it harder to integration test such resources, particularly in a headless manner. This is because the tests need to acquire the antiforgery token and cookie to be able to successfully pass the antiforgery protections on a resource that needs to be tested.
 
-A typical approach for this is to scrape the HTML response from the application for the hidden form field token (often named `__RequestVerificationToken`) using Regular Expressions and then using that, along with the cookie, in the request(s) the test makes. This can however make tests brittle to change, particularly if the UI is refactored.
+A typical approach for this is to scrape the HTML response from the application for the hidden form field token (often named `__RequestVerificationToken`) using Regular Expressions and then using that, along with the cookie, in the request(s) the test(s) make. This can however make tests brittle to change, particularly if the UI is refactored.
 
 In this blog post I'll discuss an alternate approach using [ASP.NET Core Application Parts](https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts "Share controllers, views, Razor Pages and more with Application Parts") that can make such tests easier to author and maintain, allowing you to concentrate on the core logic of your tests, rather than boilerplate setup.
 
@@ -32,7 +32,7 @@ While I can't share the code for the application itself, I have put a sample app
 
 The sample application is just a simple TODO list application that gives us something to demonstrate the approach against, but the concepts should work for any type of ASP.NET Core application using antiforgery features.
 
-The test project contains an [`AntiforgeryTokenController`](https://github.com/martincostello/antiforgery-testing-application-part/blob/main/tests/TodoApp.Tests/AntiforgeryTokenController.cs "AntiforgeryTokenController code") class. This contains an [HTTP GET resource](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/AntiforgeryTokenController.cs#L39-L65) that uses the antiforgery features to return a JSON payload containing valid CSRF tokens and the relevant cookie/form/header names to use to validate requests:
+The test project contains an [`AntiforgeryTokenController`](https://github.com/martincostello/antiforgery-testing-application-part/blob/5d8ed60e8874dc8403bb43a404a5a540362e5d07/tests/TodoApp.Tests/AntiforgeryTokenController.cs#L16 "AntiforgeryTokenController class") class. This contains an [HTTP GET resource](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/AntiforgeryTokenController.cs#L39-L65 "GET action to get valid CSRF tokens") that uses the antiforgery features to return a JSON payload containing valid CSRF tokens and the relevant cookie/form/header names to use to validate requests:
 
 ```
 public IActionResult GetAntiforgeryTokens(
