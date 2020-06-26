@@ -5,7 +5,7 @@ test: off
 branches:
   only:
   - deploy
-  - master
+  - main
 
 cache:
   - vendor/bundle

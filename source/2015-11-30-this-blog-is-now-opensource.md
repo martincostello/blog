@@ -16,4 +16,4 @@ However there's nothing sensitive in here anymore, and given that I [wrote a who
 
 I know I don't post blog posts often (work, life, Netflix and now Star Wars: Battlefront often get in the way), but for anyone vaguely interested in the technology behind it, it's now all open on GitHub.
 
-And to round things off, here's the [source code](https://github.com/martincostello/blog/blob/master/source/2015-11-30-this-blog-is-now-opensource.md) for this very post :)
+And to round things off, here's the [source code](https://github.com/martincostello/blog/blob/main/source/2015-11-30-this-blog-is-now-opensource.md) for this very post :)
