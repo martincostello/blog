@@ -24,7 +24,7 @@ The approximate steps to enable Azure static website hosting for this blog were:
   1. Enable _Static website_ to create the special `$web` container.
   1. Set the file names to use as the index and error pages.
   1. Enable the GitHub repo for [AppVeyor CI](https://ci.appveyor.com/project/martincostello/blog "blog in AppVeyor CI").
-  1. Add an [`appveyor.yml`](https://github.com/martincostello/blog/blob/master/appveyor.yml "appveyor.yml on GitHub.com") file to build the static site and upload the files to it.
+  1. Add an [`appveyor.yml`](https://github.com/martincostello/blog/blob/main/appveyor.yml "appveyor.yml on GitHub.com") file to build the static site and upload the files to it.
 
 [Here's the first AppVeyor build from my `deploy` branch](https://ci.appveyor.com/project/martincostello/blog/build/8 "First deployment") to upload the content from earlier today.
 

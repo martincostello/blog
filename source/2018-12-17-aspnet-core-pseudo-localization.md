@@ -121,7 +121,7 @@ Below is a screenshot of the application when the language is changed to the pse
 
 <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_todoapp-pseudo.png" alt="Todo application in pseudo-localized English" title="Todo application in pseudo-localized English">
 
-You can find the source `.resx` file [here](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/master/src/TodoApp/Resources.resx "Resources.resx") and the `.xlf` files [here](https://github.com/martincostello/aspnet-core-pseudo-localization/tree/master/src/TodoApp/xlf "xlf files").
+You can find the source `.resx` file [here](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/main/src/TodoApp/Resources.resx "Resources.resx") and the `.xlf` files [here](https://github.com/martincostello/aspnet-core-pseudo-localization/tree/main/src/TodoApp/xlf "xlf files").
 
 Below are the relevant steps for wiring p16n into the application.
 

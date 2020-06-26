@@ -44,7 +44,7 @@ public static async Task Function_Reverses_Numbers()
 
 The source is available [in GitHub](https://github.com/martincostello/lambda-test-server "Lambda Test Server on GitHub.com") - pull requests are welcome!
 
-Further samples for using the library with xunit are available in GitHub here: [https://github.com/martincostello/lambda-test-server/tree/master/samples](https://github.com/martincostello/lambda-test-server/tree/master/samples "Lambda Test Server samples on GitHub.com")
+Further samples for using the library with xunit are available in GitHub here: [https://github.com/martincostello/lambda-test-server/tree/main/samples](https://github.com/martincostello/lambda-test-server/tree/main/samples "Lambda Test Server samples on GitHub.com")
 
 READMORE
 

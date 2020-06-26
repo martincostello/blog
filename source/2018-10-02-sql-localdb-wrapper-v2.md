@@ -41,6 +41,6 @@ With such large amounts of refactoring required, I also took it upon myself to r
 
 Of course, it is still only fully functional on Windows due to the nature of SQL Server LocalDB itself, but it will happily sit within a cross-platform application, with an API surface that allows support to be tested for at runtime on any platform for light-up of functionality.
 
-You can find [samples](https://github.com/martincostello/sqllocaldb/tree/master/samples "SQL LocalDB Wrapper samples") for using the library in the GitHub repository, with examples for writing tests that use it as well as some usage within a simple application.
+You can find [samples](https://github.com/martincostello/sqllocaldb/tree/main/samples "SQL LocalDB Wrapper samples") for using the library in the GitHub repository, with examples for writing tests that use it as well as some usage within a simple application.
 
 I imagine over time the need for this library will decline as SQL Server LocalDB becomes more cross-platform and other technologies like containers become even more wide-spread, but I'm glad to keep it current and fresh for the next generation of C# and .NET for anyone who might find it useful.

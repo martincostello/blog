@@ -1,8 +1,8 @@
 # Martin Costello's Blog
 
-[![Build status](https://img.shields.io/travis/martincostello/blog/master.svg)](https://travis-ci.org/martincostello/blog)
+[![Build status](https://img.shields.io/travis/martincostello/blog/main.svg)](https://travis-ci.org/martincostello/blog)
 
-[![Build history](https://buildstats.info/travisci/chart/martincostello/blog?branch=master&includeBuildsFromPullRequest=false)](https://travis-ci.org/martincostello/blog)
+[![Build history](https://buildstats.info/travisci/chart/martincostello/blog?branch=main&includeBuildsFromPullRequest=false)](https://travis-ci.org/martincostello/blog)
 
 ## Overview
 
@@ -18,7 +18,7 @@ The repository is hosted in [GitHub](https://github.com/martincostello/blog): ht
 
 ## License
 
-This project is licensed under the [MIT](https://github.com/martincostello/blog/blob/master/LICENSE) license.
+This project is licensed under the [MIT](https://github.com/martincostello/blog/blob/main/LICENSE) license.
 
 ## Building and Testing
 
