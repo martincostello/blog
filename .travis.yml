@@ -1,5 +1,5 @@
 dist: bionic
-language: ruby
+language: generic
 os: linux
 
 branches:
