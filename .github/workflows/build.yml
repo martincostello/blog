@@ -22,6 +22,7 @@ jobs:
         git rev-parse --abbrev-ref HEAD > branch.txt
         bundle exec middleman build
     - name: Configure AWS credentials
+      if: ${{ github.ref == 'refs/heads/deploy' }}
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
