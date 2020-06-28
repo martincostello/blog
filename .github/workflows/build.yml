@@ -16,6 +16,7 @@ jobs:
         ruby-version: 2.6
     - name: Build blog
       run: |
+        rvm use 2.2 --install --binary --fuzzy
         gem install bundler
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
