@@ -16,7 +16,6 @@ jobs:
         ruby-version: 2.2
     - name: Build blog
       run: |
-        gem install bundler
         bundle config path vendor/bundle
         bundle install
         git rev-parse HEAD > version.txt
