@@ -8,13 +8,17 @@ branches:
     - main
     - deploy
 
+python:
+  - 3.5
+
 rvm:
- - 2.2
+  - 2.2
 
 script:
   - git rev-parse HEAD > version.txt
   - git rev-parse --abbrev-ref HEAD > branch.txt
   - bundle exec middleman build
+  - pip install awscli
 
 deploy:
   - provider: s3
@@ -56,3 +60,7 @@ deploy:
     publish: true
     on:
       branch: deploy
+
+after_deploy:
+  - aws configure set preview.cloudfront true
+  - test $TRAVIS_BRANCH = "deploy" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
