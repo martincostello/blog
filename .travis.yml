@@ -6,9 +6,6 @@ branches:
   only:
     - deploy
 
-rvm:
-  - 2.2
-
 deploy:
   - provider: lambda
     access_key_id: $AWS_S3_ACCESS_KEY_ID
