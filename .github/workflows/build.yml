@@ -10,6 +10,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.2
     - name: Build blog
       run: |
         bundle install
