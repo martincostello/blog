@@ -14,13 +14,11 @@ python:
 rvm:
   - 2.2
 
-install:
-  - pip install awscli
-
 script:
   - git rev-parse HEAD > version.txt
   - git rev-parse --abbrev-ref HEAD > branch.txt
   - bundle exec middleman build
+  - pip install awscli
 
 deploy:
   - provider: s3
