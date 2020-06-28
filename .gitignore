@@ -1,4 +1,5 @@
 ﻿/build
+/vendor
 /r
 /branch.txt
 /version.txt
