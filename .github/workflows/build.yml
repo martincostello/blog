@@ -28,5 +28,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
     - name: Deploy to S3
-      run: echo 'TODO Deploy blog to S3'
-      if: ${{ github.ref == 'refs/heads/deploy' }}
+      #if: ${{ github.ref == 'refs/heads/deploy' }}
+      run: |
+        aws s3 sync ./build/ s3://blog.martincostello.com --cache-control 'max-age=604800' --delete --dryrun
