@@ -11,14 +11,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6
+        ruby-version: 2.2
     - name: Build blog
       run: |
         gem install bundler
         bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundle install
         git rev-parse HEAD > version.txt
         git rev-parse --abbrev-ref HEAD > branch.txt
         bundle exec middleman build
