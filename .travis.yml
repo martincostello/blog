@@ -16,7 +16,7 @@ deploy:
     handler_name: "handler"
     module_name: "cloudfront-folders"
     timeout: 1,
-    runtime: "nodejs10.x"
+    runtime: "nodejs14.x"
     zip: "cloudfront-folders.js"
     publish: true
     on:
@@ -30,7 +30,7 @@ deploy:
     handler_name: "handler"
     module_name: "cloudfront-headers"
     timeout: 1,
-    runtime: "nodejs10.x"
+    runtime: "nodejs14.x"
     zip: "cloudfront-headers.js"
     publish: true
     on:
