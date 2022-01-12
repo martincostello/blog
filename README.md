@@ -1,8 +1,6 @@
 # Martin Costello's Blog
 
-[![Build status](https://img.shields.io/travis/martincostello/blog/main.svg)](https://travis-ci.org/martincostello/blog)
-
-[![Build history](https://buildstats.info/travisci/chart/martincostello/blog?branch=main&includeBuildsFromPullRequest=false)](https://travis-ci.org/martincostello/blog)
+[![Build status](https://github.com/martincostello/blog/workflows/build/badge.svg?branch=main&event=push)](https://github.com/martincostello/blog/actions?query=workflow%3Abuild+branch%3Amain+event%3Apush)
 
 ## Overview
 
