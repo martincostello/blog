@@ -24,6 +24,8 @@
     <meta name="robots" content="INDEX" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="article:author" content="<%= facebook_profile %>" />
+    <meta property="article:published_time" content="<%= current_page.date.iso8601 %>" />
+    <meta property="article:modified_time" content="<%= File.mtime(current_page.source_file).iso8601 %>" />
     <meta property="article:tag" content="<%= keywordsMeta %>" />
     <%= partial "facebookmeta" %>
     <%= partial "microsoft" %>
