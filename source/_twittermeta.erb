@@ -6,7 +6,7 @@
 if current_page.data.image
   twitter_image = URI.join(site_root_uri, image_path(current_page.data.image))
 else
-  twitter_image = "https://" + cdn_domain + "/martin_small.png"
+  twitter_image = "https://" + cdn_domain + "/martin_small-v2.png"
 end
 %>
 <meta name="twitter:image" content="<%= twitter_image %>" />
@@ -14,3 +14,5 @@ end
 <meta name="twitter:site" content="@<%= twitter_handle %>" />
 <meta name="twitter:title" content="<%= current_page.data.title || blog_title %>" />
 <meta name="twitter:url" content="<%= URI.join(site_root_uri, current_page.url) %>" />
+<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content="Martin Costello" />
