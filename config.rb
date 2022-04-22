@@ -119,7 +119,7 @@ set :markdown, :fenced_code_blocks => true
 set :cdn_domain, "cdn.martincostello.com"
 set :site_domain, "blog.martincostello.com"
 set :site_root_uri_canonical, "https://blog.martincostello.com/"
-set :analytics_id, "UA-42907618-4"
+set :analytics_id, "G-XJFV74HRL6"
 set :blog_author, "Martin Costello"
 set :blog_title, "Martin Costello's Blog"
 set :blog_subtitle, "The blog of a software developer and tester."
