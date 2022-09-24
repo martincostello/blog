@@ -181,7 +181,7 @@ Add a custom MSBuild [task](https://github.com/martincostello/aspnet-core-pseudo
 
 ```
 <ItemGroup>
-  <_PseudloLocacalizedFiles Include="$(MSBuildThisFileDirectory)xlf\*.qps-Ploc.xlf" />
+  <_PseudoLocalizedFiles Include="$(MSBuildThisFileDirectory)xlf\*.qps-Ploc.xlf" />
 </ItemGroup>
 <PropertyGroup>
   <_PseudoLocalizeInstalledCommand Condition=" '$(OS)' == 'Windows_NT' ">
@@ -208,7 +208,7 @@ Add a custom MSBuild [task](https://github.com/martincostello/aspnet-core-pseudo
     Text="To install this tool, run the following command: dotnet tool install --global PseudoLocalize" />
   <Exec
     Condition=" $(_PseudoLocalizeInstalled) == 0 "
-    Command="pseudo-localize %(_PseudloLocacalizedFiles.Identity) --overwrite --force"
+    Command="pseudo-localize %(_PseudoLocalizedFiles.Identity) --overwrite --force"
     ConsoleToMsBuild="true"
     StandardOutputImportance="Normal" />
 </Target>
