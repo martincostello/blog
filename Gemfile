@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem "bundler", "~> 1.17.3"
 gem "haml", "~> 5.2.2"
-gem "middleman", "~> 3.4.1"
-gem "middleman-blog", "~> 3.5.3"
+gem "middleman", "~> 4.3.11"
+gem "middleman-blog", "~> 4.0.3"
 gem "middleman-minify-html", "~> 3.4.1"
 gem "middleman-syntax", "~> 3.2.0"
 
