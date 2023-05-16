@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem "middleman", "~> 3.4.1"
 gem "middleman-blog", "~> 3.5.3"
 gem "middleman-minify-html", "~> 3.4.1"
-gem "middleman-syntax", "~> 2.1.0"
+gem "middleman-syntax", "~> 3.2.0"
 
 # For feed.xml.builder
 gem "builder", "~> 3.0"
