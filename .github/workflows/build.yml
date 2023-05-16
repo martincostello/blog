@@ -24,6 +24,7 @@ jobs:
       with:
         name: blog
         path: ./build
+        if-no-files-found: error
     - name: Configure AWS credentials
       if: ${{ github.ref == 'refs/heads/deploy' }}
       uses: aws-actions/configure-aws-credentials@v2
