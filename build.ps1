@@ -7,3 +7,7 @@ git rev-parse HEAD > version.txt
 git rev-parse --abbrev-ref HEAD > branch.txt
 
 bundle exec middleman build
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "middleman build failed with exit code $LASTEXITCODE"
+}
