@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem "middleman", "~> 3.4.1"
 gem "middleman-blog", "~> 3.5.3"
-gem "middleman-syntax"
-gem 'middleman-minify-html'
+gem "middleman-minify-html", "~> 3.4.1"
+gem "middleman-syntax", "~> 2.1.0"
 
 # For feed.xml.builder
 gem "builder", "~> 3.0"
@@ -15,8 +15,8 @@ gem "middleman-livereload", "~> 3.4.6"
 gem "tzinfo-data"
 
 # For faster file watcher updates on Windows:
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'wdm', '~> 0.1.0' if Gem.win_platform?
 
-gem "redcarpet", ">= 3.3.2"
+gem "redcarpet", "~> 3.3.2"
 
-gem "rack", ">= 1.6.11"
+gem "rack", "~> 1.6.11"
