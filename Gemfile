@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "haml", "~> 5.2.2"
 gem "middleman", "~> 3.4.1"
 gem "middleman-blog", "~> 3.5.3"
 gem "middleman-minify-html", "~> 3.4.1"
