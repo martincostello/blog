@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "bundler", "~> 1.17.3"
 gem "haml", "~> 5.2.2"
 gem "middleman", "~> 3.4.1"
 gem "middleman-blog", "~> 3.5.3"
