@@ -22,13 +22,13 @@ jobs:
         git rev-parse --abbrev-ref HEAD > branch.txt
         bundle exec middleman build
     - name: Publish blog
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: blog
         path: ./build
     - name: Configure AWS credentials
       if: ${{ github.ref == 'refs/heads/deploy' }}
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
