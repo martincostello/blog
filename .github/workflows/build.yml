@@ -1,42 +1,76 @@
 name: build
+
 on:
   push:
     branches: [ main, deploy ]
+    paths-ignore:
+      - '**/*.gitattributes'
+      - '**/*.gitignore'
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
+
   build:
     runs-on: ubuntu-latest
+
     steps:
+
     - name: Checkout code
       uses: actions/checkout@v3
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7
+
     - name: Build blog
+      shell: pwsh
       run: |
         bundle config path vendor/bundle
         bundle install
         ./build.ps1
+
     - name: Publish blog
       uses: actions/upload-artifact@v3
       with:
         name: blog
         path: ./build
         if-no-files-found: error
+
+  deploy:
+    if: ${{ github.event.repository.fork == false && github.ref_name == 'deploy' }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    environment:
+      name: production
+      url: https://blog.martincostello.com
+
+    permissions:
+      id-token: write
+
+    steps:
+
+    - name: Download blog
+      uses: actions/download-artifact@v3
+      with:
+        name: blog
+        path: ./build
+
     - name: Configure AWS credentials
-      if: ${{ github.ref == 'refs/heads/deploy' }}
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE }}
+        role-session-name: ${{ github.event.repository.name }}-${{ github.run_id }}-deploy
         aws-region: eu-west-2
+
     - name: Deploy to S3
-      if: ${{ github.ref == 'refs/heads/deploy' }}
-      run: |
-        aws s3 sync ./build/ s3://blog.martincostello.com --cache-control 'max-age=604800' --delete
+      run: aws s3 sync ./build/ s3://blog.martincostello.com --cache-control 'max-age=604800' --delete
+
     - name: Create CloudFront invalidation
-      if: ${{ github.ref == 'refs/heads/deploy' }}
-      run: |
-        aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
