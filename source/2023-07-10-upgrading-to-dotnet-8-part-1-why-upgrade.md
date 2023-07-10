@@ -93,14 +93,16 @@ interesting issues and deep drive into the use and adoption of some of the new f
 I encourage you to also try out the .NET 8 previews and report any issues you find to the .NET teams. You can
 find links to download the latest .NET 8 previews from the [.NET website][dotnet-8-downloads].
 
+Read the next part in this series: _[Part 2 - Automation is our Friend][part-2]_.
+
 ## Upgrading to .NET 8 Series Links
 
 You can find links to the other posts in this series here - I'll keep them updated as new posts are published over the course of 2023.
 
 - Part 1 - Why Upgrade? (this post)
+- [Part 2 - Automation is our Friend][part-2]
 
 <!--
-- [Part 2 - Automation][part-2]
 - [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
 -->
@@ -110,14 +112,14 @@ You can find links to the other posts in this series here - I'll keep them updat
 [dotnet-performance-deep-dive]: https://build.microsoft.com/en-US/sessions/28588f70-fb54-447a-b778-7ef02c8ffdf8 "Deep dive into .NET performance and native AOT - Microsoft Build"
 [dotnet-8-preview-1]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-1/ "Announcing .NET 8 Preview 1"
 [dotnet-release-cadence]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core#cadence ".NET release cadence"
-[dotnet-release-types]: https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#release-types ".NET Release types"
+[dotnet-release-types]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core#release-types ".NET Release types"
 [dotnet-support-policy]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core ".NET and .NET Core Support Policy"
 [guilds]: https://www.atlassian.com/agile/agile-at-scale/spotify "The Spotify Model for Scaling Agile"
 [idic]: https://memory-alpha.fandom.com/wiki/IDIC "Infinite Diversity in Infinite Combinations on Memory Alpha"
 [jet-careers]: https://careers.justeattakeaway.com/global/en/c/tech-product-jobs "Tech & Product Careers at Just Eat Takeaway.com"
 [jet-improving-aspnet-core]: https://medium.com/justeattakeaway-tech/improving-asp-net-core-before-it-ships-3e44b6f65054 "Improving ASP.NET Core Before It Ships 🚢"
+[part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
 <!--
-[part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation "Automation"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 -->
