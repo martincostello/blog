@@ -84,12 +84,12 @@ You can find it here: [https://github.com/martincostello/Pseudolocalizer](https:
 
 This included:
 
-  * Updates to target .NET Core and allow usage on Linux and macOS.
-  * Support for processing `.xlf` files.
-  * [Packaging the application](https://www.nuget.org/packages/PseudoLocalize/ "PseudoLocalize on NuGet.org") as a [.NET Core Global Tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools ".NET Core Global Tools overview").
-  * Making the core string-transformations available as library on [NuGet](https://www.nuget.org/packages/PseudoLocalizer.Core/ "PseudoLocalizer.Core on NuGet.org").
-  * Creating an [integration](https://www.nuget.org/packages/PseudoLocalizer.Humanizer/ "PseudoLocalizer.Humanizer on NuGet.org") with [Humanizer](https://github.com/Humanizr/Humanizer "Humanizer on GitHub.com").
-  * Fixing transforms for strings with formatting placeholders and embedded HTML.
+- Updates to target .NET Core and allow usage on Linux and macOS.
+- Support for processing `.xlf` files.
+- [Packaging the application](https://www.nuget.org/packages/PseudoLocalize/ "PseudoLocalize on NuGet.org") as a [.NET Core Global Tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools ".NET Core Global Tools overview").
+- Making the core string-transformations available as library on [NuGet](https://www.nuget.org/packages/PseudoLocalizer.Core/ "PseudoLocalizer.Core on NuGet.org").
+- Creating an [integration](https://www.nuget.org/packages/PseudoLocalizer.Humanizer/ "PseudoLocalizer.Humanizer on NuGet.org") with [Humanizer](https://github.com/Humanizr/Humanizer "Humanizer on GitHub.com").
+- Fixing transforms for strings with formatting placeholders and embedded HTML.
 
 ### Generating a qps-ploc Satellite Resource Assembly
 
@@ -224,6 +224,6 @@ It was interesting to learn about, and a fun challenge to get working. I hope yo
 
 ## Links
 
-  * [Pseudolocalizer](https://github.com/martincostello/Pseudolocalizer)
-  * [Sample application](https://github.com/martincostello/aspnet-core-pseudo-localization)
-  * [Windows Pseudo-locales](https://docs.microsoft.com/en-gb/windows/desktop/Intl/using-pseudo-locales-for-localization-testing)
+- [Pseudolocalizer](https://github.com/martincostello/Pseudolocalizer)
+- [Sample application](https://github.com/martincostello/aspnet-core-pseudo-localization)
+- [Windows Pseudo-locales](https://docs.microsoft.com/en-gb/windows/desktop/Intl/using-pseudo-locales-for-localization-testing)

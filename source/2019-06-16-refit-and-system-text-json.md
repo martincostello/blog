@@ -146,11 +146,11 @@ If you use Refit heavily in an existing .NET Core application to consume JSON it
 
 ## Links
 
-  * [Refit](https://github.com/reactiveui/refit)
-  * [JSON.NET](https://www.newtonsoft.com/json)
-  * [_Try the new System.Text.Json APIs_](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/)
-  * [_Announcing .NET Core 3.0 Preview 6_](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0-preview-6/)
-  * [Refit Benchmarks with System.Text.Json](https://github.com/martincostello/Refit-Json-Benchmarks)
+- [Refit](https://github.com/reactiveui/refit)
+- [JSON.NET](https://www.newtonsoft.com/json)
+- [_Try the new System.Text.Json APIs_](https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/)
+- [_Announcing .NET Core 3.0 Preview 6_](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0-preview-6/)
+- [Refit Benchmarks with System.Text.Json](https://github.com/martincostello/Refit-Json-Benchmarks)
 
 ## `SystemTextJsonContentSerializer` Code
 
@@ -164,46 +164,45 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Refit;
 
-namespace RefitWithSystemTextJson
+namespace RefitWithSystemTextJson;
+
+public sealed class SystemTextJsonContentSerializer : IContentSerializer
 {
-    public sealed class SystemTextJsonContentSerializer : IContentSerializer
+    private static readonly MediaTypeHeaderValue _jsonMediaType =
+        new MediaTypeHeaderValue("application/json") { CharSet = Encoding.UTF8.WebName };
+
+    public SystemTextJsonContentSerializer(JsonSerializerOptions serializerOptions)
     {
-        private static readonly MediaTypeHeaderValue _jsonMediaType =
-            new MediaTypeHeaderValue("application/json") { CharSet = Encoding.UTF8.WebName };
+        SerializerOptions = serializerOptions;
+    }
 
-        public SystemTextJsonContentSerializer(JsonSerializerOptions serializerOptions)
+    private JsonSerializerOptions SerializerOptions { get; }
+
+    public async Task<T> DeserializeAsync<T>(HttpContent content)
+    {
+        using var utf8Json = await content.ReadAsStreamAsync();
+        return await JsonSerializer.ReadAsync<T>(utf8Json, SerializerOptions);
+    }
+
+    public async Task<HttpContent> SerializeAsync<T>(T item)
+    {
+        var stream = new MemoryStream();
+
+        try
         {
-            SerializerOptions = serializerOptions;
+            await JsonSerializer.WriteAsync(item, stream, SerializerOptions);
+            await stream.FlushAsync();
+
+            var content = new StreamContent(stream);
+
+            content.Headers.ContentType = _jsonMediaType;
+
+            return content;
         }
-
-        private JsonSerializerOptions SerializerOptions { get; }
-
-        public async Task<T> DeserializeAsync<T>(HttpContent content)
+        catch (Exception)
         {
-            using var utf8Json = await content.ReadAsStreamAsync();
-            return await JsonSerializer.ReadAsync<T>(utf8Json, SerializerOptions);
-        }
-
-        public async Task<HttpContent> SerializeAsync<T>(T item)
-        {
-            var stream = new MemoryStream();
-
-            try
-            {
-                await JsonSerializer.WriteAsync(item, stream, SerializerOptions);
-                await stream.FlushAsync();
-
-                var content = new StreamContent(stream);
-
-                content.Headers.ContentType = _jsonMediaType;
-
-                return content;
-            }
-            catch (Exception)
-            {
-                await stream.DisposeAsync();
-                throw;
-            }
+            await stream.DisposeAsync();
+            throw;
         }
     }
 }

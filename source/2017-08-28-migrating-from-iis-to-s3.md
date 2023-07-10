@@ -39,7 +39,7 @@ With the S3 bucket effectively moved, it needs configuring to enable Static webs
 
 Once I've got the S3 bucket created in the correct region, I could press on. The steps were fairly simple:
 
-  1. Add a deployment section to the `.travis.yml` file to copy the static content for the site to S3: [configuration].(https://github.com/martincostello/blog/blob/5db3f6495e8accaaa567171b871a225c4e0f8d57/.travis.yml#L18-L28 "S3 deployment configuration in GitHub")
+  1. Add a deployment section to the `.travis.yml` file to copy the static content for the site to S3: [configuration](https://github.com/martincostello/blog/blob/5db3f6495e8accaaa567171b871a225c4e0f8d57/.travis.yml#L18-L28 "S3 deployment configuration in GitHub").
   1. Copy my TLS certificate to Amazon Certificate Manager in `us-east-1`.
   1. Set up a new CloudFront web distribution to serve the content from the S3 bucket (more waiting) with a CNAME for `blog.martincostello.com`.
   1. Configure a custom 404 error page for the distribution.

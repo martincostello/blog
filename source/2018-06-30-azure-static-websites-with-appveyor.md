@@ -30,11 +30,11 @@ The approximate steps to enable Azure static website hosting for this blog were:
 
 There's plenty of extra stuff I'd need to do to migrate back from AWS to Azure once this comes out of public preview if I choose to move, but it's nice to see that the mechanics of uploading content are easy to get moving with. These extras include:
 
-  * Deleting content from the storage container no longer present in source.
-  * Configuring a custom DNS hostname.
-  * Fronting it with Azure CDN to support custom TLS certificates.
-  * Configuring appropriate caching headers.
-  * Configuring HTTP response headers for things like having a Content Security Policy to get an A+ rating in tools such as [securityheaders.io](https://securityheaders.com/ "securityheaders.io").
+- Deleting content from the storage container no longer present in source.
+- Configuring a custom DNS hostname.
+- Fronting it with Azure CDN to support custom TLS certificates.
+- Configuring appropriate caching headers.
+- Configuring HTTP response headers for things like having a Content Security Policy to get an A+ rating in tools such as [securityheaders.io](https://securityheaders.com/ "securityheaders.io").
 
 With that all set up, here's this blog post served from Azure storage: [https://martincostelloblog.z33.web.core.windows.net/azure-static-websites-with-appveyor/](https://martincostelloblog.z33.web.core.windows.net/azure-static-websites-with-appveyor/ "Blog from Azure Storage")
 
