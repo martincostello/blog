@@ -111,7 +111,7 @@ my sample repo with Codespaces without neeeding to clone it locally.
 If you've stumbled across the blog post while trying to get this working
 yourself, I hope you found reading this useful!
 
-[1]: https://docs.github.com/en/codespaces "GitHub Codespaces Documentation"
+[1]: https://docs.github.com/codespaces "GitHub Codespaces Documentation"
 [2]: https://github.blog/changelog/2021-08-11-codespaces-is-generally-available-for-team-and-enterprise/ "Codespaces is generally available for Team and Enterprise"
 [3]: https://code.visualstudio.com/ "Visual Studio Code"
 [4]: https://twitter.com/github/status/1425505817827151872?s=20 "New shortcut: Press . on any GitHub repo."
