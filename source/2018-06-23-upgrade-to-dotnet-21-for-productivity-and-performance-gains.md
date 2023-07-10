@@ -18,8 +18,8 @@ In this blog post I'm going to cover two aspects of software development ASP.NET
 
 Below are links to the two GitHub Pull Requests to the repositories for my personal websites to upgrade them to ASP.NET Core 2.1:
 
-  * [Update to ASP.NET Core 2.1](https://github.com/martincostello/website/pull/211 "Update to ASP.NET Core 2.1") for martincostello.com
-  * [Migrate to ASP.NET Core 2.1](https://github.com/martincostello/alexa-london-travel-site/pull/178 "Migrate to ASP.NET Core 2.1") for londontravel.martincostello.com
+- [Update to ASP.NET Core 2.1](https://github.com/martincostello/website/pull/211 "Update to ASP.NET Core 2.1") for martincostello.com
+- [Migrate to ASP.NET Core 2.1](https://github.com/martincostello/alexa-london-travel-site/pull/178 "Migrate to ASP.NET Core 2.1") for londontravel.martincostello.com
 
 ## Productivity Improvements
 
@@ -41,8 +41,8 @@ The builder configuration API it has also makes it easy to plug in additional be
 
 Here's some links to GitHub Pull Requests where I've updated some of the applications I maintain to use HttpClientFactory:
 
-  * [Update sample to use ASP.NET Core 2.1 and HttpClientFactory](https://github.com/justeat/httpclient-interception/pull/23 "Update sample to use ASP.NET Core 2.1 and HttpClientFactory for JustEat.HttpClientInterception")
-  * [Upgrade to ASP.NET Core 2.1](https://github.com/justeat/ApplePayJSSample/pull/27 "Upgrade to ASP.NET Core 2.1 for Apple Pay JS Sample code")
+- [Update sample to use ASP.NET Core 2.1 and HttpClientFactory](https://github.com/justeat/httpclient-interception/pull/23 "Update sample to use ASP.NET Core 2.1 and HttpClientFactory for JustEat.HttpClientInterception")
+- [Upgrade to ASP.NET Core 2.1](https://github.com/justeat/ApplePayJSSample/pull/27 "Upgrade to ASP.NET Core 2.1 for Apple Pay JS Sample code")
 
 ### WebApplicationFactory&lt;T&gt;
 

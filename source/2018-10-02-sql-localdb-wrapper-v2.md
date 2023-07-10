@@ -10,8 +10,8 @@ After over 2 years and 100,000 package downloads since the [last release](https:
 
 Version 2.0.0 of SQL LocalDB Wrapper is a major rewrite of version 1.x.x, and is now fully .NET Core compatible. You can read more about the changes in the [release notes](https://github.com/martincostello/sqllocaldb/releases/tag/v2.0.0 "SQL LocalDB Wrapper 2.0.0 release notes").
 
-  * [NuGet package](https://www.nuget.org/packages/MartinCostello.SqlLocalDb "MartinCostello.SqlLocalDb on NuGet.org")
-  * [GitHub repository](https://github.com/martincostello/sqllocaldb "SQL LocalDB Wrapper on GitHub.com")
+- [NuGet package](https://www.nuget.org/packages/MartinCostello.SqlLocalDb "MartinCostello.SqlLocalDb on NuGet.org")
+- [GitHub repository](https://github.com/martincostello/sqllocaldb "SQL LocalDB Wrapper on GitHub.com")
 
 READMORE
 

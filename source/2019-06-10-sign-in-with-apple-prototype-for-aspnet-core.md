@@ -10,8 +10,8 @@ Last week at Apple's [WWDC 2019](https://developer.apple.com/wwdc19/ "WWDC19") c
 
 The main points of note about the new service are:
 
-  * Users can sign in without having to give their email address to a third-party;
-  * It will be required as an option in the future for apps that support third-party sign-in.
+- Users can sign in without having to give their email address to a third-party;
+- It will be required as an option in the future for apps that support third-party sign-in.
 
 Just _one day_ after the announcement at WWDC19, [@leastprivilege](https://github.com/leastprivilege "@leastprivilege on GitHub.com") of Identity Server fame, opened a [GitHub issue](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/issues/314 "Support for Apple Sign-in on GitHub.com") over at the [_AspNet.Security.OAuth.Providers_](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers "AspNet.Security.OAuth.Providers on GitHub.com") repository requesting a provider to support _Sign In with Apple_.
 
@@ -72,11 +72,11 @@ To implement things, I set up a free Azure App Service website to quickly get so
 
 The _TL;DR_ of what you need is:
 
-  * An App ID (for your Services ID)
-  * A Services ID (for your _Client Id_)
-  * An _Apple Developer Domain Association_ file (or two) to verify your sign-in and email domain(s)
-  * A private key (to generate your _Client Secret_)
-  * Appropriate DNS `MX` record(s) in your DNS zone (for email relay, even if you don't intend to use it)
+- An App ID (for your Services ID)
+- A Services ID (for your _Client Id_)
+- An _Apple Developer Domain Association_ file (or two) to verify your sign-in and email domain(s)
+- A private key (to generate your _Client Secret_)
+- Appropriate DNS `MX` record(s) in your DNS zone (for email relay, even if you don't intend to use it)
 
 For the email relay I just verified my main .com domain as it already has MX records setup, plus I don't intend to actually leverage the email addresses from the signed-in users to send any emails.
 
@@ -262,9 +262,9 @@ If you've got any feedback on the provider prototype, feel free to leave a comme
 
 ## Links
 
-  * [Sign In with Apple](https://developer.apple.com/sign-in-with-apple/ "Sign In with Apple - developer.apple.com")
-  * [Sign In with Apple REST API](https://developer.apple.com/documentation/signinwithapplerestapi "Sign In with Apple REST API - developer.apple.com")
-  * [_"What the Heck is Sign In with Apple?"_](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple "What the Heck is Sign In with Apple? - developer.okta.com")
-  * [_"What is Sign In with Apple?_](https://auth0.com/blog/what-is-sign-in-with-apple-a-new-identity-provider/ "Sign In with Apple: Learn About the New Identity Provider - auth0.com")
-  * [Sign In with Apple demo app](https://signinwithapple.azurewebsites.net/ "Sign In with Apple demo app - signinwithapple.azurewebsites.net")
-  * [Sign In with Apple OAuth 2.0 provider for ASP.NET Core 2.x](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/pull/318 "Sign in With Apple provider - github.com")
+- [Sign In with Apple](https://developer.apple.com/sign-in-with-apple/ "Sign In with Apple - developer.apple.com")
+- [Sign In with Apple REST API](https://developer.apple.com/documentation/signinwithapplerestapi "Sign In with Apple REST API - developer.apple.com")
+- [_"What the Heck is Sign In with Apple?"_](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple "What the Heck is Sign In with Apple? - developer.okta.com")
+- [_"What is Sign In with Apple?_](https://auth0.com/blog/what-is-sign-in-with-apple-a-new-identity-provider/ "Sign In with Apple: Learn About the New Identity Provider - auth0.com")
+- [Sign In with Apple demo app](https://signinwithapple.azurewebsites.net/ "Sign In with Apple demo app - signinwithapple.azurewebsites.net")
+- [Sign In with Apple OAuth 2.0 provider for ASP.NET Core 2.x](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/pull/318 "Sign in With Apple provider - github.com")

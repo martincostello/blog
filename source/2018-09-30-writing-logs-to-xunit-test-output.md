@@ -8,8 +8,8 @@ description: "How to write the logs from your xunit tests to the test output."
 
 Today I've published a NuGet package that simplifies the mechanics of writing logs to the test output for xunit tests, `MartinCostello.Logging.XUnit` v0.1.0. It's open-source with an Apache 2.0 licence and available on GitHub.
 
-  * [NuGet package](https://www.nuget.org/packages/MartinCostello.Logging.XUnit/ "MartinCostello.Logging.XUnit on NuGet.org")
-  * [GitHub repository](https://github.com/martincostello/xunit-logging "MartinCostello.Logging.XUnit on GitHub.com")
+- [NuGet package](https://www.nuget.org/packages/MartinCostello.Logging.XUnit/ "MartinCostello.Logging.XUnit on NuGet.org")
+- [GitHub repository](https://github.com/martincostello/xunit-logging "MartinCostello.Logging.XUnit on GitHub.com")
 
 Pull Requests and questions are welcome over on GitHub - I hope you find it useful!
 
@@ -38,58 +38,57 @@ using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace MyApp.Calculator
+namespace MyApp.Calculator;
+
+public class CalculatorTests
 {
-    public class CalculatorTests
+    // Pass ITestOutputHelper into the test class, which xunit provides per-test
+    public CalculatorTests(ITestOutputHelper outputHelper)
     {
-        // Pass ITestOutputHelper into the test class, which xunit provides per-test
-        public CalculatorTests(ITestOutputHelper outputHelper)
-        {
-            OutputHelper = outputHelper;
-        }
-
-        private ITestOutputHelper OutputHelper { get; }
-
-        [Fact]
-        public void Calculator_Sums_Two_Integers()
-        {
-            // Arrange - Create a service collection and call AddXunit()
-            // on the logging builder to register it as a logging provider.
-            var services = new ServiceCollection()
-                .AddLogging((builder) => builder.AddXUnit(OutputHelper))
-                .AddSingleton<Calculator>();
-
-            // Get the system-under-test (the Calculator) from the service collection.
-            // This will be created with a logger that routes to the xunit test output.
-            var calculator = services
-                .BuildServiceProvider()
-                .GetRequiredService<Calculator>();
-
-            // Act
-            int actual = calculator.Sum(1, 2);
-
-            // Assert
-            Assert.AreEqual(3, actual);
-        }
+        OutputHelper = outputHelper;
     }
 
-    public sealed class Calculator
+    private ITestOutputHelper OutputHelper { get; }
+
+    [Fact]
+    public void Calculator_Sums_Two_Integers()
     {
-        private readonly ILogger _logger;
+        // Arrange - Create a service collection and call AddXunit()
+        // on the logging builder to register it as a logging provider.
+        var services = new ServiceCollection()
+            .AddLogging((builder) => builder.AddXUnit(OutputHelper))
+            .AddSingleton<Calculator>();
 
-        public Calculator(ILogger<Calculator> logger)
-        {
-            _logger = logger;
-        }
+        // Get the system-under-test (the Calculator) from the service collection.
+        // This will be created with a logger that routes to the xunit test output.
+        var calculator = services
+            .BuildServiceProvider()
+            .GetRequiredService<Calculator>();
 
-        public int Sum(int x, int y)
-        {
-            int sum = x + y;
+        // Act
+        int actual = calculator.Sum(1, 2);
 
-            _logger.LogInformation("The sum of {x} and {y} is {sum}.", x, y, sum);
+        // Assert
+        Assert.AreEqual(3, actual);
+    }
+}
 
-            return sum;
-        }
+public sealed class Calculator
+{
+    private readonly ILogger _logger;
+
+    public Calculator(ILogger<Calculator> logger)
+    {
+        _logger = logger;
+    }
+
+    public int Sum(int x, int y)
+    {
+        int sum = x + y;
+
+        _logger.LogInformation("The sum of {x} and {y} is {sum}.", x, y, sum);
+
+        return sum;
     }
 }
 ```
@@ -102,5 +101,5 @@ There's also an example of registering the logger for a self-hosted ASP.NET Core
 
 Further real usage of the library for both a library and an ASP.NET Core application are available for reference in the GitHub repositories linked to below:
 
-  * [martincostello/sqllocaldb](https://github.com/martincostello/sqllocaldb/blob/fc3cd5d8539b5c8bb9d86896f0a2eae37ab6fa24/samples/TodoApp.Tests/TodoRepositoryTests.cs "martincostello/sqllocaldb sample tests on GitHub.com")
-  * [martincostello/alexa-london-travel-site](https://github.com/martincostello/alexa-london-travel-site/tree/c43c297d903c04196cc8eb66caf70b1cb32aef25/tests/LondonTravel.Site.Tests/Integration "martincostello/alexa-london-travel-site integration tests on GitHub.com")
+- [martincostello/sqllocaldb](https://github.com/martincostello/sqllocaldb/blob/fc3cd5d8539b5c8bb9d86896f0a2eae37ab6fa24/samples/TodoApp.Tests/TodoRepositoryTests.cs "martincostello/sqllocaldb sample tests on GitHub.com")
+- [martincostello/alexa-london-travel-site](https://github.com/martincostello/alexa-london-travel-site/tree/c43c297d903c04196cc8eb66caf70b1cb32aef25/tests/LondonTravel.Site.Tests/Integration "martincostello/alexa-london-travel-site integration tests on GitHub.com")

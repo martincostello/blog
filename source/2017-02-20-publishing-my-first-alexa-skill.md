@@ -74,9 +74,9 @@ Setting up the [YAML file](https://github.com/martincostello/alexa-london-travel
 
 The missing bits were:
 
-  * The default node runtime version no longer being supported in AWS.
-  * The default handler name being incorrectly generated.
-  * The IAM permissions described were insufficient.
+- The default node runtime version no longer being supported in AWS.
+- The default handler name being incorrectly generated.
+- The IAM permissions described were insufficient.
 
 The first two were easy to fix, but the third was a bit trickier. The IAM policy provided in the documentation was insufficient to allow Travis to update the Lambda function. After a bit of trial and error, I finally used the below IAM policy to get the deployment working smoothly:
 
