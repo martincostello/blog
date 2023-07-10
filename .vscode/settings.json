@@ -1,7 +1,7 @@
 {
   "markdownlint.config": {
     "MD033": {
-      "allowed_elements": [ "a", "blockquote", "br", "hr", "img", "p", "script" ]
+      "allowed_elements": [ "a", "blockquote", "br", "hr", "img", "p", "s", "script" ]
     },
     "MD040": false
   }
