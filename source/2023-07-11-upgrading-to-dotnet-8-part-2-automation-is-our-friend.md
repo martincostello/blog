@@ -62,8 +62,8 @@ There's much more detail about how that works [in the sample repository][dotnet-
 but in a nutshell it uses the [.NET release notes JSON][dotnet-release-notes] in GitHub to determine
 if there's a new .NET release available for a channel (.NET 6, .NET 7 etc.) and then raises a pull
 request to update the `global.json` file in the repository to use the latest SDK version. It can also
-optionally also update your .NET NuGet packages to the latest patch version in the same pull request too.
-For one of my repositories that uses SignalR [I also extended it include the SignalR npm package too][npm-updates].
+optionally update your .NET NuGet packages to the latest patch version in the same pull request too.
+For one of my repositories that uses SignalR [I also extended it include the SignalR npm package][npm-updates].
 
 It occured to me that I could use the same process to update the version of the .NET SDK for the
 current .NET preview release on a branch in the same way. By manually running the workflow to update
@@ -86,6 +86,16 @@ I handle this using my own imaginatively named GitHub automation bot: [costellob
 With this all set up, I can now manually run the workflow to update the .NET SDK version on the `dotnet-vnext`
 branch when there's a preview version available. This is typically on _[Patch Tuesday][patch-tuesday]_
 each month, but not always.
+
+If the upgrade from one preview to the next goes without a hitch, then it automatically merges and there's
+nothing that needs doing manually. I'm then free to play with any new features in the latest preview release
+separately.
+
+If the CI fails, then I can investigate and fix/report the issue(s) before merging the pull request. It also
+gives you a Git commit that's easy to share in a GitHub issue (assuming that your repository is public) to
+make it easier for the .NET teams to triage and fix any issues you may find.
+
+This approach makes it easy to focus your time on the parts that are important, rather than having to review _everything_. 😮‍💨
 
 ## Rebasing the branches
 
@@ -126,17 +136,17 @@ change that needs some manual intervention. In these cases, Rebaser can do the h
 
 ## Stiching things together
 
-At this point we have a workflow that does our updates for us and another that rebases the branch when it needs it,
-but both of these workflows need to be run manually. That's not very automated, is it?
+At this point we have a workflow that does our version updates for us and another that rebases the branch when it
+needs it, but both of these workflows need to be run manually. That's not very automated, is it?
 
-What if we could automate the automation (whoa, meta) to run the workflows for us when we need them? What if we
+What if we could automate the automation (whoa, meta) to run the workflows for us when we need them to? What if we
 could run the workflows for _all_ of the repositories we're testing .NET previews with? That sounds like something
 that would really save us some time each month.
 
 ### Checking for new releases
 
 - [A workflow][dotnet-release] checks the [dotnet/core][dotnet-release-notes] repository for changes to the `release-notes/**/releases.json` file(s).
-- When changes are found, which usually implies a new release is available, the workflow [raises a repository dispatch event][github-api-create-repo-dispatch] named `dotnet_release`.
+- When changes are found, which _usually_ implies a new release is available, the workflow [raises a repository dispatch event][github-api-create-repo-dispatch] named `dotnet_release`.
 - This event triggers the [`update-dotnet-sdks`][update-dotnet-sdks] workflow which runs the `update-dotnet-sdk` workflow in each repository that has opted-in to the automation for the `main` branch. This isn't run for `dotnet-vnext` at the moment as when the release notes change there's likely a new version of .NET 6, 7 and 8 at the same time. Running just for `main` means we can get the .NET 6/7 updates applied to it first, and then the .NET 8 updates later as it would just create a merge conflict anyway.
 
 In the future I might extend this to be smarter and determine whether a preview (or not) has been released, and then run the workflow for either `main` or `dotnet-vnext` as appropriate.
@@ -157,7 +167,7 @@ More detailed information about how the workflows above operate can be found in 
 
 ## What's the status of the upgrade?
 
-With all this in place, it would be good to know the status of everything in one place. Information that would be good to know includes:
+With all this in place, it would be good to know the status of everything in one place. Information that would be good to show includes:
 
 - What version of the .NET SDK is being used?
 - Is the `dotnet-vnext` branch using the latest preview version?
@@ -166,11 +176,11 @@ With all this in place, it would be good to know the status of everything in one
 
 GitHub Actions once again comes to the rescue here, as we can use it to create a workflow that uses
 the [GitHub CLI][github-cli] to easily query the state of the pull requests in our branches and then
-generate a Markdown report using [Step Summaries][github-actions-step-summaries]. This shows us a table
+generate a Markdown report using _[Step Summaries][github-actions-step-summaries]_. This shows us a table
 of all of the repositories we're testing .NET 8 with and uses [shields.io][shields-io] to generate a
 badge that we can use to tell at-a-glance if there's something not right with any repository.
 
-With some inline PowerShell script and the GitHub CLI (`gh`), the [dotnet-upgrade-report][upgrade-report-workflow]
+With some inline PowerShell script and the GitHub CLI (`gh`), the [dotnet-upgrade-report workflow][upgrade-report-workflow]
 generates a report that provides us with the information we need, using colour coding to draw attention to
 any rows that might be of interest. An example of the report can be found [here][upgrade-report-sample].
 
@@ -208,6 +218,8 @@ APIs. This means that you can safely apply these changes to your default branch 
 thing .NET 8 did was bring the _capability to detect_ these issues to us. Not waiting for these changes to be made
 until our .NET 8 upgrade is merged means that we can not only benefit from the performance improvements now, but
 we also reduce the size of the Git diff in our pull request, making it easier to review and merge when the time comes.
+The only downside is that someone could change the code back in the default branch and regress the behaviour,
+but I think that's a small issue compared to the benefits of making such changes now.
 
 ## Summary
 
@@ -216,11 +228,11 @@ a lot of the boring parts of upgrading from one .NET preview to the next. These 
 
 - Watch for new .NET versions using the JSON release notes
 - Use the [update-dotnet-sdk] GitHub action to update the .NET SDK and NuGet packages for the repositories we're testing
-- Keep changes that break the CI in a separate branch and pull request for manual inspection if an issue is found
+- Keep changes that break the CI in a separate branch and pull request for manual inspection <s>if</s> when an issue is found
 - Automatically rebase the `dotnet-vnext` branch as and when needed (or make it easier to do so manually)
 
 With these parts automated, we can focus on the more interesting parts of the process that come up, like any issues we
-might find, or trying out new functionality in the latest preview releases.
+might find, or trying out new functionality in the latest preview releases. Nice. 😎
 
 I hope you find the automation I've described above useful and an inspiration for automating .NET version upgrades
 for your own application repositories.
