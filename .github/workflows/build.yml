@@ -73,4 +73,7 @@ jobs:
       run: aws s3 sync ./build/ s3://blog.martincostello.com --cache-control 'max-age=604800' --delete
 
     - name: Create CloudFront invalidation
-      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+      run: |
+        $distributionId = "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+        $invalidationId = aws cloudfront create-invalidation --distribution-id $distributionId --paths "/*" --output text --query "Invalidation.Id"
+        aws cloudfront wait invalidation-completed --distribution-id $distributionId --id $invalidationId
