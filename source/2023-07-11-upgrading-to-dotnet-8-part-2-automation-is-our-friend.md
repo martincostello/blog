@@ -151,7 +151,9 @@ that would really save us some time each month.
 - When changes are found, which _usually_ implies a new release is available, the workflow [raises a repository dispatch event][github-api-create-repo-dispatch] named `dotnet_release`.
 - This event triggers the [`update-dotnet-sdks`][update-dotnet-sdks] workflow which runs the `update-dotnet-sdk` workflow in each repository that has opted-in to the automation for the `main` branch. This isn't run for `dotnet-vnext` at the moment as when the release notes change there's likely a new version of .NET 6, 7 and 8 at the same time. Running just for `main` means we can get the .NET 6/7 updates applied to it first, and then the .NET 8 updates later as it would just create a merge conflict anyway.
 
-In the future I might extend this to be smarter and determine whether a preview (or not) has been released, and then run the workflow for either `main` or `dotnet-vnext` as appropriate.
+<s>In the future I might extend this to be smarter and determine whether a preview (or not) has been released, and then run the workflow for either `main` or `dotnet-vnext` as appropriate.</s>
+
+I updated the workflow above to handle this scenario. It now checks the `release-notes/**/releases.json` file(s) for the latest version(s) of .NET that have been released. If any version is a preview, then it will run the workflow for `dotnet-vnext`; for any others it will run the workflow for `main`. The commit that made those changes can be [found here][improvement-commit].
 
 ### Checking for conflicts
 
@@ -274,6 +276,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [github-automation]: https://github.com/martincostello/github-automation "GitHub Automation repository on GitHub"
 [github-cli]: https://cli.github.com/ "GitHub CLI"
 [github-webhook-push]: https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push "push webhook event on GitHub"
+[improvement-commit]: https://github.com/martincostello/github-automation/commit/5cb88f4805e6181ec4a6ace53a6164ca524e21af "Run SDK update for previews - martincostello/github-automation@5cb88f4"
 [is-it-worth-the-time]: https://xkcd.com/1205/ "Is It Worth the Time? on XKCD"
 [npm-updates]: https://github.com/martincostello/costellobot/blob/8a4352c5938f1c373ea8f64194bc352b5c243ed4/.github/workflows/update-dotnet-sdk.yml#L21-L82 "Updating npm packages"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
