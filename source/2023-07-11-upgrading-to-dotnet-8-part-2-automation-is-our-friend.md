@@ -242,7 +242,7 @@ I hope you find the automation I've described above useful and an inspiration fo
 for your own application repositories.
 
 In part 3 of this series, we'll look at some of the changes that have been introduced in the first five preview
-releases of .NET 8 and some of the interesting issues testing them uncovered.
+releases of .NET 8 and some of the interesting issues testing them uncovered: _[Part 3 - Previews 1-5][part-3]_.
 
 ## Upgrading to .NET 8 Series Links
 
@@ -250,9 +250,9 @@ You can find links to the other posts in this series here - I'll keep them updat
 
 - [Part 1 - Why Upgrade?][part-1]
 - Part 2 - Automation is our Friend (this post)
+- [Part 3 - Previews 1-5][part-3]
 
 <!--
-- [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
 -->
 
@@ -280,8 +280,8 @@ You can find links to the other posts in this series here - I'll keep them updat
 [is-it-worth-the-time]: https://xkcd.com/1205/ "Is It Worth the Time? on XKCD"
 [npm-updates]: https://github.com/martincostello/costellobot/blob/8a4352c5938f1c373ea8f64194bc352b5c243ed4/.github/workflows/update-dotnet-sdk.yml#L21-L82 "Updating npm packages"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
-<!--
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
+<!--
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 -->
 [patch-tuesday]: https://en.wikipedia.org/wiki/Patch_Tuesday "Patch Tuesday on Wikipedia"
