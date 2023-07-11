@@ -139,6 +139,8 @@ change that needs some manual intervention. In these cases, Rebaser can do the h
 At this point we have a workflow that does our version updates for us and another that rebases the branch when it
 needs it, but both of these workflows need to be run manually. That's not very automated, is it?
 
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_an-automated-solution.gif" alt="A drinking bird pressing a button on a keyboard" title="A drinking bird pressing a button on a keyboard">
+
 What if we could automate the automation (whoa, meta) to run the workflows for us when we need them to? What if we
 could run the workflows for _all_ of the repositories we're testing .NET previews with? That sounds like something
 that would really save us some time each month.
