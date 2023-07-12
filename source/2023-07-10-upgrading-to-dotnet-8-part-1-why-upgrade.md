@@ -101,9 +101,9 @@ You can find links to the other posts in this series here - I'll keep them updat
 
 - Part 1 - Why Upgrade? (this post)
 - [Part 2 - Automation is our Friend][part-2]
+- [Part 3 - Previews 1-5][part-3]
 
 <!--
-- [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
 -->
 
@@ -119,8 +119,8 @@ You can find links to the other posts in this series here - I'll keep them updat
 [jet-careers]: https://careers.justeattakeaway.com/global/en/c/tech-product-jobs "Tech & Product Careers at Just Eat Takeaway.com"
 [jet-improving-aspnet-core]: https://medium.com/justeattakeaway-tech/improving-asp-net-core-before-it-ships-3e44b6f65054 "Improving ASP.NET Core Before It Ships 🚢"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
-<!--
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
+<!--
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 -->
 [penny-pinching]: https://www.hanselman.com/blog/penny-pinching-in-the-cloud-running-and-managing-lots-of-web-apps-on-a-single-azure-app-service "Penny Pinching in the Cloud: Running and Managing LOTS of Web Apps on a single Azure App Service"
