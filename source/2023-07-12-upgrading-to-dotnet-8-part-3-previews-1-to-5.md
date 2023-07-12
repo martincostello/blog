@@ -168,23 +168,25 @@ point as it makes code that depends on the time within the framework itself (suc
 
 Now .NET provides its own abstraction for time in the form of the [`TimeProvider`][time-provider] abstraction. This
 is a great fit for existing applications, particularly for those like my own where I've pulled in the entire of NodaTime
-just to provide a comon time abstraction. With `TimeProvider` I can now remove the need to ship all of the additional
-dependencies that NodaTime brings with it, such as time zone data, and instead just use `TimeProvider` in these applications.
-This makes the dependency graph of my applications much simpler, and also makes them smaller and faster to start up.
+just to provide a comon time abstraction.
+
+With `TimeProvider` I can now remove the need to ship all of the additional dependencies that NodaTime brings with it,
+such as time zone data, and instead just use `TimeProvider` in these applications. This makes the dependency graph of my
+applications much simpler, and also makes them smaller and faster to start up.
 
 ## Preview 5
 
 With the release of [preview 5][preview-5] in June, there were two things that I thought were of interest.
 
-### Dynamic PGO meets Playwright
+### Dynamic PGO 🤝 Playwright .NET
 
 Something that came up in a few of my applications after updating to preview 5 was that for _some_ of the applications,
 their [Playwright][] UI tests were starting to fail with a `NullReferenceException`. This was a bit of a head-scratcher
-as it consistently failed in GitHub Actions CI, but not locally in Visual Studio when run _individually_. After spending
-more time that I'd like debugging things and running the tests locally through Playwright .NET's own source code with
-some debugging from the `console.log()` school of though, I was able to determine that _something_ weird was going on
-with some asynchronous code inside Playwright. This lead me to open [an issue][dotnet-runtime-87628] in the .NET runtime
-repository, thinking that maybe something really weird with threads and tasks had been broken.
+as it consistently failed in GitHub Actions CI, but not locally in Visual Studio when those tests were run _individually_.
+After spending more time that I'd like debugging things and running the tests locally through Playwright .NET's own source
+code with some debugging from the `console.log()` school of thought, I was able to determine that _something_ weird was
+going on with some asynchronous code inside Playwright. This lead me to open [an issue][dotnet-runtime-87628] in the
+.NET runtime repository, thinking that maybe something really weird with threads and tasks had been broken.
 
 A member of the .NET team investigated the issue, and found that actually the triggering factor for the bug was that
 [Dynamic Profile Guided Optimization][dynamic-pgo] (PGO) was enabled by default in preview 5 for Release builds. This
@@ -223,7 +225,10 @@ in a future preview.
 
 I hope you've found this run down of our experiences and the issues we found with previews 1-5 of .NET 8 interesting.
 
-In the next post in this series, we'll take a look at .NET 8 Preview 6.
+As you can see several issues were found during our testing, with them all being raised as issues in the relevant
+repositories and at the time of writing all of them either fixed or with a fix in development.
+
+In the next post in this series, we'll take a look at upgrading to .NET 8 Preview 6.
 
 ## Upgrading to .NET 8 Series Links
 
