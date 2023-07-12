@@ -49,11 +49,8 @@ to an [Elastic Kubernetes Service][eks] (EKS) cluster.
 An interesting new change added in [preview 2][preview-2], again for containers,
 was the ability to run the application _["rootless"][rootless]_. By making a small
 change to the `Dockerfile` for the application before the `ENTRYPOINT` is defined,
-we can improve the default security of the application by running it as a non-root user.
-
-```
-USER app
-```
+we can improve the default security of the application by running it as a non-root user
+with `USER app`.
 
 Otherwise the release was again pretty uneventful.
 
@@ -61,21 +58,23 @@ Otherwise the release was again pretty uneventful.
 
 [Preview 3][preview-3] was a little more interesting, with three interesting changes.
 
-The first relates to the previous change for containers, but changes it in a way that's
-more secure than the previous way.
+### Container User ID Environment Variable
 
-```
-USER $APP_UID
-```
+The first relates to the previous change for containers, but changes it in a way that's
+more secure than the previous way by using `USER $APP_UID`.
 
 Instead of explicitly referencing the user by name, we can now use the `APP_UID`
 environment variable that is explicitly set in the `Dockerfile` to the UID of the
 `app` user. This avoids us having to hard-code a magic string - much nicer.
 
+### Artifacts output
+
 The second change was a new feature that allows [the output path for the build to be simplified][artifacts-output].
 This opt-in change allows you to change from having a separate `bin` and `obj` folder
 per project to instead have a single `artifacts` folder in the root of the solution
 directory that instead contains all of the output from your build and publish steps.
+
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_artifacts-output.png" alt="The new artifacts output folder" title="The new artifacts output folder">
 
 This makes it much easier to find the output artifacts for your application and
 process them, such as when deploying an application to a remote server or
@@ -83,9 +82,45 @@ publishing a NuGet package. Trying this out did uncover an issue in for library
 library repositories though - [there was a bug][dotnet-sdk-31882] where if you
 had enabled [NuGet package validation][nuget-validation] then `dotnet pack` would fail.
 
-[Validation fails][dotnet-sdk-31882]
+I have this enabled in all my library projects, so I put testing this feature on hold until preview 4
+as otherwise all of their continuous integration builds fail 😅.
 
-[RDG][dotnet-aspnetcore-47202]
+### Request Delegate Generator
+
+_[Minimal APIs][minimal-apis]_, which were introduced in .NET 6, are a great way to write simple
+HTTP API endpoints using Lambda expressions without the overhead and ceremony of an MVC Controller
+and Actions.
+
+For example, you could write a simple API endpoint to return the current time as JSON like this:
+
+`app.MapGet("/now", () => new { utcNow = DateTimeOffset.UtcNow });`
+
+<!--
+<script src="https://gist.github.com/martincostello/0d8accf83aa985c490aa5870a21216de.js"></script>
+-->
+
+The way this is implemented at runtime though is that additional code is compiled when the applicaion
+starts up to provide the "glue" that wires up the Lambda expression to the HTTP request pipeline.
+
+However, when an application is using [Ahead-of-Time (AOT) compilation][aot], this additional code
+cannot be compiled as the infrastructure to do so cannot be used. This creates a dilemma - how do we
+use Minimal APIs and Native AOT compilation together?
+
+The answer to this is the new _[Request Delegate Generator][rdg]_ (RDG).
+
+This changes the way that Minimal APIs are implemented so that the additional code that is required
+is instead compiled into the application at build time using a [Roslyn Source Generator][source-generator].
+By moving the compilation to build time this side-steps the restrictions of AOT compilation, but it
+_also_ increases the start-up time performance of an application not using AOT because the work no longer
+needs to be done at runtime.
+
+Many applications I'm testing .NET 8 with are using Minimal APIs, but they also use functionality that
+isn't going to be supported by .NET AOT in the .NET 8 release, such as Razor Pages. Support is for these
+scenarios is likely to come in either .NET 9 (🤞) or .NET 10.
+
+As it is still useful for applications without native AOT, I thought it would still be good to try out.
+This lead to the [first issue I found with RDG][dotnet-aspnetcore-47202] - there was some scenarios that
+still weren't supported that lead to the compiler throwing an exception. Let's revisit RDG in preview 4.
 
 ## Preview 4
 
@@ -99,6 +134,12 @@ had enabled [NuGet package validation][nuget-validation] then `dotnet pack` woul
 [Playwright bug][microsoft-playwright-dotnet-2617]
 [Broken clock][dotnet-runtime-88000]
 
+## Summary
+
+I hope you've found this run down of our experiences and the issues we found with previews 1-5 of .NET 8 interesting.
+
+In the next post in this series, we'll take a look at .NET 8 Preview 6.
+
 ## Upgrading to .NET 8 Series Links
 
 You can find links to the other posts in this series here - I'll keep them updated as new posts are published over the course of 2023.
@@ -111,6 +152,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 - [Part 4 - Preview 6][part-4]
 -->
 
+[aot]: https://learn.microsoft.com/aspnet/core/fundamentals/native-aot "ASP.NET Core support for native AOT"
 [artifacts-output]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-3/#simplified-output-path "Simplified output path"
 [docker-port-change]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-1/#net-container-images ".NET Container images"
 [dotnet-aspnetcore-46907]: https://github.com/dotnet/aspnetcore/issues/46907 "ASP0019 should not fire if code guards with ContainsKey()"
@@ -121,6 +163,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [dotnet-sdk-31882]: https://github.com/dotnet/sdk/issues/31882 "NuGet package validation fails when UseArtifactsOutput=true"
 [eks]: https://aws.amazon.com/eks/ "Amazon Elastic Kubernetes Service"
 [microsoft-playwright-dotnet-2617]: https://github.com/microsoft/playwright-dotnet/issues/2617 "Stack inspection done by playwright is fragile and breaks with Dynamic PGO enabled"
+[minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/overview "Minimal APIs overview"
 [nuget-validation]: https://devblogs.microsoft.com/dotnet/package-validation/ "Package Validation"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
@@ -134,4 +177,6 @@ You can find links to the other posts in this series here - I'll keep them updat
 [preview-3]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-3/ "Announcing .NET 8 Preview 3"
 [preview-4]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-4/ "Announcing .NET 8 Preview 4"
 [preview-5]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-5/ "Announcing .NET 8 Preview 5"
+[rdg]: https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-8-preview-3/#minimal-apis-and-native-aot "Minimal APIs and native AOT"
 [rootless]: https://devblogs.microsoft.com/dotnet/securing-containers-with-rootless/ "Secure your .NET cloud apps with rootless Linux Containers"
+[source-generator]: https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/source-generators-overview "Source Generators"
