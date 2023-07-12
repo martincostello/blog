@@ -124,15 +124,100 @@ still weren't supported that lead to the compiler throwing an exception. Let's r
 
 ## Preview 4
 
-[preview 4][preview-4]
+With the release of [preview 4][preview-4] there was a bunch of new shiny things to play with, as well as
+fixes for some of the issues I'd found in preview 3. Let's take a look at some of the highlights.
+
+### Request Delegate Generator (redux)
+
+With the initial blocking issue I found fixed, I re-enabled the support for it in a number of different projects.
+For the majority of them there were no issues, but some of them did flush out a number of edge cases:
+
+- [RequestDelegateGenerator fails to detect route pattern that uses a constant for its value][dotnet-aspnetcore-48307]
+- [Request Delegate Generator code counts as user code for code coverage][dotnet-aspnetcore-48376]
+- [Request Delegate Generator fails to compile endpoint with Uri? parameter with CS8600 errors][dotnet-aspnetcore-48378]
+- [Application using Request Delegate Generator fails to start with KeyNotFoundException][dotnet-aspnetcore-48379]
+
+Again, I think this really highlights the benefits of testing existing codebases with the preview releases to the
+product teams. This isn't to say that the code being delivered by the teams is buggy - they work dilligently to ensure
+quality - but as with anything, the wider the range of use cases you encounter, the more likely you are to find issues
+hiding in the edge cases and real world usage scenarios.
+
+For me the most interesting one was _[Request Delegate Generator code counts as user code for code coverage][dotnet-aspnetcore-48376]_
+issue. The ASP.NET Core team care about the coverage of _their own_ code, but the impact of changes on users' own code
+isn't neccessarily something that's going to come about from their own internal testing. However, being a former
+quality assurance professional, this is the sort of thing I care about deeply for my own codebases. This issue was
+also something that was easy to overlook, but also really easy to fix - [so I did][dotnet-aspnetcore-48377]!
+
+That's one of the great things about open source software - anyone can contribute and help make it better. It's
+also a great way to side-step things like prioritisation backlogs - if you care deeply about an issue, you can make
+fixing it your own priority. Of course the change has to be reviewed and accepted by the team, but _doing_ the initial
+work to get the ball rolling is a great way to get things moving.
+
+### A First-Class Time Abstraction
+
+Dealing with the _[flow of time][wibbly-wobbly]_ is one of the most common reasons to need to introduce abstractions
+and mocks into a codebase for testing. Properties like `DateTimeOffset.UtcNow` just aren't easily testable, so if you
+have code that uses them, you need to introduce abstractions to make it testable. If you have code that behaves differently
+based on the date and/or time, maybe something that's sensitive to weekends or time zone changes, then you need a way
+to test that whenever you want, rather than waiting for the right time to come around or changing the time on your computer
+back and forth.
+
+[Many abstractions for time already exist][dotnet-aspnetcore-16844], such as [Noda Time][noda-time], and you can always
+roll your own, but the lack of a first-class time abstraction within the framework itself has always been a bit of a pain
+point as it makes code that depends on the time within the framework itself (such as timers) hard(er) to test.
+
+Now .NET provides its own abstraction for time in the form of the [`TimeProvider`][time-provider] abstraction. This
+is a great fit for existing applications, particularly for those like my own where I've pulled in the entire of NodaTime
+just to provide a comon time abstraction. With `TimeProvider` I can now remove the need to ship all of the additional
+dependencies that NodaTime brings with it, such as time zone data, and instead just use `TimeProvider` in these applications.
+This makes the dependency graph of my applications much simpler, and also makes them smaller and faster to start up.
 
 ## Preview 5
 
-[preview 5][preview-5]
+With the release of [preview 5][preview-5] in June, there were two things that I thought were of interest.
 
-[Dynamic BGO break][dotnet-runtime-87628]
-[Playwright bug][microsoft-playwright-dotnet-2617]
-[Broken clock][dotnet-runtime-88000]
+### Dynamic PGO meets Playwright
+
+Something that came up in a few of my applications after updating to preview 5 was that for _some_ of the applications,
+their [Playwright][] UI tests were starting to fail with a `NullReferenceException`. This was a bit of a head-scratcher
+as it consistently failed in GitHub Actions CI, but not locally in Visual Studio when run _individually_. After spending
+more time that I'd like debugging things and running the tests locally through Playwright .NET's own source code with
+some debugging from the `console.log()` school of though, I was able to determine that _something_ weird was going on
+with some asynchronous code inside Playwright. This lead me to open [an issue][dotnet-runtime-87628] in the .NET runtime
+repository, thinking that maybe something really weird with threads and tasks had been broken.
+
+A member of the .NET team investigated the issue, and found that actually the triggering factor for the bug was that
+[Dynamic Profile Guided Optimization][dynamic-pgo] (PGO) was enabled by default in preview 5 for Release builds. This
+made the way the issue didn't always happen make sense. When running tests in Debug mode, PGO isn't enabled. When only
+one test is run, then the JIT doesn't have enough time to optimise the code, so the issue doesn't happen either.
+
+This was [raised as an issue with the Playwright team][microsoft-playwright-dotnet-2617], as the code was breaking due
+to the way that the stack was being walked to find the names of a caller of a method as part of Playwright's tracing
+functionality. When PGO inlined the code, the names were lost, and the code didn't handle that and would then hit null
+references that it didn't expect.
+
+My colleague [Stuart Lang][slang25] saw the issue after I'd originally asked him to assure me I wasn't doing something
+silly before I opened the GitHub issue. He dug into the issue further and [found a way to fix the issue][microsoft-playwright-dotnet-2620]
+by disabling inlining in various places inside the code so that the code that walks the stack to not be broken by Dynamic PGO.
+
+By using the [`1.36.0-beta-1`][playwright-beta] of Playwright .NET, the issue is resolved and now the UI tests work again!
+
+### TimeProvider Testing
+
+Preview 5 also introduced a new [testing package][time-provider-testing] you can use with the `TimeProvider` abstraction
+to make it easy to mock the time in your tests. This is a great addition and it means you can more easily set up tests
+for code that depends on the time without having to configure the behaviour with a library such as [Moq][moq] yourself.
+
+I've been contributing to the release of [Polly v8][polly-v8] over the last few months, where we've also been working
+on consuming the new `TimeProvider` API to make it easier to test Polly itself. As part of this work, I thought I would
+try out the new testing package to see whether it would reduce the amount of boilerplate code in our tests to set up
+mocks for the clock.
+
+Unfortunately, in adopting it I [found an issue in the runtime itself][dotnet-runtime-88000] where if code that used
+an infinite timeout was run with a mocked `TimeProvider`, then an exception would be thrown due to an integer overflow.
+
+I'm hoping to re-adopt the testing package into [Polly's .NET 8 branch][polly-dotnet-8] once this issue is resolved
+in a future preview.
 
 ## Summary
 
@@ -155,23 +240,35 @@ You can find links to the other posts in this series here - I'll keep them updat
 [aot]: https://learn.microsoft.com/aspnet/core/fundamentals/native-aot "ASP.NET Core support for native AOT"
 [artifacts-output]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-3/#simplified-output-path "Simplified output path"
 [docker-port-change]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-1/#net-container-images ".NET Container images"
+[dotnet-aspnetcore-16844]: https://github.com/dotnet/aspnetcore/issues/16844 "Too many ISystemClock definitions"
 [dotnet-aspnetcore-46907]: https://github.com/dotnet/aspnetcore/issues/46907 "ASP0019 should not fire if code guards with ContainsKey()"
 [dotnet-aspnetcore-46936]: https://github.com/dotnet/aspnetcore/issues/46936 "ASP0023 Ambiguous route warning when using both Http* and Route attributes"
 [dotnet-aspnetcore-47202]: https://github.com/dotnet/aspnetcore/issues/47202 "RequestDelegateGenerator throws NullReferenceException in ASP.NET Core 8 preview 2"
+[dotnet-aspnetcore-48307]: https://github.com/dotnet/aspnetcore/issues/48307 "RequestDelegateGenerator fails to detect route pattern that uses a constant for its value"
+[dotnet-aspnetcore-48376]: https://github.com/dotnet/aspnetcore/issues/48376 "Request Delegate Generator code counts as user code for code coverage"
+[dotnet-aspnetcore-48377]: https://github.com/dotnet/aspnetcore/pull/48377 "Add [GeneratedCode] for more RDG output"
+[dotnet-aspnetcore-48378]: https://github.com/dotnet/aspnetcore/issues/48378 "Request Delegate Generator fails to compile endpoint with Uri? parameter with CS8600 errors"
+[dotnet-aspnetcore-48379]: https://github.com/dotnet/aspnetcore/issues/48379 "Application using Request Delegate Generator fails to start with KeyNotFoundException"
 [dotnet-runtime-87628]: https://github.com/dotnet/runtime/issues/87628 "Possible Issue with AsyncLocal<T>/TaskCreationOptions.RunContinuationsAsynchronously"
 [dotnet-runtime-88000]: https://github.com/dotnet/runtime/issues/88000 "Cannot create a CancellationTokenSource with an infinite delay with TimeProvider that is not TimeProvider.System"
 [dotnet-sdk-31882]: https://github.com/dotnet/sdk/issues/31882 "NuGet package validation fails when UseArtifactsOutput=true"
+[dynamic-pgo]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-5/#codegen "Dynamic Profile Guided Optimization"
 [eks]: https://aws.amazon.com/eks/ "Amazon Elastic Kubernetes Service"
 [microsoft-playwright-dotnet-2617]: https://github.com/microsoft/playwright-dotnet/issues/2617 "Stack inspection done by playwright is fragile and breaks with Dynamic PGO enabled"
+[microsoft-playwright-dotnet-2620]: https://github.com/microsoft/playwright-dotnet/pull/2620 "Prevent TieredPGO inlining from breaking stack trace walking logic"
 [minimal-apis]: https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/overview "Minimal APIs overview"
+[moq]: https://github.com/moq/moq#readme "Moq on GitHub"
+[noda-time]: https://nodatime.org/ "Noda Time"
 [nuget-validation]: https://devblogs.microsoft.com/dotnet/package-validation/ "Package Validation"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
-
 <!--
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 -->
-
+[playwright]: https://playwright.dev/dotnet/ "Playwright for .NET"
+[playwright-beta]: https://www.nuget.org/packages/Microsoft.Playwright/1.36.0-beta-1 "Microsoft.Playwright 1.36.0-beta-1"
+[polly-dotnet-8]: https://github.com/App-vNext/Polly/pull/1144 "Add support for .NET 8"
+[polly-v8]: https://github.com/App-vNext/Polly/issues/1048 "Polly v8 - Architectural changes"
 [preview-1]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-1/ "Announcing .NET 8 Preview 1"
 [preview-2]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-2/ "Announcing .NET 8 Preview 2"
 [preview-3]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-3/ "Announcing .NET 8 Preview 3"
@@ -179,4 +276,8 @@ You can find links to the other posts in this series here - I'll keep them updat
 [preview-5]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-5/ "Announcing .NET 8 Preview 5"
 [rdg]: https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-8-preview-3/#minimal-apis-and-native-aot "Minimal APIs and native AOT"
 [rootless]: https://devblogs.microsoft.com/dotnet/securing-containers-with-rootless/ "Secure your .NET cloud apps with rootless Linux Containers"
+[slang25]: https://github.com/slang25 "Stuart Lang"
 [source-generator]: https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/source-generators-overview "Source Generators"
+[time-provider]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-4/#introducing-time-abstraction "Introducing Time abstraction"
+[time-provider-testing]: https://www.nuget.org/packages/Microsoft.Extensions.TimeProvider.Testing "Microsoft.Extensions.TimeProvider.Testing"
+[wibbly-wobbly]: https://www.youtube.com/watch?v=q2nNzNo_Xps "Big ball of wibbly wobbly... time-y wimey... stuff"
