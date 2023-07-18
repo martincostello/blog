@@ -228,7 +228,7 @@ I hope you've found this run down of our experiences and the issues we found wit
 As you can see several issues were found during our testing, with them all being raised as issues in the relevant
 repositories and at the time of writing all of them either fixed or with a fix in development.
 
-In the next post in this series, we'll take a look at upgrading to .NET 8 Preview 6.
+In the next post in this series, we'll take a look at upgrading to .NET 8 Preview 6: _[Part 4 - Preview 6][part-4]_.
 
 ## Upgrading to .NET 8 Series Links
 
@@ -237,10 +237,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 - [Part 1 - Why Upgrade?][part-1]
 - [Part 2 - Automation is our Friend][part-2]
 - Part 3 - Previews 1-5 (this post)
-
-<!--
 - [Part 4 - Preview 6][part-4]
--->
 
 [aot]: https://learn.microsoft.com/aspnet/core/fundamentals/native-aot "ASP.NET Core support for native AOT"
 [artifacts-output]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-3/#simplified-output-path "Simplified output path"
@@ -267,9 +264,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [nuget-validation]: https://devblogs.microsoft.com/dotnet/package-validation/ "Package Validation"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
-<!--
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
--->
 [playwright]: https://playwright.dev/dotnet/ "Playwright for .NET"
 [playwright-beta]: https://www.nuget.org/packages/Microsoft.Playwright/1.36.0-beta-1 "Microsoft.Playwright 1.36.0-beta-1"
 [polly-dotnet-8]: https://github.com/App-vNext/Polly/pull/1144 "Add support for .NET 8"

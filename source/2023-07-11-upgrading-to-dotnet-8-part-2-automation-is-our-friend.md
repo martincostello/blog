@@ -251,10 +251,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 - [Part 1 - Why Upgrade?][part-1]
 - Part 2 - Automation is our Friend (this post)
 - [Part 3 - Previews 1-5][part-3]
-
-<!--
 - [Part 4 - Preview 6][part-4]
--->
 
 [advent-of-code]: https://github.com/martincostello/adventofcode "martincostello/adventofcode on GitHub"
 [ca1859]: https://learn.microsoft.com/en-gb/dotnet/fundamentals/code-analysis/quality-rules/ca1859 "CA1859: Use concrete types when possible for improved performance"
@@ -281,9 +278,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [npm-updates]: https://github.com/martincostello/costellobot/blob/8a4352c5938f1c373ea8f64194bc352b5c243ed4/.github/workflows/update-dotnet-sdk.yml#L21-L82 "Updating npm packages"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
-<!--
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
--->
 [patch-tuesday]: https://en.wikipedia.org/wiki/Patch_Tuesday "Patch Tuesday on Wikipedia"
 [permanence]: https://xkcd.com/910/ "Permanence on XKCD"
 [rebase-workflow]: https://github.com/martincostello/github-automation/blob/main/.github/workflows/rebase.yml "The rebase workflow on GitHub"
