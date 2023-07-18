@@ -159,8 +159,7 @@ in a test class that looks something like this:
     }
 &nbsp;
     // Here be tests...
-}
-</code>
+}</code>
 </pre>
 
 With the adoption of primary constructors, this can be simplified to
@@ -169,8 +168,7 @@ the following:
 <pre class="highlight plaintext"><code>public class MyTests(ITestOutputHelper outputHelper) : TestsBase(outputHelper)
 {
     // Here be tests...
-}
-</code>
+}</code>
 </pre>
 
 Code formatting preferences aside, I think this is a great improvement
