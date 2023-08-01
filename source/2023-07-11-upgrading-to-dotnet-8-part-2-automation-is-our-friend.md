@@ -252,6 +252,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 - Part 2 - Automation is our Friend (this post)
 - [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
+- [Part 5 - Preview 7][part-5]
 
 [advent-of-code]: https://github.com/martincostello/adventofcode "martincostello/adventofcode on GitHub"
 [ca1859]: https://learn.microsoft.com/en-gb/dotnet/fundamentals/code-analysis/quality-rules/ca1859 "CA1859: Use concrete types when possible for improved performance"
@@ -279,6 +280,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
+[part-5]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7 "Preview 7"
 [patch-tuesday]: https://en.wikipedia.org/wiki/Patch_Tuesday "Patch Tuesday on Wikipedia"
 [permanence]: https://xkcd.com/910/ "Permanence on XKCD"
 [rebase-workflow]: https://github.com/martincostello/github-automation/blob/main/.github/workflows/rebase.yml "The rebase workflow on GitHub"

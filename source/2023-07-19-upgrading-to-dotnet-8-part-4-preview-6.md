@@ -186,7 +186,9 @@ Overall I think this is a nice addition to C# as it continues to evolve.
 
 In this post we looked at the latest changes to the new source generators
 coming as part of the .NET 8 release, as well as looking at a use case for
-adopting primary constructors. See you next month for the preview 7 release!
+adopting primary constructors.
+
+In the next post in this series, we'll take a look at upgrading to .NET 8 Preview 7: _[Part 5 - Preview 7][part-5]_.
 
 ## Upgrading to .NET 8 Series Links
 
@@ -196,6 +198,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 - [Part 2 - Automation is our Friend][part-2]
 - [Part 3 - Previews 1-5][part-3]
 - Part 4 - Preview 6 (this post)
+- [Part 5 - Preview 7][part-5]
 
 [configuration-binding-source-generator]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-6/#configuration-binding-source-generator-improvements "Configuration binding source generator improvements"
 [csharp-interceptors]: https://devblogs.microsoft.com/dotnet/new-csharp-12-preview-features/#interceptors "Interceptors"
@@ -217,6 +220,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
+[part-5]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7 "Preview 7"
 [primary-constructors]: https://devblogs.microsoft.com/dotnet/check-out-csharp-12-preview/#primary-constructors-for-non-record-classes-and-structs "Primary constructors for non-record classes and structs"
 [rdg]: https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-8-preview-3/#minimal-apis-and-native-aot "Minimal APIs and native AOT"
 [safia-abdalla]: https://github.com/captainsafia "@captainsafia on GitHub"
