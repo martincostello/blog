@@ -10,6 +10,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  FORCE_COLOR: 3
+  TERM: xterm
+
 permissions:
   contents: read
 
@@ -42,10 +46,27 @@ jobs:
         path: ./build
         if-no-files-found: error
 
-  deploy:
-    if: ${{ github.event.repository.fork == false && github.ref_name == 'deploy' }}
+  lint:
     runs-on: ubuntu-latest
-    needs: build
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Lint workflows
+      shell: bash
+      env:
+        ACTIONLINT_VERSION: '7b75d16d41920ec126e6f3269db0c6f3ab613c38' # v1.6.25
+      run: |
+        echo "::add-matcher::.github/actionlint-matcher.json"
+        bash <(curl --silent --show-error "https://raw.githubusercontent.com/rhysd/actionlint/${ACTIONLINT_VERSION}/scripts/download-actionlint.bash")
+        ./actionlint -color
+
+  deploy:
+    if: github.event.repository.fork == false && github.ref_name == 'deploy'
+    runs-on: ubuntu-latest
+    needs: [ build, lint ]
 
     environment:
       name: production
@@ -74,7 +95,8 @@ jobs:
 
     - name: Create CloudFront invalidation
       shell: pwsh
+      env:
+        DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
       run: |
-        $distributionId = "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
-        $invalidationId = aws cloudfront create-invalidation --distribution-id $distributionId --paths "/*" --output text --query "Invalidation.Id"
-        aws cloudfront wait invalidation-completed --distribution-id $distributionId --id $invalidationId
+        $invalidationId = aws cloudfront create-invalidation --distribution-id "${env:DISTRIBUTION_ID}" --paths "/*" --output text --query "Invalidation.Id"
+        aws cloudfront wait invalidation-completed --distribution-id "${env:DISTRIBUTION_ID}" --id $invalidationId
