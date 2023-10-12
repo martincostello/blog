@@ -188,7 +188,8 @@ In this post we looked at the latest changes to the new source generators
 coming as part of the .NET 8 release, as well as looking at a use case for
 adopting primary constructors.
 
-In the next post in this series, we'll take a look at upgrading to .NET 8 Preview 7 as well as release candidates 1 and 2: _[Part 5 - Preview 7 and Release Candidates 1 and 2][part-5]_.
+In the next post in this series, we'll take a look at upgrading to .NET 8
+Preview 7 as well as release candidates 1 and 2: _[Part 5 - Preview 7 and Release Candidates 1 and 2][part-5]_.
 
 ## Upgrading to .NET 8 Series Links
 
