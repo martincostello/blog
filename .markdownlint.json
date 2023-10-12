@@ -1,0 +1,17 @@
+{
+  "MD033": {
+    "allowed_elements": [
+      "a",
+      "blockquote",
+      "br",
+      "code",
+      "hr",
+      "img",
+      "p",
+      "pre",
+      "s",
+      "script"
+    ]
+  },
+  "MD040": false
+}
