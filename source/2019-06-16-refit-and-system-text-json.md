@@ -89,6 +89,8 @@ There's three benchmarks that try out reading an object, reading a collection an
 
 The results are fairly impressive on my laptop running Windows 10 ([full results](https://github.com/martincostello/Refit-Json-Benchmarks#results "Benchmark results")):
 
+<!-- markdownlint-disable-file MD033 -->
+
 <table>
   <thead>
     <tr>
