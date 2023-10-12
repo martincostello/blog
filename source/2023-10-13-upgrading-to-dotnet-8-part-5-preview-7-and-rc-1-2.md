@@ -41,6 +41,7 @@ The main one flushed out in this preview for the code I've been testing was this
 <pre class="highlight plaintext">
 <code>using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
 using var document = JsonDocument.Parse(stream);
+</code>
 </pre>
 
 In these cases, the fix is trivial:
@@ -48,6 +49,7 @@ In these cases, the fix is trivial:
 <pre class="highlight plaintext">
 <code>using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
 using var document = await JsonDocument.ParseAsync(stream);
+</code>
 </pre>
 
 ### FakeTimeProvider Experimental Warnings
@@ -59,7 +61,7 @@ not sure why they were needed in the first place if the intention was to ship th
 for .NET 8 itself.
 
 Typically things like [`[RequiresPreviewFeatures(...)]`][requires-preview-features] are used in
-the core libraries for such warnings, and then when a non-stable API is intended to be shipped
+the core libraries for such warnings, and then only when a non-stable API is intended to be shipped
 in a stable release, such as with the [Generic Math APIs in .NET 6][generic-maths].
 
 If this pattern were replicated for all new APIs added in new .NET releases before they reach release
@@ -71,8 +73,8 @@ patterns don't become commonplace across .NET in the future. 😄
 As part of the performance improvements in .NET 8, a new type, `CompositeFormat`, has been added
 to move the logic for formatting strings with composite formatting out of `string.Format()` every
 time it is used for a specific usage to instead be amortised across all usages with one upfront cost
-of parsing it. More information about this can be found in [Stephen Toub's epic blog post][compositeformat]
-about performance in .NET 8.
+of parsing it. More information about this can be found in [Stephen Toub's **epic** blog post][compositeformat]
+about performance in .NET 8 (grab a coffee first ☕).
 
 The TL;DR for this though is to identify any usages of `string.Format()` that can be improved this way,
 a new [CA1863][ca1863] analyzer warning has been added to the .NET SDK.
@@ -93,14 +95,17 @@ public class Greeter
 +       Console.WriteLine(string.Format(CultureInfo.InvariantCulture, GreetingFormat, name));
     }
 }
+</code>
 </pre>
 
 ## Release Candidate 1
 
 Release candidate 1 was released in September, and it was also the first release of .NET 8 that has
 a _Go-Live_ license, meaning it is supported by Microsoft for use in production. Once I got back from
-my holiday, I updated all of the production (and "production") applications I'm responsible for to run
+my holiday, I updated all of the production (and _"production"_) applications I'm responsible for to run
 on .NET 8 using RC1.
+
+Everything worked as expected once deployed, but there were a number of build-time issues that needed resolving.
 
 ### Configuration Binding Source Generator
 
@@ -129,14 +134,16 @@ official preview release was published.
 Such an issue was [dotnet/runtime#9038][dotnet-runtime-90386]. This was an issue where changes to HttpClientFactory
 caused a background task to throw an exception when it was disposed. This in turn caused the .NET test process to
 "crash", causing all of my CI builds to fail. I was glad this was caught before RC1 as it would have been a big
-blocker for me personally as it would have caused a lot of test failures in my repositories that use the `DefaultHttpClientFactory`.
+blocker for me personally as it would have caused a lot of test failures in my repositories that use the HttpClientFactory
+to stub out HTTP requests in the integration tests (_[Reliably Testing HTTP Integrations in a .NET Application][httpclient-interception]_).
 
 ### Portable Runtime Identifiers
 
 In .NET 8 the Runtime Identifiers (RIDs) used by projects targeting .NET 8 have been changed to be shorter/simpler
-and more portable ([dotnet/docs#36527][dotnet-docs-36527]). This had the consequence that for applications being
-published as a self-contained deployment for their targeted operating system and architecture, the RID being previously
-used would now generate a build error.
+and more portable (see [dotnet/docs#36527][dotnet-docs-36527]).
+
+This had the consequence that for applications being published as a self-contained deployment for their targeted
+operating system and architecture, the RID being previously used would now generate a build error.
 
 For example, instead of publishing for `win10-x64` the RID is now `win-x64`.
 
@@ -144,9 +151,10 @@ This was a simple enough change to make, but affected a fair number of my reposi
 
 ### C# 12 by Default
 
-The RC1 release also changed the default language version for C# projects to be C# 12. Previously you needed to
-explictly set the `LangVersion` MSBuild property to either `preview` or `12`, but as-of RC1 the value of `latest`
-(which is what I use) was updated to point to C# 12.
+The RC1 release also changed the default language version for C# projects to be C# 12.
+
+Previously you needed to explictly set the `LangVersion` MSBuild property to either `preview`
+or `12`, but as-of RC1 the value of `latest` (which is what I use) was updated to point to C# 12.
 
 This change in turn caused a number of new warnings to be emitted by the compiler to suggest that new code patterns
 be used where beneficial. A major source of these warnings came from the new [collection expressions][collection-expressions-csharp]
@@ -183,13 +191,15 @@ that instance the application in question was affected to the tune of a 200% inc
 
 <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_jsonserializeroptions-too-slow.png" alt="A graph showing the performance impact of the bad change" title="A graph showing the performance impact of the bad change">
 
+Spot where the code change got deployed... 🕵️
+
 While in this case the analyzer may not have helped as it was an issue with the dependency injection configuration, it's good to
 know that investment has been made to help avoid developers cause the same problem in different scenarios.
 
 #### NETSDK1212
 
 The trim analyzer for AOT has been present in the .NET SDK for a while, but what I didn't realise is that it isn't supported for
-use on projects that don't target at least .NET 6. A new analzser warning, NETSDK1212, was added to warn about this. This is easy
+use on projects that don't target at least .NET 6. A new analyzer warning, NETSDK1212, was added to warn about this. This is easy
 to fix if you have a project doing multi-targeting (such as [Polly][polly]) by adding a condition to project files where the
 analyzer is enabled, like so:
 
@@ -199,18 +209,19 @@ analyzer is enabled, like so:
   &lt;EnableSingleFileAnalyzer&gt;true&lt;/EnableSingleFileAnalyzer&gt;
   &lt;EnableTrimAnalyzer&gt;true/EnableTrimAnalyzer&gt;
   &lt;IsTrimmable&gt;true&lt;/IsTrimmable&gt;
-  &lt;/PropertyGroup&gt;
+&lt;/PropertyGroup&gt;
+</code>
 </pre>
 
 ## Release Candidate 2
 
 Release candidate 2 was released in October just a few days ago, and it's been pretty uneventful (for me at least).
 
-Other than [one issue I wan into][dotnet-runtime-93335] when I re-enabled the Configuration Binding Source Generator for
+Other than [one issue I ran into][dotnet-runtime-93335] when I re-enabled the Configuration Binding Source Generator for
 one project now the other issues I mentioned above had been fixed, I didn't experience any friction with RC2 at all.
 
 Within a few hours of RC2 being released, I had updated all of the repositories I'm responsible for that were running
-RC1 to use .NET 8 RC2 instead. 🚀
+RC1 to use .NET 8 RC2 instead. 🚀😎
 
 ## Summary
 
@@ -220,7 +231,10 @@ other updates to things like libraries I've been waiting for the stable release 
 For example, [updating Polly to use the new `TimeProvider` API][App-vNext-Polly-1144] and replace
 [the internal copy of the code][timeprovider-copy] used for the v8.0.0 release.
 
-In the next and final post in this series, we'll take a look at completing the upgrades to .NET 8!
+.NET 8 is shaping up to be a great release that will [make your applications faster than ever][performance-improvements]
+with minimal developer effort to upgrade and reap the benefits, even if you don't use any new capabilities.
+
+In the next and final post in this series, we'll take a look at completing the upgrades to the stable .NET 8 release!
 
 ## Upgrading to .NET 8 Series Links
 
@@ -251,11 +265,13 @@ You can find links to the other posts in this series here - I'll keep them updat
 [dotnet-runtime-93335]: https://github.com/dotnet/runtime/issues/93335 "Configuration Binding source generator throws InvalidOperationException at runtime for type with custom [TypeConverter] use within a dictionary"
 [DotNetAnalyzers-StyleCopAnalyzers-3687]: https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3687 "SA1010 false positive when list syntax is used in a field initializer"
 [generic-maths]: https://devblogs.microsoft.com/dotnet/preview-features-in-net-6-generic-math/ "Preview Features in .NET 6 – Generic Math"
+[httpclient-interception]: https://tech.justeattakeaway.com/2017/10/02/reliably-testing-http-integrations-in-a-dotnet-application/ "Reliably Testing HTTP Integrations in a .NET Application"
 [jsonserializeroptions]: https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-8/#collection-expressions#json "JSON"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
+[performance-improvements]: https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-8/ "Performance Improvements in .NET 8"
 [preview-7]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-7/ "Announcing .NET 8 Preview 7"
 [polly]: https://github.com/App-vNext/Polly "App-vNext/Polly on GitHub"
 [rc-1]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-rc1/ "Announcing .NET 8 RC1"
