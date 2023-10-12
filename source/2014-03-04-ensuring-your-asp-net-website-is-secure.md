@@ -6,6 +6,8 @@ layout: bloglayout
 description: "How to ensure your ASP.NET Website is secure against common attack vectors, such as CSRF and XSS."
 ---
 
+<!-- markdownlint-disable-file MD036 -->
+
 So recently I've been doing some work ensuring some websites I work on are secure. This has been from a mix of hands-on testing of them myself, dealing with feedback from dedicated security testers testing the applications, and this week attending an "ASP.NET Secure Coding" training course.
 
 From my own testing I found the odd thing here and there during development based on what I've read in the past is best-practice. These were exclusively application/coding changes. Fixing these was a mix of "Oh yeah" realisations or a quick Google leading to MSDN or Stack Overflow, leading to some simple one-line changes here and there.

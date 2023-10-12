@@ -62,6 +62,13 @@ jobs:
       with:
         args: -color
 
+    - name: Lint markdown
+      uses: DavidAnson/markdownlint-cli2-action@v13
+      with:
+        config: '.markdownlint.json'
+        globs: |
+          **/*.md
+
   deploy:
     if: github.event.repository.fork == false && github.ref_name == 'deploy'
     runs-on: ubuntu-latest
