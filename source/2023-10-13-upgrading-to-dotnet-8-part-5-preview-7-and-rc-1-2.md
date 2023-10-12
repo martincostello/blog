@@ -19,15 +19,15 @@ just as release candidate 1 landed. Given release candidate 2 was released just 
 instead I figured I'd just catch-up with myself and summarise everything in this one blog post instead!
 
 Release Candidate 2 is also the last planned release before the final release of .NET 8 in November
-to conincide with [.NET Conf 2023][dotnet-conf], so this is going to be the penultimate post in this series.
+to coincide with [.NET Conf 2023][dotnet-conf], so this is going to be the penultimate post in this series.
 
 READMORE
 
 ## Preview 7
 
-From upgrading the various projects I've been testing .NET 8 with, there were no new issues
+From upgrading the various projects I've been testing with .NET 8, there were no new issues
 to report with preview 7 in August. There were, however, a few changes that I needed to make
-with the introduction of a number of new warnings and analyzers added to the .NET SDK and some
+with the introduction of a number of new warnings from analyzers added to the .NET SDK and some
 of the new libraries.
 
 ### More CA1849 Warnings
@@ -54,11 +54,11 @@ using var document = await JsonDocument.ParseAsync(stream);
 
 ### FakeTimeProvider Experimental Warnings
 
-The new `FakeTimeProvider` started to emit a `EXTEXP0004` warning which needed to be suppressed.
-These warnings were removed for RC2 by [dotnet/extensions#4455][dotnet-extensions-4455] after the
-new libraries being formally API reviewed, but these just seemed to add noise for people so I'm
-not sure why they were needed in the first place if the intention was to ship the APIs as stable
-for .NET 8 itself.
+Usage of the new `FakeTimeProvider` class started to emit a `EXTEXP0004` warning which needed to
+be suppressed. These warnings were removed for RC2 by [dotnet/extensions#4455][dotnet-extensions-4455]
+after the new libraries being formally API reviewed, but these just seemed to add noise for people
+so I'm not sure why they were needed in the first place if the intention was to ship the APIs as
+stable for .NET 8 itself.
 
 Typically things like [`[RequiresPreviewFeatures(...)]`][requires-preview-features] are used in
 the core libraries for such warnings, and then only when a non-stable API is intended to be shipped
@@ -77,7 +77,7 @@ of parsing it. More information about this can be found in [Stephen Toub's **epi
 about performance in .NET 8 (grab a coffee first ☕).
 
 The TL;DR for this though is to identify any usages of `string.Format()` that can be improved this way,
-a new [CA1863][ca1863] analyzer warning has been added to the .NET SDK.
+so a new [CA1863][ca1863] analyzer warning has been added to the .NET SDK.
 
 An example of a Git diff to change some string formatting to use this new pattern is shown below.
 
@@ -121,20 +121,20 @@ This meant that I had to turn it off completely for RC1. The issues below were a
 ### Daily Build Testing
 
 Following the testing with .NET 8 daily builds I did to check a fix for the new Request Delegate Generator
-in preview 6, I looked into updating my [][update-dotnet-sdk] GitHub Action to support updating repositories
-based on the output of the [dotnet/installer][dotnet-installer] repository. With the [v2.3.0][update-dotnet-sdk-230]
-release of the action, that became supported. With that released I started to set up parallel branches in
-some of my repositories to test the daily builds of .NET 8 where I felt they'd use a wide range of capabilities
-to give good test coverage.
+in preview 6, I looked into updating my [update-dotnet-sdk][update-dotnet-sdk] GitHub Action to support
+updating repositories based on the output of the [dotnet/installer][dotnet-installer] repository. With the
+[v2.3.0][update-dotnet-sdk-230] release of the action, that became supported. With that released I started
+to set up parallel branches in some of my repositories to test the daily builds of .NET 8 where I felt they'd
+use a wide range of capabilities to give good test coverage.
 
 I might write a more in-depth blog post about this at some point as I'm planning on using this approach
-again next year for .NET 9 starting around preview 1 as it's found a number of bugs that got caught before an
-official preview release was published.
+again next year for .NET 9 starting around preview 1. It's found a number of bugs that got caught before
+an official preview release was published, so I think it's been a valuable investment of time.
 
 Such an issue was [dotnet/runtime#9038][dotnet-runtime-90386]. This was an issue where changes to HttpClientFactory
 caused a background task to throw an exception when it was disposed. This in turn caused the .NET test process to
 "crash", causing all of my CI builds to fail. I was glad this was caught before RC1 as it would have been a big
-blocker for me personally as it would have caused a lot of test failures in my repositories that use the HttpClientFactory
+blocker for me personally, as it would have caused a lot of test failures in my repositories that use the HttpClientFactory
 to stub out HTTP requests in the integration tests (_[Reliably Testing HTTP Integrations in a .NET Application][httpclient-interception]_).
 
 ### Portable Runtime Identifiers
@@ -184,17 +184,19 @@ There were also a few new analyzers added to the .NET SDK in RC1 that raised new
 
 The new [CA1869][ca1869] analyzer warns if you are repeatedly creating a new `JsonSerializerOptions` instance in your code.
 
-Doing this can potentially be a huge [pit of failure][jsonserializeroptions] in an application. I made a mistake in a production
-application during the .NET 5 timeframe where a misconfiguration of the dependency injection container for an application meant
-that a new instance of `JsonSerializerOptions` was being created for every HTTP request, rather than just once at startup. In
-that instance the application in question was affected to the tune of a 200% increase in response times for requests!
+Doing this can potentially be a huge [pit of failure][jsonserializeroptions] in an application.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_jsonserializeroptions-too-slow.png" alt="A graph showing the performance impact of the bad change" title="A graph showing the performance impact of the bad change">
+I made a mistake in a production application during the .NET 5 timeframe where a misconfiguration of the dependency injection
+container for an application meant that a new instance of `JsonSerializerOptions` was being created for every HTTP request,
+rather than just once at startup. In that instance the application in question was affected to the tune of a 200% increase in
+response times for requests!
 
 Spot where the code change got deployed... 🕵️
 
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_jsonserializeroptions-too-slow.png" alt="A graph showing the performance impact of the bad change" title="A graph showing the performance impact of the bad change">
+
 While in this case the analyzer may not have helped as it was an issue with the dependency injection configuration, it's good to
-know that investment has been made to help avoid developers cause the same problem in different scenarios.
+know that investment has been made to help avoid developers causing the same problem in different scenarios.
 
 #### NETSDK1212
 
@@ -223,10 +225,17 @@ one project now the other issues I mentioned above had been fixed, I didn't expe
 Within a few hours of RC2 being released, I had updated all of the repositories I'm responsible for that were running
 RC1 to use .NET 8 RC2 instead. 🚀😎
 
+Using my [GitHub Action][update-dotnet-sdk], in most cases I didn't even make the changes myself!
+
+For example, [this pull request][martincostello-costellobot-892] was automatically created to update one of my apps
+from RC1 to RC2, and the deployed application produced in that repository approved it and deployed it to production
+within 75 minutes of RC2 being released with no manual intervention at all. Most of the delay was waiting for GitHub
+Actions runners to be available due to the contention caused by trying to update all my repositories at the same time!
+
 ## Summary
 
-With those updated, it's just a case of waiting for the final release of .NET 8 in November and then merging all of the
-other updates to things like libraries I've been waiting for the stable release to merge.
+With those repositories updated, it's just a case of waiting for the final release of .NET 8 in November and then
+merging all of the other updates to things like libraries I've been waiting for the stable release to merge.
 
 For example, [updating Polly to use the new `TimeProvider` API][App-vNext-Polly-1144] and replace
 [the internal copy of the code][timeprovider-copy] used for the v8.0.0 release.
@@ -267,6 +276,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [generic-maths]: https://devblogs.microsoft.com/dotnet/preview-features-in-net-6-generic-math/ "Preview Features in .NET 6 – Generic Math"
 [httpclient-interception]: https://tech.justeattakeaway.com/2017/10/02/reliably-testing-http-integrations-in-a-dotnet-application/ "Reliably Testing HTTP Integrations in a .NET Application"
 [jsonserializeroptions]: https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-8/#collection-expressions#json "JSON"
+[martincostello-costellobot-892]: https://github.com/martincostello/costellobot/pull/892 "Update .NET SDK to 8.0.100-rc.2.23502.2"
 [part-1]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-1-why-upgrade "Why Upgrade?"
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
