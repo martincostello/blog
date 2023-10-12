@@ -40,16 +40,14 @@ The main one flushed out in this preview for the code I've been testing was this
 
 <pre class="highlight plaintext">
 <code>using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
-using var document = JsonDocument.Parse(stream);
-</code>
+using var document = JsonDocument.Parse(stream);</code>
 </pre>
 
 In these cases, the fix is trivial:
 
 <pre class="highlight plaintext">
 <code>using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
-using var document = await JsonDocument.ParseAsync(stream);
-</code>
+using var document = await JsonDocument.ParseAsync(stream);</code>
 </pre>
 
 ### FakeTimeProvider Experimental Warnings
@@ -94,8 +92,7 @@ public class Greeter
 -       Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Hello {0}!", name));
 +       Console.WriteLine(string.Format(CultureInfo.InvariantCulture, GreetingFormat, name));
     }
-}
-</code>
+}</code>
 </pre>
 
 ## Release Candidate 1
@@ -211,8 +208,7 @@ analyzer is enabled, like so:
   &lt;EnableSingleFileAnalyzer&gt;true&lt;/EnableSingleFileAnalyzer&gt;
   &lt;EnableTrimAnalyzer&gt;true/EnableTrimAnalyzer&gt;
   &lt;IsTrimmable&gt;true&lt;/IsTrimmable&gt;
-&lt;/PropertyGroup&gt;
-</code>
+&lt;/PropertyGroup&gt;</code>
 </pre>
 
 ## Release Candidate 2
