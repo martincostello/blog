@@ -246,13 +246,14 @@ releases of .NET 8 and some of the interesting issues testing them uncovered: _[
 
 ## Upgrading to .NET 8 Series Links
 
-You can find links to the other posts in this series here - I'll keep them updated as new posts are published over the course of 2023.
+You can find links to the other posts in this series below.
 
 - [Part 1 - Why Upgrade?][part-1]
 - Part 2 - Automation is our Friend (this post)
 - [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
 - [Part 5 - Preview 7 and Release Candidates 1 and 2][part-5]
+- [Part 6 - The Stable Release][part-6]
 
 [advent-of-code]: https://github.com/martincostello/adventofcode "martincostello/adventofcode on GitHub"
 [ca1859]: https://learn.microsoft.com/en-gb/dotnet/fundamentals/code-analysis/quality-rules/ca1859 "CA1859: Use concrete types when possible for improved performance"
@@ -281,6 +282,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 [part-5]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7-and-rc-1-2 "Preview 7 and Release Candidates 1 and 2"
+[part-6]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-6-stable-release "The Stable Release"
 [patch-tuesday]: https://en.wikipedia.org/wiki/Patch_Tuesday "Patch Tuesday on Wikipedia"
 [permanence]: https://xkcd.com/910/ "Permanence on XKCD"
 [rebase-workflow]: https://github.com/martincostello/github-automation/blob/main/.github/workflows/rebase.yml "The rebase workflow on GitHub"

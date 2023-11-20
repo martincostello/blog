@@ -232,13 +232,14 @@ In the next post in this series, we'll take a look at upgrading to .NET 8 Previe
 
 ## Upgrading to .NET 8 Series Links
 
-You can find links to the other posts in this series here - I'll keep them updated as new posts are published over the course of 2023.
+You can find links to the other posts in this series below.
 
 - [Part 1 - Why Upgrade?][part-1]
 - [Part 2 - Automation is our Friend][part-2]
 - Part 3 - Previews 1-5 (this post)
 - [Part 4 - Preview 6][part-4]
 - [Part 5 - Preview 7 and Release Candidates 1 and 2][part-5]
+- [Part 6 - The Stable Release][part-6]
 
 [aot]: https://learn.microsoft.com/aspnet/core/fundamentals/native-aot "ASP.NET Core support for native AOT"
 [artifacts-output]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-3/#simplified-output-path "Simplified output path"
@@ -267,6 +268,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 [part-5]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7-and-rc-1-2 "Preview 7 and Release Candidates 1 and 2"
+[part-6]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-6-stable-release "The Stable Release"
 [playwright]: https://playwright.dev/dotnet/ "Playwright for .NET"
 [playwright-beta]: https://www.nuget.org/packages/Microsoft.Playwright/1.36.0-beta-1 "Microsoft.Playwright 1.36.0-beta-1"
 [polly-dotnet-8]: https://github.com/App-vNext/Polly/pull/1144 "Add support for .NET 8"

@@ -97,13 +97,14 @@ Read the next part in this series: _[Part 2 - Automation is our Friend][part-2]_
 
 ## Upgrading to .NET 8 Series Links
 
-You can find links to the other posts in this series here - I'll keep them updated as new posts are published over the course of 2023.
+You can find links to the other posts in this series below.
 
 - Part 1 - Why Upgrade? (this post)
 - [Part 2 - Automation is our Friend][part-2]
 - [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
 - [Part 5 - Preview 7 and Release Candidates 1 and 2][part-5]
+- [Part 6 - The Stable Release][part-6]
 
 [damian-edwards]: https://twitter.com/DamianEdwards "@DamianEdwards on Twitter"
 [dotnet-8-downloads]: https://dotnet.microsoft.com/download/dotnet/8.0 "Download .NET 8"
@@ -120,5 +121,6 @@ You can find links to the other posts in this series here - I'll keep them updat
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
 [part-5]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7-and-rc-1-2 "Preview 7 and Release Candidates 1 and 2"
+[part-6]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-6-stable-release "The Stable Release"
 [penny-pinching]: https://www.hanselman.com/blog/penny-pinching-in-the-cloud-running-and-managing-lots-of-web-apps-on-a-single-azure-app-service "Penny Pinching in the Cloud: Running and Managing LOTS of Web Apps on a single Azure App Service"
 [rakes]: https://youtu.be/2WZLJpMOxS4 "Sideshow Bob stepping on rakes"

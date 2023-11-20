@@ -243,13 +243,14 @@ In the next and final post in this series, we'll take a look at completing the u
 
 ## Upgrading to .NET 8 Series Links
 
-You can find links to the other posts in this series here - I'll keep them updated as new posts are published over the course of 2023.
+You can find links to the other posts in this series below.
 
 - [Part 1 - Why Upgrade?][part-1]
 - [Part 2 - Automation is our Friend][part-2]
 - [Part 3 - Previews 1-5][part-3]
 - [Part 4 - Preview 6][part-4]
 - Part 5 - Preview 7 and Release Candidates 1 and 2 (this post)
+- [Part 6 - The Stable Release][part-6]
 
 [App-vNext-Polly-1144]: https://github.com/App-vNext/Polly/pull/1144
 [ca1849]: https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1849
@@ -277,6 +278,7 @@ You can find links to the other posts in this series here - I'll keep them updat
 [part-2]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend "Automation is our Friend"
 [part-3]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5 "Previews 1-5"
 [part-4]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-4-preview-6 "Preview 6"
+[part-6]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-6-stable-release "The Stable Release"
 [performance-improvements]: https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-8/ "Performance Improvements in .NET 8"
 [preview-7]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-7/ "Announcing .NET 8 Preview 7"
 [polly]: https://github.com/App-vNext/Polly "App-vNext/Polly on GitHub"
