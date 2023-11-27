@@ -79,6 +79,8 @@ so a new [CA1863][ca1863] analyzer warning has been added to the .NET SDK.
 
 An example of a Git diff to change some string formatting to use this new pattern is shown below.
 
+<!-- markdownlint-disable MD030 -->
+
 <pre class="highlight plaintext">
 <code>using System;
 using System.Globalization;
@@ -94,6 +96,8 @@ public class Greeter
     }
 }</code>
 </pre>
+
+<!-- markdownlint-enable MD030 -->
 
 ## Release Candidate 1
 
