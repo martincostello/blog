@@ -7,6 +7,8 @@ description: "Upgrading a .NET AWS Lambda function to use native AoT for improve
 image: "https://cdn.martincostello.com/blog_lambda-go-brr.png"
 ---
 
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-go-brr.png" alt="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" title="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" height="384px" width="384px">
+
 Since 2017 I've been maintaining an Alexa skill, [_London Travel_][london-travel], that provides real-time information about the status of London Underground, London Overground, and the DLR (and the Elizabeth Line). The skill is an AWS Lambda function, [originally implemented in Node.js][publishing-my-first-alexa-skill], but [since 2019][integrating-testing-dotnet-lambda-functions] it  has been implemented in .NET.
 
 The skill uses the [Alexa Skills SDK for .NET][alexa-dotnet] to handle the interactions with Alexa, and [since earlier this month][dotnet-8-upgrade] has been running on .NET 8.0.0.
