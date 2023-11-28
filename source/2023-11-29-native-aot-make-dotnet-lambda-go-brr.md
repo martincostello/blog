@@ -1,6 +1,6 @@
 ---
 title: ".NET Native AoT Make AWS Lambda Function Go Brrr"
-date: 2023-12-01
+date: 2023-11-29
 tags: aot,aws,dotnet,lambda
 layout: bloglayout
 description: "Upgrading a .NET AWS Lambda function to use native AoT for improved cold-start performance."
