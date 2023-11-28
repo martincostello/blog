@@ -63,7 +63,7 @@ The Lambda was running on [AWS Graviton][graviton] (`arm64`) before the migratio
 
 > I thought the same was also true for cross-architecture compilation, but we'll come back to that later when I've properly read the documentation... ⌛
 
-For the initial AoT support, rather than get into the weeds of trying to compile for arm64 on the GitHub Actions Ubuntu x64 runners I use for CI/CD, I switched the Lambda back to using `x86_64` so compile the application for the same architecture as used in GitHub Actions. To get things moving switching the architecture was the easiest path forward. GitHub are also planning to [add support for Arm-based hosted runners][github-actions-arm64] in the future, so once those become generally available any extra steps to work around these limitations should go away.
+For the initial AoT support, rather than get into the weeds of trying to compile for arm64 on the GitHub Actions Ubuntu x64 runners I use for CI/CD, I switched the Lambda back to using `x86_64` to compile the application for the same architecture as used in GitHub Actions. To get things moving, switching the architecture was the easiest path forward. GitHub are also planning to [add support for Arm-based hosted runners][github-actions-arm64] in the future, so once those become generally available any extra steps to work around these limitations should go away.
 
 ### AoT Publishing Improvements
 
@@ -215,7 +215,7 @@ Maybe once it's been running for a month and I get my next AWS bill I can take a
 
 So while writing this blog post and reading the [native AoT documentation for cross-compilation][cross-compilation] again, I discovered that while cross-_platform_ compilation isn't supported, there is limited support for cross-_architecture_ compilation. There's an even a copy-paste example of how to set it up for Ubuntu 22.04, which is what the GitHub Actions `ubuntu-latest` hosted runner uses. Interesting. 😈
 
-This means that I can actually compile the application for `arm64` on the GitHub Actions `x86_64` runners, which means that the changes I made to use Docker are actually redundant. That's even better. I tested it out using the steps in the documentation [in this pull request][alexa-london-travel-975] and it seems to work perfectly fine, just the same as when compiled in an `arm64` Docker container.
+This means that I can actually compile the application for `arm64` on the GitHub Actions `x86_64` runners, which means that the changes I made to use Docker are actually redundant - that's even better! I tested it out using the steps in the documentation [with this pull request][alexa-london-travel-975] and it seemed to work perfectly fine, just the same as when compiled in an `arm64` Docker container.
 
 I've now removed the Dockerfile and the changes to the GitHub Actions workflow, and the Lambda is now back to being published as a native application directly from the GitHub Actions hosted runner for `ubuntu-latest`, just as it was before migrating to native AoT. 💫
 
