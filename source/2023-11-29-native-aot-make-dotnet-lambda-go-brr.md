@@ -59,9 +59,11 @@ Another constraint of native AoT is that if you use globalisation features, say 
 
 ### Switch from Graviton (arm64) to x86_64
 
-The Lambda was running on [AWS Graviton][graviton] (`arm64`) before the migration to AoT, but a limitation of native AoT is that there is [limited support for cross-architecture compilation][cross-compilation] of native AoT applications. For the initial AoT support, rather than get into the weeds of trying to compile for arm64 on the GitHub Actions Ubuntu x64 runners I use for CI/CD, I switched the Lambda back to using `x86_64` so compile the application for the same architecture as used in GitHub Actions.
+The Lambda was running on [AWS Graviton][graviton] (`arm64`) before the migration to AoT, but a limitation of native AoT is that there is [no support for cross-platform compilation][cross-compilation] of native AoT applications.
 
-In the near future I might investigate trying to get cross-architecture compilation working, but to get things moving switching the architecture was the easiest path forward. GitHub are also planning to [add support for Arm-based hosted runners][github-actions-arm64] in the future, so once those become generally available this will no longer be a problem.
+> I thought the same was also true for cross-architecture compilation, but we'll come back to that later when I've properly read the documentation... ⌛
+
+For the initial AoT support, rather than get into the weeds of trying to compile for arm64 on the GitHub Actions Ubuntu x64 runners I use for CI/CD, I switched the Lambda back to using `x86_64` so compile the application for the same architecture as used in GitHub Actions. To get things moving switching the architecture was the easiest path forward. GitHub are also planning to [add support for Arm-based hosted runners][github-actions-arm64] in the future, so once those become generally available any extra steps to work around these limitations should go away.
 
 ### AoT Publishing Improvements
 
@@ -209,6 +211,14 @@ I'm not sure why the performance isn't as good on `arm64`, but the numbers are s
 
 Maybe once it's been running for a month and I get my next AWS bill I can take a look comparing month-to-month to see if what the difference is in cost and metrics. To be honest though, I imagine I won't see a difference between `x86_64` and `arm64` in terms of cost, as the difference will be dwarfed by the decrease in cost from switching to native AoT. 📉💷
 
+## Removing Docker
+
+So while writing this blog post and reading the [native AoT documentation for cross-compilation][cross-compilation] again, I discovered that while cross-_platform_ compilation isn't supported, there is limited support for cross-_architecture_ compilation. There's an even a copy-paste example of how to set it up for Ubuntu 22.04, which is what the GitHub Actions `ubuntu-latest` hosted runner uses. Interesting. 😈
+
+This means that I can actually compile the application for `arm64` on the GitHub Actions `x86_64` runners, which means that the changes I made to use Docker are actually redundant. That's even better. I tested it out using the steps in the documentation [in this pull request][alexa-london-travel-975] and it seems to work perfectly fine, just the same as when compiled in an `arm64` Docker container.
+
+I've now removed the Dockerfile and the changes to the GitHub Actions workflow, and the Lambda is now back to being published as a native application directly from the GitHub Actions hosted runner for `ubuntu-latest`, just as it was before migrating to native AoT. 💫
+
 ## Summary
 
 All-in-all it was a fun learning experience converting my first .NET application to use native AoT. I learned about some of the limitations of native AoT, and in many cases how to covercome them. The net result of the changes are that my Lambda function is now faster, smaller, and cheaper to run that ever before - thanks .NET team!
@@ -234,6 +244,7 @@ I hope that you've found this blog post interesting, and it helps you migrate so
 [alexa-dotnet-nuget]: https://www.nuget.org/packages/Alexa.NET "Alexa.NET"
 [alexa-london-travel-967]: https://github.com/martincostello/alexa-london-travel/pull/967 "Publish as AoT"
 [alexa-london-travel-973]: https://github.com/martincostello/alexa-london-travel/pull/973 "Add Dockerfile for arm64 compilation"
+[alexa-london-travel-975]: https://github.com/martincostello/alexa-london-travel/pull/975 "Compile for arm64 in GitHub Actions"
 [app-insights-aot]: https://github.com/microsoft/ApplicationInsights-dotnet/issues/2786 "Native aot support"
 [app-insights-nuget]: https://www.nuget.org/packages/Microsoft.ApplicationInsights "Microsoft.ApplicationInsights"
 [app-local-icu]: https://learn.microsoft.com/dotnet/core/extensions/globalization-icu#app-local-icu "App-local ICU"
