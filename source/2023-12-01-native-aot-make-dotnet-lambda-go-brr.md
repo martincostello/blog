@@ -213,9 +213,9 @@ All-in-all it was a fun learning experience converting my first .NET application
 
 To summarise, the net effect of converting my Alexa skill's Lambda function to use native AoT are:
 
-- **Faster**: The Lambda function is now faster to start and respond to requests, with the cold-start time reduced by **84%** and the billed duration reduced by **88%**. 🏎️
-- **Leaner**: The Lambda function is now leaner, with maximum memory used on cold-start down to 32 MB for a saving of **64%**. 🏋️
-- **Smaller**: The size of the published Lambda function is now 68% smaller, at just 39.2 MB for a saving of **68%**. The total size of the ZIP file deployed to AWS Lambda is 12.4 MB. 🤏
+- **Faster**: The Lambda function is now faster to start and respond to requests, with the cold-start time **reduced by 84%** and the billed duration **reduced by 88%**. 🏎️
+- **Leaner**: The Lambda function is now leaner, with maximum memory used on cold-start down to 32 MB for a **saving of 64%**. 🏋️
+- **Smaller**: The size of the published Lambda function is now 68% smaller, at just 39.2 MB for a **reduction of 68%**. The total size of the ZIP file deployed to AWS Lambda is 12.4 MB. 🤏
 
 Of course your mileage for a different application may vary, but depending on how many warnings you get from trying to turn on native AoT and the overall cost of the effort of fixing them, I would have thought that the majority of AWS Lambda .NET workloads could see significant benefit from switching to deploy with native AoT.
 
