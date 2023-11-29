@@ -225,6 +225,10 @@ I've now removed the Dockerfile and the changes to the GitHub Actions workflow, 
 
 All-in-all it was a fun learning experience converting my first .NET application to use native AoT. I learned about some of the limitations of native AoT, and in many cases how to covercome them. The net result of the changes are that my Lambda function is now faster, smaller, and cheaper to run that ever before - thanks .NET team!
 
+I think this image of the _Duration minimum_ metric from CloudWatch for the Lambda function over the last 2 weeks says it all. Spot when the changes were deployed... 🚀
+
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_aot-lambda-cloudwatch-metrics.png" alt="An AWS CloudWatch graph of the Duration minimum metric with a pronounced decrease and consistency of the Duration in milliseconds of the Lambda function invocations since 27th November" title="An AWS CloudWatch graph of the Duration minimum metric with a pronounced decrease and consistency of the Duration in milliseconds of the Lambda function invocations since 27th November">
+
 To summarise, the net effect of converting my Alexa skill's Lambda function to use native AoT are:
 
 - **Faster**: The Lambda function is now faster to start and respond to requests, with the cold-start time **reduced by 84%** and the billed duration **reduced by 88%**. 🏎️
