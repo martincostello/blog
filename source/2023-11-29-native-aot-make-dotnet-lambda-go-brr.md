@@ -55,7 +55,9 @@ For now I've [removed the polymorphism][remove-polymorphism], and I just created
 
 ### Using Invariant Globalization
 
-Another constraint of native AoT is that if you use globalisation features, say for `DateTime` formatting, you also need to include the [ICU libraries via a NuGet package][icu-nuget] and enable [App-local ICU][app-local-icu]. The downside of this is that it adds a lot of size to the published application - in my case, it doubled the size of the published artifacts for native AoT. Taking a look around in my code, I wasn't really actually using any features that needed culture-specific formatting support, so I was able to remove App-local ICU and use [invariant globalization][invariant-globalization] instead (`InvariantGlobalization=true`).
+Another constraint of native AoT is that if you use globalisation features, say for `DateTime` formatting, you also need to include the [ICU libraries via a NuGet package][icu-nuget] and enable [App-local ICU][app-local-icu]. This is because the `provided.al2023` custom runtime based on [Amazon Linux 2023][al-2023] does not include the ICU libraries by default.
+
+The downside of adding this is that it adds a lot of size to the published application - in my case, it doubled the size of the published artifacts for native AoT. Taking a look around in my code, I wasn't really actually using any features that needed culture-specific formatting support, so I was able to remove App-local ICU and use [invariant globalization][invariant-globalization] instead (`InvariantGlobalization=true`).
 
 ### Switch from Graviton (arm64) to x86_64
 
@@ -239,6 +241,7 @@ I hope that in the .NET 9 timeframe ASP.NET Core gets further support for native
 
 I hope that you've found this blog post interesting, and it helps you migrate some of your workloads to benefit fom native AoT and the improved performance it can bring to your applications. 🚀🔥
 
+[al-2023]: https://aws.amazon.com/about-aws/whats-new/2023/11/aws-lambda-amazon-linux-2023/ "AWS Lambda adds support for Amazon Linux 2023"
 [alexa-dotnet]: https://github.com/timheuer/alexa-skills-dotnet "Alexa Skills SDK for .NET on GitHub"
 [alexa-dotnet-262]: https://github.com/timheuer/alexa-skills-dotnet/issues/262 "AoT Support?"
 [alexa-dotnet-nuget]: https://www.nuget.org/packages/Alexa.NET "Alexa.NET"
