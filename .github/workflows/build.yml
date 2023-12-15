@@ -84,7 +84,7 @@ jobs:
     steps:
 
     - name: Download blog
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: blog
         path: ./build
