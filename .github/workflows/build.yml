@@ -40,7 +40,7 @@ jobs:
         ./build.ps1
 
     - name: Publish blog
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: blog
         path: ./build
