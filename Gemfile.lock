@@ -137,7 +137,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2023.4)
+    tzinfo-data (1.2024.1)
       tzinfo (>= 1.0.0)
     uber (0.0.15)
     uglifier (2.7.2)
