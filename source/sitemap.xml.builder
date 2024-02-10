@@ -4,7 +4,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
 
   xml.url do
     xml.loc site_url
-    xml.lastmod File.mtime(sitemap.resources.first.source_file).iso8601
+    xml.lastmod File.mtime(blog.articles.first.source_file).iso8601
     xml.changefreq "monthly"
     xml.priority "0.5"
   end
