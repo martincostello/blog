@@ -1,28 +1,16 @@
-# Activate and configure extensions
-
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
 
-###
-# Blog settings
-###
+page "/*.json", layout: false
+page "/*.txt", layout: false
+page "/*.xml", layout: false
 
 Time.zone = "Europe/London"
 
 activate :blog do |blog|
-
   blog.permalink = "{title}"
-  blog.sources = "{year}-{month}-{day}-{title}.html"
-  blog.taglink = "tags/{tag}.html"
-
-  blog.summary_separator = /(READMORE)/
-  blog.summary_length = 250
-  blog.year_link = "{year}.html"
-  blog.month_link = "{year}/{month}.html"
-  blog.day_link = "{year}/{month}/{day}.html"
   blog.default_extension = ".md"
-
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
 end
@@ -30,30 +18,18 @@ end
 activate :directory_indexes
 
 page "/humans.txt", layout: false, :directory_index => false
-page "/hostingstart.html", layout: false, :directory_index => false
 page "/robots.txt", layout: false, :directory_index => false
-page "/*.json", layout: false
-page "/*.txt", layout: false
-page "/*.xml", layout: false
 
-###
-# Helpers
-###
-
-# Reload the browser automatically whenever files change
 configure :development do
-  # activate :livereload
+  activate :livereload
   set :site_root_uri, "https://localhost/"
   set :render_analytics, false
 end
 
 set :css_dir, 'styles'
-
 set :js_dir, 'scripts'
-
 set :images_dir, 'images'
 
-# Build-specific configuration
 configure :build do
 
   activate :minify_html, remove_input_attributes: false
@@ -66,17 +42,9 @@ configure :build do
   set :render_analytics, true
 end
 
-##
-# Syntax Configuration
-##
-
 activate :syntax
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true
-
-##
-# Custom Configuration
-##
 
 set :cdn_domain, "cdn.martincostello.com"
 set :site_domain, "blog.martincostello.com"
