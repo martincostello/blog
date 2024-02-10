@@ -11,13 +11,13 @@
         <p>
             <div class="row d-none d-md-block">
                 <div class="col-6">
-                    <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a> |
+                    <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= config[:blog_author] %>"><%= config[:blog_author] %></a> |
                     <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a>
                 </div>
             </div>
             <div class="row d-md-none">
                 <div class="col-12">
-                    <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a>
+                    <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= config[:blog_author] %>"><%= config[:blog_author] %></a>
                 </div>
                 <div class="col-12">
                     <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a></p>

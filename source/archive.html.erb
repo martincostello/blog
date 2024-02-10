@@ -14,11 +14,11 @@ description: "The archive of blog posts for Martin Costello's blog."
         <p>
           <div class="row d-none d-md-block">
                 <div class="col-lg-6">
-                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
+                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" alt="<%= config[:blog_author] %>" rel="noopener" title="<%= config[:blog_author] %>"><%= config[:blog_author] %></a>
                 </div>
             </div>
             <div class="row d-md-none col-12">
-                <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" alt="<%= blog_author %>" rel="noopener" title="<%= blog_author %>"><%= blog_author %></a>
+                <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" alt="<%= config[:blog_author] %>" rel="noopener" title="<%= config[:blog_author] %>"><%= config[:blog_author] %></a>
             </div>
         </p>
     </div>

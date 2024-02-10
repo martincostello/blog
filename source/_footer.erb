@@ -10,12 +10,12 @@
   <p>
     <div class="row">
       <div class="d-none d-md-block col">
-        &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %> |
+        &copy; <%= config[:blog_author] %> 2014-<%= Time.now.utc.strftime("%Y") %> |
         Built from <a href="https://github.com/martincostello/blog/commit/<%= git_sha %>" rel="noopener" title="View commit <%= git_sha %> on GitHub"><%= git_sha[0,7] %></a> on <a href="https://github.com/martincostello/blog/tree/<%= git_branch %>" rel="noopener" title="View branch <%= git_branch %> on GitHub"><%= git_branch %></a>
       </div>
       <div class="d-md-none">
         <div class="col">
-            &copy; <%= blog_author %> 2014-<%= Time.now.utc.strftime("%Y") %>
+            &copy; <%= config[:blog_author] %> 2014-<%= Time.now.utc.strftime("%Y") %>
         </div>
       </div>
     </div>
