@@ -1,10 +1,10 @@
 xml.instruct!
 xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
-  site_url = site_root_uri
+  site_url = config[:site_root_uri]
 
   xml.url do
     xml.loc site_url
-    xml.lastmod File.mtime(blog.articles[0].source_file).iso8601
+    xml.lastmod File.mtime(sitemap.resources.first.source_file).iso8601
     xml.changefreq "monthly"
     xml.priority "0.5"
   end
@@ -23,7 +23,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
     xml.priority "0.5"
   end
 
-  blog.articles.each do |article|
+  sitemap.resources.select { |article| article.metadata[:options][:layout] == "bloglayout" && article.data.noindex != true }.each do |article|
     xml.url do
       xml.loc URI.join(site_url, article.url)
       xml.lastmod File.mtime(article.source_file).iso8601

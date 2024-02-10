@@ -1,15 +1,21 @@
+# Activate and configure extensions
+
+activate :autoprefixer do |prefix|
+  prefix.browsers = "last 2 versions"
+end
+
 ###
 # Blog settings
 ###
 
-Time.zone = "UTC"
+Time.zone = "Europe/London"
 
 activate :blog do |blog|
 
   blog.permalink = "{title}"
   blog.sources = "{year}-{month}-{day}-{title}.html"
   blog.taglink = "tags/{tag}.html"
-  # blog.layout = "layout"
+
   blog.summary_separator = /(READMORE)/
   blog.summary_length = 250
   blog.year_link = "{year}.html"
@@ -19,57 +25,20 @@ activate :blog do |blog|
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
-
-  # Enable pagination
-  # blog.paginate = true
-  # blog.per_page = 10
-  # blog.page_link = "page/{num}"
 end
 
 activate :directory_indexes
 
-page "/feed.xml", layout: false
 page "/humans.txt", layout: false, :directory_index => false
 page "/hostingstart.html", layout: false, :directory_index => false
 page "/robots.txt", layout: false, :directory_index => false
-page "/sitemap.xml", layout: false
-
-###
-# Compass
-###
-
-# Change Compass configuration
-# compass_config do |config|
-#   config.output_style = :compact
-# end
-
-###
-# Page options, layouts, aliases and proxies
-###
-
-# Per-page layout changes:
-#
-# With no layout
-# page "/path/to/file.html", :layout => false
-#
-# With alternative layout
-# page "/path/to/file.html", :layout => :otherlayout
-#
-# A path which all have the same layout
-# with_layout :admin do
-#   page "/admin/*"
-# end
-
-# Proxy pages (https://middlemanapp.com/advanced/dynamic_pages/)
-# proxy "/this-page-has-no-template.html", "/template-file.html", :locals => {
-#  :which_fake_page => "Rendering a fake page with a local variable" }
+page "/*.json", layout: false
+page "/*.txt", layout: false
+page "/*.xml", layout: false
 
 ###
 # Helpers
 ###
-
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
 configure :development do
@@ -77,13 +46,6 @@ configure :development do
   set :site_root_uri, "https://localhost/"
   set :render_analytics, false
 end
-
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
 
 set :css_dir, 'styles'
 
@@ -96,7 +58,7 @@ configure :build do
 
   activate :minify_html, remove_input_attributes: false
   activate :minify_css
-  activate :minify_javascript
+  activate :minify_javascript, compressor: Terser.new
   activate :gzip
   activate :asset_hash
 

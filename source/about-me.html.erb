@@ -11,7 +11,7 @@ description: "Information about Martin Costello, a software developer and tester
         </div>
         <div class="col-md-4">
             <div class="row text-center">
-                <img class="img-fluid mx-auto d-block lazy" style="margin: 0 auto;" data-original="https://<%= cdn_domain %>/martin_small-v2.png" height="300" width="300" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="<%= blog_author %>" title="<%= blog_author %>" />
+                <img class="img-fluid mx-auto d-block lazy" style="margin: 0 auto;" data-original="https://<%= config[:cdn_domain] %>/martin_small-v2.png" height="300" width="300" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="<%= config[:blog_author] %>" title="<%= config[:blog_author] %>" />
             </div>
         </div>
     </div>
@@ -22,6 +22,6 @@ description: "Information about Martin Costello, a software developer and tester
     <p>Besides technology, I'm a big fan of the cinema and like watching new films of many genres. I've been working on a self-imposed challenge of watching <a href="https://www.icheckmovies.com/lists/top+250/?user=martin_costello" alt="IMDb Top 250 Progress" rel="noopener" title="IMDb Top 250 Progress">all of the films in the IMDb Top 250</a> for the last <%= ((Date.today - Date.parse("2009-08-09")) / 365).to_i %> years. The list is always moving which makes it tricky, but one day I'll get there!</p>
     <p>Visit <a href="https://martincostello.com/" alt="martincostello.com" rel="noopener" title="martincostello.com">martincostello.com</a>.</p>
     <p>
-        <a href="https://twitter.com/<%= twitter_handle %>" class="twitter-follow-button" data-show-count="true" data-size="large" rel="noopener">Follow @<%= twitter_handle %></a>
+        <a href="https://twitter.com/<%= config[:twitter_handle] %>" class="twitter-follow-button" data-show-count="true" data-size="large" rel="noopener">Follow @<%= config[:twitter_handle] %></a>
     </p>
 </div>

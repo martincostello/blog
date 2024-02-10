@@ -4,8 +4,8 @@ description: "The blog of a software developer and tester based in London."
 ---
 
 <div class="jumbotron">
-    <h1><%= blog_title %></h1>
-    <p class="lead"><%= blog_subtitle %></p>
+    <h1><%= config[:blog_title] %></h1>
+    <p class="lead"><%= config[:blog_subtitle] %></p>
 </div>
 <% blog.articles[0..9].each do |article| %>
 <div class="row">
@@ -14,13 +14,13 @@ description: "The blog of a software developer and tester based in London."
         <p>
             <div class="row d-none d-md-block">
                 <div class="col-lg-6">
-                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a> |
+                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" rel="noopener" title="About <%= config[:blog_author] %>"><%= config[:blog_author] %></a> |
                     <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a>
                 </div>
             </div>
             <div class="row d-md-none">
                 <div class="col-xs-12 col-sm-12">
-                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" rel="noopener" title="About <%= blog_author %>"><%= blog_author %></a>
+                    <%= article.date.strftime('%e %B %Y') %> by&nbsp;<a href="/about-me/" rel="noopener" title="About <%= config[:blog_author] %>"><%= config[:blog_author] %></a>
                 </div>
                 <div class="col-sm-12 col-xs-12">
                     <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a></p>

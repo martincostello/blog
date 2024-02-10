@@ -30,13 +30,13 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7
+        ruby-version: 3.3
 
     - name: Build blog
       shell: pwsh
       run: |
-        bundle config path vendor/bundle
-        bundle install
+        bundler config path vendor/bundle
+        bundler install
         ./build.ps1
 
     - name: Publish blog
