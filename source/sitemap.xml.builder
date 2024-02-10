@@ -23,7 +23,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
     xml.priority "0.5"
   end
 
-  sitemap.resources.select { |article| article.metadata[:options][:layout] == "bloglayout" && article.data.noindex != true }.each do |article|
+  sitemap.resources.select { |article| article.metadata[:options][:layout] == "bloglayout" && article.data.noindex != true }.sort {|a, b| b.data["date"] <=> a.data["date"] }.each do |article|
     xml.url do
       xml.loc URI.join(site_url, article.url)
       xml.lastmod File.mtime(article.source_file).iso8601
