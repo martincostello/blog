@@ -6,7 +6,7 @@ page "/*.json", layout: false
 page "/*.txt", layout: false
 page "/*.xml", layout: false
 
-Time.zone = "Europe/London"
+Time.zone = "UTC"
 
 activate :blog do |blog|
   blog.permalink = "{title}"
