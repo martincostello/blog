@@ -12,10 +12,10 @@ exports.handler = (event, context, callback) => {
         let path = request.uri;
 
         if (path[path.length - 1] !== '/') {
-            path = path += "/";
+            path += "/";
         }
 
-        path = path += "index.html";
+        path += "index.html";
         request.uri = path;
     }
 
