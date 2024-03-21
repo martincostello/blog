@@ -17,5 +17,5 @@ gem "builder", "~> 3.2.4"
 gem "tzinfo-data", "~> 1.2024.1", platforms: [:mswin, :mingw, :jruby, :x64_mingw]
 gem 'wdm', '~> 0.1.1', platforms: [:mswin, :mingw, :x64_mingw]
 
-gem "rack", "~> 2.2.8"
+gem "rack", "~> 2.2.9"
 gem "redcarpet", "~> 3.6.0"
