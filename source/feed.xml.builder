@@ -6,7 +6,7 @@ xml.feed "xmlns" => "http://www.w3.org/2005/Atom", "xml:lang" => "en-GB" do
   xml.id URI.join(site_url, blog.options.prefix.to_s)
   xml.link "href" => URI.join(site_url, blog.options.prefix.to_s)
   xml.link "href" => URI.join(site_url, current_page.path), "rel" => "self"
-  xml.rights "&copy; " + config[:blog_author] + " 2014-" + Time.now.utc.strftime("%Y")
+  xml.rights "&copy; " + config[:blog_author] + " 2014-" + Time.now.utc.strftime("%Y"), "type" => "html"
   xml.updated(blog.articles.first.date.to_time.iso8601) unless blog.articles.empty?
   xml.author do
     xml.name config[:blog_author]
