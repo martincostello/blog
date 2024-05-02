@@ -7,7 +7,7 @@ description: "Publishing a .NET application as a container image using the .NET 
 image: "https://cdn.martincostello.com/blog_dotnet-containers.jpg"
 ---
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-containers.jpg" alt="A container ship being loaded with the .NET logo on the stern" title="A container ship being loaded with the .NET logo on the stern" height="757px" width="384px">
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-containers.jpg" alt="A container ship being loaded with the .NET logo on the stern" title="A container ship being loaded with the .NET logo on the stern" height="384px" width="757px">
 
 Containers have been a thing in the software ecosystem for a few years now, with lots of associated technologies and
 concepts - Docker, Kubernetes, Helm charts, sidecars and many more. Using containers simplifies the deployment of your
