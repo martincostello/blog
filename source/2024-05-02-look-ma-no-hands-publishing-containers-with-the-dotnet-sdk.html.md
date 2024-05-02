@@ -47,10 +47,10 @@ Let's say that I now want to publish my application as a Linux x64 container ima
 dotnet publish ./src/MyProject --arch x64 --os linux -p:PublishProfile=DefaultContainer
 ```
 
-By default this will create us an appropriate container image for our application using an appropriate base image
-derived from our project and publish it to the local container registry. To publish it to a remote registry, we just
-need to ensure that the appropriate credentials are available to publish to the registry and that we configure the
-name of the registry.
+By default this will create us an appropriate container image for our application using a base image derived from our project's
+properties (`PublishAot=true`, `PublishSelfContained=true`, `InvariantGlobalization=true`, etc.) and publish it to the local
+container registry. To publish it to a remote registry, we just need to ensure that the appropriate credentials are available
+to publish to the registry and that we configure the name of the registry.
 
 I use GitHub Actions to build and publish my applications, so I can use the [docker/login-action][docker-login] to
 authenticate with my container registry and then publish the container image to it. Here's a simplified example of
@@ -83,7 +83,7 @@ Then `dotnet publish` is invoked to publish the project as a container image. Sp
 tells the .NET SDK to publish the application as a container image, rather than publishing it as a standalone application.
 
 The container publishing support comes with lots of sensible defaults built-in and you can customise the image that is
-produced where it makes sense for you. The default smarts built-in include using [chiselled images][secure-container-builds]
+produced where it makes sense for you. The default smarts built-in include using [chiseled images][secure-container-builds]
 if you publish a self-contained application, or [setting OCI labels][container-labels] on the image for you. With [SourceLink][sourcelink]
 being built into the .NET SDK from .NET 8, this gives you lots of useful metadata about the image out-of-the-box.
 
@@ -159,7 +159,7 @@ published to our artifact repository came from a known source. You can read more
 post: [_Where does your software (really) come from?_][github-attestation].
 
 Adding in an attestation that others (or ourselves) can use to verify our container image is really simple and builds on top
-of the additional hardening me made to our container image at runtime as part of our publishing process.
+of the additional hardening we made to our container image at runtime as part of our publishing process.
 
 First we add a small [MSBuild target][msbuild-target] that runs after the container image is published (the `PublishContainer` target).
 
