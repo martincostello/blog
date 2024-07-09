@@ -3,7 +3,7 @@
 if current_page.data.image
   og_image = URI.join(config[:site_root_uri], image_path(current_page.data.image))
 else
-  og_image = "https://" + config[:cdn_domain] + "/martin_small-v2.png"
+  og_image = "https://" + config[:cdn_domain] + "/martin_small-v3.png"
 end
 %>
 <meta property="og:image" content="<%= og_image %>" />
