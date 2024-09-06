@@ -1,6 +1,6 @@
 ---
 title: "What's New for OpenAPI with .NET 9"
-date: 2024-09-10
+date: 2024-09-09
 tags: dotnet,openapi,swagger,swashbuckle
 layout: bloglayout
 description: "A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 and comparing it to NSwag and Swashbuckle.AspNetCore."
