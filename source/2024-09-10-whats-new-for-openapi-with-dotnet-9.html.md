@@ -291,7 +291,7 @@ public static IServiceCollection AddSwashbuckleOpenApi(this IServiceCollection s
 ## Performance
 
 The last thing I thought I'd touch on in this blog post is performance. After I'd created the repository comparing the three
-implementations, I thought it would be interesting to benchmark them to compare how they perform when generating an OpenAPI document.
+implementations, I figured it would be interesting to benchmark them to compare how they perform when generating an OpenAPI document.
 
 ### Preliminary Results with .NET 9 Preview 7
 
@@ -346,7 +346,7 @@ eventually caused OpenAPI generation to stop working completely. Because of this
 benchmarks ran as a short run via `[ShortRunJob]`, otherwise the benchmarks would grind to a halt. This is also the cause of the
 variance in the allocation numbers (the red line at the top of the first graph).
 
-The second caveat is that by default, NSwag caches the OpenAPI document it generates, so out-of-the-box it will only ever generate
+The second caveat is that, by default, NSwag caches the OpenAPI document it generates, so out-of-the-box it will only ever generate
 the OpenAPI document once. For the sake of comparison, I [disabled the caching][disabled-caching] in NSwag so that the document was
 generated in full on each request. We _could_ level the playing field in the opposite direction by caching all three, but that's not
 interesting for a performance comparison/test as we'd effectively just be benchmarking the caching 😄.
@@ -364,13 +364,15 @@ able to identify three different places where the OpenAPI generation was doing u
 The first thing I found was that the code seemed to be spending a lot of time in the `Enumerable.All()` method. Digging into this
 further, I noticed that `IDictionary<K, V>.Contains()` was being used in a number of places in the code along with the indexer.
 This is a known performance trap in .NET, with this pattern leading to a double look-up, which can be avoided by instead using the
-`TryGetValue()` method. There's even a .NET analysis rule that covers this scenario: [CA1854][ca1854]. It turns out
+`TryGetValue()` method.
+
+In fact there's even a .NET analysis rule that covers this scenario: [CA1854][ca1854]. It turns out
 [there's a bug][dotnet-roslyn-analyzers-7369] in this analyser that doesn't catch certain patterns of usage, which is why it wasn't
 caught previously.
 
 Changing the code to use `TryGetValue()` instead was an easy enough change to make, but that didn't answer the question of why so
 much time was being spent in `All()` in the first place. The reason for this turned out to be due to the way the OpenAPI library
-was implementing `IEqualityComparer<T>` for the various types in the OpenAPI document.
+was implementing [`IEqualityComparer<T>`][iequalitycomparer] for the various types used to generate the OpenAPI document.
 
 Some custom equality comparers are implemented which are used to help test whether different OpenAPI schema "shapes" are equal to
 each other or not. These objects in some cases contain dozens of properties, some of which are themselves dictionaries or arrays,
@@ -379,7 +381,7 @@ which can create a large object graph to traverse to compute the equality of.
 With some reordering to how the properties are computed based on expense/likelihood of being different, a lot of the cost of these
 comparisons can be avoided and make things much faster in the majority of cases.
 
-I opened [a pull request][dotnet-aspnetcore-57208] to fix both of these issues, which once merged caused all of the identified
+I opened [a pull request][dotnet-aspnetcore-57208] to address both of these items, which once merged caused all of the identified
 method calls to drop out of the hot path for the profiler traces in the benchmarks 🔥.
 
 #### Too Many Transformers 🤖
@@ -387,17 +389,17 @@ method calls to drop out of the hot path for the profiler traces in the benchmar
 After the fix for the unstable schemas and the above changes, I took another look at the traces from my benchmark runs and
 spotted one other anomaly from the data. Looking at the data, I noticed that [transformers were being created too often][dotnet-aspnetcore-57211].
 
-This was due to an issue with the lifetime and disposal of transformers, meaning that they were being created once per schema,
-rather than once per generation of the OpenAPI document. This then had not only the overhead of the additional work, but also
+This was due to an issue with the lifetime and disposal of transformers, meaning that they were being created once per _schema_,
+rather than once per generation of the OpenAPI _document_. This then had not only the overhead of the additional work, but also
 an impact to memory usage and garbage collection.
 
 ### Latest Results with .NET 9 RC.1
 
-After fixes for the above issues were merged, I re-ran the benchmarks against the latest daily build of .NET 9 from their CI,
-as at the time of writing, .NET 9 RC.1 isn't available yet. I've [written about using daily builds before][daily-builds], so
+After changes for the above issues were merged, I re-ran the benchmarks against the latest daily build of .NET 9 from their CI,
+as at the time of writing, .NET 9 RC.1 isn't officially available yet. I've [written about using daily builds before][daily-builds], so
 check out that post if you're interested.
 
-With the latest version of the .NET SDK from the .NET 9 CI (`9.0.100-rc.1.24452.12` at the time of writing) things are notably
+With the latest version of the .NET SDK from the .NET 9 CI (`9.0.100-rc.1.24452.12` at the time of writing) things are noticeably
 improved compared to preview 7:
 
 ```
@@ -418,7 +420,7 @@ AMD EPYC 7763, 1 CPU, 4 logical and 2 physical cores
 
 As you can see compared to the previous results, the OpenAPI package is now the fastest of the three libraries.
 
-The new ASP.NET Core package beats both NSwag and Swashbuckle by a significant margin, both in terms of time _and_ memory. ⚡⚡
+The new ASP.NET Core package beats both NSwag and Swashbuckle by a significant margin, both in terms of time _and_ memory. ⚡
 
 In fact it's almost **~2.8x** faster, and **~4.6x** less memory hungry that the nearest competitor.
 
@@ -440,7 +442,8 @@ Compared to itself from preview 7, it's now **~11x** faster and allocates **~18x
 
 The caveats to note here:
 
-- `[ShortRunJob]` is no longer used, so the benchmarks run more iterations and are thus more accurate.
+- `[ShortRunJob]` is no longer used, so the benchmarks run more iterations and are thus more accurate. This is why
+  the error bars are much smaller in the second series of graphs.
 - _All_ improvements between .NET 9 preview 7 and release candidate 1 are included, not just the fixes for OpenAPI.
   This is most apparent from the major step down on the graph for all three libraries a few points in from the left.
   This is where the benchmark project switches from using preview 7 to the daily RC1 builds.
@@ -484,6 +487,7 @@ TODO
 [example-aspnetcore]: https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/AspNetCore/AspNetCoreOpenApiEndpoints.cs
 [example-nswag]: https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/NSwag/NSwagOpenApiEndpoints.cs
 [example-swashbuckle]: https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/Swashbuckle/SwashbuckleOpenApiEndpoints.cs
+[iequalitycomparer]: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1 "IEqualityComparer<T> Interface"
 [linting]: https://learn.microsoft.com/aspnet/core/fundamentals/openapi/aspnetcore-openapi?view=aspnetcore-9.0#lint-generated-openapi-documents-with-spectral "Lint generated OpenAPI documents with Spectral"
 [microsoft-aspnetcore-openapi]: https://www.nuget.org/packages/Microsoft.AspNetCore.OpenApi "The Microsoft.AspNetCore.OpenApi package on NuGet.org"
 [m-e-apidescription-server]: https://www.nuget.org/packages/Microsoft.Extensions.ApiDescription.Server/ "The Microsoft.Extensions.ApiDescription.Server package on NuGet.org"
