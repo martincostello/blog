@@ -465,7 +465,20 @@ The documentation for the package for ASP.NET Core 9 can be found in [Microsoft 
 
 ## Summary
 
-TODO
+All in all, the new ASP.NET Core OpenAPI package is a great addition to the ASP.NET Core ecosystem. It provides a modern and
+performant way to generate OpenAPI documents for your ASP.NET Core applications to cover the core use cases that developers need.
+
+While it may not yet be as feature-rich as existing libraries such as NSwag or Swashbuckle, it's better ability to keep up with
+the change of pace to ASP.NET Core now and in the future, such as support for native AoT, give it a strong foundation to build
+on going forwards, such as for future support for OpenAPI 3.1.
+
+Developers don't need to switch from their existing libraries to the new OpenAPI package if they're happy with their current
+implementation - the only compelling reason to switch is if you want to generate OpenAPI documents in a native AoT deployment.
+For those who do wish to switch (I have for a number of my apps), the migration is easiest for users of Swashbuckle.AspNetCore due
+to both libraries being built on top of the same OpenAPI.NET foundation.
+
+If you've not added OpenAPI documentation to an API before and are writing a new ASP.NET Core 9+ application, I'd recommend giving
+the library a try to see how it fits your needs. It's a great way to get started with OpenAPI documentation for your APIs!
 
 [aspnetcore-9]: https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0 "What's new in ASP.NET Core 9.0"
 [aspnetcore-endpoints]: https://learn.microsoft.com/aspnet/core/fundamentals/routing "Routing in ASP.NET Core"
