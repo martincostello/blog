@@ -450,7 +450,7 @@ The caveats to note here:
 
 As ever, performance is relative to the environment used and your numbers might vary. However with a relatively stable
 environment (GitHub Actions' Ubuntu runners in this case), the graphs show consistent performance across multiple runs
-and a clear improvement as newer versions of .NET 9 are used.
+and a clear improvement as newer versions of .NET 9 are used. The useful data here is in the trends, not the absolute values.
 
 ## Further Reading
 
