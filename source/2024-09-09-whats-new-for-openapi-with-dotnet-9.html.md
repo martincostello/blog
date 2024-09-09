@@ -90,7 +90,9 @@ Like Swashbuckle, the package is built on top of the [OpenAPI.NET][microsoft-ope
 for the various primitives of the [OpenAPI specification][openapi-specification]. The advantage of this is that adding support
 for new versions of the OpenAPI specification in the future (e.g. OpenAPI 3.1) should be easier as the library can be updated
 to use a new version that supports it in the future, with only the "glue" for generating the types from the endpoints needing
-to be updating, rather than also needing to fully implement the specification itself.
+to be updating, rather than also needing to fully implement the specification itself. The generation of the JSON schemas for
+the models is built on top of the [new JSON schema support][json-schema-exporter] in .NET 9, which is exposed by the new
+`JsonSchemaExporter` class.
 
 OpenAPI support is added at the [endpoint][aspnetcore-endpoints] level (think `MapGet()` and similar methods). This allow the
 the OpenAPI document can be coupled into other mechanisms in ASP.NET Core, such as authorization, caching, and more.
@@ -501,6 +503,7 @@ the library a try to see how it fits your needs. It's a great way to get started
 [example-nswag]: https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/NSwag/NSwagOpenApiEndpoints.cs
 [example-swashbuckle]: https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/Swashbuckle/SwashbuckleOpenApiEndpoints.cs
 [iequalitycomparer]: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1 "IEqualityComparer<T> Interface"
+[json-schema-exporter]: https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview6/libraries.md#jsonschemaexporter "JsonSchemaExporter"
 [linting]: https://learn.microsoft.com/aspnet/core/fundamentals/openapi/aspnetcore-openapi?view=aspnetcore-9.0#lint-generated-openapi-documents-with-spectral "Lint generated OpenAPI documents with Spectral"
 [microsoft-aspnetcore-openapi]: https://www.nuget.org/packages/Microsoft.AspNetCore.OpenApi "The Microsoft.AspNetCore.OpenApi package on NuGet.org"
 [m-e-apidescription-server]: https://www.nuget.org/packages/Microsoft.Extensions.ApiDescription.Server/ "The Microsoft.Extensions.ApiDescription.Server package on NuGet.org"
