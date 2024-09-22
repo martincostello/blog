@@ -143,7 +143,7 @@ I've chosen not to run the benchmarks on every pull request for a few reasons:
 - Pull requests from forks and from Dependabot do not have access to secrets - this means the data cannot be pushed to the other repository;
 - I don't want to tie-up a lot of my GitHub Actions capacity running the benchmarks for all PRs given that most pull requests are unlikely
   to change the performance characteristics of the code;
-- If a regression is detected post-merge, I can easily investigate the cause after-the-fact and either fix-forward or revert the change.
+- If a regression is detected post-merge ([like this][regression-comment]), I can easily investigate the cause after-the-fact and either fix-forward or revert the change.
 
 The only requirement over basic BenchmarkDotNet usage is that the benchmarks need to be run with the `--exporters json` option to
 generate the benchmark results in JSON format. This is for the action to use to generate the summarised data for the dashboard.
@@ -267,6 +267,5 @@ TODO
 [xunit]: https://xunit.net/ "xUnit.net"
 
 <!--
-https://cdn.martincostello.com/blog_benchmarks-regression.png
 https://cdn.martincostello.com/blog_benchmarks-regression-tooltip.png
 -->
