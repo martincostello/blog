@@ -7,7 +7,7 @@ description: "A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 a
 image: "https://cdn.martincostello.com/blog_openapi.png"
 ---
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_openapi.png" alt="The OpenAPI logo" title="The OpenAPI logo" height="272px" width="899x">
+<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_openapi.png" alt="The OpenAPI logo" title="The OpenAPI logo" height="272px" width="899px">
 
 Developers in the .NET ecosystem have been writing APIs with ASP.NET and ASP.NET Core for years, and
 [OpenAPI][openapi] (née Swagger) has been a popular choice for documenting those APIs.
