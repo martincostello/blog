@@ -297,7 +297,7 @@ implementations, I figured it would be interesting to benchmark them to compare 
 
 ### Preliminary Results with .NET 9 Preview 7
 
-After a detour off into setting up a continuous benchmarking process (which I'll try and blog about separately some time soon),
+After a detour off into setting up a continuous benchmarking process ([read about it here][continuous-benchmarks]),
 I set up some benchmarks for each library with [BenchmarkDotNet][benchmarkdotnet] to compare the performance. When I first set
 them up I was targeting the official Preview 7 release of .NET 9, and at a very high-level, these were the results I got:
 
@@ -493,6 +493,7 @@ the library a try to see how it fits your needs. It's a great way to get started
 [benchmark-commit-preview7]: https://github.com/martincostello/aspnetcore-openapi/commit/fd5d79a12deeeda3abc10b61a80f2568bd38b381
 [benchmark-commit-rc1]: https://github.com/martincostello/aspnetcore-openapi/commit/6a09d0422eeeabe38cc4ea7655af04d5d7209d11
 [ca1854]: https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/CA1854 "Prefer the IDictionary.TryGetValue(TKey, out TValue) method"
+[continuous-benchmarks]: https://blog.martincostello.com/continuous-benchmarks-on-a-budget/
 [daily-builds]: https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7-and-rc-1-2/ "Daily Build Testing"
 [disabled-caching]: https://github.com/martincostello/aspnetcore-openapi/blob/fd5d79a12deeeda3abc10b61a80f2568bd38b381/src/TodoApp/OpenApi/NSwag/NSwagOpenApiEndpoints.cs#L94-L97
 [dotnet-aspnetcore-56990]: https://github.com/dotnet/aspnetcore/issues/56990 "OpenAPI schemas are not stable between generations"
