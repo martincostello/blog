@@ -203,6 +203,10 @@ Similarly, I added a custom domain to the GitHub Pages site, but this was again 
 _additional_ cost. It's still possible to use the default GitHub Pages domain to host the site, you just don't get the custom/vanity URL
 to serve it over.
 
+> ⚠️ If you need to use device flow with non-public repositories hosted in GitHub.com, you should do so over a custom domain so that you
+> can restrict the allowed hosts for CORS to your domain, as otherwise you would need to allow it for the entire GitHub Pages domain, or
+> otherwise restrict it somehow (e.g. by referrer or IP address).
+
 ### The End Result
 
 With all the pieces in place, at a high-level the solution looks something like this:
@@ -224,7 +228,66 @@ up some Benchmark.NET benchmarks and then using a GitHub Actions workflow to run
 
 ## Concrete Results
 
-TODO
+So with this solution in place, what have I been able to achieve with it so far?
+
+First, the dashboard was incredibly useful to track the fixes for a number of performance improvements in the new ASP.NET Core OpenAPI
+library. These are covered in more detail in [my previous blog post][openapi-post], but the dashboard was invaluable in tracking the
+effect of the changes on the performance of the library over time as changes were made, particularly when ASP.NET Core 9 Release Candidate 1
+was released.
+
+The second concrete outcome from using the dashboard was the discovery of a performance regression in the .NET Runtime in .NET 9.
+
+With the release of .NET 9 RC1 on the 10th of September 2024, I updated a number of my own applications to use the new version of the runtime
+as RC1 is the first preview of .NET 9 with "go-live" support. After updating a number of applications and deploying them to my "production"
+environments, I took a look at the dashboard to review any changes in the performance of the applications.
+
+I expected a good number of the benchmarks to show that the time taken for the benchmarks had reduced and/or used less memory. This was the
+case for the majority of the benchmarks, but there was one benchmark that bucked the trend and went in the wrong direction.
+
+Going back to the chart shown at the top of this blog post, you can see that the red line denoting memory usage has a noticeable,
+and consistent, uptick a few commits ago:
+
+<img class="img-fluid mx-auto d-block"
+     src="https://cdn.martincostello.com/blog_benchmarks-regression.png"
+     alt="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points"
+     title="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points">
+
+If we hover over the first data point in the uptick, we can see that the change is from the upgrade from .NET 8 to .NET 9 RC1:
+
+<img class="img-fluid mx-auto d-block"
+     src="https://cdn.martincostello.com/blog_benchmarks-regression-tooltip.png"
+     alt="The above chart with a tooltip showing the Git commit associated with the increase in memory usage"
+     title="The above chart with a tooltip showing the Git commit associated with the increase in memory usage">
+
+I hadn't spotted this regression previously as the benchmark data is something I'd started collecting relatively recently, and the trends
+didn't go back far enough to show the regression at the time it was made through my testing of the .NET 9 pre-releases. It was only when
+I merged the upgrade to `main` and the data I'd started collecting in that branch for .NET 8 was the difference apparent.
+
+The regression also escaped the regression comment functionality of the GitHub Action. The memory used compared to the previous commit was
+~106% - this is lower than the default threshold of 200% (i.e. double, carried through from [github-action-benchmark][publisher-inspiration])
+to avoid noisy false positives from variance in the performance of the GitHub Actions runners. When I've been running these benchmarks
+for a bit longer, I might revisit this threshold to see if it can be lowered (either by changing the config, or maybe the default itself)
+to avoid missing such regressions in the future. In this case, it was manual review that spotted it, rather than anything automated.
+
+The [specific benchmark][regression-benchmark] calls [an endpoint][regression-endpoint] that as I use as the health endpoint in a number of
+my applications for containers deployed to Azure App Service. The endpoint uses `JsonObject` to return a JSON payload that contains a number
+of useful properties about the application, such as the Git commit it was built from, the version of .NET its running, etc. This isn't an area
+I would have expected to see a regression, but also isn't on a critical path, so wouldn't have been particularly noticeable in usage of the
+applications themselves. It also turned out not to be an anomaly, as the same endpoint is present in several of my applications copy-pasted,
+and each one showed the same regression.
+
+I figured it would be worth raising the issue with the .NET team, so I created a more pared-down version of the benchmark. The original benchmark
+is an "end-to-end" benchmark that calls the endpoint over HTTP, so I extracted the body of the endpoint into a separate method and then benchmarked
+it in isolation. By itself, the same code showed the same regression, but without being compensated for by improvements elsewhere in the .NET
+9 runtime and ASP.NET Core 9, the regression was relatively significant. Compared to .NET 8, the memory usage had increased by 70% and the time
+taken to run the benchmark had increased by 90%. Ouch.
+
+I raised the issue with the .NET team, and they were able to identify the cause of the regression as part of
+[adding suport for explicit ordering of the properties of `JsonObject`][json-ordering]: [dotnet/runtime#107869][runtime-regression].
+The issue was fixed just three days later, and will be included in release candidate 2 of .NET 9 in October. The team also added new benchmarks
+to their existing suite to ensure that such a regression in this area doesn't slip by in the future.
+
+I think both these examples of otherwise unnoticed issues demonstrate the usefulness of having a continuous benchmarking solution in place!
 
 ## Summary
 
@@ -254,18 +317,17 @@ TODO
 [github-actions-limits]: https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration "GitHub Actions usage limits, billing and administration"
 [github-device-flow]: https://docs.github.com/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#device-flow "GitHub Device Flow documentation"
 [github-pages]: https://pages.github.com/ "GitHub Pages"
+[json-ordering]: https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview6/libraries.md#ordering-jsonobject-properties "Ordering JsonObject properties"
 [nswag]: https://github.com/RicoSuter/NSwag "The NSwag repository on GitHub"
 [openapi-post]: https://blog.martincostello.com/whats-new-for-openapi-with-dotnet-9/ "What's New for OpenAPI with .NET 9"
 [plotly]: https://plotly.com/javascript/ "Plotly JavaScript Open Source Graphing Library"
 [power-bi]: https://learn.microsoft.com/power-bi/fundamentals/power-bi-overview "What is Power BI?"
 [publisher-action]: https://github.com/martincostello/benchmarkdotnet-results-publisher "The benchmarkdotnet-results-publisher repository on GitHub"
 [publisher-inspiration]: https://github.com/benchmark-action/github-action-benchmark "The github-action-benchmark repository on GitHub"
+[regression-benchmark]: https://github.com/martincostello/api/blob/28fc4e2a9267e98303ff896e5e3a1da292201d2b/tests/API.Benchmarks/ApiBenchmarks.cs#L42-L44 "The benchmark that regressed"
 [regression-comment]: https://github.com/martincostello/project-euler/pull/335#issuecomment-2302688319 "Example of a comment on a pull request for a regression"
+[regression-endpoint]: https://github.com/martincostello/api/blob/28fc4e2a9267e98303ff896e5e3a1da292201d2b/src/API/ApiModule.cs#L85-L114 "The endpoint that regressed"
 [report-generator]: https://github.com/danielpalme/ReportGenerator "The ReportGenerator repository on GitHub"
 [runtime-regression]: https://github.com/dotnet/runtime/issues/107869 "Performance regression with JsonObject creation by +70%"
 [swashbuckle]: https://github.com/domaindrivendev/Swashbuckle.AspNetCore "The Swashbuckle.AspNetCore repository on GitHub"
 [xunit]: https://xunit.net/ "xUnit.net"
-
-<!--
-https://cdn.martincostello.com/blog_benchmarks-regression-tooltip.png
--->
