@@ -291,7 +291,17 @@ I think both these examples of otherwise unnoticed issues demonstrate the useful
 
 ## Summary
 
-TODO
+In this post I've covered how I set up a continuous benchmarking solution using GitHub Actions, GitHub Pages and Blazor to run and visualise
+the results of BenchmarkDotNet benchmarks without needing to spend any money on hardware, software or infrastructure. The solution is good
+enough to provide a consistent relative view of the performance of the software I maintain over time, and to spot any regressions in their performance.
+
+I'm looking forward to see what changes, and any issues, this setup might reveal in 2025 and beyond once .NET 10 development kicks off.
+
+If you'd like to run your own copy of this solution, or if you have suggestions about how to improve or extend it, feel free to open an issue
+in either the [action][publisher-action] or [dashboard][benchmarks-dashboard] repositories. I'd also be curious to hear about any other issues
+you might find that you wouldn't have otherwise noticed if you adopt this approach for your own code projects.
+
+I hope you've found this post interesting and its given you some inspiration to add a similar capability to your own workflows. 💡
 
 [acr-housekeeping]: https://github.com/martincostello/github-automation/blob/adf8d8b14b6b8ac7be8ca8f30614ac4dfb137642/.github/workflows/acr-housekeeping.yml "A GitHub Actions workflow to clean up ACR images"
 [aspnetcore-benchmarks-dashboard]: https://aka.ms/aspnet/benchmarks "ASP.NET Core Benchmarks Power BI Dashboard"
