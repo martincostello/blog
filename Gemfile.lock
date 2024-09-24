@@ -137,7 +137,7 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     wdm (0.2.0)
-    webrick (1.8.1)
+    webrick (1.8.2)
 
 PLATFORMS
   x64-mingw-ucrt
