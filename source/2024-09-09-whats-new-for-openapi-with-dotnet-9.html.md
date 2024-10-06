@@ -10,7 +10,7 @@ image: "https://cdn.martincostello.com/blog_openapi.png"
 <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_openapi.png" alt="The OpenAPI logo" title="The OpenAPI logo" height="272px" width="899px">
 
 Developers in the .NET ecosystem have been writing APIs with ASP.NET and ASP.NET Core for years, and
-[OpenAPI][openapi] (née Swagger) has been a popular choice for documenting those APIs.
+[OpenAPI][openapi] has been a popular choice for documenting those APIs.
 OpenAPI at its core is a machine-readable document that describes the endpoints available in an API.
 It contains information not only about parameters, requests and responses, but also additional metadata
 such as descriptions of properties, security-related metadata, and more.
@@ -42,8 +42,8 @@ that there's a need for a third new option to enter the fray. While both NSwag a
 well for many years, recently both libraries have seen a decline in maintenance and updates. This has led to a lag
 in the ability for new features of the framework to be leveraged and/or supported in these libraries with each new release.
 
-While Swashbuckle has had a bit of a resurgence in 2024 with the [announcement of new maintainers for the project][swashbuckle-maintainers]
-(I'm one of them 👋) and now has first-class support for .NET 8, it is still an open source project that is provided
+While Swashbuckle has had a bit of a resurgence in 2024 with the [announcement of new maintainers for the project][swashbuckle-maintainers],
+of which I'm one 👋, and now has first-class support for .NET 8, it is still an open source project that is provided
 for free and maintained by volunteers in their spare time. With these constraints, it's difficult to keep up with the
 pace of change in the .NET ecosystem with a new major release every year. By contrast, the ASP.NET team at Microsoft
 are paid to work on the framework full-time, so can dedicate time to ensure that the libraries they provide are kept
