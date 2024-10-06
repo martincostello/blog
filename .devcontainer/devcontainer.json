@@ -1,0 +1,9 @@
+{
+  "name": "Ruby",
+  "image": "mcr.microsoft.com/devcontainers/ruby:1-3.3-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/ruby:1": {}
+  },
+  "forwardPorts": [4567],
+  "postCreateCommand": "bundle install"
+}
