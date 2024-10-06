@@ -104,8 +104,8 @@ API documentation to your users in your deployed environment.
 To add the minimal level of support for generating an OpenAPI document, you could add the following code to your ASP.NET Core
 application after adding a reference to the Microsoft.AspNetCore.OpenApi NuGet package:
 
-```
-var builder = WebApplication.CreateBuilder();
+<pre class="highlight plaintext">
+<code>var builder = WebApplication.CreateBuilder();
 
 // Add services for generating OpenAPI documents
 builder.Services.AddOpenApi();
@@ -118,8 +118,8 @@ app.MapOpenApi();
 // Your API endpoints
 app.MapGet("/", () => "Hello world!");
 
-app.Run();
-```
+app.Run();</code>
+</pre>
 
 Running the server and navigating to the `/openapi/v1/openapi.json` URL in a browser will then return a OpenAPI document as JSON
 that describes the endpoints in your application.
@@ -137,8 +137,8 @@ means they can be resolved from the dependency injection container used by your 
 
 Here's an example of declaring and then using a document transformer:
 
-```
-// Add a custom service to the DI container
+<pre class="highlight plaintext">
+<code>// Add a custom service to the DI container
 builder.Services.AddTransient<IMyService, MyService>();
 
 // Add services for generating OpenAPI documents and register a custom document transformer
@@ -158,8 +158,8 @@ class MyDocumentTransformer(IMyService myService) : IOpenApiDocumentTransformer
     {
         // Use myService to modify the document in some way...
     }
-}
-```
+}</code>
+</pre>
 
 As another example of the power of these transformers, I've built a library of my own on top of these abstractions to add
 additional capabilities for my own APIs. The [OpenAPI Extensions for ASP.NET Core][openapi-extensions] library provides a
@@ -200,9 +200,9 @@ could be added in a future release.
 This is again another piece of functionality I've added to my [OpenAPI Extensions for ASP.NET Core][openapi-extensions] library, so you
 could use that to generate YAML documents if you need to. It's enabled with a single line of code in your application:
 
-```
-app.MapOpenApiYaml();
-```
+<pre class="highlight plaintext">
+<code>app.MapOpenApiYaml();</code>
+</pre>
 
 ## Comparison with NSwag and Swashbuckle
 
@@ -223,8 +223,8 @@ named either _transformers_ (ASP.NET Core), _processors_ (NSwag) or _filters_ (S
 
 ### Microsoft.AspNetCore.OpenApi
 
-```
-public static IServiceCollection AddAspNetCoreOpenApi(this IServiceCollection services)
+<pre class="highlight plaintext">
+<code>public static IServiceCollection AddAspNetCoreOpenApi(this IServiceCollection services)
 {
     services.AddOpenApi(options =>
     {
@@ -241,15 +241,15 @@ public static IServiceCollection AddAspNetCoreOpenApi(this IServiceCollection se
     });
 
     return services;
-}
-```
+}</code>
+</pre>
 
 [Code][example-aspnetcore]
 
 ### NSwag
 
-```
-public static IServiceCollection AddNSwagOpenApi(this IServiceCollection services)
+<pre class="highlight plaintext">
+<code>public static IServiceCollection AddNSwagOpenApi(this IServiceCollection services)
 {
     services.AddOpenApiDocument(options =>
     {
@@ -261,15 +261,15 @@ public static IServiceCollection AddNSwagOpenApi(this IServiceCollection service
     });
 
     return services;
-}
-```
+}</code>
+</pre>
 
 [Code][example-nswag]
 
 ### Swashbuckle
 
-```
-public static IServiceCollection AddSwashbuckleOpenApi(this IServiceCollection services)
+<pre class="highlight plaintext">
+<code>public static IServiceCollection AddSwashbuckleOpenApi(this IServiceCollection services)
 {
     services.AddSwaggerGen(options =>
     {
@@ -285,8 +285,8 @@ public static IServiceCollection AddSwashbuckleOpenApi(this IServiceCollection s
     });
 
     return services;
-}
-```
+}</code>
+</pre>
 
 [Code][example-swashbuckle]
 
@@ -301,8 +301,8 @@ After a detour off into setting up a continuous benchmarking process ([read abou
 I set up some benchmarks for each library with [BenchmarkDotNet][benchmarkdotnet] to compare the performance. When I first set
 them up I was targeting the official Preview 7 release of .NET 9, and at a very high-level, these were the results I got:
 
-```
-BenchmarkDotNet v0.14.0, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+<pre class="highlight plaintext">
+<code>BenchmarkDotNet v0.14.0, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
 AMD EPYC 7763, 1 CPU, 4 logical and 2 physical cores
 .NET SDK 9.0.100-preview.7.24406.8
   [Host]   : .NET 9.0.0 (9.0.24.40507), X64 RyuJIT AVX2
@@ -315,8 +315,8 @@ WarmupCount=3
 |------------ |----------:|----------:|----------:|---------:|---------:|---------:|----------:|
 | AspNetCore  | 10.988 ms | 13.319 ms | 0.7301 ms | 171.8750 | 140.6250 | 125.0000 |   6.02 MB |
 | NSwag       | 12.269 ms |  2.276 ms | 0.1247 ms |  15.6250 |        - |        - |   1.55 MB |
-| Swashbuckle |  7.989 ms |  6.878 ms | 0.3770 ms |  15.6250 |        - |        - |    1.5 MB |
-```
+| Swashbuckle |  7.989 ms |  6.878 ms | 0.3770 ms |  15.6250 |        - |        - |    1.5 MB |</code>
+</pre>
 
 [Commit][benchmark-commit-preview7]
 
@@ -404,8 +404,8 @@ check out that post if you're interested.
 With the latest version of the .NET SDK from the .NET 9 CI (`9.0.100-rc.1.24452.12` at the time of writing) things are noticeably
 improved compared to preview 7:
 
-```
-BenchmarkDotNet v0.14.0, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+<pre class="highlight plaintext">
+<code>BenchmarkDotNet v0.14.0, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
 AMD EPYC 7763, 1 CPU, 4 logical and 2 physical cores
 .NET SDK 9.0.100-rc.1.24452.12
   [Host]     : .NET 9.0.0 (9.0.24.43107), X64 RyuJIT AVX2
@@ -415,8 +415,8 @@ AMD EPYC 7763, 1 CPU, 4 logical and 2 physical cores
 |------------ |-----------:|---------:|----------:|-----------:|--------:|-----------:|
 | AspNetCore  |   981.9 us | 15.94 us |  30.34 us |   975.3 us |       - |  326.64 KB |
 | NSwag       | 4,570.8 us | 60.82 us |  53.92 us | 4,556.4 us | 15.6250 | 1588.43 KB |
-| Swashbuckle | 2,768.2 us | 52.00 us | 124.58 us | 2,721.2 us | 15.6250 |    1527 KB |
-```
+| Swashbuckle | 2,768.2 us | 52.00 us | 124.58 us | 2,721.2 us | 15.6250 |    1527 KB |</code>
+</pre>
 
 [Commit][benchmark-commit-rc1]
 
