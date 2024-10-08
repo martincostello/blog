@@ -124,7 +124,7 @@ GEM
     servolux (0.13.0)
     strscan (3.1.0)
     temple (0.10.3)
-    terser (1.2.3)
+    terser (1.2.4)
       execjs (>= 0.3.0, < 3)
     thor (1.2.2)
     tilt (2.0.11)
@@ -156,7 +156,7 @@ DEPENDENCIES
   nokogiri (~> 1.16.7)
   rack (~> 2.2.9)
   redcarpet (~> 3.6.0)
-  terser (~> 1.2.3)
+  terser (~> 1.2.4)
   tzinfo-data (~> 1.2024.1)
   wdm (~> 0.2.0)
 
