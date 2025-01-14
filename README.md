@@ -1,6 +1,6 @@
 # Martin Costello's Blog
 
-[![Build status](https://github.com/martincostello/blog/workflows/build/badge.svg?branch=main&event=push)](https://github.com/martincostello/blog/actions?query=workflow%3Abuild+branch%3Amain+event%3Apush)
+[![Build status](https://github.com/martincostello/blog/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/martincostello/blog/actions/workflows/build.yml?query=branch%3Amain+event%3Apush)
 
 ## Overview
 
