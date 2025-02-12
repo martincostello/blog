@@ -109,7 +109,7 @@ GEM
     parslet (2.0.0)
     public_suffix (5.0.4)
     racc (1.8.1)
-    rack (2.2.10)
+    rack (2.2.11)
     rack-livereload (0.3.17)
       rack
     rb-fsevent (0.11.2)
@@ -152,7 +152,7 @@ DEPENDENCIES
   middleman-minify-html (~> 3.4.1)
   middleman-syntax (~> 3.4.0)
   nokogiri (~> 1.18.2)
-  rack (~> 2.2.10)
+  rack (~> 2.2.11)
   redcarpet (~> 3.6.0)
   terser (~> 1.2.5)
   tzinfo-data (~> 1.2024.1)
