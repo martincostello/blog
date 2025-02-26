@@ -18,4 +18,4 @@ gem "tzinfo-data", "~> 1.2024.1", platforms: [:mswin, :mingw, :jruby, :x64_mingw
 gem 'wdm', '~> 0.2.0', platforms: [:mswin, :mingw, :x64_mingw]
 
 gem "rack", "~> 2.2.11"
-gem "redcarpet", "~> 3.6.0"
+gem "redcarpet", "~> 3.6.1"
