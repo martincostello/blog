@@ -4,7 +4,7 @@ gem "bundler", "~> 2.5.6"
 gem "haml", "~> 6.3.0"
 gem "middleman", "~> 4.6.0"
 gem 'middleman-autoprefixer', '~> 3.0.0'
-gem "middleman-blog", "~> 4.0.3"
+gem "middleman-blog", "~> 4.1.0"
 gem "middleman-livereload", "~> 3.4.7"
 gem "middleman-minify-html", "~> 3.4.1"
 gem "middleman-syntax", "~> 3.4.0"
