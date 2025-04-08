@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (8.0.1)
+    activesupport (8.0.2)
       base64
       benchmark (>= 0.3)
       bigdecimal
@@ -57,7 +57,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.6)
+    logger (1.7.0)
     memoist (0.16.2)
     middleman (4.6.0)
       middleman-cli (= 4.6.0)
@@ -106,10 +106,10 @@ GEM
     middleman-minify-html (3.4.1)
       htmlcompressor (~> 0.2.0)
       middleman-core (>= 3.2)
-    middleman-syntax (3.4.0)
+    middleman-syntax (3.5.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
-    minitest (5.25.4)
+    minitest (5.25.5)
     nokogiri (1.18.7-x64-mingw-ucrt)
       racc (~> 1.4)
     nokogiri (1.18.7-x86_64-linux-gnu)
@@ -168,7 +168,7 @@ DEPENDENCIES
   middleman-blog (~> 4.0.3)
   middleman-livereload (~> 3.4.7)
   middleman-minify-html (~> 3.4.1)
-  middleman-syntax (~> 3.4.0)
+  middleman-syntax (~> 3.5.0)
   nokogiri (~> 1.18.7)
   rack (~> 3.1.12)
   redcarpet (~> 3.6.1)
