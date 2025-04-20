@@ -30,11 +30,6 @@ code {
     padding: 2px 4px;
 }
 
-div.fb-like > span,
-div.fb-share-button > span {
-    vertical-align: initial !important;
-}
-
 pre code {
     background-color: #ecf0f1;
     border: 1px solid #cccccc;
