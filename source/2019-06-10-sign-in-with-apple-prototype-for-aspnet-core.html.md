@@ -19,7 +19,7 @@ While the issue was opened slightly tongue-in-cheek, it's a valid start to the c
 
 I've recently become a maintainer of the [aspnet-contrib](https://github.com/aspnet-contrib "aspnet-contrib org on GitHub.com") organisation in GitHub.com, which provides a suite of community-written providers for various OAuth 2.0 and Open ID 2.0 third-party authentication providers. Over the last few years I've made a number of contributions; for an [Amazon Login provider](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/pull/157 "Add Amazon provider"), and most recently starting the work to [add support for ASP.NET Core 3.0](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/pull/280 "Support ASP.NET Core 3.0").
 
-Given the community discussion and appetite, some previous experience implementing [Apple Pay JS for ASP.NET Core](https://tech.just-eat.com/2016/10/10/bringing-apple-pay-to-the-web/ "Bringing Apple Pay to the web"), and some shiny new technology to play with, last I decided to try my hand at adding support for _Sign In with Apple_ for ASP.NET Core myself via _AspNet.Security.OAuth.Providers_.
+Given the community discussion and appetite, some previous experience implementing [Apple Pay JS for ASP.NET Core](https://blog.martincostello.com/bringing-apple-pay-to-the-web "Bringing Apple Pay to the web"), and some shiny new technology to play with, last I decided to try my hand at adding support for _Sign In with Apple_ for ASP.NET Core myself via _AspNet.Security.OAuth.Providers_.
 
 READMORE
 
