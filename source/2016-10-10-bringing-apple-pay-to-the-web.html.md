@@ -11,11 +11,6 @@ image: "https://cdn.martincostello.com/blog_apple-pay-hero.png"
 
 ## Introduction
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-hero.png"
-     alt="Using Apple Pay on the web from just-eat.co.uk."
-     title="Using Apple Pay on the web from just-eat.co.uk.">
-
 Back in June at [WWDC][annoucement], Apple announced that [Apple Pay][apple-pay] was expanding its reach.
 No longer just for apps and Wallet on TouchID compatible iOS devices and the Apple Watch, it would also
 be coming to Safari in iOS 10 and macOS Sierra in September 2016.
