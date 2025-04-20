@@ -6,7 +6,7 @@ layout: bloglayout
 description: "Reliably testing your HTTP API integrations in .NET with JustEat.HttpClientInterception to intercept your HTTP calls to use custom HTTP responses."
 ---
 
-Over the past few months I've been working on some new ASP.NET Core applications in my day job at [Just Eat](https://careers.just-eat.com/departments/technology "Just Eat Technology"), and as part of that devised a new strategy for integration testing the applications with respect to their HTTP dependencies.
+Over the past few months I've been working on some new ASP.NET Core applications in my day job at Just Eat, and as part of that devised a new strategy for integration testing the applications with respect to their HTTP dependencies.
 
 I've written a blog post about the problems I faced and how I went about solving them [here](https://blog.martincostello.com/reliably-testing-http-integrations-in-dotnet-applications/ "Read the post here").
 
