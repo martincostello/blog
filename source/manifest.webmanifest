@@ -2,7 +2,7 @@
   "name": "Martin Costello's Blog",
   "short_name": "Martin's Blog",
   "start_url": "./index.html",
-  "description": "The blog of a software developer and tester based in London, UK.",
+  "description": "The blog of a software developer and tester based near London, UK.",
   "display": "standalone",
   "dir": "ltr",
   "background_color": "#ffffff",
