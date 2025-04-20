@@ -20,7 +20,7 @@ I found the approach particularly interesting, so wondered how I could look at u
 
 READMORE
 
-Before this year I'd not particularly worked on a large-scale application where its users could speak one of several different languages, but as part of my current role at [Just Eat](https://careers.just-eat.com/departments/technology "Just Eat Technology") that's no longer the case.
+Before this year I'd not particularly worked on a large-scale application where its users could speak one of several different languages, but as part of my role at [Just Eat](https://careers.just-eat.com/departments/technology "Just Eat Technology") that's no longer the case.
 
 The team I'm a member of has been working on a new updated experience for our consumer-facing website which needs to be global for all of our core markets and localised for the languages that the majority of our consumers speak in those markets. This includes variants of English for the UK, Ireland and Australia, as well as Danish, French, Italian, Norwegian and Spanish for our other core markets.
 

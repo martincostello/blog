@@ -6,7 +6,7 @@ layout: bloglayout
 description: "Upgrading to ASP.NET Core 2.1 can deliver serious performance improvements to your web applications as well as make you much more productive as a developer."
 ---
 
-I've been using .NET Core since it was released [back in June 2016](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/ "Announcing .NET Core 1.0") as my development technology of choice for my personal projects, as well as helping introduce it as a mainstream technology choice at [Just Eat](https://www.just-eat.com/ "Just Eat global website") (my current employer).
+I've been using .NET Core since it was released [back in June 2016](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/ "Announcing .NET Core 1.0") as my development technology of choice for my personal projects, as well as helping introduce it as a mainstream technology choice at [Just Eat](https://www.just-eat.com/ "Just Eat global website") (my employer at the time of writing).
 
 I find it so much more pleasurable to code against compared to "traditional" ASP.NET. With features such as self-hosting, built-in dependency injection and a high level of testability, you can really focus on solving the domain problem at hand, rather than worrying too much over boilerplate and ceremony.
 
@@ -84,7 +84,7 @@ Of course, improving the response times of the simple MVC application for my per
 
 Yes, you read that correctly. It improved the performance of an MVC web application by **43%**! Considering the changes were more-or-less just a framework upgrade (plus some new usage of HttpClientFactory), that's a tremendous improvement for the amount of development work put in to do the upgrade.
 
-You can read more about the performance improvements in these two applications and how the metrics were collected in my post on the Just Eat Technology blog: [ASP.NET Core 2.1 – Supercharging Our Applications 🚀](https://tech.just-eat.com/2018/06/14/aspnet-core-21-supercharging-our-applications/ "ASP.NET Core 2.1 – Supercharging Our Applications on the Just Eat Technology blog")
+You can read more about the performance improvements in these two applications and how the metrics were collected in my post here: [ASP.NET Core 2.1 – Supercharging Our Applications 🚀](https://blog.martincostello.com/aspnet-core-21-supercharging-our-applications/ "ASP.NET Core 2.1 – Supercharging Our Applications")
 
 It was nice to see good feedback from members of the .NET community on the blog post as well, including from [Ben Adams](https://twitter.com/ben_a_adams "Ben Adams on Twitter") of Illyriad, who is quite a prolific contributor to .NET Core for performance gains.
 
