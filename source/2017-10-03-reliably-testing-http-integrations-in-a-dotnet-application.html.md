@@ -8,7 +8,7 @@ description: "Reliably testing your HTTP API integrations in .NET with JustEat.H
 
 Over the past few months I've been working on some new ASP.NET Core applications in my day job at [Just Eat](https://careers.just-eat.com/departments/technology "Just Eat Technology"), and as part of that devised a new strategy for integration testing the applications with respect to their HTTP dependencies.
 
-I've written a blog post about the problems I faced and how I went about solving them over on the [Just Eat Tech Blog](https://tech.just-eat.com/2017/10/02/reliably-testing-http-integrations-in-a-dotnet-application/ "Read the post on the Just Eat Tech Blog").
+I've written a blog post about the problems I faced and how I went about solving them [here](https://blog.martincostello.com/reliably-testing-http-integrations-in-dotnet-applications/ "Read the post here").
 
 READMORE
 

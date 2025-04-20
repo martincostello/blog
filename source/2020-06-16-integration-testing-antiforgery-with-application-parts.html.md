@@ -20,7 +20,7 @@ READMORE
 
 I've recently been reimplementing part of a .NET Framework web application over to a newer ASP.NET Core 3.1 web application. The part of the application in question requires a write operation, so uses an HTML form for the request to be made by the user so that it is safe from CSRF attacks.
 
-The operation can have various different responses, so there's many different cases to cover as part of automated integration testing. I've blogged about [HTTP integration testing before](https://tech.just-eat.com/2017/10/02/reliably-testing-http-integrations-in-a-dotnet-application/ "Reliably Testing HTTP Integrations in a .NET Application") and using [`WebApplicationFactory<T>`](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests "Integration tests in ASP.NET Core"), but the need to pass the antiforgery protections presented a bit of a challenge.
+The operation can have various different responses, so there's many different cases to cover as part of automated integration testing. I've blogged about [HTTP integration testing before](https://blog.martincostello.com/reliably-testing-http-integrations-in-dotnet-applications/ "Reliably Testing HTTP Integrations in a .NET Application") and using [`WebApplicationFactory<T>`](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests "Integration tests in ASP.NET Core"), but the need to pass the antiforgery protections presented a bit of a challenge.
 
 One approach I've used in the past is to add _"test-only"_ controller methods to the application, but then care has to be taken to ensure that these can't be used in production to bypass security features. It also bloats the code of the service itself, having to be deployed with code that isn't actually used.
 
