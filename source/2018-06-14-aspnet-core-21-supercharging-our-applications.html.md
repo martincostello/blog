@@ -11,11 +11,6 @@ image: "https://cdn.martincostello.com/blog_web-cpu.png"
 
 ## Introduction
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_web-cpu.png"
-     alt="CPU utilisation of the website between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="CPU utilisation of the website between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
-
 [ASP.NET Core 2.1][aspnet-core-21] was released by Microsoft at the end of May, and last week we deployed
 two consumer-facing applications upgraded to use ASP.NET Core 2.1 to production for the first time.
 
