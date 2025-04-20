@@ -2,7 +2,7 @@
 post_title = current_page.data.title || config[:blog_title]
 post_url = URI.join(config[:site_root_uri_canonical], current_page.url)
 
-text = "%s by @%s %s" % [post_title, config[:bluesky_handle], post_url.to_s]
+text = "%s by @%s - %s" % [post_title, config[:bluesky_handle], post_url.to_s]
 text_encoded = URI.encode_www_form_component(text)
 %>
 <p>
