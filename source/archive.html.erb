@@ -3,9 +3,14 @@ title: Archive
 description: "The archive of blog posts for Martin Costello's blog."
 ---
 
-<div class="jumbotron">
-    <h1><%= current_page.data.title %></h1>
-    <p class="lead"><%= current_page.data.description %></p>
+<div class="p-4 mb-3 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-5">
+            <%= current_page.data.title %>
+            <span class="fa-solid fa-box-archive" aria-hidden="true"></span>
+        </h1>
+        <p class="col-md-8 fs-4 lead"><%= current_page.data.description %></p>
+    </div>
 </div>
 <% blog.articles.each do |article| %>
 <div class="row">
