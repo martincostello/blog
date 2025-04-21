@@ -74,7 +74,7 @@ This opt-in change allows you to change from having a separate `bin` and `obj` f
 per project to instead have a single `artifacts` folder in the root of the solution
 directory that instead contains all of the output from your build and publish steps.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_artifacts-output.png" alt="The new artifacts output folder" title="The new artifacts output folder">
+<img class="img-fluid mx-auto d-block w-75" src="https://cdn.martincostello.com/blog_artifacts-output.png" alt="The new artifacts output folder" title="The new artifacts output folder">
 
 This makes it much easier to find the output artifacts for your application and
 process them, such as when deploying an application to a remote server or
