@@ -4,15 +4,17 @@
   <body>
     <%= partial "navbar" %>
     <main class="container body-content">
-        <div class="jumbotron">
-            <h1><%= current_page.data.title %></h1>
-            <p class="lead"><%= current_page.data.description %></p>
+        <div class="p-4 mb-3 bg-light rounded-3">
+            <div class="container-fluid py-3">
+                <h1 class="display-5"><%= current_page.data.title %></h1>
+                <p class="col-md-8 fs-4 lead"><%= current_page.data.description %></p>
+            </div>
         </div>
         <p>
             <div class="row d-none d-md-block">
                 <div class="col-6">
                     <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= config[:blog_author] %>"><%= config[:blog_author] %></a> |
-                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a>
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden="true"></span></a>
                 </div>
             </div>
             <div class="row d-md-none">
@@ -20,7 +22,7 @@
                     <%= current_page.data.date.strftime('%e %B %Y') %> by <a href="/about-me/" rel="noopener" title="About <%= config[:blog_author] %>"><%= config[:blog_author] %></a>
                 </div>
                 <div class="col-12">
-                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><em class="fas fa-rss"></em></a></p>
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden="true"></span></a></p>
                 </div>
             </div>
         </p>
