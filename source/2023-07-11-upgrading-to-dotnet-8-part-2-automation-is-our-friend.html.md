@@ -190,7 +190,7 @@ any rows that might be of interest. An example of the report can be found [here]
 
 Here's a snippet from one as an example:
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-8-upgrade-report.png" alt="An example upgrade report showing the status of 9 repositories' upgrades" title="An example upgrade report showing the status of 9 repositories' upgrades">
+<img class="img-fluid mx-auto d-block w-75" src="https://cdn.martincostello.com/blog_dotnet-8-upgrade-report.png" alt="An example upgrade report showing the status of 9 repositories' upgrades" title="An example upgrade report showing the status of 9 repositories' upgrades">
 
 As you can see above, at the time the report was generated all of the repositories' CI were passing and
 using the latest .NET 8 preview SDK, but the [adventofcode repository][advent-of-code] had a merge
