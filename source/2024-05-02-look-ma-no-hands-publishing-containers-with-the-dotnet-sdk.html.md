@@ -43,9 +43,7 @@ instead publish a container image.
 
 Let's say that I now want to publish my application as a Linux x64 container image instead. I can do that like this:
 
-```
-dotnet publish ./src/MyProject --arch x64 --os linux -p:PublishProfile=DefaultContainer
-```
+<script src="https://gist.github.com/martincostello/711c8601ca29acd573e9d3864ce54871.js"></script>
 
 By default this will create us an appropriate container image for our application using a base image derived from our project's
 properties (`PublishAot=true`, `PublishSelfContained=true`, `InvariantGlobalization=true`, etc.) and publish it to the local
@@ -56,27 +54,7 @@ I use GitHub Actions to build and publish my applications, so I can use the [doc
 authenticate with my container registry and then publish the container image to it. Here's a simplified example of
 the additions to my build and deploy workflow needed to create and publish my application as a container image:
 
-```
-- name: Docker log in
-  uses: docker/login-action@v3
-  with:
-    registry: ${{ env.CONTAINER_REGISTRY }}
-    username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
-    password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
-
-- name: Publish container
-  id: publish-container
-  shell: pwsh
-  env:
-    ContainerRegistry: ${{ env.CONTAINER_REGISTRY }}
-    ContainerRepository: ${{ github.repository }}
-  run: |
-    dotnet publish ./src/API --arch x64 --os linux -p:PublishProfile=DefaultContainer
-
-    # Make the container image name available to use later in the workflow
-    $containerImage = "${env:ContainerRegistry}/${env:ContainerRepository}".ToLowerInvariant()
-    "container-image=${containerImage}" >> ${env:GITHUB_OUTPUT}
-```
+<script src="https://gist.github.com/martincostello/022a57247b22aabce2fafe1dc71385b0.js"></script>
 
 In the first step the `docker/login-action` is used to authenticate with the container registry using the credentials.
 Then `dotnet publish` is invoked to publish the project as a container image. Specifying `-p:PublishProfile=DefaultContainer`
@@ -91,20 +69,7 @@ As I use GitHub Actions to build my images, I can also leverage the [default env
 to automatically set up a lot of the configuration for me by convention. For example, when running in GitHub Actions I can
 set various labels to associate the image with the repository and the source code used to build it:
 
-```
-<PropertyGroup Condition=" '$(CI)' == 'true' ">
-  <ContainerImageTags>github-$(GITHUB_RUN_NUMBER)</ContainerImageTags>
-  <ContainerImageTags Condition=" '$(GITHUB_HEAD_REF)' == '' ">$(ContainerImageTags);latest</ContainerImageTags>
-  <ContainerRepository>$(GITHUB_REPOSITORY)</ContainerRepository>
-  <ContainerTitle>$(GITHUB_REPOSITORY)</ContainerTitle>
-  <ContainerVendor>$(GITHUB_REPOSITORY_OWNER)</ContainerVendor>
-  <ContainerVersion>$(GITHUB_SHA)</ContainerVersion>
-</PropertyGroup>
-<ItemGroup Condition=" '$(CI)' == 'true' ">
-  <ContainerLabel Include="com.docker.extension.changelog" Value="$(GITHUB_SERVER_URL)/$(GITHUB_REPOSITORY)/commit/$(GITHUB_SHA)" />
-  <ContainerLabel Include="com.docker.extension.publisher-url" Value="$(GITHUB_SERVER_URL)/$(GITHUB_REPOSITORY_OWNER)" />
-</ItemGroup>
-```
+<script src="https://gist.github.com/martincostello/1ba480f827517600403c0054a0143c80.js"></script>
 
 In the above example I can automatically tag and name the image based on the GitHub Actions workflow used to publish it,
 as well as include links to the release notes and publisher.
@@ -113,15 +78,11 @@ For my application where I tried this out, I also explicitly set `ContainerBaseI
 [brand new Ubuntu 24.04][ubuntu-2404] base image for my container. This is currently only available in the .NET nightly container
 images, which is why I need to set the full image name explicitly for the base image.
 
-```
-<ContainerBaseImage>mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-noble-chiseled-extra</ContainerBaseImage>
-```
+<script src="https://gist.github.com/martincostello/2680f135bcc7da48835b3bd6e5182ed6.js"></script>
 
 Once Ubuntu 24.04 images are available in the stable feed, I'll be able to simplfy this to just use `ContainerFamily` instead:
 
-```
-<ContainerFamily>noble-chiseled-extra</ContainerFamily>
-```
+<script src="https://gist.github.com/martincostello/a9e2adc5b20b7b9eeb70b1a0b89fbbbb.js"></script>
 
 As you can see, with some simple conventions, we can easily extend our build and publish process to switch to container images.
 
@@ -140,17 +101,7 @@ This is a [bug][well-known-issue] in the .NET SDK that will hopefully be fixed i
 If you need to work around this issue before it's fixed, you can do [something like this][workaround] by renaming the directory
 to not be prefixed with a `.` and then add an endpoint to manually serve the files from the folder to requests for those files.
 
-```
-app.MapGet(".well-known/{fileName}", (string fileName, IWebHostEnvironment environment) =>
-{
-    var file = environment.WebRootFileProvider.GetFileInfo(Path.Combine("well-known", fileName));
-    if (file.Exists && file.PhysicalPath is { Length: > 0 })
-    {
-        return Results.File(file.PhysicalPath);
-    }
-    return Results.NotFound();
-});
-```
+<script src="https://gist.github.com/martincostello/62c34d05560fa7014f5334416aa500b1.js"></script>
 
 ## Bonus: Attesting the provenance of your container
 
@@ -167,23 +118,12 @@ In the target we get the digest of the container image that we published (`$(Gen
 file as an [output from our publish step][github-actions-set-output] named `container-digest`. This output can then be referenced
 later in our workflow to attest the container image.
 
-```
-<Target Name="OutputContainerDigest" AfterTargets="PublishContainer" Condition=" '$(GITHUB_OUTPUT)' != '' ">
-  <WriteLinesToFile File="$(GITHUB_OUTPUT)" Lines="container-digest=$(GeneratedContainerDigest)" />
-</Target>
-```
+<script src="https://gist.github.com/martincostello/1072e4acfc0d2feeb787e8f1ad6d0458.js"></script>
 
 Now we can add a step to our GitHub Actions publishing workflow that consumes this value to attest our image using the
 [`attest-build-provenance`][attest-build-provenance] action.
 
-```
-- name: Attest container image
-  uses: actions/attest-build-provenance@v1
-  with:
-    push-to-registry: true
-    subject-digest: ${{ steps.publish-container.outputs.container-digest }}
-    subject-name: ${{ steps.publish-container.outputs.container-image }}
-```
+<script src="https://gist.github.com/martincostello/9d8de69fddbc2adc610f06d3cf4d6fca.js"></script>
 
 This action generates an attestation for the container image for the digest we published, and then pushes it to our
 container registry and associates it with the manifest of that container image.
@@ -191,12 +131,7 @@ container registry and associates it with the manifest of that container image.
 To ensure that the correct permissions are available to the GitHub Actions workflow to do this, ensure that the following
 permissions are available to the job that runs the attestation step:
 
-```
-permissions:
-  attestations: write
-  contents: read
-  id-token: write
-```
+<script src="https://gist.github.com/martincostello/c329d3b8ff3c3f8b203de6f9ce2ce6de.js"></script>
 
 Once our image is published and attested in the GitHub Actions workflow, we can then use [the GitHub CLI][github-cli] to verify the attestation.
 You'll need at least version 2.49 of the GitHub CLI to do this.
@@ -205,17 +140,7 @@ In the case of [this build][build-and-deploy], I published the following contain
 
 Now, if I ensure I'm logged in to my Azure Container Registry, I can verify the attestation for the image:
 
-```
-❯ gh attestation verify oci://martincostello.azurecr.io/martincostello/api:github-3279 -R martincostello/api
-Loaded digest sha256:0053eef24e8a8dda09ceaae8acbdaeba85f4807c9ef13f8c026dfecaa5c4018f for oci://martincostello.azurecr.io/martincostello/api:github-3279
-Loaded 2 attestations from GitHub API
-✓ Verification succeeded!
-
-sha256:0053eef24e8a8dda09ceaae8acbdaeba85f4807c9ef13f8c026dfecaa5c4018f was attested by:
-REPO                PREDICATE_TYPE                  WORKFLOW
-martincostello/api  https://spdx.dev/Document/v2.3  .github/workflows/build.yml@refs/heads/main
-martincostello/api  https://slsa.dev/provenance/v1  .github/workflows/build.yml@refs/heads/main
-```
+<script src="https://gist.github.com/martincostello/a5d1cca0cc8eca61bb1d867029e5bf25.js"></script>
 
 Here we can see that the image was attested by the workflow that built it, and the provenance attestation was verified.
 This gives us the confidence that if we want to run the image produced by this build, we can determine where it was published
