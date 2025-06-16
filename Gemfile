@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem "bundler", "~> 2.5.6"
 gem "haml", "~> 6.3.0"
-gem "middleman", "~> 4.6.0"
+gem "middleman", "~> 4.6.1"
 gem 'middleman-autoprefixer', '~> 3.0.0'
 gem "middleman-blog", "~> 4.1.0"
 gem "middleman-livereload", "~> 3.4.7"
