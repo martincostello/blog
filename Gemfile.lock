@@ -139,7 +139,7 @@ GEM
     securerandom (0.4.1)
     servolux (0.13.0)
     temple (0.10.3)
-    terser (1.2.5)
+    terser (1.2.6)
       execjs (>= 0.3.0, < 3)
     thor (1.3.2)
     tilt (2.6.0)
@@ -172,7 +172,7 @@ DEPENDENCIES
   nokogiri (~> 1.18.8)
   rack (~> 3.1.16)
   redcarpet (~> 3.6.1)
-  terser (~> 1.2.5)
+  terser (~> 1.2.6)
   tzinfo-data (~> 1.2024.1)
   wdm (~> 0.2.0)
 
