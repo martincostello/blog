@@ -9,7 +9,7 @@ gem "middleman-livereload", "~> 3.4.7"
 gem "middleman-minify-html", "~> 3.4.1"
 gem "middleman-syntax", "~> 3.5.0"
 gem "nokogiri", "~> 1.18.8"
-gem 'terser', '~> 1.2.5'
+gem 'terser', '~> 1.2.6'
 
 # For feed.xml.builder
 gem "builder", "~> 3.3.0"
