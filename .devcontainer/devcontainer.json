@@ -1,6 +1,6 @@
 {
   "name": "Ruby",
-  "image": "mcr.microsoft.com/devcontainers/ruby:1-3.3-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/ruby",
   "features": {
     "ghcr.io/devcontainers/features/ruby:1": {}
   },
