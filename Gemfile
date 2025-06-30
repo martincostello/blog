@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "bundler", "~> 2.5.6"
+gem "bundler", "~> 2.6.0"
 gem "haml", "~> 6.3.0"
 gem "middleman", "~> 4.6.1"
 gem 'middleman-autoprefixer', '~> 3.0.0'
