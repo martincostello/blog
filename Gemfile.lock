@@ -147,7 +147,7 @@ GEM
       parslet (>= 1.8.0, < 3.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2024.1)
+    tzinfo-data (1.2025.2)
       tzinfo (>= 1.0.0)
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
@@ -173,7 +173,7 @@ DEPENDENCIES
   rack (~> 3.1.16)
   redcarpet (~> 3.6.1)
   terser (~> 1.2.6)
-  tzinfo-data (~> 1.2024.1)
+  tzinfo-data (~> 1.2025.0)
   wdm (~> 0.2.0)
 
 BUNDLED WITH
