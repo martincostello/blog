@@ -7,7 +7,7 @@ gem 'middleman-autoprefixer', '~> 3.0.0'
 gem "middleman-blog", "~> 4.1.0"
 gem "middleman-livereload", "~> 3.5.0"
 gem "middleman-minify-html", "~> 3.4.1"
-gem "middleman-syntax", "~> 3.5.0"
+gem "middleman-syntax", "~> 3.6.0"
 gem "nokogiri", "~> 1.18.8"
 gem 'terser', '~> 1.2.6'
 
