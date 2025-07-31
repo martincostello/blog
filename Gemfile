@@ -17,5 +17,5 @@ gem "builder", "~> 3.3.0"
 gem "tzinfo-data", "~> 1.2025.0", platforms: [:windows]
 gem 'wdm', '~> 0.2.0', platforms: [:windows]
 
-gem "rack", "~> 3.1.16"
+gem "rack", "~> 3.2.0"
 gem "redcarpet", "~> 3.6.1"
