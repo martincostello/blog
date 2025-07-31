@@ -14,8 +14,8 @@ gem 'terser', '~> 1.2.6'
 # For feed.xml.builder
 gem "builder", "~> 3.3.0"
 
-gem "tzinfo-data", "~> 1.2025.0", platforms: [:mswin, :mingw, :jruby, :x64_mingw]
-gem 'wdm', '~> 0.2.0', platforms: [:mswin, :mingw, :x64_mingw]
+gem "tzinfo-data", "~> 1.2025.0", platforms: [:windows]
+gem 'wdm', '~> 0.2.0', platforms: [:windows]
 
 gem "rack", "~> 3.1.16"
 gem "redcarpet", "~> 3.6.1"
