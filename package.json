@@ -17,6 +17,7 @@
   "prettier": {
     "arrowParens": "always",
     "bracketSpacing": true,
+    "endOfLine": "lf",
     "printWidth": 100,
     "quoteProps": "consistent",
     "semi": true,
