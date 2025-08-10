@@ -99,16 +99,16 @@ Middleman uses some Ruby gems that need the Ruby DevKit so they can compile nati
   1. [Download](http://rubyinstaller.org/downloads/) and install the Ruby Development Kit (I installed the one for Ruby 2.0 (x64));
   1. Run the following commands in a command-line window:
 
-  ```
+  ```sh
   ruby dk.rb init
   ruby dk.rb install
   ```
 
 ### Setting Up Compilation
 
-I'm quite a big fan of being able to compile on the command-line, so I set myself up a ```Build.cmd``` and checked it into Git for compiling the site as I go. It's nothing ground-breaking, here's the content:
+I'm quite a big fan of being able to compile on the command-line, so I set myself up a `Build.cmd` and checked it into Git for compiling the site as I go. It's nothing ground-breaking, here's the content:
 
-```
+```terminal
 @echo off
 
 bundle exec middleman build %*
@@ -116,13 +116,13 @@ bundle exec middleman build %*
 
 Then it's just a simple command of:
 
-```
+```terminal
 c:\coding\blog>build
 ```
 
-The ```%*``` on the end passes any arguments through to bundle, which is useful if compilation produces errors so you can do this to get more detail:
+The `%*` on the end passes any arguments through to bundle, which is useful if compilation produces errors so you can do this to get more detail:
 
-```
+```terminal
 c:\coding\blog>build --verbose
 ```
 
@@ -136,25 +136,25 @@ Below are a few snippets and gotchas found in the process:
 
 WordPress defaults to extensionless URLs. To keep my URLs I needed to get rid of them.
 
-To do this, set this option on the blog in ```config.rb```:
+To do this, set this option on the blog in `config.rb`:
 
-```
+```ruby
 blog.permalink = "{title}"
 ```
 
 Then *after* the blog options, set this:
 
-```
+```ruby
 activate :directory_indexes
 ```
 
-For a while I had blogs misbehaving but non-blog pages working as expected. This was fixed by turning on ```directory_indexes``` after the blog pages were considered when the directory indexes were created.
+For a while I had blogs misbehaving but non-blog pages working as expected. This was fixed by turning on `directory_indexes` after the blog pages were considered when the directory indexes were created.
 
 #### Forcing CSS and Javascript Cache Updates
 
-If you change your CSS browser caches might not pick-up the change and you'll end up with a screwy UX. If you activate asset hashing as described below, your CSS and Javascript paths (assuming you use the ```javascript_include_tag``` or ```stylesheet_link_tag``` helpers to render them) will have a hash added to the file name so that they move between deployments, forcing client caches to be invalidated.
+If you change your CSS browser caches might not pick-up the change and you'll end up with a screwy UX. If you activate asset hashing as described below, your CSS and Javascript paths (assuming you use the `javascript_include_tag` or `stylesheet_link_tag` helpers to render them) will have a hash added to the file name so that they move between deployments, forcing client caches to be invalidated.
 
-```
+```ruby
 configure :build do
   activate :asset_hash
 end
@@ -162,17 +162,17 @@ end
 
 #### Fixing Timezone-related Errors
 
-The blog plug-in uses the ```tzinfo``` gem to handle timezones. However Windows doesn't include the data required for this that Linux has natively, which causes builds to fail. The remedy this add this line to ```Gemfile```:
+The blog plug-in uses the `tzinfo` gem to handle timezones. However Windows doesn't include the data required for this that Linux has natively, which causes builds to fail. The remedy this add this line to `Gemfile`:
 
-```
+```ruby
 gem "tzinfo-data"
 ```
 
 #### Adding The Homepage To sitemap.xml With The Date Of The Lastest Blog Article
 
-The blog template comes with a ```sitemap.xml.builder``` file which renders a sitemap of articles in the blog for you. It won't render any other pages you might have though. There's probably a snazzier way to enumerate the pages during the build and list everything, but I only wanted two extra entries. To add them manually, you can add something like the code below. This adds an entry for the root of the site, and dates it as being updated at the same time as the latest blog entry (because it lists the last few posts on it).
+The blog template comes with a `sitemap.xml.builder` file which renders a sitemap of articles in the blog for you. It won't render any other pages you might have though. There's probably a snazzier way to enumerate the pages during the build and list everything, but I only wanted two extra entries. To add them manually, you can add something like the code below. This adds an entry for the root of the site, and dates it as being updated at the same time as the latest blog entry (because it lists the last few posts on it).
 
-```
+```ruby
 xml.url do
   xml.loc site_url
   xml.lastmod File.mtime(blog.articles[0].source_file).iso8601
@@ -181,17 +181,17 @@ xml.url do
 end
 ```
 
-For other pages, I change ```<lastmod>``` to be the filetime of the relevant source file:
+For other pages, I change `<lastmod>` to be the filetime of the relevant source file:
 
-```
+```ruby
 xml.lastmod File.mtime("source/my-page.html.erb").iso8601
 ```
 
 #### Parameterise All The Things
 
-Put commonly used text, variables etc. as variables in your ```config.rb``` file. For example:
+Put commonly used text, variables etc. as variables in your `config.rb` file. For example:
 
-```
+```ruby
 set :site_root_uri_canonical, "https://blog.martincostello.com/"
 set :blog_author, "Martin Costello"
 set :twitter_handle, "martin_costello"
@@ -205,7 +205,7 @@ Similar to ASP.NET MVC, as well as full pages Middleman supports partial pages f
 
 As an example here's the raw code for my entire layout page which contains 7 partials.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en-gb">
   <%= partial "head" %>
@@ -234,20 +234,20 @@ If you need to import content en-masse I'd suggest writing something in your lan
 
 ### Syntax Highlighting
 
-My [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) uses a lot of code examples and when this blog was still running in its PHP incarnation I was never really happy with the styling.  For this new blog I did some digging around to find something to use. Again, it turns out there's a dedicated Middleman plug-in just for this: ```middleman-syntax```.
+My [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) uses a lot of code examples and when this blog was still running in its PHP incarnation I was never really happy with the styling.  For this new blog I did some digging around to find something to use. Again, it turns out there's a dedicated Middleman plug-in just for this: `middleman-syntax`.
 
 You can wire-it up to use [Rouge](https://github.com/jneen/rouge) just like GitHub pages, so that's exactly what I did.
 
 All it took was these lines in the gemfile:
 
-```
+```ruby
 gem "middleman-syntax"
 gem "redcarpet"
 ```
 
-And these configuration settings in ```config.rb```:
+And these configuration settings in `config.rb`:
 
-```
+```ruby
 activate :syntax
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true
@@ -255,7 +255,7 @@ set :markdown, :fenced_code_blocks => true
 
 ### Security
 
-I like to ensure all my sites are best-practice secured, so I ran through the points in my [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) and sorted everything out. As there's no code in the site as it's static, this was purely ```Web.config``` jiggery-pokery to get IIS running in Azure doing what I wanted.
+I like to ensure all my sites are best-practice secured, so I ran through the points in my [first blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/) and sorted everything out. As there's no code in the site as it's static, this was purely `Web.config` jiggery-pokery to get IIS running in Azure doing what I wanted.
 
 ### Eye-Candy
 
@@ -263,7 +263,7 @@ As I was doing a relaunch and spruce-up, I figured I'd add a few nice-to-have fe
 
   1. Integration with [Disqus](https://disqus.com/) for comments;
   1. Social sharing buttons for Facebook, Google+ and Twitter;
-  1. Review my SEO and Social Media related metadata (like OpenGraph ```<meta>``` tags).
+  1. Review my SEO and Social Media related metadata (like OpenGraph `<meta>` tags).
 
 I won't get into the detail here as you can see the results here in the blog for yourself, but it was just simple following of the integration guides for Disqus and social sharing and using partials for the buttons and scripts etc. so they were centralised and I could re-use them as needed with minimal fuss.
 
@@ -271,10 +271,10 @@ I won't get into the detail here as you can see the results here in the blog for
 
 With all the feature and testing cards on my VS Online task board in the Done column, it was time to put the site live. Ideally I'd have done it with 100% uptime (just for the show-off factor), but I couldn't due to the need to migrate the SSL host name bindings between Azure Web Apps due to the subscription changeover. For my particular set up this involved:
 
-  1. Remove the host name binding for ```blog.martincostello.com``` from the old Web App;
-  1. Add the host name binding for ```blog.martincostello.com``` to the new Web App;
+  1. Remove the host name binding for `blog.martincostello.com` from the old Web App;
+  1. Add the host name binding for `blog.martincostello.com` to the new Web App;
   1. Setup the SSL certificate binding;
-  1. Update my DNS ```CNAME``` to point at the new Web App;
+  1. Update my DNS `CNAME` to point at the new Web App;
   1. Flush my DNS cache.
 
 Then it was just a simple matter of pushing the final build of the site to Azure over FTP, checking it was working and deleting the old Azure resources using the subscription I didn't want to use any more. At which point I felt quite pleased with myself!
@@ -285,11 +285,11 @@ Then it was just a simple matter of pushing the final build of the site to Azure
 
 Middleman is a nice static site generator to use for a blog. It has a plug-in for blogging, lets you use Markdown for authoring, has built-in support for paging, sorting, tags and all the other goodness you'd expect in a simple blog. There's a bit of a learning curve if you're not that familiar with Ruby, but unless you want to do something *really* custom, you shouldn't need to learn anything beyond a few loops and string/date formatting. Most of the Ruby you'll write will be tag blocks to output dynamic content during the build process:
 
-```
+```ruby
 <%= current_page.data.title %>
 ```
 
-The biggest selling point for me was being able to use Markdown to write posts. In fact, that's what I'm writing this very post in right now. I've got a few more things left to implement in the near future, such as automating deployment of the ```build``` folder to Azure using Git so I don't need to do manual FTP copies, and adding in a proper HTML sidebar to the pages to list the recent posts and the post archive. Other that that I'm a lot happier with the appearance of my blog, the management overhead, and the cost, than I ever was with the PHP incarnation.
+The biggest selling point for me was being able to use Markdown to write posts. In fact, that's what I'm writing this very post in right now. I've got a few more things left to implement in the near future, such as automating deployment of the `build` folder to Azure using Git so I don't need to do manual FTP copies, and adding in a proper HTML sidebar to the pages to list the recent posts and the post archive. Other that that I'm a lot happier with the appearance of my blog, the management overhead, and the cost, than I ever was with the PHP incarnation.
 
 I think this tweet, and the fact that you are reading this blog post right now, speak for themselves:
 

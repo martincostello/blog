@@ -41,7 +41,7 @@ our Minimal API endpoints which we can use to leverage the JSON source generator
 
 Here's a simplified example of this for `JsonTypeInfo<T>`:
 
-```
+```csharp
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using Microsoft.AspNetCore.Http.Result;
@@ -81,7 +81,7 @@ our objects to JSON using our source-generated implementation.
 
 Below are some snippets from the relevant code.
 
-```
+```csharp
 // JsonResult<T>
 Task IResult.ExecuteAsync(HttpContext httpContext)
 {
@@ -109,7 +109,7 @@ public static Task WriteAsJsonAsync<T>(
 With these extensions available, we can then modify our Minimal API endpoints to
 use our new `Json()` method with our source-generated code.
 
-```
+```csharp
 var planets = new Planet[]
 {
     new() { Name = "Mercury" },
@@ -144,7 +144,7 @@ We could also add other extension methods that we can use that rely on a
 context isn't even referenced in the endpoints' code, and the only difference to
 using the built-in `Json()` method is the `Extensions` part, like this.
 
-```
+```csharp
 app.MapGet("/planets", () => Results.Extensions.Json(planets));
 ```
 

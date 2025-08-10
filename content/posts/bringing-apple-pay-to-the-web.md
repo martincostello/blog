@@ -121,7 +121,7 @@ Let’s delve into the different layers and things we need to add...
 
 Well first we need an Apple Pay button. You can add one with some HTML like this:
 
-```
+```html
 <div class="hide apple-pay-button apple-pay-button-black" />
 ```
 
@@ -137,7 +137,7 @@ experience for your integration.
 First, there’s some `link` tags you can add to provide an icon for use on an iPhone or iPad when a confirmation
 message is shown to the user initiating a payment from macOS:
 
-```
+```html
 <link rel="apple-touch-icon" href="https://dy3erx8o0a6nh.cloudfront.net/images/touch-icon-120.png" sizes="120x120" />
 <link rel="apple-touch-icon" href="https://dy3erx8o0a6nh.cloudfront.net/images/touch-icon-152.png" sizes="152x152" />
 <link rel="apple-touch-icon" href="https://dy3erx8o0a6nh.cloudfront.net/images/touch-icon-180.png" sizes="180x180" />
@@ -149,7 +149,7 @@ that they are in the DOM before you create an `ApplePaySession` object.
 There’s also some meta tags you can add so that crawlers (such as [Googlebot][googlebot]) can identify your website
 as supporting payment through Apple Pay:
 
-```
+```html
 <meta property="product:payment_method" content="ApplePay" />
 <meta name="payment-country-code" content="GB" />
 <meta name="payment-currency-code" content="GBP" />
@@ -168,7 +168,7 @@ functions in the browser.
 
 The psuedo-code for an implementation within a consuming website would be:
 
-```
+```javascript
 // Determine if Apple Pay is supported by the current device
 if (je.applePay.isSupportedForCheckout() === true) {
 
@@ -209,7 +209,7 @@ session and capture payment – and invoke the website-supplied callback functio
 Within our abstraction, we use the `ApplePaySession` object to drive our integration. For example, to test
 for Apple Pay support, we use code similar to this (logging removed for brevity):
 
-```
+```javascript
 /**
  * Returns whether Apple Pay is supported on the current device.
  * @returns {Boolean} Whether Apple Pay is supported on the current device.
@@ -233,7 +233,7 @@ Assuming that the device supports Apple Pay then we’ll want to display the App
 before we do that we’ll need to wire-up an onclick event handler to invoke the JavaScript to handle
 the payment process itself when it is clicked or pressed. For example with jQuery:
 
-```
+```javascript
 // Get the button
 var button = $(".apple-pay-button");
 
@@ -252,7 +252,7 @@ button, then there’s the choice of either an Apple Pay logo only, or the logo 
 
 The logo itself is provided by resources built into Safari, such as shown in this snippet:
 
-```
+```css
 .apple-pay-button-black {
   background-image: -webkit-named-image(apple-pay-logo-white);
   background-color: black;
@@ -285,7 +285,7 @@ to the server-side of your implementation to validate the merchant session.
 
 An example of how you could do this in jQuery is shown in the snippet below:
 
-```
+```javascript
 session.onvalidatemerchant = function (event) {
   var data = {
     validationUrl: event.validationURL
@@ -302,7 +302,7 @@ the funds from the user.
 
 An example of how you could do this in jQuery is shown in the snippet below:
 
-```
+```javascript
 session.onpaymentauthorized = function (event) {
 
   var data = {
@@ -385,7 +385,7 @@ First we need to load the certificate, whether that’s from the certificate sto
 In our service we store the certificate as an embedded resource as we have multiple certificates for
 different environments, but the simplest form is loading from disk.
 
-```
+```csharp
 var certificate = new X509Certificate2(
     "merchant_id.pfx",
     "MySuperSecretPa$$w0rd");
@@ -408,7 +408,7 @@ the identity associated with the IIS App Pool. Note that the `validOnly` paramet
 if it is not the Merchant Identifier Certificate will not be loaded as it is not considered valid for
 use by Windows, even though it is valid from Apple’s perspective.
 
-```
+```csharp
 using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
 {
     store.Open(OpenFlags.ReadOnly);
@@ -429,7 +429,7 @@ from the Merchant Identifier Certificate instead. Thanks to [Tom Dale’s node.j
 example implementation, we discovered that this can be found from the `1.2.840.113635.100.6.32` X.509 extension
 field, so we can read it out of our `X509Certificate2` like so:
 
-```
+```csharp
 var extension = certificate.Extensions["1.2.840.113635.100.6.32"];
 var merchantId = System.Text.Encoding.ASCII.GetString(extension.RawData).Substring(2);
 ```
@@ -440,7 +440,7 @@ achieved by using the `HttpClientHandler` class which provides a `ClientCertific
 can use our certificate, and then pass it into the constructor of `HttpClient` to handle authentication
 for use when we POST the data:
 
-```
+```csharp
 var payload = new
 {
     merchantIdentifier = merchantId,
@@ -463,7 +463,7 @@ response.EnsureSuccessStatusCode();
 Assuming we get a valid response from the Apple server, then we just need to deserialise the JSON
 containing the merchant session and return it to the client from our API controller method:
 
-```
+```csharp
 var merchantSessionJson = await response.Content.ReadAsStringAsync();
 var merchantSession = JObject.Parse(merchantSessionJson);
 
@@ -604,7 +604,7 @@ need to write some small scripts to do the steps.
 We can set the environment name machine-wide because we deploy each service on its own EC2 instance.
 There are other approaches available, like setting environment variables in the ASP.NET Core Module, but this was simpler:
 
-```
+```powershell
 [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", $environmentName, [System.EnvironmentVariableTarget]::Machine)
 ```
 
@@ -613,7 +613,7 @@ There are other approaches available, like setting environment variables in the 
 We also need to amend the IIS App Pool for the website to disable the .NET Framework (because we don’t need it)
 and to load the user profile so we can load the private keys in our Merchant Identifier Certificates.
 
-```
+```powershell
 $appCmd = [IO.Path]::Combine($env:WinDir, "System32", "inetsrv", "appcmd")
 
 # Set the site to run no managed code

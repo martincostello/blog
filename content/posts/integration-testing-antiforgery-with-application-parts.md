@@ -34,7 +34,7 @@ The sample application is just a simple TODO list application that gives us some
 
 The test project contains an [`AntiforgeryTokenController`](https://github.com/martincostello/antiforgery-testing-application-part/blob/5d8ed60e8874dc8403bb43a404a5a540362e5d07/tests/TodoApp.Tests/AntiforgeryTokenController.cs#L16 "AntiforgeryTokenController class") class. This contains an [HTTP GET resource](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/AntiforgeryTokenController.cs#L39-L65 "GET action to get valid CSRF tokens") that uses the antiforgery features to return a JSON payload containing valid CSRF tokens and the relevant cookie/form/header names to use to validate requests:
 
-```
+```csharp
 public IActionResult GetAntiforgeryTokens(
     [FromServices] IAntiforgery antiforgery,
     [FromServices] IOptions<AntiforgeryOptions> options)
@@ -56,7 +56,7 @@ public IActionResult GetAntiforgeryTokens(
 
 This is then configured as an Application Part by the [`ConfigureAntiforgeryTokenResource()`](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/IWebHostBuilderExtensions.cs#L26-L39 "ConfigureAntiforgeryTokenResource method") method, which is [registered with the test server fixture](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/TestServerFixture.cs#L82 "TestServer registration"):
 
-```
+```csharp
 protected override void ConfigureWebHost(IWebHostBuilder builder)
 {
     builder.ConfigureAntiforgeryTokenResource();
@@ -65,7 +65,7 @@ protected override void ConfigureWebHost(IWebHostBuilder builder)
 
 One potential gotcha to watch out for is to make sure that requests to the test controller don't return an HTTP 404. To fix this, make sure that the assembly containing the test controllers is decorated with the [`[ApplicationPart]` attribute](https://github.com/martincostello/antiforgery-testing-application-part/blob/5d8ed60e8874dc8403bb43a404a5a540362e5d07/tests/TodoApp.Tests/TodoApp.Tests.csproj#L24-L31 "Adding the ApplicationPart attribute"). One way you can achieve this is with adding a snippet like the below to your test project's `.csproj` file:
 
-```
+```xml
 <!--
   Add [ApplicationPart("TodoApp.Tests")] to the assembly so the controller is discovered.
 -->
@@ -80,7 +80,7 @@ Thanks to [Andrew Lock's blog post on Application Parts](https://andrewlock.net/
 
 This then allows tests to use the [`GetAntiforgeryTokensAsync()`](https://github.com/martincostello/antiforgery-testing-application-part/blob/f8985fe1bbaa800cf73bc62bb85949c1c0a8a698/tests/TodoApp.Tests/TestServerFixture.cs#L52-L64 "GetAntiforgeryTokensAsync method") helper method to perform an HTTP GET to the application to obtain valid CSRF tokens to use:
 
-```
+```csharp
 public async Task<AntiforgeryTokens> GetAntiforgeryTokensAsync()
 {
     using var httpClient = CreateClient();
@@ -92,7 +92,7 @@ public async Task<AntiforgeryTokens> GetAntiforgeryTokensAsync()
 
 The tests then use this to configure an `HttpClient` with CSRF tokens so that HTTP POST/DELETE etc. requests to the application pass the checks by the antiforgery protections.
 
-```
+```csharp
 [Fact]
 public async Task Can_Create_Todo_Item_With_Html_Form()
 {

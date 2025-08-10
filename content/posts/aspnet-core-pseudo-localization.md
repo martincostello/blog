@@ -129,7 +129,7 @@ Below are the relevant steps for wiring p16n into the application.
 
 Add the .NET Core MyGet feed to [`nuget.config`](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/c2981c8ed7f5fee9e64e85705a420419c91af230/NuGet.config#L5) for the `xliff-tasks` package
 
-```
+```xml
 <add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />
 ```
 
@@ -137,7 +137,7 @@ Add the .NET Core MyGet feed to [`nuget.config`](https://github.com/martincostel
 
 Install the [xliff-tasks](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/c2981c8ed7f5fee9e64e85705a420419c91af230/src/TodoApp/TodoApp.csproj#L14) NuGet package.
 
-```
+```xml
 <PackageReference Include="XliffTasks" Version="0.2.0-beta-63125-01" PrivateAssets="All" />
 ```
 
@@ -145,7 +145,7 @@ Install the [xliff-tasks](https://github.com/martincostello/aspnet-core-pseudo-l
 
 Configure [the languages](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/c2981c8ed7f5fee9e64e85705a420419c91af230/src/TodoApp/TodoApp.csproj#L7) to generate `.xlf` files for.
 
-```
+```xml
 <XlfLanguages>de-DE;en-GB;en-US;es-ES;fr-FR;ja-JP;qps-Ploc</XlfLanguages>
 ```
 
@@ -157,7 +157,7 @@ Note the capitalisation of the P in the culture code here. On non-Windows platfo
 
 Using the normalised casing prevents failures on Linux and macOS due while still working as expected on Windows.
 
-```
+```csharp
 supportedCultures.Add(new CultureInfo("qps-Ploc"));
 ```
 
@@ -165,13 +165,13 @@ supportedCultures.Add(new CultureInfo("qps-Ploc"));
 
 Install the [NuGet package](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/c2981c8ed7f5fee9e64e85705a420419c91af230/src/TodoApp/TodoApp.csproj#L13).
 
-```
+```xml
 <PackageReference Include="PseudoLocalizer.Humanizer" Version="0.1.0" />
 ```
 
 Configure [support](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/c2981c8ed7f5fee9e64e85705a420419c91af230/src/TodoApp/Startup.cs#L81-L83) for `qps-Ploc`.
 
-```
+```csharp
 new PseudoLocalizer.Humanizer.PseudoHumanizer().Register();
 ```
 
@@ -179,7 +179,7 @@ new PseudoLocalizer.Humanizer.PseudoHumanizer().Register();
 
 Add a custom MSBuild [task](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/c2981c8ed7f5fee9e64e85705a420419c91af230/src/TodoApp/TodoApp.csproj#L31-L44) to the project file so that PseudoLocalize is invoked to regenerate the `qps-Ploc` strings whenever the `.resx` file is updated (e.g. by running `dotnet msbuild /t:UpdateXlf`).
 
-```
+```xml
 <ItemGroup>
   <_PseudoLocalizedFiles Include="$(MSBuildThisFileDirectory)xlf\*.qps-Ploc.xlf" />
 </ItemGroup>

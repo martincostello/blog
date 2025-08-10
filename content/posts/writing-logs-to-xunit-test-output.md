@@ -31,7 +31,7 @@ I've had this problem in .NET Core applications I've worked on, and I found myse
 
 Here's an example of using it to create an `ILogger<T>` for a class being tested with xunit:
 
-```
+```csharp
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

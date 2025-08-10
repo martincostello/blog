@@ -77,7 +77,7 @@ bypass the network and return responses that drive your test scenarios.
 
 Below is a simple example that shows registering an interception for an HTTP GET request to the Just Eat Public API:
 
-```
+```csharp
 // Install-Package JustEat.HttpClientInterception
 // using JustEat.HttpClientInterception;
 var builder = new HttpRequestInterceptionBuilder()

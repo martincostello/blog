@@ -79,7 +79,7 @@ Core 3.0][12] that will automatically configure the middleware for you if you se
 This meant I could simplify the code to just two lines in the `Program.cs` file
 to add on the additional flag for the middleware:
 
-```
+```csharp
 if (string.Equals(
         builder.Configuration["CODESPACES"],
         "true",
@@ -93,7 +93,7 @@ if (string.Equals(
 With that in place, I could just set up the forwarded headers from the VS Code
 launch configuration:
 
-```
+```json
 "env": {
   "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "${env:CODESPACES}"
 }

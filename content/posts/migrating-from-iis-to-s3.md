@@ -72,7 +72,7 @@ I hope that this is something AWS improve the developer experience for in the fu
 
 ### Permissions Policy
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -93,7 +93,7 @@ I hope that this is something AWS improve the developer experience for in the fu
 
 ### Trust Relationship
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [

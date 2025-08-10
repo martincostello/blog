@@ -30,13 +30,13 @@ With no further ado, the things to make sure you do...
 
 ## Require SSL
 
-This is an IIS setting, and it's pretty easy to enable. This ensures your IIS server returns a HTTP ```301 Moved Permanently``` or ```302 Found``` HTTP code and redirects to the HTTPS version of your site. This is to protect against main-in-the-middle and Strip HTTPS attacks.
+This is an IIS setting, and it's pretty easy to enable. This ensures your IIS server returns a HTTP `301 Moved Permanently` or `302 Found` HTTP code and redirects to the HTTPS version of your site. This is to protect against main-in-the-middle and Strip HTTPS attacks.
 
-For example if a user browses to [http://martincostello.com/](http://martincostello.com/) they will receive an HTTP ```301 Moved Permanently``` and be redirected to [https://martincostello.com/](https://martincostello.com/) instead.
+For example if a user browses to [http://martincostello.com/](http://martincostello.com/) they will receive an HTTP `301 Moved Permanently` and be redirected to [https://martincostello.com/](https://martincostello.com/) instead.
 
-Here's the output from a cURL request to my website ```http://martincostello.com/``` for example:
+Here's the output from a cURL request to my website `http://martincostello.com/` for example:
 
-```
+```terminal
 c:\Tools\Curl>curl http://martincostello.com/ -v
 * Adding handle: conn: 0x1fe3148
 * Adding handle: send: 0
@@ -64,7 +64,7 @@ c:\Tools\Curl>curl http://martincostello.com/ -v
 
 The parts of interest are the following two parts of the response:
 
-```
+```text
 < HTTP/1.1 301 Moved Permanently
 < Location: https://martincostello.com/
 ```
@@ -73,7 +73,7 @@ The parts of interest are the following two parts of the response:
 
 If you don't have access to the full IIS configuration (for example you are using Azure Websites), and are using ASP.NET MVC, you can use the [RequireHttpsAttribute](https://msdn.microsoft.com/en-us/library/system.web.mvc.requirehttpsattribute%28v=vs.118%29.aspx) attribute in your filters as shown below. This only works for requests processed by the MVC pipeline, so won't work for static content, for example.
 
-```
+```csharp
 using System.Web.Mvc;
 
 namespace MyWebsite
@@ -90,7 +90,7 @@ namespace MyWebsite
 
 If you can't easily run any custom code like the MVC example above, you can use an IIS URL Rewrite rule in Web.config to do this instead, as shown below:
 
-```
+```xml
 <configuration>
   <system.webServer>
     <rewrite>
@@ -111,9 +111,9 @@ If you can't easily run any custom code like the MVC example above, you can use 
 
 *Updated 17/06/2015*
 
-If you are using MVC, as of [ASP.NET 5.2.4](http://aspnetwebstack.codeplex.com/SourceControl/changeset/9efcaf3315962488823acead507db18bf5c3e29d) you can issue an HTTP ```301``` instead of a HTTP ```302``` in the following way:
+If you are using MVC, as of [ASP.NET 5.2.4](http://aspnetwebstack.codeplex.com/SourceControl/changeset/9efcaf3315962488823acead507db18bf5c3e29d) you can issue an HTTP `301` instead of a HTTP `302` in the following way:
 
-```
+```csharp
 using System.Web.Mvc;
 
 namespace MyWebsite
@@ -132,13 +132,13 @@ As of ASP.NET MVC 6 only permanent redirects are supported.
 
 To force MVC to require HTTPS for anti-forgery tokens, you can set this line of code:
 
-```
+```csharp
 AntiForgeryConfig.RequireSsl = true;
 ```
 
 *Updated 30/11/2015*
 
-I've noticed that the redirect can be cached in some browsers (e.g. Chrome) and can prevent you from serving any content over HTTP on ```localhost```. You can prevent this by checking whether the request is for ```localhost``` (which the ```Web.config``` sample above has been adjusted to show).
+I've noticed that the redirect can be cached in some browsers (e.g. Chrome) and can prevent you from serving any content over HTTP on `localhost`. You can prevent this by checking whether the request is for `localhost` (which the `Web.config` sample above has been adjusted to show).
 
 ## Use Anti-Forgery Tokens
 
@@ -146,13 +146,13 @@ If using MVC you should use anti-forgery tokens when submitting your forms via H
 
 First, generate an anti-forgery token in your forms in your views:
 
-```
+```csharp
 @Html.AntiForgeryToken()
 ```
 
 Second, apply the attribute to your controller action methods that are posts:
 
-```
+```csharp
 [HttpPost]
 [ValidateAntiForgeryToken]
 public ActionResult LogOff()
@@ -168,7 +168,7 @@ Something to watch out for here is if you do AJAX POST requests from your views.
 
 This is a pretty simple one. As well as improving the user-experience, it makes sure you don't accidentally leak error details (e.g. stack traces) to clients in the event of an exception occurring. There's two settings for this, one for IIS 6 and one for IIS 7. It's best to set both of these, so the below should be present as a bare minimum. Obviously, you can customise these further - see MSDN for details.
 
-```
+```xml
 <configuration>
   <system.web>
     <customErrors mode="On" defaultRedirect="~/Error" />
@@ -183,7 +183,7 @@ This is a pretty simple one. As well as improving the user-experience, it makes 
 
 This isn't really a security setting, more of a performance one, but it can cause a number of features to be automatically disabled, so you shouldn't be running it in Debug in production. Simple to turn off:
 
-```
+```xml
 <configuration>
   <system.web>
     <compilation debug="false" />
@@ -205,14 +205,14 @@ You should never trust user input, **ever**, and never "mirror" it back to the u
 
 For the non-Razor MVC view engine and for ASP.NET Web Forms, you need to ensure your HTML escape it yourself using one of the two syntaxes:
 
-  1. ASP.NET Web Forms: ```HttpUtility.HtmlEncode(Model.Value)```
-  1. ASP.NET MVC: ```HtmlHelper.Encode(Model.Value)```
+  1. ASP.NET Web Forms: `HttpUtility.HtmlEncode(Model.Value)`
+  1. ASP.NET MVC: `HtmlHelper.Encode(Model.Value)`
 
 ## Don't Expose the IIS Version
 
-The IIS version is exposed via the ```Server``` HTTP response header. It's best to disable this as it helps hide the version of server software you're using to make it just a bit harder for an attacker to find known vulnerabilities to use against you. If you're using IIS 7 and Integrated Pipeline mode, you can disable it this way:
+The IIS version is exposed via the `Server` HTTP response header. It's best to disable this as it helps hide the version of server software you're using to make it just a bit harder for an attacker to find known vulnerabilities to use against you. If you're using IIS 7 and Integrated Pipeline mode, you can disable it this way:
 
-```
+```csharp
 protected void Application_PreSendRequestHeaders()
 {
     this.Response.Headers.Remove("Server");
@@ -221,7 +221,7 @@ protected void Application_PreSendRequestHeaders()
 
 To make sure this is suppressed for all requests (e.g. for static content such as JavaScript), you should also add the following setting if you're using IIS 7:
 
-```
+```xml
 <configuration>
   <system.webServer>
     <modules runAllManagedModulesForAllRequests="true" />
@@ -231,9 +231,9 @@ To make sure this is suppressed for all requests (e.g. for static content such a
 
 *Updated 08/02/2015*
 
-If you're using Azure Websites, you can also use the following setting in Web.config as documented here to remove the ```Server``` HTTP response header:
+If you're using Azure Websites, you can also use the following setting in Web.config as documented here to remove the `Server` HTTP response header:
 
-```
+```xml
 <configuration>
   <system.webServer>
     <security>
@@ -247,7 +247,7 @@ If you're using Azure Websites, you can also use the following setting in Web.co
 
 As with the IIS version, for the same reasons it's also best to hide the ASP.NET version you're using to clients as well. You can accomplish this with the following Web.config setting in IIS 7.
 
-```
+```xml
 <configuration>
   <system.webServer>
     <httpProtocol>
@@ -261,9 +261,9 @@ As with the IIS version, for the same reasons it's also best to hide the ASP.NET
 
 *Updated 08/02/2015*
 
-If you don't have access to the full IIS configuration (for example you are using Azure Websites) and can't run any custom code to remove the ```X-Powered-By``` header, than you can use an IIS URL Rewrite rule to blank the value instead.
+If you don't have access to the full IIS configuration (for example you are using Azure Websites) and can't run any custom code to remove the `X-Powered-By` header, than you can use an IIS URL Rewrite rule to blank the value instead.
 
-```
+```xml
 <configuration>
   <system.webServer>
     <rewrite>
@@ -282,7 +282,7 @@ If you don't have access to the full IIS configuration (for example you are usin
 
 You can also remove this using the following setting:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <system.web>
@@ -295,13 +295,13 @@ You can also remove this using the following setting:
 
 As above (again), you should also hide the MVC version you're using. This is a simple one-line code change:
 
-```
+```csharp
 MvcHandler.DisableMvcResponseHeader = true;
 ```
 
 ## Secure The Root Of Your Site
 
-If you use a virtual directory for your site, you might have the root of the website just pointing to ```C:\Inetpub\wwwroot``` and its default settings. This will undo all of the changes you make in your sub-directory for security if someone just navigates to the root.
+If you use a virtual directory for your site, you might have the root of the website just pointing to `C:\Inetpub\wwwroot` and its default settings. This will undo all of the changes you make in your sub-directory for security if someone just navigates to the root.
 
 The best way to deal with this is to manually configure the root site to:
 
@@ -313,7 +313,7 @@ If you do this, two things to consider:
   1. Ensure that any IIS 7 custom error pages include the full path to your site in the virtual directory.
   1. You disable HTTP redirects on the site in your virtual directory. In IIS 7, you do this with the following Web.config setting.
 
-```
+```xml
 <configuration>
   <system.webServer>
     <httpRedirect enabled="false" />
@@ -325,9 +325,9 @@ If you do this, two things to consider:
 
 This is again designed to help prevent man-in-the-middle and HTTPS Strip attacks. More information can be found [here on Wikipedia](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security "Read about HSTS on Wikipedia").
 
-To enable this, add the following to your ```Global.asax.cs``` file:
+To enable this, add the following to your `Global.asax.cs` file:
 
-```
+```csharp
 protected void Application_PreSendRequestHeaders()
 {
     if (!this.Request.IsLocal && this.Request.IsSecureConnection)
@@ -345,13 +345,13 @@ If you can't run custom .NET code (e.g. a static site or a PHP site), you can us
 
 *Updated 30/11/2015*
 
-I've noticed that this header can be cached in some browsers (e.g. Chrome) and can prevent you from serving any content over HTTP on ```localhost```. You can prevent this by bypassing the addition of the header of ```HttpRequest.IsLocal``` is ```true``` (which the code sample above has been adjusted to show).
+I've noticed that this header can be cached in some browsers (e.g. Chrome) and can prevent you from serving any content over HTTP on `localhost`. You can prevent this by bypassing the addition of the header of `HttpRequest.IsLocal` is `true` (which the code sample above has been adjusted to show).
 
 ## Use HTTP-Only and SSL-Only Cookies
 
 To protect your sites users' cookies from being accessed by scripts in other domains and protect against them being read from min-in-the-middle attackers, ensure the following settings is enabled in Web.config:
 
-```
+```xml
 <configuration>
   <system.web>
     <httpCookies httpOnlyCookies="true" requireSSL="true" />
@@ -363,7 +363,7 @@ To protect your sites users' cookies from being accessed by scripts in other dom
 
 Similar to the above, ensure that you use SSL for the cookies used for Forms authentication, assuming you're using the (more secure) cookie-based version, rather than the query string version to store the forms authentication cookie.
 
-```
+```xml
 <configuration>
   <system.web>
     <authentication mode="Forms">
@@ -378,7 +378,7 @@ Similar to the above, ensure that you use SSL for the cookies used for Forms aut
 [Click-Jacking](https://en.wikipedia.org/wiki/Clickjacking) and framing is where an attacker uses an IFrame to either host their own scripts around the site you want to visit so they can inspect what you're doing, and/or force/persuade you to click a link to execute an action they want you to perform because they can't do it automatically because of browser security features.
 You can prevent framing in IIS 7 Integrated Pipeline mode with this code snippet:
 
-```
+```csharp
 protected void Application_PreSendRequestHeaders()
 {
     this.Response.AppendHeader("X-Frame-Options", "DENY");
@@ -387,7 +387,7 @@ protected void Application_PreSendRequestHeaders()
 
 If other sites you manage in the same domain need to frame your site for some reason, then you can use this instead:
 
-```
+```csharp
 protected void Application_PreSendRequestHeaders()
 {
     this.Response.AppendHeader("X-Frame-Options", "SAMEORIGIN");
@@ -400,7 +400,7 @@ protected void Application_PreSendRequestHeaders()
 
 If you don't need any runtime configurability and are using at least IIS 7.0, you could also achieve this via Web.config settings are shown below.
 
-```
+```xml
 <configuration>
   <system.webServer>
     <httpProtocol>
@@ -414,7 +414,7 @@ If you don't need any runtime configurability and are using at least IIS 7.0, yo
 
 To help further framing, you can use the following Javascript in your page layouts to force your site to "burst" to the top of the frames in the browser it's being rendered in. This helps eliminate the site from being contained in iframes:
 
-```
+```javascript
 <script type="text/javascript">
     if (self == top) {
         document.documentElement.className = document.documentElement.className.replace(/\bjs-flash\b/, '');
@@ -427,9 +427,9 @@ To help further framing, you can use the following Javascript in your page layou
 
 ## Don't Cache Secure Content
 
-If you have secure content on your site (i.e. content you need to be logged in to see), then you should not cache this content. It provides a way for an attacker to potentially access this content via the browser cache, even if the user is not logged in in the current session. The easiest way to do this is to update your Master page or ```_Layout.cshtml``` file to add the following HTTP meta tags:
+If you have secure content on your site (i.e. content you need to be logged in to see), then you should not cache this content. It provides a way for an attacker to potentially access this content via the browser cache, even if the user is not logged in in the current session. The easiest way to do this is to update your Master page or `_Layout.cshtml` file to add the following HTTP meta tags:
 
-```
+```html
 <meta http-equiv="Cache-Control" content="no-cache, no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
 ```
@@ -438,7 +438,7 @@ If you have secure content on your site (i.e. content you need to be logged in t
 
 Everyone likes to be successful, and if your site is you might need to scale out and add new machines to your server farm to handle the load. Even if you don't think you'll get that far, it's a good idea to set the machine keys used to secure things like for forms authentication ticket in your Web.config file explicitly up-front so that you're ready to handle scale out. You can use [this tool on my website](https://www.martincostello.com/tools/#GenerateMachineKey) to generate your keys, then you just need to add them to this setting:
 
-```
+```xml
 <configuration>
   <system.web>
     <machineKey decryption="AES" decryptionKey="{Your Decryption Key}" validation="SHA1" validationKey="{Your Validation Key}"/>
@@ -450,7 +450,7 @@ Everyone likes to be successful, and if your site is you might need to scale out
 
 The Trace.axd HTTP handler is great for debugging, but can leak lots of nasty details to browsers to it if you leave it enabled on your production servers. For example, you could leak users' user names and passwords from your log on page. Eeek! This is a doddle to turn off, and is off by default anyway. But it's always good to be explicit and put it in your file and get any installers and/or deployment scripts explicitly turn it off when you deploy to your production servers.
 
-```
+```xml
 <configuration>
   <system.web>
     <trace enabled="false" localOnly="true" />
@@ -480,7 +480,7 @@ Over the last year or so, there's a number of other settings I've come across in
 
 If you're using Azure Websites, you'll find that HTTP requests to your website include a cookie that isn't HTTP-Only and isn't secure called [ARRAffinity](http://azure.microsoft.com/blog/2013/11/18/disabling-arrs-instance-affinity-in-windows-azure-web-sites/). If you don't need Sticky Sessions and you need to remove this cookie, you can apply the following Web.config change to remove it.
 
-```
+```xml
 <configuration>
   <system.webServer>
     <httpProtocol>
@@ -496,7 +496,7 @@ If you're using Azure Websites, you'll find that HTTP requests to your website i
 
 If you're using the ASP.NET Role Manager and are caching the user's role in a cookie, ensure that the cookie is set to require SSL in Web.config, as shown below.
 
-```
+```xml
 <configuration>
   <system.web>
     <roleManager cookieRequireSSL="true" />
@@ -508,7 +508,7 @@ If you're using the ASP.NET Role Manager and are caching the user's role in a co
 
 If using OWIN Middleware for authentication (e.g. for Microsoft Accounts, Google Accounts, WS-Federation etc.), then sure you set the appropriate options when configuring cookie-based authentiation, as shown below.
 
-```
+```csharp
 var options = new CookieAuthenticationOptions()
 {
     CookieHttpOnly = true,
@@ -523,11 +523,11 @@ Over the last few months I've found *even more* things that are a good idea to d
 
 ## Rename Your Cookies
 
-In the same way that hiding the ```Server``` HTTP response header disguises the fact that you are using ASP.NET, cookies served by your site can give the game away due to the default naming schemes used for the default cookies for things like Forms Authentication, Role Manager, ASP.NET Identity etc. Below are some example code snippets and configuration settings you can use to rename your cookies to disguise your technology stack further.
+In the same way that hiding the `Server` HTTP response header disguises the fact that you are using ASP.NET, cookies served by your site can give the game away due to the default naming schemes used for the default cookies for things like Forms Authentication, Role Manager, ASP.NET Identity etc. Below are some example code snippets and configuration settings you can use to rename your cookies to disguise your technology stack further.
 
 ### Rename the Forms Authentication Cookie
 
-```
+```xml
 <configuration>
   <system.web>
     <authentication>
@@ -539,7 +539,7 @@ In the same way that hiding the ```Server``` HTTP response header disguises the 
 
 ### Rename the Role Manager Cookie
 
-```
+```xml
 <configuration>
   <system.web>
     <roleManager cookieName="myrolescookie" />
@@ -549,7 +549,7 @@ In the same way that hiding the ```Server``` HTTP response header disguises the 
 
 ### Rename the Session State Cookie
 
-```
+```xml
 <configuration>
   <system.web>
     <sessionState cookieName="mysessioncookie" />
@@ -559,13 +559,13 @@ In the same way that hiding the ```Server``` HTTP response header disguises the 
 
 ### Rename the MVC Anti-Forgery Cookie
 
-```
+```csharp
 AntiForgeryConfig.CookieName = "myxsrfcookie";
 ```
 
 ### Rename the ASP.NET Identity Cookie
 
-```
+```csharp
 var options = new CookieAuthenticationOptions()
 {
     CookieName = "myauthcookie",

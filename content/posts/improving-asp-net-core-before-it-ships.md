@@ -80,7 +80,7 @@ When config changes in Consul, an agent installed on each EC2 instance gets noti
 to the app installed on it to an endpoint we use to reload the config. In the case of our .NET apps, we use the
 [`IConfigurationRoot.Reload()`][reload] method to do this, similar to what is shown below:
 
-```
+```csharp
 app.MapPost("/configuration/reload", (IConfiguration config) =>
 {
     if (config is IConfigurationRoot root)

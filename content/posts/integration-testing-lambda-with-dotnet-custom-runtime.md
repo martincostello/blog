@@ -11,7 +11,7 @@ _Lambda Test Server_ is a .NET Core 3.0 library available from [NuGet](https://w
 
 The example below shows how _Lambda Test Server_ can be used to write an xunit integration test for a simple C# Lambda function that reverses an array of integers:
 
-```
+```csharp
 [Fact]
 public static async Task Function_Reverses_Numbers()
 {
@@ -82,7 +82,7 @@ It uses ASP.NET Core 3.0's `TestServer` and [endpoint routing](https://docs.micr
 
 Here's an excerpt of the code (tweaked for brevity) that sets up the HTTP endpoints for the emulated Lambda runtime:
 
-```
+```csharp
 protected virtual void Configure(IApplicationBuilder app)
 {
     app.UseRouting();

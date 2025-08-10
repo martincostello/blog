@@ -59,8 +59,8 @@ For the first version I planned on two intents:
 
 Getting the status of these lines is handled by integrating with the [TfL Unified API](https://api.tfl.gov.uk/ "TfL Unified API documentation"). It's a fairly comprehensive HTTP REST API that returns JSON responses for journey planning, lines, modes of transport etc. and is used to drive many of TfL's own applications and services.  For these two skill intents I only need to use two of the API's resources:
 
-  1. ```GET /Line/Mode/{modes}/Disruption```
-  1. ```GET /Line/{id}/Status```
+  1. `GET /Line/Mode/{modes}/Disruption`
+  1. `GET /Line/{id}/Status`
 
 The first resource drives the overall disruption skill, as I just need to specify the modes I'm interested in (tube, DLR, London Overground), and then parse the response. The second drives the status updates for a specific line. For that one I just need to map the spoken line name from a slot to a line Id. From there it's just a case of using the correct properties in the response document to render the text to convert to speech for Alexa to read out to the user.
 
@@ -68,7 +68,7 @@ Sounds simple enough for now. I coded something basic to start with so I knew th
 
 ## Continuous Deployment using Travis CI
 
-As I've decided to open-source the skill, that means I can use [Travis CI](https://travis-ci.org/martincostello/alexa-london-travel "Alexa London Travel's Continuous Deployment on Travis CI") for free to do my Continuous Integration to run my tests. Travis CI also has built-in support for deploying node.js apps to an AWS Lambda function. I'm not using anything fancy for the JavaScript like TypeScript at the moment, so there's no much to the CI - it just needs to run tests in the long term, and out-of-the-box it already runs ```npm install``` and ```npm test``` for you as the standard build script.
+As I've decided to open-source the skill, that means I can use [Travis CI](https://travis-ci.org/martincostello/alexa-london-travel "Alexa London Travel's Continuous Deployment on Travis CI") for free to do my Continuous Integration to run my tests. Travis CI also has built-in support for deploying node.js apps to an AWS Lambda function. I'm not using anything fancy for the JavaScript like TypeScript at the moment, so there's no much to the CI - it just needs to run tests in the long term, and out-of-the-box it already runs `npm install` and `npm test` for you as the standard build script.
 
 Setting up the [YAML file](https://github.com/martincostello/alexa-london-travel/blob/main/.travis.yml "My Travis CI configuration in GitHub") was simple enough, but the first deployment of the lambda function did not work. It turned out this was because [the documentation](https://docs.travis-ci.com/user/deployment/lambda "Travis CI Lambda deployment instructions") to deploy a Lambda was out of date (I need to do a Pull Request to fix it. **_Updated 20/02/2017: [Pull Request](https://github.com/travis-ci/docs-travis-ci-com/pull/974 "GitHub Pull Request to update the Travis CI Lambda deployment documentation")_**).
 
@@ -128,7 +128,7 @@ The first two were easy to fix, but the third was a bit trickier. The IAM policy
 
 _**Updated 20/02/2017**: The IAM policy has now been updated with the minimum permissions to deploy successfully from Travis CI._
 
-Once the Lambda deployment was working, I created a ```deploy``` branch and set up Travis to only update the Lambda function for builds on that branch. That way I still get the CI benefit while developing on the main branch, without worrying about updating the lambda unnecessarily.
+Once the Lambda deployment was working, I created a `deploy` branch and set up Travis to only update the Lambda function for builds on that branch. That way I still get the CI benefit while developing on the main branch, without worrying about updating the lambda unnecessarily.
 
 ## Quirks of Alexa's pronunciation
 
@@ -145,7 +145,7 @@ Yet, that didn't work - it just made the weirdness of the pronunciation...differ
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Before: <a href="https://t.co/CgZTmB78oX">pic.twitter.com/CgZTmB78oX</a></p>&mdash; Martin Costello (@martin_costello) <a href="https://twitter.com/martin_costello/status/827548751829094400">February 3, 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Using the speech preview in the _Test_ tab of the skill in the developer portal allowed for some trial and error though. Eventually I got it being pronounced correctly by placing dots between the letters: ```D.L.R.```. This had the unintended side-effect later of making [cards](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/providing-home-cards-for-the-amazon-alexa-app "Alexa cards documentation") slightly more difficult to implement. This was because my modified text for the speech could no longer just be returned as-is for use in the cards as it would not look right when read. This just required some extra code to put the raw TfL API text responses into the cards, and then post-process them to adjust the pronunciation.
+Using the speech preview in the _Test_ tab of the skill in the developer portal allowed for some trial and error though. Eventually I got it being pronounced correctly by placing dots between the letters: `D.L.R.`. This had the unintended side-effect later of making [cards](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/providing-home-cards-for-the-amazon-alexa-app "Alexa cards documentation") slightly more difficult to implement. This was because my modified text for the speech could no longer just be returned as-is for use in the cards as it would not look right when read. This just required some extra code to put the raw TfL API text responses into the cards, and then post-process them to adjust the pronunciation.
 
 ## Getting through the certification process
 
@@ -160,8 +160,8 @@ Once I was happy with the implementation of my skill through testing the lambda 
 
 ### Attempt 2
 
-  1. [Not responding to "_help_"](https://github.com/martincostello/alexa-london-travel/issues/16) - The skill had no functionality to ask it for help, which was easily added by handling the built-in ```AMAZON.HelpIntent``` intent.
-  1. [Not responding to "_cancel_" or "_stop_"](https://github.com/martincostello/alexa-london-travel/issues/17) - The incorrect launch functionality in the previous submission had hidden that the skill could not be asked to stop or cancel if it was idle. This was also fixed by using the built-in ```AMAZON.CancelIntent``` and ```AMAZON.StopIntent``` intents. Initially I thought these were handled as the same intent, until discovering they were distinct during testing with the Echo Dot.
+  1. [Not responding to "_help_"](https://github.com/martincostello/alexa-london-travel/issues/16) - The skill had no functionality to ask it for help, which was easily added by handling the built-in `AMAZON.HelpIntent` intent.
+  1. [Not responding to "_cancel_" or "_stop_"](https://github.com/martincostello/alexa-london-travel/issues/17) - The incorrect launch functionality in the previous submission had hidden that the skill could not be asked to stop or cancel if it was idle. This was also fixed by using the built-in `AMAZON.CancelIntent` and `AMAZON.StopIntent` intents. Initially I thought these were handled as the same intent, until discovering they were distinct during testing with the Echo Dot.
 
 ### Attempt 3
 

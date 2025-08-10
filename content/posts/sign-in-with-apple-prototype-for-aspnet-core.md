@@ -35,7 +35,7 @@ The very first step was very easy, as that just required creating the project te
 
 The latest version for ASP.NET Core 2.0 isn't available in [npmjs.org](https://www.npmjs.com/package/generator-aspnet-oauth "generator-aspnet-oauth on the npm registry") yet, but with a recent enough version of Yeoman you can run the generator directly from source as shown below.
 
-```
+```terminal
 > git clone https://github.com/aspnet-contrib/generator-aspnet-oauth.git
 > git clone https://github.com/martincostello/AspNet.Security.OAuth.Providers.git
 > cd AspNet.Security.OAuth.Providers\src
@@ -100,7 +100,7 @@ As [discussed](https://developer.apple.com/documentation/signinwithapplerestapi/
 
 These can be [easily decoded](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/b9a72d4928eff6bfe550e5f3abb3da3c81199090/src/AspNet.Security.OAuth.Apple/AppleAuthenticationHandler.cs#L110-L121 "") using the [System.IdentityModel.Tokens.Jwt](https://www.nuget.org/packages/System.IdentityModel.Tokens.Jwt/ "System.IdentityModel.Tokens.Jwt on NuGet.org") library:
 
-```
+```csharp
 // dotnet add System.IdentityModel.Tokens.Jwt
 
 // Get the ID token from the OAuth token response
@@ -123,7 +123,7 @@ Also [discussed in the documentation](https://developer.apple.com/documentation/
 
 Again, this is [relatively easy](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/blob/b9a72d4928eff6bfe550e5f3abb3da3c81199090/src/AspNet.Security.OAuth.Apple/Internal/DefaultAppleIdTokenValidator.cs#L40-L55) to do using the System.IdentityModel.Tokens.Jwt package.
 
-```
+```csharp
 // Get the ID token from the OAuth token response
 OAuthTokenResponse tokens = ...;
 string token = tokens.Response.Value<string>("id_token");
@@ -157,7 +157,7 @@ With the basic end-to-end flow working using the Client Secret generated using t
 
 This was the trickiest bit to get working (more on that a bit later), but again is mostly solved by the System.IdentityModel.Tokens.Jwt package.
 
-```
+```csharp
 // Generate a token valid for the maximum 6 months
 var expiresAt = DateTime.UtcNow.Add(TimeSpan.FromSeconds(15777000));
 
@@ -218,7 +218,7 @@ With that change done, finally everything was working as expected on both Window
 
 I merged the provider prototype changes to the ASP.NET Core 3.0 preview 5 branch of _AspNet.Security.OAuth.Providers_ and took a look at the new APIs added to see if it could remove the need to fork the code. In fact [it does neatly](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/commit/ee4a2f7ca3d0f1550d3f3990a63e9fb01158caf9 "Support PKCS 8 keys on macOS and Linux"), meaning that the ASP.NET Core 3.0 version of the provider would be able to work exactly the same using just the `.p8` private key without the need for a password option on all three operating systems.
 
-```
+```csharp
 // Load the .p8 file from disk, removing the
 // `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
 // prefix and suffix, and joining `\n` characters between lines.
@@ -237,7 +237,7 @@ var key = new ECDsaSecurityKey(algorithm) { KeyId = "{YOUR KEY ID}" };
 
 With the provider prototype fully functional, the only code required to add _Sign In with Apple_ support to an existing ASP.NET Core 2.x (or 3.0 preview) application can be as little as:
 
-```
+```csharp
 .AddApple(options =>
 {
     options.ClientId = Configuration["AppleClientId"];

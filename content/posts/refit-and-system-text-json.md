@@ -12,7 +12,7 @@ It uses code generation to let you do simple HTTP calls using interfaces and use
 
 For example, to get a repository from the GitHub API you could define these types:
 
-```
+```csharp
 public class Organization
 {
     [JsonProperty("login")]
@@ -34,7 +34,7 @@ public interface IGitHub
 
 Then you could call the API like this:
 
-```
+```csharp
 var client = RestService.For<IGitHub>("https://api.github.com");
 var org = await client.GetOrganizationAsync("dotnet");
 ```
@@ -49,7 +49,7 @@ Refit has some extension points to let you change how things work, including JSO
 
 Here's the equivalent code to the above to create an `IGitHub` instance with the new serializer. The complete code for the `SystemTextJsonContentSerializer` class is at the bottom of this post.
 
-```
+```csharp
 var options = new JsonSerializerOptions()
 {
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -66,7 +66,7 @@ var client = RestService.For<IGitHub>("https://api.github.com", settings);
 
 You'll also need to update your objects if you use attributes to control the serialization of the property names, for example the `Organization` object defined above becomes the following, with `[JsonProperty("...")]` replaced with `[JsonPropertyName("...")]` from the `System.Text.Json.Serialization` namespace.
 
-```
+```csharp
 using System.Text.Json.Serialization;
 
 public class Organization
@@ -156,7 +156,7 @@ If you use Refit heavily in an existing .NET Core application to consume JSON it
 
 ## `SystemTextJsonContentSerializer` Code
 
-```
+```csharp
 using System;
 using System.IO;
 using System.Net.Http;
