@@ -22,5 +22,5 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($Serve) {
-    hugo serve
+    hugo server --buildDrafts
 }
