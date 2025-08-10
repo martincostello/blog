@@ -7,15 +7,22 @@ param(
     [Parameter(Mandatory = $false)][switch] $Serve
 )
 
-git rev-parse HEAD > version.txt
-git rev-parse --abbrev-ref HEAD > branch.txt
-
-bundler exec middleman build
-
-if ($LASTEXITCODE -ne 0) {
-    throw "middleman build failed with exit code $LASTEXITCODE"
+if (-Not ${env:GIT_COMMIT_SHA}) {
+    ${env:GIT_COMMIT_SHA} = ${env:GITHUB_REF} ?? (git rev-parse HEAD)
+}
+if (-Not ${env:GIT_BRANCH}) {
+    ${env:GIT_BRANCH} = ${env:GITHUB_REF_NAME} ?? (git rev-parse --abbrev-ref HEAD)
 }
 
 if ($Serve) {
-    bundler exec middleman serve
+    ${env:HUGO_PARAMS_analyticsId} = ""
+    ${env:HUGO_PARAMS_renderAnalytics} = "false"
+    hugo server --buildDrafts --buildFuture
+}
+else {
+    npm run all
+}
+
+if ($LASTEXITCODE -ne 0) {
+    throw "build failed with exit code $LASTEXITCODE"
 }

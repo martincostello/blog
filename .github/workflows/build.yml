@@ -30,26 +30,58 @@ jobs:
         filter: 'tree:0'
         show-progress: false
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # v1.254.0
+    - name: Setup Node
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      with:
+        node-version: '22'
 
-    - name: Update file timestamps
-      shell: bash
+    - name: Get npm cache directory
+      id: npm-cache-dir
+      shell: pwsh
       run: |
-        git ls-files | xargs -I{} git log -1 --date=format:%Y%m%d%H%M.%S --format='touch -t %ad "{}"' "{}" | $SHELL
+        "dir=$(npm config get cache)" >> ${env:GITHUB_OUTPUT}
+
+    - name: Setup npm cache
+      uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+      id: npm-cache
+      with:
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: ${{ runner.os }}-node-
+
+    - name: Install packages
+      run: npm ci
+
+    - name: Install Hugo
+      shell: bash
+      env:
+        # renovate: datasource=github-releases depName=Hugo packageName=gohugoio/hugo
+        HUGO_VERSION: 'v0.148.2'
+      run: |
+        HUGO_FILE="hugo_extended_${HUGO_VERSION#v}_Linux-64bit.tar.gz"
+        TEMP_DIR="${RUNNER_TEMP}/hugo-install"
+        mkdir --parents "${TEMP_DIR}" && cd "${TEMP_DIR}"
+        curl --silent --location "https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/${HUGO_FILE}" --output "${HUGO_FILE}"
+        tar -xf "${HUGO_FILE}"
+        sudo mv hugo /usr/local/bin/
+        hugo version
 
     - name: Build blog
       shell: pwsh
+      run: ./build.ps1
+
+    - name: GZip HTML files
+      shell: bash
       run: |
-        bundler config path vendor/bundle
-        bundler install
-        ./build.ps1
+        find ./public -type f -name '*.html' -print0 | while IFS= read -r -d '' file; do
+          gzip --stdout "${file}" > "${file}.gz"
+        done
 
     - name: Publish blog
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: blog
-        path: ./build
+        path: ./public
         if-no-files-found: error
 
   lint:
@@ -118,7 +150,7 @@ jobs:
       uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
       with:
         name: blog
-        path: ./build
+        path: ./public
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
@@ -128,7 +160,7 @@ jobs:
         aws-region: eu-west-2
 
     - name: Deploy to S3
-      run: aws s3 sync ./build/ s3://blog.martincostello.com --cache-control "max-age=604800" --delete
+      run: aws s3 sync ./public/ s3://blog.martincostello.com --cache-control "max-age=604800" --delete
 
     - name: Create CloudFront invalidation
       shell: pwsh

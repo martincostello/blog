@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="https://cdn.martincostello.com/tile_tiny.png"/>
+      <square150x150logo src="https://cdn.martincostello.com/tile_square.png"/>
+      <wide310x150logo src="https://cdn.martincostello.com/tile_wide.jpg"/>
+      <square310x310logo src="https://cdn.martincostello.com/tile_large.jpg"/>
+      <TileColor>#FFFFFF</TileColor>
+    </tile>
+    <notification>
+      <polling-uri src="feed.xml"/>
+      <frequency>30</frequency>
+      <cycle>1</cycle>
+    </notification>
+  </msapplication>
+</browserconfig>

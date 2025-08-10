@@ -1,0 +1,38 @@
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <title>{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Params.blogSubtitle }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="author" content="{{ .Site.Params.blogAuthor }}" />
+    <meta name="copyright" content="&copy; {{ .Site.Params.blogAuthor }} 2014-{{ now.Format "2006" }}" />
+    <meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ with .Title }}{{ . }}{{ else }}{{ .Site.Params.blogTitle }}{{ end }}{{ end }}" />
+    <meta name="language" content="en" />
+    <meta name="theme-color" content="#ffffff" />
+    {{- $keywords := slice -}}
+    {{- if .Params.tags -}}
+        {{- $keywords = split .Params.tags "," -}}
+    {{- else -}}
+        {{- range .Site.Taxonomies.tags -}}
+            {{- $keywords = $keywords | append .Page.Title -}}
+        {{- end -}}
+    {{- end -}}
+    <meta name="keywords" content="{{ delimit $keywords "," }}" />
+    <meta name="robots" content="INDEX" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="article:author" content="{{ .Site.Params.facebookProfile }}" />
+    {{ if .Date }}
+    <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
+    <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}" />
+    {{ end }}
+    <meta property="article:tag" content="{{ delimit $keywords "," }}" />
+    {{ partial "facebookmeta" . }}
+    {{ partial "microsoft" . }}
+    {{ partial "opengraph" . }}
+    {{ partial "twittermeta" . }}
+    <meta name="google-site-verification" content="{{ .Site.Params.siteVerificationGoogle }}" />
+    <meta name="msvalidate.01" content="{{ .Site.Params.siteVerificationBing }}" />
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link href="https://{{ .Site.Params.cdnDomain }}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
+    <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Atom" />
+</head>

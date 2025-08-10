@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="p-4 mb-3 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-5">{{ .Title }}</h1>
+        <p class="col-8 col-lg-12 fs-4 lead">{{ .Params.description }}</p>
+    </div>
+</div>
+<p>
+    <div class="row d-none d-md-block">
+        <div class="col-6">
+            {{ .Date.Format "2 January 2006" }} by <a href="/about-me/" rel="noopener" title="About {{ .Site.Params.blogAuthor }}">{{ .Site.Params.blogAuthor }}</a> |
+            <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden="true"></span></a>
+        </div>
+    </div>
+    <div class="row d-md-none">
+        <div class="col-12">
+            {{ .Date.Format "2 January 2006" }} by <a href="/about-me/" rel="noopener" title="About {{ .Site.Params.blogAuthor }}">{{ .Site.Params.blogAuthor }}</a>
+        </div>
+        <div class="col-12">
+            <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden="true"></span></a></p>
+        </div>
+    </div>
+</p>
+{{ partial "social" . }}
+{{ .Content }}
+<hr />
+{{ partial "social" . }}
+{{ end }}
