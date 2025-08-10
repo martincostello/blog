@@ -8,7 +8,7 @@ param(
 )
 
 if (-Not ${env:GIT_COMMIT_SHA}) {
-    ${env:GIT_COMMIT_SHA} = ${env:GITHUB_REF} ?? (git rev-parse HEAD)
+    ${env:GIT_COMMIT_SHA} = ${env:GITHUB_SHA} ?? (git rev-parse HEAD)
 }
 if (-Not ${env:GIT_BRANCH}) {
     ${env:GIT_BRANCH} = ${env:GITHUB_REF_NAME} ?? (git rev-parse --abbrev-ref HEAD)
