@@ -1,5 +1,6 @@
-﻿/build
-/vendor
-/r
-/branch.txt
-/version.txt
+.hugo_build.lock
+hugo_stats.json
+node_modules/
+/playwright/.cache/
+public/
+/test-results/

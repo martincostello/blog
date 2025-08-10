@@ -1,0 +1,47 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "private": true,
+  "author": {
+    "name": "Martin Costello",
+    "url": "https://github.com/martincostello"
+  },
+  "bugs": {
+    "url": "https://github.com/martincostello/blog/issues"
+  },
+  "description": "Martin Costello's Blog",
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "Apache-2.0",
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "printWidth": 100,
+    "quoteProps": "consistent",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martincostello/blog.git"
+  },
+  "scripts": {
+    "all": "npm run format-check && npm run install-browsers && npm run test && npm run build",
+    "build": "hugo",
+    "format": "prettier --write **/*.js",
+    "format-check": "prettier --check **/*.js",
+    "install-browsers": "npx playwright install --with-deps chromium",
+    "serve": "hugo server",
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.54.2",
+    "@types/node": "24.2.1",
+    "prettier": "3.6.2"
+  }
+}

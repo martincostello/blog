@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="p-4 mb-3 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-5">
+            Archive
+            <span class="fa-solid fa-box-archive" aria-hidden="true"></span>
+        </h1>
+        <p class="col-md-8 fs-4 lead">The archive of blog posts for Martin Costello's blog.</p>
+    </div>
+</div>
+{{ range .Site.RegularPages }}
+<div class="row">
+    <div class="col">
+        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <p>
+          <div class="row d-none d-md-block">
+                <div class="col-lg-6">
+                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" class="archive-link" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
+                </div>
+            </div>
+            <div class="row d-md-none col-12">
+                {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" class="archive-link" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
+            </div>
+        </p>
+    </div>
+</div>
+{{ end }}
+{{ end }}

@@ -1,0 +1,53 @@
+baseURL = "https://blog.martincostello.com/"
+cleanDestinationDir = true
+disableKinds = ["section", "taxonomy", "term"]
+enableGitInfo = true
+ignoreErrors = ["error-disable-taxonomy"]
+panicOnWarning = true
+languageCode = "en-gb"
+title = "Martin Costello's Blog"
+
+[build]
+  writeStats = true
+
+[params]
+  analyticsId = "G-XJFV74HRL6"
+  blogAuthor = "Martin Costello"
+  blogSubtitle = "The blog of a software developer and tester."
+  blogTitle = "Martin Costello's Blog"
+  blueskyHandle = "martincostello.com"
+  cdnDomain = "cdn.martincostello.com"
+  facebookProfile = "10100867762061905"
+  githubLogin = "martincostello"
+  renderAnalytics = true
+  siteDomain = "blog.martincostello.com"
+  siteVerificationBing = "D6C2E7551C902F1A396D8564C6452930"
+  siteVerificationGoogle = "ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"
+  twitterHandle = "martin_costello"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    lineNos = false
+    style = "github"
+
+[minify]
+  minifyOutput = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+
+[outputFormats.RSS]
+  baseName = "feed"
+  mediaType = "application/rss+xml"
+
+[permalinks]
+  posts = "/:contentbasename/"
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$', '^GIT_.*']

@@ -1,0 +1,13 @@
+{{- $post_title := .Title | default .Site.Params.blogTitle -}}
+{{- $post_url := .Permalink -}}
+{{- $text := printf "%s by @%s - %s" $post_title .Site.Params.blueskyHandle $post_url -}}
+<p>
+  <div class="row">
+    <div class="col-lg-6">
+      <a href="https://bsky.app/intent/compose?text={{ $text | urlquery }}" target="_blank" rel="noopener" class="btn btn-info btn-sm" title="Share on Bluesky">
+        Share on Bluesky
+        <span class="fa-brands fa-bluesky" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</p>

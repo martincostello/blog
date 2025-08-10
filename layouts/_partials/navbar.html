@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a href="/" class="navbar-brand">
+            <span class="fa-solid fa-laptop-code" aria-hidden="true"></span>
+            {{ .Site.Params.siteDomain }}
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#site-navbar" aria-controls="site-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="site-navbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/archive/" title="View the post archive">
+                        Archive
+                        <span class="fa-solid fa-box-archive" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about-me/" title="About Martin">
+                        About Me
+                        <span class="fa-solid fa-circle-info" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,15 @@
+<footer>
+  <p>
+    <div class="row">
+      <div class="d-none d-md-block col">
+        &copy; {{ .Site.Params.blogAuthor }} 2014-{{ now.Format "2006" }} |
+        Built from <a href="https://github.com/martincostello/blog/commit/{{ getenv "GIT_COMMIT_SHA" | default "main" }}" rel="noopener" title="View commit {{ getenv "GIT_COMMIT_SHA" | default "main" }} on GitHub">{{ substr (getenv "GIT_COMMIT_SHA" | default "main") 0 7 }}</a> on <a href="https://github.com/martincostello/blog/tree/{{ getenv "GIT_BRANCH" | default "main" }}" rel="noopener" title="View branch {{ getenv "GIT_BRANCH" | default "main" }} on GitHub">{{ getenv "GIT_BRANCH" | default "main" }}</a>
+      </div>
+      <div class="d-md-none">
+        <div class="col">
+            &copy; {{ .Site.Params.blogAuthor }} 2014-{{ now.Format "2006" }}
+        </div>
+      </div>
+    </div>
+  </p>
+</footer>
