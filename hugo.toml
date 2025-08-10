@@ -1,6 +1,8 @@
 baseURL = "https://blog.martincostello.com/"
 cleanDestinationDir = true
+disableKinds = ["taxonomy", "term"]
 enableGitInfo = true
+ignoreErrors = ["error-disable-taxonomy"]
 languageCode = "en-gb"
 title = "Martin Costello's Blog"
 
@@ -47,6 +49,3 @@ title = "Martin Costello's Blog"
 [security]
   [security.funcs]
     getenv = ['^HUGO_', '^CI$', '^GIT_.*']
-
-[taxonomies]
-  tag = "tags"
