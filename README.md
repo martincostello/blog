@@ -35,5 +35,11 @@ Alternatively, you can use the PowerShell build script:
 To serve the website locally for development:
 
 ```sh
-hugo serve
+hugo server --buildDrafts --buildFuture
+```
+
+or:
+
+```sh
+./build.ps1 -Serve
 ```

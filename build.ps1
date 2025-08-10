@@ -15,12 +15,12 @@ if (-not $env:GIT_BRANCH) {
     $env:GIT_BRANCH = git rev-parse --abbrev-ref HEAD
 }
 
-hugo --minify
+hugo
 
 if ($LASTEXITCODE -ne 0) {
     throw "hugo build failed with exit code $LASTEXITCODE"
 }
 
 if ($Serve) {
-    hugo server --buildDrafts
+    hugo server --buildDrafts --buildFuture
 }

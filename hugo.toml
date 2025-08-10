@@ -1,7 +1,8 @@
 baseURL = "https://blog.martincostello.com/"
+cleanDestinationDir = true
+enableGitInfo = true
 languageCode = "en-gb"
 title = "Martin Costello's Blog"
-# Using custom layouts, no theme
 
 [params]
   blog_author = "Martin Costello"
