@@ -1,6 +1,4 @@
-/public
-/vendor
-/r
-/branch.txt
-/version.txt
 .hugo_build.lock
+branch.txt
+public/
+version.txt
