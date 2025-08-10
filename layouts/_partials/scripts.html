@@ -4,11 +4,12 @@
 {{ end }}
 <script>
   window.siteParameters = {
+    version: "{{ substr (getenv "GIT_COMMIT_SHA" | default "main") 0 7 }}",
     renderAnalytics: {{ .Site.Params.renderAnalytics }},
     analyticsId: "{{ .Site.Params.analyticsId }}"
   };
 </script>
 {{ $js := resources.Get "scripts/site.js" }}
 {{ if $js }}
-<script src="{{ $js.RelPermalink }}" defer></script>
+<script src="{{ $js.RelPermalink }}?v={{ substr (getenv "GIT_COMMIT_SHA" | default "main") 0 7 }}" defer></script>
 {{ end }}
