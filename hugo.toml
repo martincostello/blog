@@ -18,6 +18,7 @@ title = "Martin Costello's Blog"
   blueskyHandle = "martincostello.com"
   cdnDomain = "cdn.martincostello.com"
   facebookProfile = "10100867762061905"
+  githubLogin = "martincostello"
   renderAnalytics = true
   siteDomain = "blog.martincostello.com"
   siteVerificationBing = "D6C2E7551C902F1A396D8564C6452930"
