@@ -7,15 +7,20 @@ param(
     [Parameter(Mandatory = $false)][switch] $Serve
 )
 
-git rev-parse HEAD > version.txt
-git rev-parse --abbrev-ref HEAD > branch.txt
+# Set environment variables for git info (if not already set)
+if (-not $env:GIT_COMMIT_SHA) {
+    $env:GIT_COMMIT_SHA = git rev-parse HEAD
+}
+if (-not $env:GIT_BRANCH) {
+    $env:GIT_BRANCH = git rev-parse --abbrev-ref HEAD
+}
 
-bundler exec middleman build
+hugo --minify
 
 if ($LASTEXITCODE -ne 0) {
-    throw "middleman build failed with exit code $LASTEXITCODE"
+    throw "hugo build failed with exit code $LASTEXITCODE"
 }
 
 if ($Serve) {
-    bundler exec middleman serve
+    hugo serve
 }

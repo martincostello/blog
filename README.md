@@ -20,8 +20,20 @@ This project is licensed under the [MIT](https://github.com/martincostello/blog/
 
 ## Building and Testing
 
-To build the website run the following command (requires [Ruby](https://www.ruby-lang.org/en/downloads/)):
+To build the website run the following command (requires [Hugo](https://gohugo.io/)):
 
 ```sh
-bundle exec middleman build
+hugo --minify
+```
+
+Alternatively, you can use the PowerShell build script:
+
+```sh
+./build.ps1
+```
+
+To serve the website locally for development:
+
+```sh
+hugo serve
 ```
