@@ -14,19 +14,33 @@
     "node": ">=22"
   },
   "license": "Apache-2.0",
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "printWidth": 100,
+    "quoteProps": "consistent",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/martincostello/blog.git"
   },
   "scripts": {
-    "all": "npm run build && npm run install-browsers && npm run test",
+    "all": "npm run format-check && npm run build && npm run install-browsers && npm run test",
     "build": "hugo --minify",
+    "format": "prettier --write **/*.js",
+    "format-check": "prettier --check **/*.js",
     "install-browsers": "npx playwright install --with-deps chromium",
     "serve": "hugo server",
     "test": "npx playwright test"
   },
   "devDependencies": {
     "@playwright/test": "1.54.2",
-    "@types/node": "24.2.1"
+    "@types/node": "24.2.1",
+    "prettier": "3.6.2"
   }
 }

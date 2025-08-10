@@ -22,7 +22,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run serve',
     reuseExistingServer: !process.env.CI,
-    url: 'http://localhost:1313'
+    url: 'http://localhost:1313',
   },
   workers: process.env.CI ? 1 : undefined,
 });
