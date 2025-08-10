@@ -31,7 +31,7 @@
     "url": "git+https://github.com/martincostello/blog.git"
   },
   "scripts": {
-    "all": "npm run format-check && npm run build && npm run install-browsers && npm run test",
+    "all": "npm run format-check && npm run install-browsers && npm run test && npm run build",
     "build": "hugo",
     "format": "prettier --write **/*.js",
     "format-check": "prettier --check **/*.js",
