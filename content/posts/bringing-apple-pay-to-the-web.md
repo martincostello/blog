@@ -617,7 +617,7 @@ and to load the user profile so we can load the private keys in our Merchant Ide
 $appCmd = [IO.Path]::Combine($env:WinDir, "System32", "inetsrv", "appcmd")
 
 # Set the site to run no managed code
-& $appCmd set apppool "/apppool.name:$siteName" /managedRuntimeVersion:
+& $appCmd set apppool "/apppool.name:$siteName" "/managedRuntimeVersion:"
 
 # Load the user profile so X509 certificate private keys can be loaded
 & $appCmd set config -section:applicationPools "/[name='$siteName'].processModel.loadUserProfile:true"

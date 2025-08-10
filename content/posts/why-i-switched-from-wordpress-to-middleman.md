@@ -205,7 +205,7 @@ Similar to ASP.NET MVC, as well as full pages Middleman supports partial pages f
 
 As an example here's the raw code for my entire layout page which contains 7 partials.
 
-```html
+```text
 <!DOCTYPE html>
 <html lang="en-gb">
   <%= partial "head" %>

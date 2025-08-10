@@ -414,7 +414,7 @@ If you don't need any runtime configurability and are using at least IIS 7.0, yo
 
 To help further framing, you can use the following Javascript in your page layouts to force your site to "burst" to the top of the frames in the browser it's being rendered in. This helps eliminate the site from being contained in iframes:
 
-```javascript
+```html
 <script type="text/javascript">
     if (self == top) {
         document.documentElement.className = document.documentElement.className.replace(/\bjs-flash\b/, '');

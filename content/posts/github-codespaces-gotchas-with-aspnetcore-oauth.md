@@ -94,8 +94,10 @@ With that in place, I could just set up the forwarded headers from the VS Code
 launch configuration:
 
 ```json
-"env": {
-  "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "${env:CODESPACES}"
+{
+  "env": {
+    "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "${env:CODESPACES}"
+  }
 }
 ```
 
