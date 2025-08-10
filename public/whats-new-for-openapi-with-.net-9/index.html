@@ -1,0 +1,257 @@
+<!doctype html><html lang=en-gb><head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#"><title>What's New for OpenAPI with .NET 9 | The blog of a software developer and tester.</title>
+<meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta property="author" content="Martin Costello"><meta name=copyright content="&copy; Martin Costello 2014-2025"><meta name=description content="A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 and comparing it to NSwag and Swashbuckle.AspNetCore."><meta name=language content="en"><meta name=theme-color content="#ffffff"><meta name=keywords content="dotnet,openapi,swagger,swashbuckle"><meta name=robots content="INDEX"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="article:author" content="10100867762061905"><meta property="article:published_time" content="2024-09-09T00:00:00Z"><meta property="article:modified_time" content="2024-09-09T00:00:00Z"><meta property="article:tag" content="dotnet,openapi,swagger,swashbuckle"><meta property="fb:profile_id" content="10100867762061905"><meta name=application-name content="Martin Costello's Blog"><meta name=msapplication-config content="browserconfig.xml"><meta name=msapplication-navbutton-color content="#0095DA"><meta name=msapplication-starturl content="/"><meta property="og:description" content="A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 and comparing it to NSwag and Swashbuckle.AspNetCore."><meta property="og:image" content="https://cdn.martincostello.com/blog_openapi.png"><meta property="og:locale" content="en_GB"><meta property="og:site_name" content="Martin Costello's Blog"><meta property="og:title" content="What's New for OpenAPI with .NET 9"><meta property="og:type" content="article"><meta property="og:updated_time" content="2024-09-09T00:00:00Z"><meta property="og:url" content="https://blog.martincostello.com/whats-new-for-openapi-with-.net-9/"><meta name=twitter:card content="summary"><meta name=twitter:creator content="@martin_costello"><meta name=twitter:description content="A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 and comparing it to NSwag and Swashbuckle.AspNetCore."><meta name=twitter:domain content="blog.martincostello.com"><meta name=twitter:image content="https://cdn.martincostello.com/blog_openapi.png"><meta name=twitter:image:alt content="Martin Costello"><meta name=twitter:site content="@martin_costello"><meta name=twitter:title content="What's New for OpenAPI with .NET 9"><meta name=twitter:url content="https://blog.martincostello.com/whats-new-for-openapi-with-.net-9/"><meta name=twitter:label1 content="Written by"><meta name=twitter:data1 content="Martin Costello"><meta name=google-site-verification content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"><meta name=msvalidate.01 content="D6C2E7551C902F1A396D8564C6452930"><link rel=canonical href=https://blog.martincostello.com/whats-new-for-openapi-with-.net-9/><link rel=manifest href=/manifest.webmanifest><link href=https://cdn.martincostello.com/favicon.ico rel="shortcut icon" type=image/x-icon><link href=/sitemap.xml rel=sitemap type=application/xml><link href=/feed.xml rel=alternate type=application/rss+xml title=Atom></head><body><nav class="navbar navbar-expand-lg navbar-dark bg-primary"><div class=container><a href=/ class=navbar-brand><span class="fa-solid fa-laptop-code" aria-hidden=true></span>
+blog.martincostello.com
+</a><button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#site-navbar aria-controls=site-navbar aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=site-navbar><ul class="navbar-nav me-auto"><li class=nav-item><a class=nav-link href=/archive/ title="View the post archive">Archive
+<span class="fa-solid fa-box-archive" aria-hidden=true></span></a></li></ul><ul class=navbar-nav><li class=nav-item><a class=nav-link href=/about-me/ title="About Martin">About Me
+<span class="fa-solid fa-circle-info" aria-hidden=true></span></a></li></ul></div></div></nav><main class="container body-content"><div class="p-4 mb-3 bg-light rounded-3"><div class="container-fluid py-3"><h1 class=display-5>What's New for OpenAPI with .NET 9</h1><p class="col-md-8 fs-4 lead">A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 and comparing it to NSwag and Swashbuckle.AspNetCore.</p></div></div><p><div class="row d-none d-md-block"><div class=col-6>9 September 2024 by <a href=/about-me/ rel=noopener title="About Martin Costello">Martin Costello</a> |
+<a href=/feed.xml rel=noopener title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden=true></span></a></div></div><div class="row d-md-none"><div class=col-12>9 September 2024 by <a href=/about-me/ rel=noopener title="About Martin Costello">Martin Costello</a></div><div class=col-12><a href=/feed.xml rel=noopener title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden=true></span></a></p></div></div></p><p><div class=row><div class=col-lg-6><a href="https://bsky.app/intent/compose?text=What%27s+New+for+OpenAPI+with+.NET+9+by+%40martincostello.com+-+https%3A%2F%2Fblog.martincostello.com%2Fwhats-new-for-openapi-with-.net-9%2F" target=_blank rel=noopener class="btn btn-info btn-sm" title="Share on Bluesky">Share on Bluesky
+<span class="fa-brands fa-bluesky" aria-hidden=true></span></a></div></div></p><img class="img-fluid mx-auto d-block" src=https://cdn.martincostello.com/blog_openapi.png alt="The OpenAPI logo" title="The OpenAPI logo" height=272px width=899px><p>Developers in the .NET ecosystem have been writing APIs with ASP.NET and ASP.NET Core for years, and
+<a href=https://swagger.io/docs/specification/about/ title="What Is OpenAPI?">OpenAPI</a> has been a popular choice for documenting those APIs.
+OpenAPI at its core is a machine-readable document that describes the endpoints available in an API.
+It contains information not only about parameters, requests and responses, but also additional metadata
+such as descriptions of properties, security-related metadata, and more.</p><p>These documents can then be consumed by tools such as <a href=https://github.com/swagger-api/swagger-ui title="The Swagger UI repository on GitHub">Swagger UI</a> to provide a user interface
+for developers to interact with the API quickly and easily, such as when testing. With the recent surge in
+popularity of AI-based development tools, OpenAPI has become even more important as a way to describe APIs
+in a way that machines can understand.</p><p>For a long time, the two most common libraries to produce API specifications at runtime for ASP.NET Core
+have been <a href=https://github.com/RicoSuter/NSwag title="The NSwag repository on GitHub">NSwag</a> and <a href=https://github.com/domaindrivendev/Swashbuckle.AspNetCore title="The Swashbuckle.AspNetCore repository on GitHub">Swashbuckle</a>. Both libraries provide functionality that allows
+developers to generate a rich OpenAPI document(s) for their APIs in either JSON and/or YAML from their
+existing code. The endpoints can then be augmented in different ways, such as with attributes or custom
+code, to further enrich the generated document(s) to provide a great Developer Experience for its consumers.</p><p>With the upcoming release of <a href=https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0 title="What's new in ASP.NET Core 9.0">ASP.NET Core 9</a>, the ASP.NET team have introduced new functionality
+for the existing <a href=https://www.nuget.org/packages/Microsoft.AspNetCore.OpenApi title="The Microsoft.AspNetCore.OpenApi package on NuGet.org">Microsoft.AspNetCore.OpenApi NuGet package</a>, that provides a
+new way to generate OpenAPI documents for ASP.NET Core Minimal APIs.</p><p>In this post, we&rsquo;ll take a look at the new functionality and compare it to the exsisting NSwag and Swashbuckle
+libraries to see how it compares in both features as well as performance.</p><p>READMORE</p><h2 id=why-a-new-openapi-library>Why a new OpenAPI library?</h2><p>You may wonder why when there&rsquo;s two existing and popular solutions for generating OpenAPI documents in ASP.NET Core
+that there&rsquo;s a need for a third new option to enter the fray. While both NSwag and Swashbuckle have served the community
+well for many years, recently both libraries have seen a decline in maintenance and updates. This has led to a lag
+in the ability for new features of the framework to be leveraged and/or supported in these libraries with each new release.</p><p>While Swashbuckle has had a bit of a resurgence in 2024 with the <a href=https://github.com/domaindrivendev/Swashbuckle.AspNetCore/discussions/2778 title="Swashbuckle.AspNetCore maintainers announcement">announcement of new maintainers for the project</a>,
+of which I&rsquo;m one 👋, and now has first-class support for .NET 8, it is still an open source project that is provided
+for free and maintained by volunteers in their spare time. With these constraints, it&rsquo;s difficult to keep up with the
+pace of change in the .NET ecosystem with a new major release every year. By contrast, the ASP.NET team at Microsoft
+are paid to work on the framework full-time, so can dedicate time to ensure that the libraries they provide are kept
+up-to-date with the latest features and best practices as the product evolves over time.</p><p>Another motivating factor for the new library is that <a href=https://learn.microsoft.com/dotnet/core/deploying/native-aot title="Native AOT deployment">native AoT compilation</a> is becoming an increasingly
+popular way to deploy .NET applications, especially in the cloud, where reducing cold start times is important for
+high-scale applications with variable load patterns. Both NSwag and Swashbuckle rely heavily on reflection to generate
+their OpenAPI documents, but reflection has many constraints when used in an application compiled to run as native code.
+This makes many existing code patterns in these libraries not work due to the metadata needed being trimmed away, as it
+appears to be unused.</p><p>While both libraries probably <em>could</em> be refactored to support native AoT, this would be a significant amount of work to
+undertake as it would require a significant rewrite of the core functionality of both libraries. Speaking as a Swashbuckle
+maintainer, the amount of work required is so large compared to the benefits it would provide, that it&rsquo;s not something that
+is realistically going to happen.</p><p>A brand new library that is designed from the ground-up to support native AoT compilation and the latest features of ASP.NET
+Core however is a very different proposition. Any new library is unburdened by the weight of its existing functionality,
+and instead can start fresh with a new design that is more suited to the current state of the ASP.NET Core ecosystem and
+its needs in 2024 and beyond.</p><p>The Swashbuckle maintainers are also unconcerned that there&rsquo;s a new library on the scene. We don&rsquo;t consider it to be a
+competitor to Swashbuckle - for example, the new library only supports ASP.NET Core 9 and later, whereas Swashbuckle has
+a broader range of support for older versions of ASP.NET Core, including for .NET Framework. Users who want to use the
+new functionality and wish to migrate are welcome to do so, but we&rsquo;re not going to stop maintaining Swashbuckle any time
+soon. I&rsquo;m sure many developers are happy with their existing library of choice and will continue to use it rather than invest
+time and effort moving from one library to another.</p><h2 id=microsoftaspnetcoreopenapi-features-and-gaps>Microsoft.AspNetCore.OpenApi Features (and Gaps)</h2><p>At a high-level, the new Microsoft.AspNetCore.OpenApi package has the same basic functionality as both NSwag and Swashbuckle.
+It generates an OpenAPI document for your ASP.NET Core endpoints at runtime. The shape of your endpoints, such as their methods,
+paths, requests, responses, parameters etc. are all derived from your application&rsquo;s code. The declaration can be extended with
+metadata, such as with attributes like <code>[ProducesResponseType]</code> and <code>[Tags]</code>, to provide additional information to the
+generation process to describe the endpoints and schemas as required for your needs.</p><p>The library also integrates with the existing <a href=https://www.nuget.org/packages/Microsoft.Extensions.ApiDescription.Server/ title="The Microsoft.Extensions.ApiDescription.Server package on NuGet.org">Microsoft.Extensions.ApiDescription.Server package</a>
+to generate the document at build time via a custom MSBuild target that can run as part of compiling your project to produce
+the OpenAPI document as a file on disk. This is useful for CI/CD scenarios like <a href="https://learn.microsoft.com/aspnet/core/fundamentals/openapi/aspnetcore-openapi?view=aspnetcore-9.0#lint-generated-openapi-documents-with-spectral" title="Lint generated OpenAPI documents with Spectral">linting</a> - for example you could run
+<a href=https://github.com/stoplightio/spectral title="The Spectral repository on GitHub">spectral</a> as part of your build pipeline to validate that your OpenAPI document is valid and follows recommended best practices.</p><p>Like Swashbuckle, the package is built on top of the <a href=https://github.com/microsoft/OpenAPI.NET title="The OpenAPI.NET repository on GitHub">OpenAPI.NET</a> library, which provides the C# types
+for the various primitives of the <a href=https://swagger.io/specification/ title="The OpenAPI specification">OpenAPI specification</a>. The advantage of this is that adding support
+for new versions of the OpenAPI specification in the future (e.g. OpenAPI 3.1) should be easier as the library can be updated
+to use a new version that supports it in the future, with only the &ldquo;glue&rdquo; for generating the types from the endpoints needing
+to be updating, rather than also needing to fully implement the specification itself. The generation of the JSON schemas for
+the models is built on top of the <a href=https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview6/libraries.md#jsonschemaexporter title=JsonSchemaExporter>new JSON schema support</a> in .NET 9, which is exposed by the new
+<code>JsonSchemaExporter</code> class.</p><p>OpenAPI support is added at the <a href=https://learn.microsoft.com/aspnet/core/fundamentals/routing title="Routing in ASP.NET Core">endpoint</a> level (think <code>MapGet()</code> and similar methods). This allow the
+the OpenAPI document can be coupled into other mechanisms in ASP.NET Core, such as authorization, caching, and more.</p><p>As noted earlier, it is also fully compatible with native AoT, allowing you to generate OpenAPI documents for your ASP.NET Core
+applications at runtime even when compiled to native code, such as when running in a container, if you want to expose your
+API documentation to your users in your deployed environment.</p><p>To add the minimal level of support for generating an OpenAPI document, you could add the following code to your ASP.NET Core
+application after adding a reference to the Microsoft.AspNetCore.OpenApi NuGet package:</p><pre class="highlight plaintext">
+<code>var builder = WebApplication.CreateBuilder();
+
+// Add services for generating OpenAPI documents
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+// Add the endpoint to get the OpenAPI document
+app.MapOpenApi();
+
+// Your API endpoints
+app.MapGet("/", () => "Hello world!");
+
+app.Run();</code>
+</pre><p>Running the server and navigating to the <code>/openapi/v1/openapi.json</code> URL in a browser will then return a OpenAPI document as JSON
+that describes the endpoints in your application.</p><h3 id=transformers>Transformers</h3><p>If (or when) you need to enrich the document further, the library provides a number of extensions points that you can use to
+extend the document, or individual operations and/or schemas, using the concept of <em>transformers</em>. Transformers provide a way
+for you to run custom code to modify the OpenAPI document as it is being generated, allowing you to add additional metadata.</p><p>Transformers can either be registered as inline delegates or as types that implement the appropriate transformer interface
+(<code>IOpenApiDocumentTransformer</code>, <code>IOpenApiOperationTransformer</code> or <code>IOpenApiSchemaTransformer</code>). In the case of the interfaces,
+this allows you to implement types that use various additional services (e.g. <code>IConfiguration</code>) in your implementations and
+means they can be resolved from the dependency injection container used by your application.</p><p>Here&rsquo;s an example of declaring and then using a document transformer:</p><pre class="highlight plaintext">
+<code>// Add a custom service to the DI container
+builder.Services.AddTransient<imyservice, myservice>();
+
+// Add services for generating OpenAPI documents and register a custom document transformer
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer<mydocumenttransformer>();
+});
+
+// A custom implementation of IOpenApiDocumentTransformer that uses our custom service.
+// The type is activated from the DI container, so can use other services in the application.
+class MyDocumentTransformer(IMyService myService) : IOpenApiDocumentTransformer
+{
+    public async Task TransformAsync(
+        OpenApiDocument document,
+        OpenApiDocumentTransformerContext context,
+        CancellationToken cancellationToken)
+    {
+        // Use myService to modify the document in some way...
+    }
+}</code>
+</pre><p>As another example of the power of these transformers, I&rsquo;ve built a library of my own on top of these abstractions to add
+additional capabilities for my own APIs. The <a href=https://github.com/martincostello/openapi-extensions title="The OpenAPI Extensions repository on GitHub">OpenAPI Extensions for ASP.NET Core</a> library provides a
+number of transformers that can be used to add additional metadata to the OpenAPI document, such as support for generating
+rich examples for requests, responses and schemas.</p><h3 id=feature-gaps>Feature Gaps</h3><p>As a first release however, there are a few feature gaps compared to what developers may come to expect from an OpenAPI
+solution compared to NSwag and Swashbuckle.</p><h4 id=no-user-interface>No User Interface</h4><p>Compared to the application templates that shipped with the .NET SDK in previous releases of ASP.NET Core, there is no
+built-in solution to render a user interface on top of the OpenAPI document that is generated.</p><p>I don&rsquo;t think this is a major gap at this stage, as it&rsquo;s still possible to add a Swagger UI to your application with ease
+by continuing to use the <a href=https://www.nuget.org/packages/Swashbuckle.AspNetCore.SwaggerUI title="The Swashbuckle.AspNetCore.SwaggerUI package on NuGet.org">Swashbuckle.AspNetCore.SwaggerUI</a> NuGet package to provide one. This NuGet package
+is independent from the rest of Swashbuckle, so can be used with the new OpenAPI library without any issues or bloat from
+including two implementations. From version 6.6.2 of Swashbuckle.AspNetCore, this package also supports native AoT, so
+doesn&rsquo;t compromise support for that either.</p><h4 id=no-xml-comments>No XML Comments</h4><p>For the .NET 9 release, there is no support for adding descriptions to the OpenAPI document from the XML documentation in
+your code. This is a feature that is <a href=https://github.com/dotnet/aspnetcore/issues/39927#issuecomment-2233634912 title="Support XML-based OpenAPI docs for minimal APIs">planned for a future release</a>, likely .NET 10, but a preview
+of the feature is expected to be made available at some point before then.</p><p>If this is critical for your application, you could investigate creating your own transformer to consume your XML
+documentation until then.</p><h4 id=no-support-for-yaml-documents>No support for YAML documents</h4><p>While both the Microsoft.OpenApi library and NSwag support generating OpenAPI documents in YAML (unlike Swashbuckle), the
+Microsoft.AspNetCore.OpenApi package currently only supports generating OpenAPI documents in JSON. This is a feature that
+could be added in a future release.</p><p>This is again another piece of functionality I&rsquo;ve added to my <a href=https://github.com/martincostello/openapi-extensions title="The OpenAPI Extensions repository on GitHub">OpenAPI Extensions for ASP.NET Core</a> library, so you
+could use that to generate YAML documents if you need to. It&rsquo;s enabled with a single line of code in your application:</p><pre class="highlight plaintext">
+<code>app.MapOpenApiYaml();</code>
+</pre><h2 id=comparison-with-nswag-and-swashbuckle>Comparison with NSwag and Swashbuckle</h2><p>So how does the new Microsoft.AspNetCore.OpenApi package compare to the existing NSwag and Swashbuckle libraries?</p><p>While the goal of the library is not for 100% feature parity with either of the existing libraries, it does provide the
+majority of the same functionality that developers would expect from an OpenAPI library for ASP.NET Core applications.
+As noted above, the core gaps are support for XML comments and a built-in User Interface.</p><p>If you&rsquo;d like a more detailed comparison of the three libraries, you can check out this <a href=https://github.com/martincostello/aspnetcore-openapi title="A GitHub repository comparing OpenAPI implementations for ASP.NET Core">GitHub repository</a>
+that implements a Todo API and exposes equivalent OpenAPI documents for it using all three libraries. This should give you
+a good idea of how all three libraries express the same concepts and how you use them as an application developer.</p><p>As an example, here&rsquo;s the code to add an OpenAPI document and customise the API info in all three implementations.</p><p>One thing you&rsquo;ll notice that the same ability to customise the document is done through either similar concepts that are
+named either <em>transformers</em> (ASP.NET Core), <em>processors</em> (NSwag) or <em>filters</em> (Swashbuckle).</p><h3 id=microsoftaspnetcoreopenapi>Microsoft.AspNetCore.OpenApi</h3><pre class="highlight plaintext">
+<code>public static IServiceCollection AddAspNetCoreOpenApi(this IServiceCollection services)
+{
+    services.AddOpenApi(options =>
+    {
+        options.AddDocumentTransformer((document, _, _) =>
+        {
+            document.Info.Title = "Todo API";
+            document.Info.Description = "An API for managing Todo items.";
+            document.Info.Version = "v1";
+
+            return Task.CompletedTask;
+        });
+
+        options.AddOperationTransformer(new AddExamplesTransformer());
+    });
+
+    return services;
+}</code>
+</pre><p><a href=https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/AspNetCore/AspNetCoreOpenApiEndpoints.cs>Code</a></p><h3 id=nswag>NSwag</h3><pre class="highlight plaintext">
+<code>public static IServiceCollection AddNSwagOpenApi(this IServiceCollection services)
+{
+    services.AddOpenApiDocument(options =>
+    {
+        options.Title = "Todo API";
+        options.Description = "An API for managing Todo items.";
+        options.Version = "v1";
+
+        options.OperationProcessors.Add(new AddExamplesProcessor());
+    });
+
+    return services;
+}</code>
+</pre><p><a href=https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/NSwag/NSwagOpenApiEndpoints.cs>Code</a></p><h3 id=swashbuckle>Swashbuckle</h3><pre class="highlight plaintext">
+<code>public static IServiceCollection AddSwashbuckleOpenApi(this IServiceCollection services)
+{
+    services.AddSwaggerGen(options =>
+    {
+        var info = new OpenApiInfo
+        {
+            Title = "Todo API",
+            Description = "An API for managing Todo items.",
+            Version = "v1"
+        };
+
+        options.SwaggerDoc(info.Version, info);
+        options.OperationFilter<addexamplesfilter>();
+    });
+
+    return services;
+}</code>
+</pre><p><a href=https://github.com/martincostello/aspnetcore-openapi/blob/06b3aff0e5023cce8a5c8599507b4d974aedf37b/src/TodoApp/OpenApi/Swashbuckle/SwashbuckleOpenApiEndpoints.cs>Code</a></p><h2 id=performance>Performance</h2><p>The last thing I thought I&rsquo;d touch on in this blog post is performance. After I&rsquo;d created the repository comparing the three
+implementations, I figured it would be interesting to benchmark them to compare how they perform when generating an OpenAPI document.</p><h3 id=preliminary-results-with-net-9-preview-7>Preliminary Results with .NET 9 Preview 7</h3><p>After a detour off into setting up a continuous benchmarking process (<a href=https://blog.martincostello.com/continuous-benchmarks-on-a-budget/>read about it here</a>),
+I set up some benchmarks for each library with <a href=https://github.com/dotnet/BenchmarkDotNet title="The BenchmarkDotNet repository on GitHub">BenchmarkDotNet</a> to compare the performance. When I first set
+them up I was targeting the official Preview 7 release of .NET 9, and at a very high-level, these were the results I got:</p><pre class="highlight plaintext">
+<code>BenchmarkDotNet v0.14.0, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+AMD EPYC 7763, 1 CPU, 4 logical and 2 physical cores
+.NET SDK 9.0.100-preview.7.24406.8
+  [Host]   : .NET 9.0.0 (9.0.24.40507), X64 RyuJIT AVX2
+  ShortRun : .NET 9.0.0 (9.0.24.40507), X64 RyuJIT AVX2
+
+Job=ShortRun  IterationCount=3  LaunchCount=1
+WarmupCount=3
+
+| Method      | Mean      | Error     | StdDev    | Gen0     | Gen1     | Gen2     | Allocated |
+|------------ |----------:|----------:|----------:|---------:|---------:|---------:|----------:|
+| AspNetCore  | 10.988 ms | 13.319 ms | 0.7301 ms | 171.8750 | 140.6250 | 125.0000 |   6.02 MB |
+| NSwag       | 12.269 ms |  2.276 ms | 0.1247 ms |  15.6250 |        - |        - |   1.55 MB |
+| Swashbuckle |  7.989 ms |  6.878 ms | 0.3770 ms |  15.6250 |        - |        - |    1.5 MB |</code>
+</pre><p><a href=https://github.com/martincostello/aspnetcore-openapi/commit/fd5d79a12deeeda3abc10b61a80f2568bd38b381>Commit</a></p><p>As you can see from the data, the new OpenAPI package is roughly second along with NSwag in terms of performance, with Swashbuckle
+ahead by a few milliseconds. However the new ASP.NET Core OpenAPI is <em>way</em> behind in terms of memory usage, using nearly 4 times as
+much as the other two libraries. You can also see from the graphs below from many runs over time with the preview 7 that there is
+a lot of variance in the OpenAPI package&rsquo;s performance, compared to the other two libraries which are much more stable.</p><div class="container mx-1"><div class=row><div class=col><img class=img-fluid src=https://cdn.martincostello.com/blog_openapi-aspnetcore-preview7.png alt="ASP.NET Core results for .NET 9 preview 7" title="ASP.NET Core results for .NET 9 preview 7"></div><div class=col><img class=img-fluid src=https://cdn.martincostello.com/blog_openapi-nswag-preview7.png alt="NSwag results for .NET 9 preview 7" title="NSwag results for .NET 9 preview 7"></div><div class=col><img class=img-fluid src=https://cdn.martincostello.com/blog_openapi-swashbuckle-preview7.png alt="Swashbuckle results for .NET 9 preview 7" title="Swashbuckle results for .NET 9 preview 7"></div></div></div><p>Not particularly great, but there&rsquo;s actually two interesting caveats to these benchmarks.</p><p>The first is that <a href=https://github.com/dotnet/aspnetcore/issues/56990 title="OpenAPI schemas are not stable between generations">there is a bug</a> in ASP.NET Core 9 Preview 7 that caused the OpenAPI document schemas to
+not be stable between generations - this was leading to a lot of unncessary work being done, and was causing a memory leak that
+eventually caused OpenAPI generation to stop working completely. Because of this issue, I had to cap the number of iterations the
+benchmarks ran as a short run via <code>[ShortRunJob]</code>, otherwise the benchmarks would grind to a halt. This is also the cause of the
+variance in the allocation numbers (the red line at the top of the first graph).</p><p>The second caveat is that, by default, NSwag caches the OpenAPI document it generates, so out-of-the-box it will only ever generate
+the OpenAPI document once. For the sake of comparison, I <a href=https://github.com/martincostello/aspnetcore-openapi/blob/fd5d79a12deeeda3abc10b61a80f2568bd38b381/src/TodoApp/OpenApi/NSwag/NSwagOpenApiEndpoints.cs#L94-L97>disabled the caching</a> in NSwag so that the document was
+generated in full on each request. We <em>could</em> level the playing field in the opposite direction by caching all three, but that&rsquo;s not
+interesting for a performance comparison/test as we&rsquo;d effectively just be benchmarking the caching 😄.</p><h3 id=gotta-go-fast->Gotta Go Fast 🦔💨</h3><p>With some data to hand, I then took a look into what exactly the code was doing to see if there was anything obvious that could be
+fixed or improved to speed things up. What was invaluable in this process was the <a href=https://benchmarkdotnet.org/articles/features/event-pipe-profiler.html title=EventPipeProfiler>EventPipe Profiler</a>
+that can be enabled in BenchmarkDotNet to capture a flame graph of the code being executed. Using <a href=https://www.speedscope.app/ title=speedscope>speedscope.app</a> I
+was able to visualise the code paths that were being executed and see where the time was being spent. With this information, I was
+able to identify three different places where the OpenAPI generation was doing unnecessary work and causing the performance issues.</p><h4 id=dictionary-lookups->Dictionary Lookups 🕵️📖</h4><p>The first thing I found was that the code seemed to be spending a lot of time in the <code>Enumerable.All()</code> method. Digging into this
+further, I noticed that <code>IDictionary&lt;K, V>.Contains()</code> was being used in a number of places in the code along with the indexer.
+This is a known performance trap in .NET, with this pattern leading to a double look-up, which can be avoided by instead using the
+<code>TryGetValue()</code> method.</p><p>In fact there&rsquo;s even a .NET analysis rule that covers this scenario: <a href=https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/CA1854 title="Prefer the IDictionary.TryGetValue(TKey, out TValue) method">CA1854</a>. It turns out
+<a href=https://github.com/dotnet/roslyn-analyzers/issues/7369 title="CA1854 isn't catching cases that aren't directly part of an if statement">there&rsquo;s a bug</a> in this analyser that doesn&rsquo;t catch certain patterns of usage, which is why it wasn&rsquo;t
+caught previously.</p><p>Changing the code to use <code>TryGetValue()</code> instead was an easy enough change to make, but that didn&rsquo;t answer the question of why so
+much time was being spent in <code>All()</code> in the first place. The reason for this turned out to be due to the way the OpenAPI library
+was implementing <a href=https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1 title="IEqualityComparer<T> Interface"><code>IEqualityComparer&lt;T></code></a> for the various types used to generate the OpenAPI document.</p><p>Some custom equality comparers are implemented which are used to help test whether different OpenAPI schema &ldquo;shapes&rdquo; are equal to
+each other or not. These objects in some cases contain dozens of properties, some of which are themselves dictionaries or arrays,
+which can create a large object graph to traverse to compute the equality of.</p><p>With some reordering to how the properties are computed based on expense/likelihood of being different, a lot of the cost of these
+comparisons can be avoided and make things much faster in the majority of cases.</p><p>I opened <a href=https://github.com/dotnet/aspnetcore/pull/57208 title="Use TryGetValue for dictionary lookups in OpenAPI comparers">a pull request</a> to address both of these items, which once merged caused all of the identified
+method calls to drop out of the hot path for the profiler traces in the benchmarks 🔥.</p><h4 id=too-many-transformers->Too Many Transformers 🤖</h4><p>After the fix for the unstable schemas and the above changes, I took another look at the traces from my benchmark runs and
+spotted one other anomaly from the data. Looking at the data, I noticed that <a href=https://github.com/dotnet/aspnetcore/pull/57211 title="OpenAPI activates transformers too many times">transformers were being created too often</a>.</p><p>This was due to an issue with the lifetime and disposal of transformers, meaning that they were being created once per <em>schema</em>,
+rather than once per generation of the OpenAPI <em>document</em>. This then had not only the overhead of the additional work, but also
+an impact to memory usage and garbage collection.</p><h3 id=latest-results-with-net-9-rc1>Latest Results with .NET 9 RC.1</h3><p>After changes for the above issues were merged, I re-ran the benchmarks against the latest daily build of .NET 9 from their CI,
+as at the time of writing, .NET 9 RC.1 isn&rsquo;t officially available yet. I&rsquo;ve <a href=https://blog.martincostello.com/upgrading-to-dotnet-8-part-5-preview-7-and-rc-1-2/ title="Daily Build Testing">written about using daily builds before</a>, so
+check out that post if you&rsquo;re interested.</p><p>With the latest version of the .NET SDK from the .NET 9 CI (<code>9.0.100-rc.1.24452.12</code> at the time of writing) things are noticeably
+improved compared to preview 7:</p><pre class="highlight plaintext">
+<code>BenchmarkDotNet v0.14.0, Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+AMD EPYC 7763, 1 CPU, 4 logical and 2 physical cores
+.NET SDK 9.0.100-rc.1.24452.12
+  [Host]     : .NET 9.0.0 (9.0.24.43107), X64 RyuJIT AVX2
+  DefaultJob : .NET 9.0.0 (9.0.24.43107), X64 RyuJIT AVX2
+
+| Method      | Mean       | Error    | StdDev    | Median     | Gen0    | Allocated  |
+|------------ |-----------:|---------:|----------:|-----------:|--------:|-----------:|
+| AspNetCore  |   981.9 us | 15.94 us |  30.34 us |   975.3 us |       - |  326.64 KB |
+| NSwag       | 4,570.8 us | 60.82 us |  53.92 us | 4,556.4 us | 15.6250 | 1588.43 KB |
+| Swashbuckle | 2,768.2 us | 52.00 us | 124.58 us | 2,721.2 us | 15.6250 |    1527 KB |</code>
+</pre><p><a href=https://github.com/martincostello/aspnetcore-openapi/commit/6a09d0422eeeabe38cc4ea7655af04d5d7209d11>Commit</a></p><p>As you can see compared to the previous results, the OpenAPI package is now the fastest of the three libraries.</p><p>The new ASP.NET Core package beats both NSwag and Swashbuckle by a significant margin, both in terms of time <em>and</em> memory. ⚡</p><p>In fact it&rsquo;s almost <strong>~2.8x</strong> faster, and <strong>~4.6x</strong> less memory hungry that the nearest competitor.</p><p>Compared to itself from preview 7, it&rsquo;s now <strong>~11x</strong> faster and allocates <strong>~18x</strong> less memory. That&rsquo;s a huge improvement! 🚀</p><div class="container mx-1"><div class=row><div class=col><img class=img-fluid src=https://cdn.martincostello.com/blog_openapi-aspnetcore-rc1.png alt="ASP.NET Core results for .NET 9 preview 7" title="ASP.NET Core results for .NET 9 preview 7"></div><div class=col><img class=img-fluid src=https://cdn.martincostello.com/blog_openapi-nswag-rc1.png alt="NSwag results for .NET 9 preview 7" title="NSwag results for .NET 9 preview 7"></div><div class=col><img class=img-fluid src=https://cdn.martincostello.com/blog_openapi-swashbuckle-rc1.png alt="Swashbuckle results for .NET 9 preview 7" title="Swashbuckle results for .NET 9 preview 7"></div></div></div><p>The caveats to note here:</p><ul><li><code>[ShortRunJob]</code> is no longer used, so the benchmarks run more iterations and are thus more accurate. This is why
+the error bars are much smaller in the second series of graphs.</li><li><em>All</em> improvements between .NET 9 preview 7 and release candidate 1 are included, not just the fixes for OpenAPI.
+This is most apparent from the major step down on the graph for all three libraries a few points in from the left.
+This is where the benchmark project switches from using preview 7 to the daily RC1 builds.</li></ul><p>As ever, performance is relative to the environment used and your numbers might vary. However with a relatively stable
+environment (GitHub Actions&rsquo; Ubuntu runners in this case), the graphs show consistent performance across multiple runs
+and a clear improvement as newer versions of .NET 9 are used. The useful data here is in the trends, not the absolute values.</p><h2 id=further-reading>Further Reading</h2><p>For more information on the new features in the Microsoft.AspNetCore.OpenApi package, check out these ASP.NET Community Standup
+streams on YouTube. Here <a href=https://github.com/captainsafia title="@captainsafia on GitHub">Safia Abdalla</a>, the engineer behind this new functionality, explains the new features
+in the package and how to use them in your applications:</p><ul><li><a href=https://www.youtube.com/watch/XoMese9g8WQ title="ASP.NET Community Standup - OpenAPI Updates in .NET 9 on YouTube">OpenAPI Updates in .NET 9</a></li><li><a href=https://www.youtube.com/watch/keK69Y5HqvY title="ASP.NET Community Standup - OpenAPI Updates in .NET 9 (Part 2) on YouTube">OpenAPI Updates in .NET 9 (Part 2)</a></li></ul><p>The documentation for the package for ASP.NET Core 9 can be found in <a href="https://learn.microsoft.com/aspnet/core/fundamentals/openapi/aspnetcore-openapi?view=aspnetcore-9.0" title="Work with OpenAPI documents on Microsoft Learn">Microsoft Learn</a>.</p><h2 id=summary>Summary</h2><p>All in all, the new ASP.NET Core OpenAPI package is a great addition to the ASP.NET Core ecosystem. It provides a modern and
+performant way to generate OpenAPI documents for your ASP.NET Core applications to cover the core use cases that developers need.</p><p>While it may not yet be as feature-rich as existing libraries such as NSwag or Swashbuckle, it&rsquo;s better ability to keep up with
+the change of pace to ASP.NET Core now and in the future, such as support for native AoT, give it a strong foundation to build
+on going forwards, such as for future support for OpenAPI 3.1.</p><p>Developers don&rsquo;t need to switch from their existing libraries to the new OpenAPI package if they&rsquo;re happy with their current
+implementation - the only compelling reason to switch is if you want to generate OpenAPI documents in a native AoT deployment.
+For those who do wish to switch (I have for a number of my apps), the migration is easiest for users of Swashbuckle.AspNetCore due
+to both libraries being built on top of the same OpenAPI.NET foundation.</p><p>If you&rsquo;ve not added OpenAPI documentation to an API before and are writing a new ASP.NET Core 9+ application, I&rsquo;d recommend giving
+the library a try to see how it fits your needs. It&rsquo;s a great way to get started with OpenAPI documentation for your APIs!</p><hr><p><div class=row><div class=col-lg-6><a href="https://bsky.app/intent/compose?text=What%27s+New+for+OpenAPI+with+.NET+9+by+%40martincostello.com+-+https%3A%2F%2Fblog.martincostello.com%2Fwhats-new-for-openapi-with-.net-9%2F" target=_blank rel=noopener class="btn btn-info btn-sm" title="Share on Bluesky">Share on Bluesky
+<span class="fa-brands fa-bluesky" aria-hidden=true></span></a></div></div></p><hr><footer><p><div class=row><div class="d-none d-md-block col">&copy; Martin Costello 2014-2025 |
+Built from <a href=https://github.com/martincostello/blog/commit/main rel=noopener title="View commit main on GitHub">main</a> on <a href=https://github.com/martincostello/blog/tree/main rel=noopener title="View branch main on GitHub">main</a></div><div class=d-md-none><div class=col>&copy; Martin Costello 2014-2025</div></div></div></p></footer></main><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.7/flatly/bootstrap.min.css integrity="sha512-O+EA0Agf5+pB8u7CtnIAYq/BKyFPMT8c0DFjmqLyfIJJ9Fm8GBohV/0H0TFaZ96+jieN8zUVY4IkSBso9z6hpg==" crossorigin=anonymous referrerpolicy=no-referrer async><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin=anonymous referrerpolicy=no-referrer async><link rel=stylesheet href=/styles/site.css><script src=https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g==" crossorigin=anonymous referrerpolicy=no-referrer></script><script src="https://www.googletagmanager.com/gtag/js?id=G-XJFV74HRL6" async></script><script>window.hugoSiteParams={render_analytics:!0,analytics_id:"G-XJFV74HRL6"}</script><script src=/scripts/site.js defer></script></body></html>

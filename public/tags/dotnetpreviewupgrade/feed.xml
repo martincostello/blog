@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dotnet,preview,upgrade on Martin Costello's Blog</title><link>https://blog.martincostello.com/tags/dotnetpreviewupgrade/</link><description>Recent content in Dotnet,preview,upgrade on Martin Costello's Blog</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Mon, 20 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.martincostello.com/tags/dotnetpreviewupgrade/feed.xml" rel="self" type="application/rss+xml"/><item><title>Upgrading to .NET 8: Part 6 - The Stable Release</title><link>https://blog.martincostello.com/upgrading-to-.net-8-part-6-the-stable-release/</link><pubDate>Mon, 20 Nov 2023 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/upgrading-to-.net-8-part-6-the-stable-release/</guid><description>&lt;p>Last week at &lt;a href="https://www.dotnetconf.net/" title=".NET Conf 2023">.NET Conf 2023&lt;/a>, the stable release of .NET 8 was released as the latest &lt;a href="https://dotnet.microsoft.com/platform/support/policy/dotnet-core" title=".NET and .NET Core Support Policy">Long Term Support&lt;/a> (LTS) release of the .NET platform.&lt;/p>
+&lt;p>With the release of .NET 8.0.0 and the end of the preview releases, my past week can be summed up by the following image:&lt;/p>
+&lt;img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_upgrade-all-the-things.jpg" alt="The All the Things meme, with the text: Upgrade All The Things To .NET 8" title="The All the Things meme, with the text: Upgrade All The Things To .NET 8">
+&lt;p>READMORE&lt;/p></description></item><item><title>Upgrading to .NET 8: Part 5 - Preview 7 and Release Candidates 1 and 2</title><link>https://blog.martincostello.com/upgrading-to-.net-8-part-5-preview-7-and-release-candidates-1-and-2/</link><pubDate>Fri, 13 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/upgrading-to-.net-8-part-5-preview-7-and-release-candidates-1-and-2/</guid><description>&lt;p>This post is a bumper edition, covering three different releases:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-7/" title="Announcing .NET 8 Preview 7">Preview 7&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-rc1/" title="Announcing .NET 8 RC1">Release Candidate 1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-rc2/" title="Announcing .NET 8 RC2">Release Candidate 2&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>I had intended to continue the post-per-preview series originally, but time got away from me
+with preview 7, plus there wasn&amp;rsquo;t much to say about it, and then I went on holiday for two weeks
+just as release candidate 1 landed. Given release candidate 2 was released just a few days ago,
+instead I figured I&amp;rsquo;d just catch-up with myself and summarise everything in this one blog post instead!&lt;/p></description></item><item><title>Upgrading to .NET 8: Part 4 - Preview 6</title><link>https://blog.martincostello.com/upgrading-to-.net-8-part-4-preview-6/</link><pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/upgrading-to-.net-8-part-4-preview-6/</guid><description>&lt;p>Following on from &lt;a href="https://blog.martincostello.com/upgrading-to-dotnet-8-part-3-previews-1-to-5" title="Previews 1-5">part 3&lt;/a> of this series, I&amp;rsquo;ve been continuing
+to upgrade my projects to .NET 8 - this time to preview 6. In this post
+I&amp;rsquo;ll cover more experiences with the new source generators with this
+preview as well as a new feature of C# 12: &lt;em>primary constructors&lt;/em>.&lt;/p>
+&lt;p>READMORE&lt;/p>
+&lt;h2 id="more-fun-with-source-generators">More Fun with Source Generators&lt;/h2>
+&lt;h3 id="request-delegate-generator---round-3">Request Delegate Generator - Round 3&lt;/h3>
+&lt;p>Preview 6 includes further changes to the &lt;em>&lt;a href="https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-8-preview-3/#minimal-apis-and-native-aot" title="Minimal APIs and native AOT">Request Delegate Generator&lt;/a>&lt;/em>
+since last month&amp;rsquo;s preview 5, so time to dive in again and see how things
+are shaping up.&lt;/p></description></item><item><title>Upgrading to .NET 8: Part 3 - Previews 1-5</title><link>https://blog.martincostello.com/upgrading-to-.net-8-part-3-previews-1-5/</link><pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/upgrading-to-.net-8-part-3-previews-1-5/</guid><description>&lt;p>In the &lt;a href="https://blog.martincostello.com/upgrading-to-dotnet-8-part-2-automation-is-our-friend" title="Automation is our Friend">previous post of this series&lt;/a> I described how with some
+GitHub Actions workflows we can reduce the amount of manual work required
+to test each preview of .NET 8 in our projects. With the infrastructure to
+do that set up we can now dig into some highlights of the things we found
+in our testing of .NET 8 itself in the preview releases available so far
+this year!&lt;/p></description></item><item><title>Upgrading to .NET 8: Part 1 - Why Upgrade?</title><link>https://blog.martincostello.com/upgrading-to-.net-8-part-1-why-upgrade/</link><pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/upgrading-to-.net-8-part-1-why-upgrade/</guid><description>&lt;p>Another year, another new major version of .NET is coming - .NET &lt;strong>8&lt;/strong>, to be specific.&lt;/p>
+&lt;p>I write that like it&amp;rsquo;s brand new information - it&amp;rsquo;s been coming for a while, what with
+&lt;a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-1/" title="Announcing .NET 8 Preview 1">.NET 8 Preview 1 having being released in Feburary&lt;/a> - but it&amp;rsquo;s only
+recently occured to me to write this blog post series (yes, a series, more on that later).&lt;/p>
+&lt;p>As annouced a few releases ago, a new major version of .NET is &lt;a href="https://dotnet.microsoft.com/platform/support/policy/dotnet-core#cadence" title=".NET release cadence">released every November&lt;/a>.
+These alternate between an odd-numbered Short Term Support (STS) release and an even-numbered
+Long Term Support (LTS) release (&lt;a href="https://dotnet.microsoft.com/platform/support/policy/dotnet-core#release-types" title=".NET Release types">see here&lt;/a>).&lt;/p></description></item></channel></rss>

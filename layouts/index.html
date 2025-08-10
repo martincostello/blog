@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="p-4 mb-3 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-5">{{ .Site.Params.blog_title }}</h1>
+        <p class="col-md-8 fs-4 lead">
+            <span class="fa-solid fa-laptop-code" aria-hidden="true"></span>
+            {{ .Site.Params.blog_subtitle }}
+        </p>
+    </div>
+</div>
+{{ range first 10 .Site.RegularPages }}
+<div class="row">
+    <div class="col">
+        <h2 class="display-4"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <p>
+            <div class="row d-none d-md-block">
+                <div class="col-lg-6">
+                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" rel="noopener" title="About {{ $.Site.Params.blog_author }}">{{ $.Site.Params.blog_author }}</a> |
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div class="row d-md-none">
+                <div class="col-xs-12 col-sm-12">
+                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" rel="noopener" title="About {{ $.Site.Params.blog_author }}">{{ $.Site.Params.blog_author }}</a>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <a href="/feed.xml" rel="noopener" title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden="true"></span></a></p>
+                </div>
+            </div>
+        </p>
+        <p>{{ .Summary }}</p>
+        <p><a href="{{ .Permalink }}" alt="Read more" rel="noopener" title="Read more of this post">Read more...</a></p>
+    </div>
+</div>
+{{ end }}
+{{ end }}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aspnetcore,dotnet,refit on Martin Costello's Blog</title><link>https://blog.martincostello.com/tags/aspnetcoredotnetrefit/</link><description>Recent content in Aspnetcore,dotnet,refit on Martin Costello's Blog</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Sun, 16 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.martincostello.com/tags/aspnetcoredotnetrefit/feed.xml" rel="self" type="application/rss+xml"/><item><title>Using Refit with the new System.Text.Json APIs</title><link>https://blog.martincostello.com/using-refit-with-the-new-system.text.json-apis/</link><pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/using-refit-with-the-new-system.text.json-apis/</guid><description>&lt;p>I&amp;rsquo;m a big fan of the &lt;a href="https://github.com/reactiveui/refit" title="Refit on GitHub.com">&lt;em>Refit&lt;/em>&lt;/a> library for calling HTTP APIs from my .NET applications.&lt;/p>
+&lt;p>It uses code generation to let you do simple HTTP calls using interfaces and uses &lt;a href="https://www.newtonsoft.com/json" title="JSON.NET website">JSON.NET&lt;/a> under-the-hood to handle serializing and deserializing JSON.&lt;/p>
+&lt;p>For example, to get a repository from the GitHub API you could define these types:&lt;/p>
+&lt;pre tabindex="0">&lt;code>public class Organization
+{
+ [JsonProperty(&amp;#34;login&amp;#34;)]
+ public string Login { get; set; }
+
+ [JsonProperty(&amp;#34;id&amp;#34;)]
+ public long Id { get; set; }
+
+ // ... other properties
+}
+
+[Headers(&amp;#34;Accept: application/vnd.github.v3+json&amp;#34;, &amp;#34;User-Agent: My-App/1.0.0&amp;#34;)]
+public interface IGitHub
+{
+ [Get(&amp;#34;/orgs/{organization}&amp;#34;)]
+ Task&amp;lt;Organization&amp;gt; GetOrganizationAsync(string organization);
+}
+&lt;/code>&lt;/pre>&lt;p>Then you could call the API like this:&lt;/p></description></item></channel></rss>

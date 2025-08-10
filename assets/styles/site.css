@@ -1,0 +1,52 @@
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-size: 1rem;
+    }
+}
+
+a {
+    color: #0f7661;
+}
+
+.body-content {
+    padding-top: 20px;
+}
+
+blockquote {
+    border-left: 5px solid #ecf0f1;
+    margin: 0 0 21px;
+    padding: 10.5px 21px;
+}
+
+code {
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    color: #cd186d;
+    padding: 2px 4px;
+}
+
+pre code {
+    background-color: #ecf0f1;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    display: block;
+    font-size: 1rem;
+    margin: 0 0 10.5px;
+    padding: 10px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+img.lazy[data-original] {
+    opacity: 0;
+}
+
+img.lazy:not([data-original]) {
+    opacity: 1;
+    transition: opacity 1s ease-in-out 0.2s;
+}

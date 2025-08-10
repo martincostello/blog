@@ -1,0 +1,116 @@
+<!doctype html><html lang=en-gb><head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#"><title>Using the .NET JSON Source Generator with ASP.NET Core Minimal APIs | The blog of a software developer and tester.</title>
+<meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta property="author" content="Martin Costello"><meta name=copyright content="&copy; Martin Costello 2014-2025"><meta name=description content="How to use the new .NET 6 JSON source generator in an application using ASP.NET Core Minimal APIs."><meta name=language content="en"><meta name=theme-color content="#ffffff"><meta name=keywords content="aspnet,aspnetcore,dotnet,json,minimal apis,source generators"><meta name=robots content="INDEX"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="article:author" content="10100867762061905"><meta property="article:published_time" content="2021-11-28T00:00:00Z"><meta property="article:modified_time" content="2021-11-28T00:00:00Z"><meta property="article:tag" content="aspnet,aspnetcore,dotnet,json,minimal apis,source generators"><meta property="fb:profile_id" content="10100867762061905"><meta name=application-name content="Martin Costello's Blog"><meta name=msapplication-config content="browserconfig.xml"><meta name=msapplication-navbutton-color content="#0095DA"><meta name=msapplication-starturl content="/"><meta property="og:description" content="How to use the new .NET 6 JSON source generator in an application using ASP.NET Core Minimal APIs."><meta property="og:image" content="https://cdn.martincostello.com/martin_small-v3.png"><meta property="og:locale" content="en_GB"><meta property="og:site_name" content="Martin Costello's Blog"><meta property="og:title" content="Using the .NET JSON Source Generator with ASP.NET Core Minimal APIs"><meta property="og:type" content="article"><meta property="og:updated_time" content="2021-11-28T00:00:00Z"><meta property="og:url" content="https://blog.martincostello.com/using-the-.net-json-source-generator-with-asp.net-core-minimal-apis/"><meta name=twitter:card content="summary"><meta name=twitter:creator content="@martin_costello"><meta name=twitter:description content="How to use the new .NET 6 JSON source generator in an application using ASP.NET Core Minimal APIs."><meta name=twitter:domain content="blog.martincostello.com"><meta name=twitter:image content="https://cdn.martincostello.com/martin_small-v3.png"><meta name=twitter:image:alt content="Martin Costello"><meta name=twitter:site content="@martin_costello"><meta name=twitter:title content="Using the .NET JSON Source Generator with ASP.NET Core Minimal APIs"><meta name=twitter:url content="https://blog.martincostello.com/using-the-.net-json-source-generator-with-asp.net-core-minimal-apis/"><meta name=twitter:label1 content="Written by"><meta name=twitter:data1 content="Martin Costello"><meta name=google-site-verification content="ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"><meta name=msvalidate.01 content="D6C2E7551C902F1A396D8564C6452930"><link rel=canonical href=https://blog.martincostello.com/using-the-.net-json-source-generator-with-asp.net-core-minimal-apis/><link rel=manifest href=/manifest.webmanifest><link href=https://cdn.martincostello.com/favicon.ico rel="shortcut icon" type=image/x-icon><link href=/sitemap.xml rel=sitemap type=application/xml><link href=/feed.xml rel=alternate type=application/rss+xml title=Atom></head><body><nav class="navbar navbar-expand-lg navbar-dark bg-primary"><div class=container><a href=/ class=navbar-brand><span class="fa-solid fa-laptop-code" aria-hidden=true></span>
+blog.martincostello.com
+</a><button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#site-navbar aria-controls=site-navbar aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=site-navbar><ul class="navbar-nav me-auto"><li class=nav-item><a class=nav-link href=/archive/ title="View the post archive">Archive
+<span class="fa-solid fa-box-archive" aria-hidden=true></span></a></li></ul><ul class=navbar-nav><li class=nav-item><a class=nav-link href=/about-me/ title="About Martin">About Me
+<span class="fa-solid fa-circle-info" aria-hidden=true></span></a></li></ul></div></div></nav><main class="container body-content"><div class="p-4 mb-3 bg-light rounded-3"><div class="container-fluid py-3"><h1 class=display-5>Using the .NET JSON Source Generator with ASP.NET Core Minimal APIs</h1><p class="col-md-8 fs-4 lead">How to use the new .NET 6 JSON source generator in an application using ASP.NET Core Minimal APIs.</p></div></div><p><div class="row d-none d-md-block"><div class=col-6>28 November 2021 by <a href=/about-me/ rel=noopener title="About Martin Costello">Martin Costello</a> |
+<a href=/feed.xml rel=noopener title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden=true></span></a></div></div><div class="row d-md-none"><div class=col-12>28 November 2021 by <a href=/about-me/ rel=noopener title="About Martin Costello">Martin Costello</a></div><div class=col-12><a href=/feed.xml rel=noopener title="View the RSS syndication feed"><span class="fa-solid fa-rss" aria-hidden=true></span></a></p></div></div></p><p><div class=row><div class=col-lg-6><a href="https://bsky.app/intent/compose?text=Using+the+.NET+JSON+Source+Generator+with+ASP.NET+Core+Minimal+APIs+by+%40martincostello.com+-+https%3A%2F%2Fblog.martincostello.com%2Fusing-the-.net-json-source-generator-with-asp.net-core-minimal-apis%2F" target=_blank rel=noopener class="btn btn-info btn-sm" title="Share on Bluesky">Share on Bluesky
+<span class="fa-brands fa-bluesky" aria-hidden=true></span></a></div></div></p><p>I&rsquo;ve recently completed upgrading a bunch of personal and work applications to
+ASP.NET Core 6, and now that the dust has finally settled on those efforts, I
+thought I&rsquo;d look into a new feature of .NET 6 that I hadn&rsquo;t tried out yet - <a href=https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-source-generator/>JSON source generators</a>.</p><p>If you haven&rsquo;t come across them before, <a href=https://devblogs.microsoft.com/dotnet/introducing-c-source-generators/>C# source generators</a> are a way to
+write some code that can generate more code during compilation. It&rsquo;s a form of
+<a href=https://en.wikipedia.org/wiki/Metaprogramming>metaprogramming</a>.</p><p>One of the benefits of the new JSON source generator for the System.Text.Json
+serializer is that it is more performant that the APIs introduced as part of
+.NET 5. This is because the serializer is able to leverage code that is compiled
+ahead-of-time (the source generator part) to serialize and deserialize objects
+to and from JSON without using reflection (which is relatively slow).</p><p>It sounds like that could give applications a performance boost at runtime, but
+how can we use the new JSON source generator with ASP.NET Core <a href=https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis>Minimal APIs</a>?</p><p>READMORE</p><p>Out-of-the box, ASP.NET Core Minimal APIs do not currently support using the JSON
+source generator and just use the <code>JsonSerializer.SerializeAsync()</code> methods
+under-the-hood (<a href=https://github.com/dotnet/aspnetcore/blob/ae1a6cbe225b99c0bf38b7e31bf60cb653b73a52/src/Http/Http.Results/src/JsonResult.cs#L57>this code</a>, which calls through to <a href=https://github.com/dotnet/aspnetcore/blob/ae1a6cbe225b99c0bf38b7e31bf60cb653b73a52/src/Http/Http.Extensions/src/HttpResponseJsonExtensions.cs#L91>this code</a>). For us
+to leverage the JSON source generator we need to be able to use one of the new
+<code>SerializeAsync()</code> overloads added as part of .NET 6 that take either a
+<a href="https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializer.serializeasync?view=net-6.0#System_Text_Json_JsonSerializer_SerializeAsync_System_IO_Stream_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_System_Threading_CancellationToken_"><code>JsonSerializerContext</code></a> or a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializer.serializeasync?view=net-6.0#System_Text_Json_JsonSerializer_SerializeAsync__1_System_IO_Stream___0_System_Text_Json_Serialization_Metadata_JsonTypeInfo___0__System_Threading_CancellationToken_"><code>JsonTypeInfo&lt;T></code></a> parameter somehow. How
+can we achieve that while still keeping our HTTP endpoint code minimal?</p><p>One approach we can use to do this is to use the <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0#customizing-results">extensibility hook</a> built
+into the <code>Results</code> class - the <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.results.extensions?view=aspnetcore-6.0#Microsoft_AspNetCore_Http_Results_Extensions"><code>Results.Extensions</code></a> property and the
+<code>IResultExtensions</code> interface. By adding a custom extension method for the
+<code>IResultExtensions</code> interface, we can add a new <code>Json()</code> method we can use in
+our Minimal API endpoints which we can use to leverage the JSON source generator.</p><p>Here&rsquo;s a simplified example of this for <code>JsonTypeInfo&lt;T></code>:</p><pre tabindex=0><code>using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+using Microsoft.AspNetCore.Http.Result;
+
+namespace Microsoft.AspNetCore.Http;
+
+public static class ResultExtensions
+{
+    public static IResult Json&lt;T&gt;(
+        this IResultExtensions extensions,
+        T value,
+        JsonTypeInfo&lt;T&gt; jsonTypeInfo,
+        string? contentType = null,
+        int? statusCode = null)
+    {
+        return new JsonResult&lt;T&gt;
+        {
+            ContentType = contentType,
+            JsonTypeInfo = jsonTypeInfo,
+            StatusCode = statusCode,
+            Value = value,
+        };
+    }
+}
+</code></pre><p>We extend the <code>IResultExtensions</code> and pass through the <code>JsonTypeInfo&lt;T></code> along
+with the data we want to serialize as JSON and assign them to a <code>JsonResult&lt;T></code>
+instance, which is returned to the caller. This is a custom implementation of the
+<a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iresult?view=aspnetcore-6.0"><code>IResult</code></a> interface, which is where we&rsquo;ll put the code to actually do the
+JSON serialization.</p><p>Using ASP.NET Core 6&rsquo;s <a href=https://github.com/dotnet/aspnetcore/blob/ae1a6cbe225b99c0bf38b7e31bf60cb653b73a52/src/Http/Http.Results/src/JsonResult.cs#L47-L58>own implementation</a> as inspiration, we can then
+write some extension methods for the <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpresponse?view=aspnetcore-6.0"><code>HttpResponse</code></a> class which can then
+pass this information along to the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializer?view=net-6.0"><code>JsonSerializer</code></a> class to serialize
+our objects to JSON using our source-generated implementation.</p><p>Below are some snippets from the relevant code.</p><pre tabindex=0><code>// JsonResult&lt;T&gt;
+Task IResult.ExecuteAsync(HttpContext httpContext)
+{
+    if (StatusCode is int statusCode)
+    {
+        httpContext.Response.StatusCode = statusCode;
+    }
+
+    return httpContext.Response.WriteAsJsonAsync(Value, JsonTypeInfo, ContentType);
+}
+
+// HttpResponseJsonExtensions
+public static Task WriteAsJsonAsync&lt;T&gt;(
+    this HttpResponse response,
+    T value,
+    JsonTypeInfo&lt;T&gt; jsonTypeInfo,
+    string? contentType,
+    CancellationToken cancellationToken = default)
+{
+    response.ContentType = contentType ?? &#34;application/json; charset=utf-8&#34;;
+    return JsonSerializer.SerializeAsync(response.Body, value, jsonTypeInfo, cancellationToken);
+}
+</code></pre><p>With these extensions available, we can then modify our Minimal API endpoints to
+use our new <code>Json()</code> method with our source-generated code.</p><pre tabindex=0><code>var planets = new Planet[]
+{
+    new() { Name = &#34;Mercury&#34; },
+    new() { Name = &#34;Venus&#34; },
+    new() { Name = &#34;Earth&#34; },
+    new() { Name = &#34;Mars&#34; }
+};
+
+// Create an instance of our custom JsonSerializerContext using the JSON
+// serializer settings we want to use with it, such as to be in camelCase.
+var context = new StellarJsonSerializerContext(new(JsonSerializerDefaults.Web));
+
+// Use Results.Extensions.Json() with our serializer context
+app.MapGet(&#34;/planets&#34;, () =&gt; Results.Extensions.Json(planets, context.PlanetArray));
+
+public class Planet
+{
+    public string Name { get; set; }
+}
+
+// Our custom JSON serializer context that generates code to serialize
+// arrays of planets so that we can use it with our HTTP endpoint.
+[JsonSerializable(typeof(Planet[]))]
+public partial class StellarJsonSerializerContext : JsonSerializerContext
+{
+}
+</code></pre><p>We could also add other extension methods that we can use that rely on a
+<code>JsonSerializerContext</code> being registered with the service provider used for
+<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0">dependency injection</a> to simplify the endpoint code even further. Then the
+context isn&rsquo;t even referenced in the endpoints&rsquo; code, and the only difference to
+using the built-in <code>Json()</code> method is the <code>Extensions</code> part, like this.</p><pre tabindex=0><code>app.MapGet(&#34;/planets&#34;, () =&gt; Results.Extensions.Json(planets));
+</code></pre><p>A complete sample application containing all the code referenced in this blog
+post can be found in GitHub here: <a href=https://github.com/martincostello/MinimalApisWithJsonSourceGenerator>https://github.com/martincostello/MinimalApisWithJsonSourceGenerator</a></p><p>I hope you find it useful - happy coding!</p><hr><p><div class=row><div class=col-lg-6><a href="https://bsky.app/intent/compose?text=Using+the+.NET+JSON+Source+Generator+with+ASP.NET+Core+Minimal+APIs+by+%40martincostello.com+-+https%3A%2F%2Fblog.martincostello.com%2Fusing-the-.net-json-source-generator-with-asp.net-core-minimal-apis%2F" target=_blank rel=noopener class="btn btn-info btn-sm" title="Share on Bluesky">Share on Bluesky
+<span class="fa-brands fa-bluesky" aria-hidden=true></span></a></div></div></p><hr><footer><p><div class=row><div class="d-none d-md-block col">&copy; Martin Costello 2014-2025 |
+Built from <a href=https://github.com/martincostello/blog/commit/main rel=noopener title="View commit main on GitHub">main</a> on <a href=https://github.com/martincostello/blog/tree/main rel=noopener title="View branch main on GitHub">main</a></div><div class=d-md-none><div class=col>&copy; Martin Costello 2014-2025</div></div></div></p></footer></main><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.7/flatly/bootstrap.min.css integrity="sha512-O+EA0Agf5+pB8u7CtnIAYq/BKyFPMT8c0DFjmqLyfIJJ9Fm8GBohV/0H0TFaZ96+jieN8zUVY4IkSBso9z6hpg==" crossorigin=anonymous referrerpolicy=no-referrer async><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin=anonymous referrerpolicy=no-referrer async><link rel=stylesheet href=/styles/site.css><script src=https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g==" crossorigin=anonymous referrerpolicy=no-referrer></script><script src="https://www.googletagmanager.com/gtag/js?id=G-XJFV74HRL6" async></script><script>window.hugoSiteParams={render_analytics:!0,analytics_id:"G-XJFV74HRL6"}</script><script src=/scripts/site.js defer></script></body></html>

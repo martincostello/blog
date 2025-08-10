@@ -1,0 +1,14 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js" integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{ if .Site.Params.render_analytics }}
+<script src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analytics_id }}" async></script>
+{{ end }}
+<script>
+  window.hugoSiteParams = {
+    render_analytics: {{ .Site.Params.render_analytics }},
+    analytics_id: "{{ .Site.Params.analytics_id }}"
+  };
+</script>
+{{ $js := resources.Get "scripts/site.js" }}
+{{ if $js }}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{ end }}

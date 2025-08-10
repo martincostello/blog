@@ -1,0 +1,17 @@
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:creator" content="@{{ .Site.Params.twitter_handle }}" />
+<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ with .Title }}{{ . }}{{ else }}{{ .Site.Params.blog_title }}{{ end }}{{ end }}" />
+<meta name="twitter:domain" content="{{ .Site.Params.site_domain }}" />
+{{- $twitter_image := "" -}}
+{{- if .Params.image -}}
+    {{- $twitter_image = .Params.image -}}
+{{- else -}}
+    {{- $twitter_image = printf "https://%s/martin_small-v3.png" .Site.Params.cdn_domain -}}
+{{- end -}}
+<meta name="twitter:image" content="{{ $twitter_image }}" />
+<meta name="twitter:image:alt" content="{{ with .Params.image_alt_text }}{{ . }}{{ else }}Martin Costello{{ end }}" />
+<meta name="twitter:site" content="@{{ .Site.Params.twitter_handle }}" />
+<meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ .Site.Params.blog_title }}{{ end }}" />
+<meta name="twitter:url" content="{{ .Permalink }}" />
+<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content="Martin Costello" />

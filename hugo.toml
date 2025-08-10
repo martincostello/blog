@@ -1,0 +1,52 @@
+baseURL = "https://blog.martincostello.com/"
+languageCode = "en-gb"
+title = "Martin Costello's Blog"
+# Using custom layouts, no theme
+
+[params]
+  blog_author = "Martin Costello"
+  blog_title = "Martin Costello's Blog"
+  blog_subtitle = "The blog of a software developer and tester."
+  bluesky_handle = "martincostello.com"
+  facebook_profile = "10100867762061905"
+  github_login = "martincostello"
+  twitter_handle = "martin_costello"
+  cdn_domain = "cdn.martincostello.com"
+  site_domain = "blog.martincostello.com"
+  analytics_id = "G-XJFV74HRL6"
+  site_verification_bing = "D6C2E7551C902F1A396D8564C6452930"
+  site_verification_google = "ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"
+  render_analytics = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    lineNos = false
+    style = "github"
+
+[permalinks]
+  posts = "/:title/"
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+
+[outputFormats.RSS]
+  mediaType = "application/rss+xml"
+  baseName = "feed"
+
+[minify]
+  minifyOutput = true
+
+[build]
+  writeStats = true
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$', '^GIT_.*']
