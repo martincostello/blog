@@ -9,9 +9,9 @@
     {{- $twitter_image = printf "https://%s/martin_small-v3.png" .Site.Params.cdnDomain -}}
 {{- end -}}
 <meta name="twitter:image" content="{{ $twitter_image }}" />
-<meta name="twitter:image:alt" content="{{ with .Params.image_alt_text }}{{ . }}{{ else }}Martin Costello{{ end }}" />
+<meta name="twitter:image:alt" content="{{ with .Params.image_alt_text }}{{ . }}{{ else }}{{ .Params.author }}{{ end }}" />
 <meta name="twitter:site" content="@{{ .Site.Params.twitterHandle }}" />
 <meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ .Site.Params.blogTitle }}{{ end }}" />
 <meta name="twitter:url" content="{{ .Permalink }}" />
 <meta name="twitter:label1" content="Written by" />
-<meta name="twitter:data1" content="Martin Costello" />
+<meta name="twitter:data1" content="{{ .Params.author }}" />
