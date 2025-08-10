@@ -8,7 +8,7 @@
         <p class="col-8 col-lg-12 fs-4 lead">The archive of blog posts for Martin Costello's blog.</p>
     </div>
 </div>
-{{ range .Site.RegularPages }}
+{{ range where .Site.RegularPages "Sitemap.Disable" "ne" true }}
 <div class="row">
     <div class="col">
         <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
