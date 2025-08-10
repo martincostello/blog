@@ -1,8 +1,9 @@
 baseURL = "https://blog.martincostello.com/"
 cleanDestinationDir = true
-disableKinds = ["taxonomy", "term"]
+disableKinds = ["section", "taxonomy", "term"]
 enableGitInfo = true
 ignoreErrors = ["error-disable-taxonomy"]
+panicOnWarning = true
 languageCode = "en-gb"
 title = "Martin Costello's Blog"
 
@@ -44,7 +45,7 @@ title = "Martin Costello's Blog"
   mediaType = "application/rss+xml"
 
 [permalinks]
-  posts = "/:title/"
+  posts = "/:contentbasename/"
 
 [security]
   [security.funcs]

@@ -5,7 +5,6 @@ tags: aot,aws,dotnet,lambda
 layout: post
 description: "Upgrading a .NET AWS Lambda function to use native AoT for improved cold-start performance by over 85%."
 image: "https://cdn.martincostello.com/blog_lambda-go-brr.png"
-url: /native-aot-make-dotnet-lambda-go-brr/
 ---
 
 <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-go-brr.png" alt="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" title="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" height="384px" width="384px">
