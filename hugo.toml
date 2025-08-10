@@ -14,10 +14,10 @@ title = "Martin Costello's Blog"
   twitter_handle = "martin_costello"
   cdn_domain = "cdn.martincostello.com"
   site_domain = "blog.martincostello.com"
-  analytics_id = "G-XJFV74HRL6"
+  analyticsId = "G-XJFV74HRL6"
   site_verification_bing = "D6C2E7551C902F1A396D8564C6452930"
   site_verification_google = "ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"
-  render_analytics = true
+  renderAnalytics = true
 
 [markup]
   [markup.goldmark]

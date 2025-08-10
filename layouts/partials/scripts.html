@@ -1,11 +1,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js" integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{ if .Site.Params.render_analytics }}
-<script src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analytics_id }}" async></script>
+{{ if .Site.Params.renderAnalytics }}
+<script src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analyticsId }}" async></script>
 {{ end }}
 <script>
   window.hugoSiteParams = {
-    render_analytics: {{ .Site.Params.render_analytics }},
-    analytics_id: "{{ .Site.Params.analytics_id }}"
+    renderAnalytics: {{ .Site.Params.renderAnalytics }},
+    analyticsId: "{{ .Site.Params.analyticsId }}"
   };
 </script>
 {{ $js := resources.Get "scripts/site.js" }}

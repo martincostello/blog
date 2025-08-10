@@ -29,9 +29,9 @@ window.addEventListener('load', async () => {
 !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.defer = ""; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
 
 // Google Analytics
-if (window.hugoSiteParams && window.hugoSiteParams.render_analytics) {
+if (window.hugoSiteParams && window.hugoSiteParams.renderAnalytics) {
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', window.hugoSiteParams.analytics_id);
+    gtag('config', window.hugoSiteParams.analyticsId);
 }
