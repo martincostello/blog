@@ -23,7 +23,7 @@ This project is licensed under the [MIT](https://github.com/martincostello/blog/
 To build the website run the following command (requires [Hugo](https://gohugo.io/)):
 
 ```sh
-hugo --minify
+hugo
 ```
 
 Alternatively, you can use the PowerShell build script (requires npm to run tests):

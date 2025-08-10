@@ -35,7 +35,7 @@ title = "Martin Costello's Blog"
     style = "github"
 
 [minify]
-  minifyOutput = false
+  minifyOutput = true
 
 [outputs]
   home = ["HTML", "RSS"]

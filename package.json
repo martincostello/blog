@@ -32,7 +32,7 @@
   },
   "scripts": {
     "all": "npm run format-check && npm run build && npm run install-browsers && npm run test",
-    "build": "hugo --minify",
+    "build": "hugo",
     "format": "prettier --write **/*.js",
     "format-check": "prettier --check **/*.js",
     "install-browsers": "npx playwright install --with-deps chromium",
