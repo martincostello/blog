@@ -70,6 +70,13 @@ jobs:
       shell: pwsh
       run: ./build.ps1
 
+    - name: GZip HTML files
+      shell: bash
+      run: |
+        find ./public -type f -name '*.html' -print0 | while IFS= read -r -d '' file; do
+          gzip --stdout "${file}" > "${file}.gz"
+        done
+
     - name: Publish blog
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
