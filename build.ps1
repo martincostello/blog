@@ -7,12 +7,11 @@ param(
     [Parameter(Mandatory = $false)][switch] $Serve
 )
 
-# Set environment variables for git info (if not already set)
-if (-not $env:GIT_COMMIT_SHA) {
-    $env:GIT_COMMIT_SHA = git rev-parse HEAD
+if (-Not ${env:GIT_COMMIT_SHA}) {
+    ${env:GIT_COMMIT_SHA} = ${env:GITHUB_REF} ?? (git rev-parse HEAD)
 }
-if (-not $env:GIT_BRANCH) {
-    $env:GIT_BRANCH = git rev-parse --abbrev-ref HEAD
+if (-Not ${env:GIT_BRANCH}) {
+    ${env:GIT_BRANCH} = ${env:GITHUB_REF_NAME} ?? (git rev-parse --abbrev-ref HEAD)
 }
 
 hugo
@@ -22,5 +21,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($Serve) {
+    ${env:HUGO_PARAMS_analyticsId} = ""
+    ${env:HUGO_PARAMS_renderAnalytics} = "false"
     hugo server --buildDrafts --buildFuture
 }
