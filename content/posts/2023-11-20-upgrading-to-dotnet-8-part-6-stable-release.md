@@ -51,15 +51,16 @@ A few days later I noticed that some non-critical automation we use internally t
 
 A little refactoring later and adjusting the logging lead to the following exception that was being swallowed on the assumption it would only fail for mis-configured time zone IDs:
 
-<pre class="highlight plaintext"><code>System.TimeZoneNotFoundException: The time zone ID 'Europe/London' was not found on the local computer.
+```text
+System.TimeZoneNotFoundException: The time zone ID 'Europe/London' was not found on the local computer.
  ---> System.IO.DirectoryNotFoundException: Could not find a part of the path '/usr/share/zoneinfo/Europe/London'.
    at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
    at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
    at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
    at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
    at System.TimeZoneInfo.ReadAllBytesFromSeekableNonZeroSizeFile(String path, Int32 maxFileSize)
-   at System.TimeZoneInfo.TryGetTimeZoneFromLocalMachineCore(String id, TimeZoneInfo& value, Exception& e)</code>
-</pre>
+   at System.TimeZoneInfo.TryGetTimeZoneFromLocalMachineCore(String id, TimeZoneInfo& value, Exception& e)
+```
 
 The failures were coming from the calls to [`TimeZoneInfo.FindSystemTimeZoneById(string)`][findtimezonebyid] used to convert UTC `DateTimeOffset` values to their local time zone equivalents. The failure was causing release window definitions used by the automation to be failed to be parsed, so the code was failing safe and not auto-approving the deployments as it didn't know whether it was a safe time of day to do so.
 
@@ -77,19 +78,21 @@ The code changes required for this scenario are pretty simple, as the following 
 
 Before the code was essentially this:
 
-<pre class="highlight plaintext"><code>var timeZoneId = "Europe/London";
+```csharp
+var timeZoneId = "Europe/London";
 var utcNow = TimeProvider.System.GetUtcNow();
 var timeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
-var localNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);</code>
-</pre>
+var localNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);
+```
 
 Using NodaTime, the code becomes:
 
-<pre class="highlight plaintext"><code>var timeZoneId = "Europe/London";
+```csharp
+var timeZoneId = "Europe/London";
 var utcNow = TimeProvider.System.GetUtcNow();
 var timeZone = DateTimeZoneProviders.Tzdb[timeZoneId];
-var localNow = Instant.FromDateTimeUtc(utcNow).InZone(timeZone).ToDateTimeUnspecified();</code>
-</pre>
+var localNow = Instant.FromDateTimeUtc(utcNow).InZone(timeZone).ToDateTimeUnspecified();
+```
 
 I hope that the AWS teams will be able to add tzdb to Amazon Linux 2023 so I can remove NodaTime again, but if it's not added to the custom
 runtime I certainly hope it's added to any forthcoming managed runtime for .NET 8. Otherwise, I can see a lot of developers needing to update

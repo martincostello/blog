@@ -45,16 +45,16 @@ As of writing this blog post this is still being looked into.
 emitting code correctly where the lambda method for the endpoint captures
 a type parameter from the method calling the `Map*()` method. For example:
 
-<pre class="highlight plaintext">
-<code>public static RouteHandlerBuilder MapRepositoryUpdate&lt;T&gt;(
+```csharp
+public static RouteHandlerBuilder MapRepositoryUpdate<T>(
     this IEndpointRouteBuilder endpoints,
     string pattern,
-    Func&lt;IConfigurationRepository, RepositoryId, T, CancellationToken, Task&lt;bool&gt;&gt; operation)
+    Func<IConfigurationRepository, RepositoryId, T, CancellationToken, Task<bool>> operation)
 {
     return endpoints.MapPatch(pattern, async (
         long installationId,
         long repositoryId,
-        [FromBody] Payload&lt;T&gt; request,
+        [FromBody] Payload<T> request,
         InstallationService service,
         IConfigurationRepository repository,
         CancellationToken cancellationToken) =>
@@ -63,9 +63,9 @@ a type parameter from the method calling the `Map*()` method. For example:
         {
             return Results.NotFound();
         }
-&nbsp;
+
         await repository.EnsureRepositoryAsync(repositoryId, cancellationToken);
-&nbsp;
+
         return await operation(repository, new(repositoryId), request.Value, cancellationToken) switch
         {
             false => Results.Conflict(),
@@ -74,8 +74,8 @@ a type parameter from the method calling the `Map*()` method. For example:
     }).RequireAuthorization();
 }
 
-internal sealed record Payload&lt;T&gt;(T Value);</code>
-</pre>
+internal sealed record Payload<T>(T Value);
+```
 
 This turned out to be a [known issue][dotnet-aspnetcore-47338], but unfortunately
 it doesn't appear to be in scope to be resolved as part of the .NET 8 release.
@@ -151,25 +151,27 @@ this for me, but it still needs the derived test classes to also declare
 a constructor to pass through the `ITestOutputHelper` instance. This results
 in a test class that looks something like this:
 
-<pre class="highlight plaintext"><code>public class MyTests : TestsBase
+```csharp
+public class MyTests : TestsBase
 {
     public MyTests(ITestOutputHelper outputHelper)
         : base(outputHelper)
     {
     }
-&nbsp;
+
     // Here be tests...
-}</code>
-</pre>
+}
+```
 
 With the adoption of primary constructors, this can be simplified to
 the following:
 
-<pre class="highlight plaintext"><code>public class MyTests(ITestOutputHelper outputHelper) : TestsBase(outputHelper)
+```csharp
+public class MyTests(ITestOutputHelper outputHelper) : TestsBase(outputHelper)
 {
     // Here be tests...
-}</code>
-</pre>
+}
+```
 
 Code formatting preferences aside, I think this is a great improvement
 as it not just reduces the number of lines of code you need in your types,

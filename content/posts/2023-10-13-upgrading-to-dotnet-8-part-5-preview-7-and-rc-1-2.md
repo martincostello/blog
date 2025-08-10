@@ -38,17 +38,17 @@ despite asynchronous versions now being being available.
 
 The main one flushed out in this preview for the code I've been testing was this:
 
-<pre class="highlight plaintext">
-<code>using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
-using var document = JsonDocument.Parse(stream);</code>
-</pre>
+```csharp
+using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
+using var document = JsonDocument.Parse(stream);
+```
 
 In these cases, the fix is trivial:
 
-<pre class="highlight plaintext">
-<code>using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
-using var document = await JsonDocument.ParseAsync(stream);</code>
-</pre>
+```csharp
+using var stream = await response.Content.ReadAsStreamAsync(Context.RequestAborted);
+using var document = await JsonDocument.ParseAsync(stream);
+```
 
 ### FakeTimeProvider Experimental Warnings
 
@@ -79,10 +79,8 @@ so a new [CA1863][ca1863] analyzer warning has been added to the .NET SDK.
 
 An example of a Git diff to change some string formatting to use this new pattern is shown below.
 
-<!-- markdownlint-disable MD030 -->
-
-<pre class="highlight plaintext">
-<code>using System;
+```diff
+using System;
 using System.Globalization;
 + using System.Text;
 
@@ -94,10 +92,8 @@ public class Greeter
 -       Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Hello {0}!", name));
 +       Console.WriteLine(string.Format(CultureInfo.InvariantCulture, GreetingFormat, name));
     }
-}</code>
-</pre>
-
-<!-- markdownlint-enable MD030 -->
+}
+```
 
 ## Release Candidate 1
 
@@ -206,14 +202,14 @@ use on projects that don't target at least .NET 6. A new analyzer warning, NETSD
 to fix if you have a project doing multi-targeting (such as [Polly][polly]) by adding a condition to project files where the
 analyzer is enabled, like so:
 
-<pre class="highlight plaintext">
-<code>&lt;PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))"&gt;
-  &lt;EnableAotAnalyzer&gt;true&lt;/EnableAotAnalyzer&gt;
-  &lt;EnableSingleFileAnalyzer&gt;true&lt;/EnableSingleFileAnalyzer&gt;
-  &lt;EnableTrimAnalyzer&gt;true/EnableTrimAnalyzer&gt;
-  &lt;IsTrimmable&gt;true&lt;/IsTrimmable&gt;
-&lt;/PropertyGroup&gt;</code>
-</pre>
+```xml
+<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
+  <EnableAotAnalyzer>true</EnableAotAnalyzer>
+  <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+  <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  <IsTrimmable>true</IsTrimmable>
+</PropertyGroup>
+```
 
 ## Release Candidate 2
 
