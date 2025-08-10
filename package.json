@@ -19,8 +19,9 @@
     "url": "git+https://github.com/martincostello/blog.git"
   },
   "scripts": {
-    "all": "npm run build && npm run test",
+    "all": "npm run build && npm run install-browsers && npm run test",
     "build": "hugo --minify",
+    "install-browsers": "npx playwright install --with-deps chromium",
     "serve": "hugo server",
     "test": "npx playwright test"
   },
