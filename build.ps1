@@ -14,7 +14,7 @@ if (-Not ${env:GIT_BRANCH}) {
     ${env:GIT_BRANCH} = ${env:GITHUB_REF_NAME} ?? (git rev-parse --abbrev-ref HEAD)
 }
 
-hugo
+hugo --minify
 
 if ($LASTEXITCODE -ne 0) {
     throw "hugo build failed with exit code $LASTEXITCODE"
