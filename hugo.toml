@@ -4,20 +4,22 @@ enableGitInfo = true
 languageCode = "en-gb"
 title = "Martin Costello's Blog"
 
+[build]
+  writeStats = true
+
 [params]
-  blog_author = "Martin Costello"
-  blog_title = "Martin Costello's Blog"
-  blog_subtitle = "The blog of a software developer and tester."
-  bluesky_handle = "martincostello.com"
-  facebook_profile = "10100867762061905"
-  github_login = "martincostello"
-  twitter_handle = "martin_costello"
-  cdn_domain = "cdn.martincostello.com"
-  site_domain = "blog.martincostello.com"
   analyticsId = "G-XJFV74HRL6"
-  site_verification_bing = "D6C2E7551C902F1A396D8564C6452930"
-  site_verification_google = "ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"
+  blogAuthor = "Martin Costello"
+  blogSubtitle = "The blog of a software developer and tester."
+  blogTitle = "Martin Costello's Blog"
+  blueskyHandle = "martincostello.com"
+  cdnDomain = "cdn.martincostello.com"
+  facebookProfile = "10100867762061905"
   renderAnalytics = true
+  siteDomain = "blog.martincostello.com"
+  siteVerificationBing = "D6C2E7551C902F1A396D8564C6452930"
+  siteVerificationGoogle = "ji6SNsPQEbNQmF252sQgQFswh-b6cDnNOa3AHvgo4J0"
+  twitterHandle = "martin_costello"
 
 [markup]
   [markup.goldmark]
@@ -28,26 +30,23 @@ title = "Martin Costello's Blog"
     lineNos = false
     style = "github"
 
-[permalinks]
-  posts = "/:title/"
-
-[taxonomies]
-  tag = "tags"
+[minify]
+  minifyOutput = true
 
 [outputs]
   home = ["HTML", "RSS"]
   page = ["HTML"]
 
 [outputFormats.RSS]
-  mediaType = "application/rss+xml"
   baseName = "feed"
+  mediaType = "application/rss+xml"
 
-[minify]
-  minifyOutput = true
-
-[build]
-  writeStats = true
+[permalinks]
+  posts = "/:title/"
 
 [security]
   [security.funcs]
     getenv = ['^HUGO_', '^CI$', '^GIT_.*']
+
+[taxonomies]
+  tag = "tags"

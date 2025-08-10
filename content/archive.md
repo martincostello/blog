@@ -22,11 +22,11 @@ url: /archive/
         <p>
           <div class="row d-none d-md-block">
                 <div class="col-lg-6">
-                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blog_author }}" rel="noopener" title="{{ $.Site.Params.blog_author }}">{{ $.Site.Params.blog_author }}</a>
+                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
                 </div>
             </div>
             <div class="row d-md-none col-12">
-                {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blog_author }}" rel="noopener" title="{{ $.Site.Params.blog_author }}">{{ $.Site.Params.blog_author }}</a>
+                {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
             </div>
         </p>
     </div>
