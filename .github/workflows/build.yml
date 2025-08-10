@@ -30,11 +30,19 @@ jobs:
         filter: 'tree:0'
         show-progress: false
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@7c3e79b02e5fc7e3d5e96bd1fe1a8b3e8df1e3c2 # v3.1.0
-      with:
-        hugo-version: '0.142.0'
-        extended: true
+    - name: Install Hugo
+      shell: bash
+      env:
+        # renovate: datasource=github-releases depName=Hugo packageName=gohugoio/hugo
+        HUGO_VERSION: 'v0.142.0'
+      run: |
+        HUGO_FILE="hugo_extended_${HUGO_VERSION#v}_Linux-64bit.tar.gz"
+        TEMP_DIR="${RUNNER_TEMP}/hugo-install"
+        mkdir --parents "${TEMP_DIR}" && cd "${TEMP_DIR}"
+        curl --silent --location "https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/${HUGO_FILE}" --output "${HUGO_FILE}"
+        tar -xf "${HUGO_FILE}"
+        sudo mv hugo /usr/local/bin/
+        hugo version
 
     - name: Build blog
       shell: pwsh
