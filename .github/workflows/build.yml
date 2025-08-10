@@ -30,26 +30,21 @@ jobs:
         filter: 'tree:0'
         show-progress: false
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # v1.254.0
-
-    - name: Update file timestamps
-      shell: bash
-      run: |
-        git ls-files | xargs -I{} git log -1 --date=format:%Y%m%d%H%M.%S --format='touch -t %ad "{}"' "{}" | $SHELL
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@7c3e79b02e5fc7e3d5e96bd1fe1a8b3e8df1e3c2 # v3.1.0
+      with:
+        hugo-version: '0.142.0'
+        extended: true
 
     - name: Build blog
       shell: pwsh
-      run: |
-        bundler config path vendor/bundle
-        bundler install
-        ./build.ps1
+      run: ./build-hugo.ps1
 
     - name: Publish blog
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: blog
-        path: ./build
+        path: ./public
         if-no-files-found: error
 
   lint:
@@ -118,7 +113,7 @@ jobs:
       uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
       with:
         name: blog
-        path: ./build
+        path: ./public
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
@@ -128,7 +123,7 @@ jobs:
         aws-region: eu-west-2
 
     - name: Deploy to S3
-      run: aws s3 sync ./build/ s3://blog.martincostello.com --cache-control "max-age=604800" --delete
+      run: aws s3 sync ./public/ s3://blog.martincostello.com --cache-control "max-age=604800" --delete
 
     - name: Create CloudFront invalidation
       shell: pwsh

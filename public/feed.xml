@@ -156,11 +156,36 @@ Apple Pay for payment will make your experience even more dynamic and friction-f
 &lt;p>From my own testing I found the odd thing here and there during development based on what I&amp;rsquo;ve read in the past is best-practice. These were exclusively application/coding changes. Fixing these was a mix of &amp;ldquo;Oh yeah&amp;rdquo; realisations or a quick Google leading to MSDN or Stack Overflow, leading to some simple one-line changes here and there.&lt;/p></description></item><item><title>About Me</title><link>https://blog.martincostello.com/about-me/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/about-me/</guid><description>&lt;div class="row">
  &lt;div class="col-md-3">
  &lt;div class="pt-4 row text-center">
- &lt;img class="img-fluid mx-auto d-block lazy" data-original="https://{{ .Site.Params.cdn_domain }}/martin_small-v3.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="{{ .Site.Params.blog_author }}" title="{{ .Site.Params.blog_author }}" />
+ &lt;img class="img-fluid mx-auto d-block lazy" data-original="https://cdn.martincostello.com/martin_small-v3.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Martin Costello" title="Martin Costello" />
  &lt;/div>
  &lt;/div>
  &lt;div class="col-md-9">
- &lt;h1>{{ .Title }}&lt;/h1>
+ &lt;h1>About Me&lt;/h1>
  &lt;p class="lead">My name is Martin, and I'm a software developer and tester based near London.&lt;/p>
  &lt;p>Hi there! My name is Martin, and I'm a software developer and tester based near London.&lt;/p>
- &lt;p>I've been working in software development for over {{ div (sub now.Unix 1157328000) 31536000 }} years now. My experience is primarily in the Microsoft technology stack with C# .NET, working on ASP.NET Core-based technologies deployed in AWS and Azure.&lt;/p></description></item></channel></rss>
+ &lt;p>I've been working in software development for over 18 years now. My experience is primarily in the Microsoft technology stack with C# .NET, working on ASP.NET Core-based technologies deployed in AWS and Azure.&lt;/p></description></item><item><title>Archive</title><link>https://blog.martincostello.com/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.martincostello.com/archive/</guid><description>&lt;div class="p-4 mb-3 bg-light rounded-3">
+ &lt;div class="container-fluid py-3">
+ &lt;h1 class="display-5">
+ Archive
+ &lt;span class="fa-solid fa-box-archive" aria-hidden="true">&lt;/span>
+ &lt;/h1>
+ &lt;p class="col-md-8 fs-4 lead">The archive of blog posts for Martin Costello's blog.&lt;/p>
+ &lt;/div>
+&lt;/div>
+&lt;p>{{ range .Site.RegularPages }}&lt;/p>
+&lt;div class="row">
+ &lt;div class="col">
+ &lt;h2>&lt;a href="{{ .Permalink }}">{{ .Title }}&lt;/a>&lt;/h2>
+ &lt;p>
+ &lt;div class="row d-none d-md-block">
+ &lt;div class="col-lg-6">
+ {{ .Date.Format "2 January 2006" }} by&amp;nbsp;&lt;a href="https://blog.martincostello.com/about-me/" alt="{{ $.Site.Params.blog_author }}" rel="noopener" title="{{ $.Site.Params.blog_author }}">{{ $.Site.Params.blog_author }}&lt;/a>
+ &lt;/div>
+ &lt;/div>
+ &lt;div class="row d-md-none col-12">
+ {{ .Date.Format "2 January 2006" }} by&amp;nbsp;&lt;a href="https://blog.martincostello.com/about-me/" alt="{{ $.Site.Params.blog_author }}" rel="noopener" title="{{ $.Site.Params.blog_author }}">{{ $.Site.Params.blog_author }}&lt;/a>
+ &lt;/div>
+ &lt;/p>
+ &lt;/div>
+&lt;/div>
+{{ end }}</description></item></channel></rss>
