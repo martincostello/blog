@@ -14,7 +14,7 @@ do that set up we can now dig into some highlights of the things we found
 in our testing of .NET 8 itself in the preview releases available so far
 this year!
 
-READMORE
+<!--more-->
 
 ## Preview 1
 

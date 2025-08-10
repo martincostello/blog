@@ -13,7 +13,7 @@ Today I've published a NuGet package that simplifies the mechanics of writing lo
 
 Pull Requests and questions are welcome over on GitHub - I hope you find it useful!
 
-READMORE
+<!--more-->
 
 ## Rationale
 

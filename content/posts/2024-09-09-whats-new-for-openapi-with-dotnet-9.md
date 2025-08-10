@@ -33,7 +33,7 @@ new way to generate OpenAPI documents for ASP.NET Core Minimal APIs.
 In this post, we'll take a look at the new functionality and compare it to the exsisting NSwag and Swashbuckle
 libraries to see how it compares in both features as well as performance.
 
-READMORE
+<!--more-->
 
 ## Why a new OpenAPI library?
 

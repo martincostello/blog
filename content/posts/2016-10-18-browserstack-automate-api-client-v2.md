@@ -9,7 +9,7 @@ image: "https://cdn.martincostello.com/blog_browserstack-logo.png"
 
 I've just released [version 2.0.1](https://www.nuget.org/packages/MartinCostello.BrowserStack.Automate) of the [BrowserStack Automate](https://www.browserstack.com/automate) .NET client open source project that I maintain on [GitHub](https://martincostello.github.io/browserstack-automate/).
 
-READMORE
+<!--more-->
 
 This release adds functionality for consuming more of the BrowserStack Automate API, such as for deleting resources, but also adds support for targeting .NET Core via the use of .NET Standard 1.3.
 

@@ -22,10 +22,10 @@ I thought it would be a fun mini-project to set up some automation to run the be
 monitor the performance of my open source projects easily going forwards.
 
 In this post I'll cover how I went about setting up a continuous benchmarking pipeline using GitHub Actions, [GitHub Pages][github-pages]
-and [Blazor][blazor] to run and visualise the results of the benchmarks on a "good enough" basis without needing to spend any money__*__
+and [Blazor][blazor] to run and visualise the results of the benchmarks on a "good enough" basis without needing to spend any money<sup>*</sup>
 on infrastructure.
 
-READMORE
+<!--more-->
 
 _*Unless you want to use this with GitHub Enterprise Server or non-public repositories. More information about this later._
 

@@ -15,7 +15,7 @@ create difficulty for authoring reliable tests. Today, we’re open-sourcing a l
 many developers have with this common requirement: JustEat.HttpClientInterception. You can find the repository in
 [our GitHub organisation][github] and can find the package available to [download at JustEat.HttpClientInterception on NuGet.org][nuget].
 
-READMORE
+<!--more-->
 
 ## The Problem
 

@@ -43,7 +43,7 @@ This week [.NET Core 3.0 preview 6](https://devblogs.microsoft.com/dotnet/announ
 
 So what should you do if you want to use the new System.Text.Json APIs with Refit?
 
-READMORE
+<!--more-->
 
 Refit has some extension points to let you change how things work, including JSON (de)serialization. This means we can just provide our own `IContentSerializer` implementation to the `RefitSettings` class to replace JSON.NET with the new JSON APIs.
 

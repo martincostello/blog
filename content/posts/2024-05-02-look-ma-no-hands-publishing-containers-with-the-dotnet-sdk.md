@@ -30,7 +30,7 @@ you can containerise your application and not need a Dockerfile at all! 🚫🐋
 Plus, as a bonus, if building with GitHub Actions, we can leverage this support to
 [attest the provenance of our container images][using-artifact-attestations] with minimal additional effort. 🕵️🪪
 
-READMORE
+<!--more-->
 
 ## Publishing your app as a container
 

@@ -13,7 +13,7 @@ With the release of .NET 8.0.0 and the end of the preview releases, my past week
 
 <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_upgrade-all-the-things.jpg" alt="The All the Things meme, with the text: Upgrade All The Things To .NET 8" title="The All the Things meme, with the text: Upgrade All The Things To .NET 8">
 
-READMORE
+<!--more-->
 
 ## Upgrading All The Things
 

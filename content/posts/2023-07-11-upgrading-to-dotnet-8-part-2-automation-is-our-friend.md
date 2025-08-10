@@ -24,7 +24,7 @@ where we as humans really add value compared to the mechanical parts of an upgra
 In part 2 of this series I'm going to explain how I've gone about automating the boring
 parts of the process of testing the latest .NET preview releases using [GitHub Actions][github-actions].
 
-READMORE
+<!--more-->
 
 ## Getting started
 

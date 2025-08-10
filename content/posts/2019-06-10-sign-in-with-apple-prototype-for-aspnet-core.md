@@ -21,7 +21,7 @@ I've recently become a maintainer of the [aspnet-contrib](https://github.com/asp
 
 Given the community discussion and appetite, some previous experience implementing [Apple Pay JS for ASP.NET Core](https://blog.martincostello.com/bringing-apple-pay-to-the-web "Bringing Apple Pay to the web"), and some shiny new technology to play with, last I decided to try my hand at adding support for _Sign In with Apple_ for ASP.NET Core myself via _AspNet.Security.OAuth.Providers_.
 
-READMORE
+<!--more-->
 
 Others have already blogged in great detail about the _what_ of _Sign In with Apple_, including [Aaron Parecki](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple "What the Heck is Sign In with Apple?") of okta and [Bruno Krebs](https://auth0.com/blog/what-is-sign-in-with-apple-a-new-identity-provider/ "Sign In with Apple: Learn About the New Identity Provider") of auth0, so I won't reiterate the information they've covered there. Instead I'll focus on the ASP.NET Core integration specifics for how to get the service working with the REST API instead.
 

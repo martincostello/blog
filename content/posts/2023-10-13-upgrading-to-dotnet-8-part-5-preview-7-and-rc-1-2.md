@@ -21,7 +21,7 @@ instead I figured I'd just catch-up with myself and summarise everything in this
 Release Candidate 2 is also the last planned release before the final release of .NET 8 in November
 to coincide with [.NET Conf 2023][dotnet-conf], so this is going to be the penultimate post in this series.
 
-READMORE
+<!--more-->
 
 ## Preview 7
 

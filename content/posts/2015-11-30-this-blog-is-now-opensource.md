@@ -8,7 +8,7 @@ description: "My personal blog is now open source, and hosted on GitHub."
 
 TL;DR - This blog is now hosted on [GitHub.com](https://github.com/martincostello/blog)!
 
-READMORE
+<!--more-->
 
 I set up this blog a while ago (March 2014 to be specific) and up until now it has been hosted in my Visual Studio Team Services (formerly Visual Studio Online, neé TFS Online) account, which effectively made this blog closed-source as VSTS is private.
 

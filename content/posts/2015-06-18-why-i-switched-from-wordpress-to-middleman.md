@@ -10,7 +10,7 @@ A few years ago I thought I'd set up a blog. Initially I created a blog in [Blog
 
 Flash-foward a few years, and I had a sum total of [one solitary blog post](https://blog.martincostello.com/ensuring-your-asp-net-website-is-secure/). Yeah, so I'd been a bit slack on the whole writing a blog thing. However I've got an idea for a second blog post that I've been procrastinating over writing for a while, so I thought I'd start on that (aside: this isn't that blog post, that's coming soon). By this point I'd grown two different Azure subscriptions and the blog was running in the wrong one and I was starting to hit limits on my free Azure credits due to other usage, so I figured I'd switch it around. The problems begin.
 
-READMORE
+<!--more-->
 
 ## Problems, Problems, Problems
 

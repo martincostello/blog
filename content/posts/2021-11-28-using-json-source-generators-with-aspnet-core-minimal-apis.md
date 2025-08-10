@@ -23,7 +23,7 @@ to and from JSON without using reflection (which is relatively slow).
 It sounds like that could give applications a performance boost at runtime, but
 how can we use the new JSON source generator with ASP.NET Core [Minimal APIs][4]?
 
-READMORE
+<!--more-->
 
 Out-of-the box, ASP.NET Core Minimal APIs do not currently support using the JSON
 source generator and just use the `JsonSerializer.SerializeAsync()` methods

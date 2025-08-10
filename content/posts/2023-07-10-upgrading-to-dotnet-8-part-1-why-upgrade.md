@@ -30,7 +30,7 @@ patched is the primary reason, but there's another reason that sounds much more 
 >
 > _[Damian Edwards][damian-edwards]_
 
-READMORE
+<!--more-->
 
 As Damian says [in this talk from Microsoft Build 2023][dotnet-performance-deep-dive], upgrading
 .NET will often give you **free** performance improvements in your applications. Just by upgrading

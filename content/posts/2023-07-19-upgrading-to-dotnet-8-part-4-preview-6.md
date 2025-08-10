@@ -12,7 +12,7 @@ to upgrade my projects to .NET 8 - this time to preview 6. In this post
 I'll cover more experiences with the new source generators with this
 preview as well as a new feature of C# 12: _primary constructors_.
 
-READMORE
+<!--more-->
 
 ## More Fun with Source Generators
 

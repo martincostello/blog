@@ -24,7 +24,7 @@ Alberto from our iOS team wrote a post about [how we introduced Apple Pay][just-
 iOS app last year, and this post follows on from that journey with a write-up of how we went about making
 Apple Pay available on our website to iOS and macOS users with the new [Apple Pay JS SDK][apple-pay-js].
 
-READMORE
+<!--more-->
 
 ## Getting set up
 

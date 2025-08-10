@@ -12,7 +12,7 @@ I find it so much more pleasurable to code against compared to "traditional" ASP
 
 Each new release, both major and minor, brings something new to geek-out over, but ASP.NET Core 2.1 has been a particular stand-out so far for new features and benefits that I find really compelling as a software developer.
 
-READMORE
+<!--more-->
 
 In this blog post I'm going to cover two aspects of software development ASP.NET Core 2.1 really helps with — _productivity_ and _performance_ — with some specific examples from my personal side projects as well as professionally at my day job.
 

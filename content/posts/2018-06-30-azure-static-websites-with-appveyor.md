@@ -10,7 +10,7 @@ This week the Azure storage team [finally announced](https://azure.microsoft.com
 
 I've been hosting this blog in [AWS for almost a year now](https://blog.martincostello.com/migrating-from-iis-to-s3/ "Migrating to Amazon S3"), so I thought I'd give the public preview a try and automate deployment with [AppVeyor](https://www.appveyor.com/ "AppVeyor CI") as well at the same time.
 
-READMORE
+<!--more-->
 
 Part of the primary reason this blog is hosted in AWS is because it wasn't possible to host the static site in Azure, which is my preferred cloud hosting provider for most of my infrastructure. But as that wasn't possible I went with S3 for content and AWS Lambda@Edge to handle IIS-style folders and custom HTTP response headers. You can read more about that in this blog post: [https://blog.martincostello.com/migrating-from-iis-to-s3/](https://blog.martincostello.com/migrating-from-iis-to-s3/ "Migrating to Amazon S3")
 

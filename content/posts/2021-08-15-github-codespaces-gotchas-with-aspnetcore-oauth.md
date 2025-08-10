@@ -13,7 +13,7 @@ I'd give it a try with some existing projects. In the process I hit a few
 gotchas that took me a few hours to get to the bottom of. This post goes through
 some of those and how to resolve them.
 
-READMORE
+<!--more-->
 
 One of the projects I decided I'd try it out on is the [sample application][5] I
 recently published for integration testing with ASP.NET Core 6 [Minimal APIs][6].

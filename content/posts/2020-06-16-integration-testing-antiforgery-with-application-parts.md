@@ -14,7 +14,7 @@ A typical approach for this is to scrape the HTML response from the application 
 
 In this blog post I'll discuss an alternate approach using [ASP.NET Core Application Parts](https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts "Share controllers, views, Razor Pages and more with Application Parts") that can make such tests easier to author and maintain, allowing you to concentrate on the core logic of your tests, rather than boilerplate setup.
 
-READMORE
+<!--more-->
 
 ## Motivation
 

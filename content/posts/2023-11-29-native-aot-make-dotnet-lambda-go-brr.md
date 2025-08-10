@@ -23,7 +23,7 @@ With all these changes, I was curious to see how much of a difference AoT would 
 
 Let's dive in!
 
-READMORE
+<!--more-->
 
 ## Publishing as AoT
 

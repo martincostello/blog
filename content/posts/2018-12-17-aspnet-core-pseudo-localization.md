@@ -18,7 +18,7 @@ With transformations to lengthen the text, apply accents and surround it in brac
 
 I found the approach particularly interesting, so wondered how I could look at using it in my own day-to-day work.
 
-READMORE
+<!--more-->
 
 Before this year I'd not particularly worked on a large-scale application where its users could speak one of several different languages, but as part of my role at [Just Eat](https://careers.just-eat.com/departments/technology "Just Eat Technology") that's no longer the case.
 

@@ -11,7 +11,7 @@ Since I set up my blog in March 2014, it's been running in IIS as part of an Azu
 
 At the end of the day though, this blog is still statically generated, and running a whole web server (actually two, one in Azure's East US datacentre, another in UK South) is just overkill. Given that Amazon S3 supports static website hosting, I thought I'd migrate it to an S3 bucket instead.
 
-READMORE
+<!--more-->
 
 ## The Starting Point
 

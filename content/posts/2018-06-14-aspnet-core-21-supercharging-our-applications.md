@@ -17,7 +17,7 @@ two consumer-facing applications upgraded to use ASP.NET Core 2.1 to production 
 These applications have now been run in production for an entire weekend of peak traffic, and we’ve seen
 some great performance improvements – in some cases **improving average response times by over 40%**.
 
-READMORE
+<!--more-->
 
 ## Background
 

@@ -16,7 +16,7 @@ Have you ever wondered why Microsoft releases preview versions of their products
 Well, it’s so real customers can help ensure their quality before they go live. In this post, we’ll tell you
 about an issue we found in testing the previews of ASP.NET Core and how we worked with Microsoft to fix it.
 
-READMORE
+<!--more-->
 
 ## Early-Adoption and Release Candidates 🌅🐣
 

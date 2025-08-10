@@ -20,7 +20,7 @@ However, after three rounds of realisation, fixing and testing, there was one co
 
 So, Dear Reader, why have I written this? Well, I thought it would be a good idea to collate all the stuff that's best practice into a single blog post, and then include for each one the instructions of how to fix it. Helpful right? Well, at least I hope so.
 
-READMORE
+<!--more-->
 
 I've arranged them by flaw/requirement, with a quick explanation for each and then the steps to fix. Some fixes are code, some are Web.config settings, and others require digging around in the Registry. After that there's some links to resources you can use to help test your site to check for a number of vulnerabilities you want to be protected against.
 

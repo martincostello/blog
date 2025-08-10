@@ -13,7 +13,7 @@ Off the back of that success I thought I'd have a go at writing my own skill, wh
 
 Now the dust has settled and I've got some free time, I thought I'd do a blog post about how I got started with Alexa and the idea for the skill, how I coded it and set up the Continuous Integration, how I got it through the certification tests and, finally, setting up monitoring for it in production.
 
-READMORE
+<!--more-->
 
 ## Background
 

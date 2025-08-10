@@ -13,7 +13,7 @@ Version 2.0.0 of SQL LocalDB Wrapper is a major rewrite of version 1.x.x, and is
 - [NuGet package](https://www.nuget.org/packages/MartinCostello.SqlLocalDb "MartinCostello.SqlLocalDb on NuGet.org")
 - [GitHub repository](https://github.com/martincostello/sqllocaldb "SQL LocalDB Wrapper on GitHub.com")
 
-READMORE
+<!--more-->
 
 ## Origins
 

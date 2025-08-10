@@ -46,7 +46,7 @@ The source is available [in GitHub](https://github.com/martincostello/lambda-tes
 
 Further samples for using the library with xunit are available in GitHub here: [https://github.com/martincostello/lambda-test-server/tree/main/samples](https://github.com/martincostello/lambda-test-server/tree/main/samples "Lambda Test Server samples on GitHub.com")
 
-READMORE
+<!--more-->
 
 ## Background
 
