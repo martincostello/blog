@@ -1,0 +1,31 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "private": true,
+  "author": {
+    "name": "Martin Costello",
+    "url": "https://github.com/martincostello"
+  },
+  "bugs": {
+    "url": "https://github.com/martincostello/blog/issues"
+  },
+  "description": "Martin Costello's Blog",
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martincostello/blog.git"
+  },
+  "scripts": {
+    "all": "npm run build && npm run test",
+    "build": "hugo --minify",
+    "serve": "hugo server",
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^24.2.1"
+  }
+}

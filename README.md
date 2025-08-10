@@ -26,7 +26,7 @@ To build the website run the following command (requires [Hugo](https://gohugo.i
 hugo --minify
 ```
 
-Alternatively, you can use the PowerShell build script:
+Alternatively, you can use the PowerShell build script (requires npm to run tests):
 
 ```sh
 ./build.ps1
