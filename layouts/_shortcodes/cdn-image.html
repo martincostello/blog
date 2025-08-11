@@ -1,0 +1,5 @@
+{{- $class := "img-fluid mx-auto d-block" -}}
+{{- if .Params.class -}}
+    {{- $class = .Params.class -}}
+{{- end -}}
+<img src="https://{{ .Site.Params.cdnDomain }}/blog_{{ .Params.path }}" alt="{{ .Params.title }}" title="{{ .Params.title }}" class="{{ $class }}" >

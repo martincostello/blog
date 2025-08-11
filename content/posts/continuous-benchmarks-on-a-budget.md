@@ -4,13 +4,10 @@ date: 2024-09-23
 tags: actions,benchmarks,benchmarkdotnet,ci,dotnet,github
 layout: post
 description: "Using GitHub Actions, GitHub Pages and Blazor to run and visualise continuous benchmarks with BenchmarkDotNet with zero hosting costs."
-image: "https://cdn.martincostello.com/blog_benchmarks-regression.png"
+cdnImage: "benchmarks-regression.png"
 ---
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_benchmarks-regression.png"
-     alt="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points"
-     title="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points">
+{{< cdn-image path="benchmarks-regression.png" title="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points" >}}
 
 Over the last few months I've been doing a bunch of testing with the [new OpenAPI support in .NET 9][openapi-post].
 As part of that testing, I wanted to take a look at how the performance of the new libraries compared to the existing
@@ -211,17 +208,11 @@ to serve it over.
 
 With all the pieces in place, at a high-level the solution looks something like this:
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_benchmarks-workflow.png"
-     alt="A sequence diagram showing how the application, data and dashboard repositories interact to render charts"
-     title="A sequence diagram showing how the application, data and dashboard repositories interact to render charts">
+{{< cdn-image path="benchmarks-workflow.png" title="A sequence diagram showing how the application, data and dashboard repositories interact to render charts" >}}
 
 Which for the end-user (i.e. me) gives a nice interactive dashboard to visualise the results like this:
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_benchmarks-dashboard.png"
-     alt="A screenshot of the dashboard website showing two charts of time and memory consumption for a branch of a GitHub repository"
-     title="A screenshot of the dashboard website showing two charts of time and memory consumption for a branch of a GitHub repository">
+{{< cdn-image path="benchmarks-dashboard.png" title="A screenshot of the dashboard website showing two charts of time and memory consumption for a branch of a GitHub repository" >}}
 
 I've set up a demo repository ([martincostello/benchmarks-demo][benchmarks-demo]) that you can use as an inspiration for setting
 up some Benchmark.NET benchmarks and then using a GitHub Actions workflow to run them and publish them to another repository.
@@ -247,17 +238,11 @@ case for the majority of the benchmarks, but there was one benchmark that bucked
 Going back to the chart shown at the top of this blog post, you can see that the red line denoting memory usage has a noticeable,
 and consistent, uptick a few commits ago:
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_benchmarks-regression.png"
-     alt="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points"
-     title="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points">
+{{< cdn-image path="benchmarks-regression.png" title="A chart showing a time series for performance and memory usage with an increase in memory usage in the most recent data points" >}}
 
 If we hover over the first data point in the uptick, we can see that the change is from the upgrade from .NET 8 to .NET 9 RC1:
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_benchmarks-regression-tooltip.png"
-     alt="The above chart with a tooltip showing the Git commit associated with the increase in memory usage"
-     title="The above chart with a tooltip showing the Git commit associated with the increase in memory usage">
+{{< cdn-image path="benchmarks-regression-tooltip.png" title="The above chart with a tooltip showing the Git commit associated with the increase in memory usage" >}}
 
 I hadn't spotted this regression previously as the benchmark data is something I'd started collecting relatively recently, and the trends
 didn't go back far enough to show the regression at the time it was made through my testing of the .NET 9 pre-releases. It was only when
