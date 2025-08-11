@@ -11,15 +11,15 @@
 {{ range where .Site.RegularPages "Layout" "post" }}
 <div class="row">
     <div class="col">
-        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <h2><a href="{{ .Permalink }}" class="archive-link">{{ .Title }}</a></h2>
         <p>
           <div class="row d-none d-md-block">
                 <div class="col-lg-6">
-                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" class="archive-link" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
+                    {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
                 </div>
             </div>
             <div class="row d-md-none col-12">
-                {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" class="archive-link" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
+                {{ .Date.Format "2 January 2006" }} by&nbsp;<a href="/about-me/" alt="{{ $.Site.Params.blogAuthor }}" rel="noopener" title="{{ $.Site.Params.blogAuthor }}">{{ $.Site.Params.blogAuthor }}</a>
             </div>
         </p>
     </div>

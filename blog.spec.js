@@ -40,3 +40,45 @@ test('archive links are valid', async ({ page }) => {
     }).toPass();
   }
 });
+
+test('page images are valid', async ({ page }) => {
+  test.setTimeout(90_000);
+
+  await page.goto('/archive/');
+
+  const archiveLinks = await page.locator('a.archive-link');
+  await expect(archiveLinks).not.toHaveCount(0);
+
+  const pageUrls = ['/', '/about-me/', '/archive/'];
+
+  for (const link of await archiveLinks.elementHandles()) {
+    pageUrls.push(await link.getAttribute('href'));
+  }
+
+  for (const url of pageUrls) {
+    await page.goto(url);
+    await page.waitForLoadState('networkidle');
+
+    const images = await page.locator('img');
+
+    for (const image of await images.elementHandles()) {
+      const src = await image.getAttribute('src');
+      if (src.startsWith('data:')) {
+        continue;
+      }
+      await expect(async () => {
+        const response = await page.request.get(src);
+        expect(response.status(), `Image ${src} on page ${url} could not be loaded`).toBe(200);
+      }).toPass();
+    }
+
+    const metaImage = await page.locator('meta[property="og:image"]');
+    if (metaImage) {
+      await expect(async () => {
+        const src = await metaImage.getAttribute('content');
+        const response = await page.request.get(src);
+        expect(response.status(), `Image ${src} on page ${url} could not be loaded`).toBe(200);
+      }).toPass();
+    }
+  }
+});
