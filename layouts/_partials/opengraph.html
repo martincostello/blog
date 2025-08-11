@@ -1,6 +1,8 @@
 <meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ with .Title }}{{ . }}{{ else }}{{ .Site.Params.blogTitle }}{{ end }}{{ end }}" />
 {{- $og_image := "" -}}
-{{- if .Params.image -}}
+{{- if .Params.cdnImage -}}
+    {{- $og_image = printf "https://%s/blog_%s" .Site.Params.cdnDomain .Params.cdnImage -}}
+{{- else if .Params.image -}}
     {{- $og_image = .Params.image -}}
 {{- else -}}
     {{- $og_image = printf "https://%s/martin_small-v3.png" .Site.Params.cdnDomain -}}
