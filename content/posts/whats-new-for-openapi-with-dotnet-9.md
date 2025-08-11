@@ -4,10 +4,10 @@ date: 2024-09-09
 tags: dotnet,openapi,swagger,swashbuckle
 layout: post
 description: "A look at the new Microsoft.AspNetCore.OpenApi package in .NET 9 and comparing it to NSwag and Swashbuckle.AspNetCore."
-image: "https://cdn.martincostello.com/blog_openapi.png"
+cdnImage: "openapi.png"
 ---
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_openapi.png" alt="The OpenAPI logo" title="The OpenAPI logo" height="272px" width="899px">
+{{< cdn-image path="openapi.png" title="The OpenAPI logo" height="272px" width="899px" >}}
 
 Developers in the .NET ecosystem have been writing APIs with ASP.NET and ASP.NET Core for years, and
 [OpenAPI][openapi] has been a popular choice for documenting those APIs.
@@ -329,13 +329,13 @@ a lot of variance in the OpenAPI package's performance, compared to the other tw
 <div class="container mx-1">
   <div class="row">
     <div class="col">
-      <img class="img-fluid" src="https://cdn.martincostello.com/blog_openapi-aspnetcore-preview7.png" alt="ASP.NET Core results for .NET 9 preview 7" title="ASP.NET Core results for .NET 9 preview 7" >
+      {{< cdn-image path="openapi-aspnetcore-preview7.png" title="ASP.NET Core results for .NET 9 preview 7" class="img-fluid" >}}
     </div>
     <div class="col">
-      <img class="img-fluid" src="https://cdn.martincostello.com/blog_openapi-nswag-preview7.png" alt="NSwag results for .NET 9 preview 7" title="NSwag results for .NET 9 preview 7">
+      {{< cdn-image path="openapi-nswag-preview7.png" title="NSwag results for .NET 9 preview 7" class="img-fluid" >}}
     </div>
     <div class="col">
-      <img class="img-fluid" src="https://cdn.martincostello.com/blog_openapi-swashbuckle-preview7.png" alt="Swashbuckle results for .NET 9 preview 7" title="Swashbuckle results for .NET 9 preview 7">
+      {{< cdn-image path="openapi-swashbuckle-preview7.png" title="Swashbuckle results for .NET 9 preview 7" class="img-fluid" >}}
     </div>
   </div>
 </div>
@@ -431,13 +431,13 @@ Compared to itself from preview 7, it's now **~11x** faster and allocates **~18x
 <div class="container mx-1">
   <div class="row">
     <div class="col">
-      <img class="img-fluid" src="https://cdn.martincostello.com/blog_openapi-aspnetcore-rc1.png" alt="ASP.NET Core results for .NET 9 preview 7" title="ASP.NET Core results for .NET 9 preview 7" >
+      {{< cdn-image path="openapi-aspnetcore-rc1.png" title="ASP.NET Core results for .NET 9 release candidate 1" class="img-fluid" >}}
     </div>
     <div class="col">
-      <img class="img-fluid" src="https://cdn.martincostello.com/blog_openapi-nswag-rc1.png" alt="NSwag results for .NET 9 preview 7" title="NSwag results for .NET 9 preview 7">
+      {{< cdn-image path="openapi-nswag-rc1.png" title="NSwag results for .NET 9 release candidate 1" class="img-fluid" >}}
     </div>
     <div class="col">
-      <img class="img-fluid" src="https://cdn.martincostello.com/blog_openapi-swashbuckle-rc1.png" alt="Swashbuckle results for .NET 9 preview 7" title="Swashbuckle results for .NET 9 preview 7">
+      {{< cdn-image path="openapi-swashbuckle-rc1.png" title="Swashbuckle results for .NET 9 release candidate 1" class="img-fluid" >}}
     </div>
   </div>
 </div>

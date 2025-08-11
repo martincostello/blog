@@ -115,11 +115,11 @@ _Apologies if you speak French, German, Japanese or Spanish and the text isn't..
 
 Below is a screenshot of the application when set to use UK English.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_todoapp-english.png" alt="Todo application in UK English" title="Todo application in UK English">
+{{< cdn-image path="todoapp-english.png" title="Todo application in UK English" >}}
 
 Below is a screenshot of the application when the language is changed to the pseudo-locale. Notice that all of the text has been updated except for the user-provided Todo items' descriptions. Even the operating system-formatted date has been changed.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_todoapp-pseudo.png" alt="Todo application in pseudo-localized English" title="Todo application in pseudo-localized English">
+{{< cdn-image path="todoapp-pseudo.png" title="Todo application in pseudo-localized English" >}}
 
 You can find the source `.resx` file [here](https://github.com/martincostello/aspnet-core-pseudo-localization/blob/main/src/TodoApp/Resources.resx "Resources.resx") and the `.xlf` files [here](https://github.com/martincostello/aspnet-core-pseudo-localization/tree/main/src/TodoApp/xlf "xlf files").
 

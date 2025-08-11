@@ -4,7 +4,7 @@ date: 2023-07-10
 tags: dotnet,preview,upgrade
 layout: post
 description: "Why should you upgrade to .NET 8?"
-image: "https://cdn.martincostello.com/blog_spiderman-upgrades.jpg"
+cdnImage: "spiderman-upgrades.jpg"
 ---
 
 Another year, another new major version of .NET is coming - .NET **8**, to be specific.
@@ -19,7 +19,7 @@ Long Term Support (LTS) release ([see here][dotnet-release-types]).
 
 There's a nice graphic here from the .NET website that illustrates how things look today:
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-8-releases.svg" alt="A timeline showing the support for .NET 5 in 2020 through to .NET 9 in 2024" title="A timeline showing the support for .NET 5 in 2020 through to .NET 9 in 2024">
+{{< cdn-image path="dotnet-8-releases.svg" title="A timeline showing the support for .NET 5 in 2020 through to .NET 9 in 2024" >}}
 
 That means .NET 8 will be the next LTS release and supercede .NET 6 _and also_ .NET 7 by the end of 2024.
 
@@ -44,7 +44,7 @@ but these are typically few in number and are usually easy to fix.
 
 This screenshot from the talk illustrates the sort of improvements you can expect to see from a simple upgrade.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-8-performance.png" alt="A bar chart comparing the requests per second gained by upgrading from .NET Core 3.1 to .NET 5, 6, 7 and 8 preview 4" title="A bar chart comparing the requests per second gained by upgrading from .NET Core 3.1 to .NET 5, 6, 7 and 8 preview 4">
+{{< cdn-image path="dotnet-8-performance.png" title="A bar chart comparing the requests per second gained by upgrading from .NET Core 3.1 to .NET 5, 6, 7 and 8 preview 4" >}}
 
 That makes it seem like a no-brainer to upgrade to me. With lots of people being cost concious these days,
 [penny pinching in the cloud][penny-pinching] can be a big deal, and small improvements magnified across
@@ -78,7 +78,7 @@ This gives us a high confidence to adopt the latest .NET releases as soon as the
 a period of time for them to _"bake in"_ by letting others [step on the rakes][rakes] for us. If everyone did that,
 no one would ever upgrade anything!
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_spiderman-upgrades.jpg" alt="Meme of three Spider-Men pointing at each other about upgrading .NET" title="Meme of three Spider-Men pointing at each other about upgrading .NET">
+{{< cdn-image path="spiderman-upgrades.jpg" title="Meme of three Spider-Men pointing at each other about upgrading .NET" >}}
 
 ## What's in this series?
 

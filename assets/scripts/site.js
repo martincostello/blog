@@ -21,7 +21,9 @@ window.addEventListener('load', async () => {
   if ('serviceWorker' in navigator) {
     try {
       const version = window.siteParameters?.version || '';
-      await navigator.serviceWorker.register('/service-worker.js?' + new URLSearchParams({ v: version }));
+      await navigator.serviceWorker.register(
+        '/service-worker.js?' + new URLSearchParams({ v: version })
+      );
     } catch (e) {
       console.error('Failed to register Service Worker: ', e);
     }

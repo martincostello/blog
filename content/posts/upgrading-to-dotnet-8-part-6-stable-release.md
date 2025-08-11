@@ -4,14 +4,14 @@ date: 2023-11-20
 tags: dotnet,preview,upgrade
 layout: post
 description: "Highlights from upgrading to the stable release of .NET 8"
-image: "https://cdn.martincostello.com/blog_dotnet-bot.png"
+cdnImage: "dotnet-bot.png"
 ---
 
 Last week at [.NET Conf 2023][dotnet-conf], the stable release of .NET 8 was released as the latest [Long Term Support][dotnet-support-policy] (LTS) release of the .NET platform.
 
 With the release of .NET 8.0.0 and the end of the preview releases, my past week can be summed up by the following image:
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_upgrade-all-the-things.jpg" alt="The All the Things meme, with the text: Upgrade All The Things To .NET 8" title="The All the Things meme, with the text: Upgrade All The Things To .NET 8">
+{{< cdn-image path="upgrade-all-the-things.jpg" title="The All the Things meme, with the text: Upgrade All The Things To .NET 8" >}}
 
 <!--more-->
 

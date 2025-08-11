@@ -4,7 +4,7 @@ date: 2016-10-18
 tags: browserstack,automate,dotnet core,
 layout: post
 description: "BrowserStack Automate API client 2.0.1 released - now supporting .NET Core!"
-image: "https://cdn.martincostello.com/blog_browserstack-logo.png"
+cdnImage: "browserstack-logo.png"
 ---
 
 I've just released [version 2.0.1](https://www.nuget.org/packages/MartinCostello.BrowserStack.Automate) of the [BrowserStack Automate](https://www.browserstack.com/automate) .NET client open source project that I maintain on [GitHub](https://martincostello.github.io/browserstack-automate/).

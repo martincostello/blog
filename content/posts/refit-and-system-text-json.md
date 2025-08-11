@@ -140,7 +140,7 @@ The results are fairly impressive on my laptop running Windows 10 ([full results
   </tbody>
 </table>
 
-<hr/>
+---
 
 For these specific example requests and responses, for reading an object **the mean time per operation is reduced by 87%** and the amount of **memory allocated reduced by 55%**!
 

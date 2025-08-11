@@ -25,7 +25,7 @@ bit of time to bed-in and sort out), I found that whenever I tried to log in to
 the sample application using the Codespaces preview URL when I ran it in the
 debugger, I'd be greeted with an HTTP 405 error ([Method Not Allowed][14]).
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_http-405.png" alt="HTTP 405 error" title="HTTP 405 error">
+{{< cdn-image path="http-405.png" title="HTTP 405 error" >}}
 
 However, the error page wasn't coming from my app. The `Server` HTTP response
 header identified it as NGINX, and turning up the default log level to `Trace`

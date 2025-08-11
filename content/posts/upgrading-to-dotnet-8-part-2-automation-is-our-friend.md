@@ -4,7 +4,7 @@ date: 2023-07-11
 tags: dotnet,preview,upgrade,automation,github,actions
 layout: post
 description: "Making it easier to test .NET previews using GitHub Actions for on-going automation."
-image: "https://cdn.martincostello.com/blog_dotnet-8-upgrade-report.png"
+cdnImage: "dotnet-8-upgrade-report.png"
 ---
 
 In [part 1 of this series][part-1] I recommended that you prepare to upgrade to .NET 8 and suggested
@@ -139,7 +139,7 @@ change that needs some manual intervention. In these cases, Rebaser can do the h
 At this point we have a workflow that does our version updates for us and another that rebases the branch when it
 needs it, but both of these workflows need to be run manually. That's not very automated, is it?
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_an-automated-solution.gif" alt="A drinking bird pressing a button on a keyboard" title="A drinking bird pressing a button on a keyboard">
+{{< cdn-image path="an-automated-solution.gif" title="A drinking bird pressing a button on a keyboard" >}}
 
 What if we could automate the automation (whoa, meta) to run the workflows for us when we need them to? What if we
 could run the workflows for _all_ of the repositories we're testing .NET previews with? That sounds like something
@@ -151,7 +151,7 @@ that would really save us some time each month.
 - When changes are found, which _usually_ implies a new release is available, the workflow [raises a repository dispatch event][github-api-create-repo-dispatch] named `dotnet_release`.
 - This event triggers the [`update-dotnet-sdks`][update-dotnet-sdks] workflow which runs the `update-dotnet-sdk` workflow in each repository that has opted-in to the automation for the `main` branch. This isn't run for `dotnet-vnext` at the moment as when the release notes change there's likely a new version of .NET 6, 7 and 8 at the same time. Running just for `main` means we can get the .NET 6/7 updates applied to it first, and then the .NET 8 updates later as it would just create a merge conflict anyway.
 
-<s>In the future I might extend this to be smarter and determine whether a preview (or not) has been released, and then run the workflow for either `main` or `dotnet-vnext` as appropriate.</s>
+~~In the future I might extend this to be smarter and determine whether a preview (or not) has been released, and then run the workflow for either `main` or `dotnet-vnext` as appropriate.~~
 
 I updated the workflow above to handle this scenario. It now checks the `release-notes/**/releases.json` file(s) for the latest version(s) of .NET that have been released. If any version is a preview, then it will run the workflow for `dotnet-vnext`; for any others it will run the workflow for `main`. The commit that made those changes can be [found here][improvement-commit].
 
@@ -164,7 +164,7 @@ I updated the workflow above to handle this scenario. It now checks the `release
 A sequence diagram of how all the workflows and events fit together is shown below.
 
 <a href="https://github.com/martincostello/github-automation/blob/main/docs/dotnet-vnext.md#sequence-diagram" target="_blank">
-  <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-vnext-sequence.png" alt="A sequence diagram showing the automated workflow" title="A sequence diagram showing the automated workflow">
+  {{< cdn-image path="dotnet-vnext-sequence.png" title="A sequence diagram showing the automated workflow" >}}
 </a>
 
 More detailed information about how the workflows above operate can be found in _[Testing .NET vNext][dotnet-vnext]_.
@@ -190,7 +190,7 @@ any rows that might be of interest. An example of the report can be found [here]
 
 Here's a snippet from one as an example:
 
-<img class="img-fluid mx-auto d-block w-75" src="https://cdn.martincostello.com/blog_dotnet-8-upgrade-report.png" alt="An example upgrade report showing the status of 9 repositories' upgrades" title="An example upgrade report showing the status of 9 repositories' upgrades">
+{{< cdn-image path="dotnet-8-upgrade-report.png" title="An example upgrade report showing the status of 9 repositories' upgrades" class="img-fluid mx-auto d-block w-75" >}}
 
 As you can see above, at the time the report was generated all of the repositories' CI were passing and
 using the latest .NET 8 preview SDK, but the [adventofcode repository][advent-of-code] had a merge
@@ -232,7 +232,7 @@ a lot of the boring parts of upgrading from one .NET preview to the next. These 
 
 - Watch for new .NET versions using the JSON release notes
 - Use the [update-dotnet-sdk] GitHub action to update the .NET SDK and NuGet packages for the repositories we're testing
-- Keep changes that break the CI in a separate branch and pull request for manual inspection <s>if</s> when an issue is found
+- Keep changes that break the CI in a separate branch and pull request for manual inspection ~~if~~ when an issue is found
 - Automatically rebase the `dotnet-vnext` branch as and when needed (or make it easier to do so manually)
 
 With these parts automated, we can focus on the more interesting parts of the process that come up, like any issues we

@@ -4,7 +4,7 @@ date: 2019-11-11
 tags: aws,dotnet,lambda,testing
 layout: post
 description: "Using Lambda Test Server to integration test your C# AWS Lambda functions for .NET Core locally when using a custom runtime."
-image: "https://cdn.martincostello.com/blog_lambda-dotnet-core.png"
+cdnImage: "lambda-dotnet-core.png"
 ---
 
 _Lambda Test Server_ is a .NET Core 3.0 library available from [NuGet](https://www.nuget.org/packages/MartinCostello.Testing.AwsLambdaTestServer/ "MartinCostello.Testing.AwsLambdaTestServer on NuGet.org") which builds on top of the [`TestServer`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.testhost.testserver "TestServer Class on Microsoft Docs") class in the [Microsoft.AspNetCore.TestHost NuGet package](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost/ "Microsoft.AspNetCore.TestHost on NuGet.org") to provide infrastructure to use with end-to-end/integration tests for .NET Core AWS Lambda Functions using a [custom runtime](https://aws.amazon.com/blogs/developer/net-core-3-0-on-lambda-with-aws-lambdas-custom-runtime/ ".NET Core 3.0 on Lambda with AWS Lambda’s Custom Runtime").
