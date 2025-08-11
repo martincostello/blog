@@ -31,7 +31,7 @@ Highlights of the upgrade have included:
 
 Through testing with the preview releases over this release cycle, the upgrade to the stable release was pretty much a non-event, everything Just Worked™️.
 
-There was only one thing which caught me out, and that was that the `Microsoft.Extensions.Http.Telemetry` NuGet package was renamed between RC2 and the stable release to [`Microsoft.Extensions.Http.Diagnostics`][ms-extensions-http-diag]. This was temporarily confusing as the [annoucement blog post][dotnet-8-annoucement] included the old name, but the 8.0.0 NuGet package was not available. I [queried this with the team][dotnet-extensions-4723] and they confirmed the name change the next day.
+There was only one thing which caught me out, and that was that the `Microsoft.Extensions.Http.Telemetry` NuGet package was renamed between RC2 and the stable release to [`Microsoft.Extensions.Http.Diagnostics`][ms-extensions-http-diag]. This was temporarily confusing as the [announcement blog post][dotnet-8-announcement] included the old name, but the 8.0.0 NuGet package was not available. I [queried this with the team][dotnet-extensions-4723] and they confirmed the name change the next day.
 
 Within 24 hours of the release, I'd updated all of the applications and libraries I'm responsible for maintaining to either target .NET 8, or build with the .NET 8 SDK. 🚀
 
@@ -41,7 +41,7 @@ There was however a _tangential_ issue I stumbled into while working through all
 
 On the 9th of November, AWS [announced support for Amazon Linux 2023][aws-lambda-al2023] as a custom runtime for AWS Lambda. I've been waiting for this to be released for a while as it has been in preview for quite some time, and I've been using the Amazon Linux 2 custom runtime since it was released. Amazon Linux 2023 also looks like it'll be the basis for any forthcoming AWS Lambda managed runtime support for .NET 8 (soon I hope 🤞) - it's already used as the basis for the new [Node.js 20.x and Java 21 managed runtimes][aws-lambda-runtimes].
 
-I was just leaving for a short break in Norway when the release was announced, so I didn't see the annoucement until I next sat in front of a computer again on the 14th of November. As I was already (or about to) update a bunch of applications for .NET 8 later in the day, I figured I'd get ahead of the curve and update the AWS Lambda functions I maintain to use the new runtime in advance of those changes.
+I was just leaving for a short break in Norway when the release was announced, so I didn't see the announcement until I next sat in front of a computer again on the 14th of November. As I was already (or about to) update a bunch of applications for .NET 8 later in the day, I figured I'd get ahead of the curve and update the AWS Lambda functions I maintain to use the new runtime in advance of those changes.
 
 Things were all pretty painless as with the subsequent .NET 8 updates...or so I thought.
 
@@ -132,7 +132,7 @@ You can find links to the other posts in this series below.
 [aws-aws-lambda-dotnet-1620]: https://github.com/aws/aws-lambda-dotnet/issues/1620 "Install tzdb on provided.al2023 runtime so that TimeZoneInfo.FindSystemTimeZoneById() works"
 [aws-lambda-al2023]: https://aws.amazon.com/about-aws/whats-new/2023/11/aws-lambda-amazon-linux-2023/ "AWS Lambda adds support for Amazon Linux 2023"
 [aws-lambda-runtimes]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-[dotnet-8-annoucement]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/ "Announcing .NET 8"
+[dotnet-8-announcement]: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/ "Announcing .NET 8"
 [dotnet-conf]: https://www.dotnetconf.net/ ".NET Conf 2023"
 [dotnet-extensions-4723]: https://github.com/dotnet/extensions/issues/4723 "Missing stable package for Microsoft.Extensions.Http.Telemetry"
 [dotnet-support-policy]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core ".NET and .NET Core Support Policy"

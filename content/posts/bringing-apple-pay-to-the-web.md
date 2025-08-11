@@ -11,7 +11,7 @@ image: "https://cdn.martincostello.com/blog_apple-pay-hero.png"
 
 ## Introduction
 
-Back in June at [WWDC][annoucement], Apple announced that [Apple Pay][apple-pay] was expanding its reach.
+Back in June at [WWDC][announcement], Apple announced that [Apple Pay][apple-pay] was expanding its reach.
 No longer just for apps and Wallet on TouchID compatible iOS devices and the Apple Watch, it would also
 be coming to Safari in iOS 10 and macOS Sierra in September 2016.
 
@@ -709,7 +709,7 @@ ASP.NET Core (the good and the not so good).
 Just Eat is here to help you find your flavour, and with Apple Pay as a payment option in our website now, we
 hope you’ll now be able to find it even easier!
 
-[annoucement]: https://developer.apple.com/videos/play/wwdc2016/703/
+[announcement]: https://developer.apple.com/videos/play/wwdc2016/703/
 [apple-pay]: https://www.apple.com/uk/apple-pay/
 [apple-pay-applepaysession]: https://developer.apple.com/documentation/applepayontheweb/applepaysession/applepaysession
 [apple-pay-begin]: https://developer.apple.com/documentation/applepayontheweb/applepaysession/begin

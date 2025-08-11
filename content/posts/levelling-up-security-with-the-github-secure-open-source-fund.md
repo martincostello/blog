@@ -35,7 +35,7 @@ participation that I've been able apply not just to Polly, but for other project
 
 ## The Application Process
 
-I'd heard about the GitHub Secure Open Source Fund when it was [first announced][github-sosf-annoucement] in November 2024, but at the
+I'd heard about the GitHub Secure Open Source Fund when it was [first announced][github-sosf-announcement] in November 2024, but at the
 time I didn't think of myself as "worthy" of such an opportunity. Maybe this was just the [Impostor Syndrome][impostor-syndrome] talking,
 but the projects I was used to seeing participating in things such as this were typically really popular and famous projects written in
 languages such as JavaScript, Go, or Python. C# doesn't usually appear among the ranks of the participants for these sort of initiatives.
@@ -89,7 +89,7 @@ implement them or whether I use their projects myself.
 So did I learn anything new from my participation in the GitHub Secure Open Source Fund? Absolutely!
 
 I've done security training modules for software before, but never with a focus on open source projects and their unique challenges.
-While the sessions may have covered topics I was already familar with, such as use of [CodeQL][codeql], the context and application
+While the sessions may have covered topics I was already familiar with, such as use of [CodeQL][codeql], the context and application
 to open source provided a significant levelling up in my understanding of these areas.
 
 We were encouraged to make notes as the program went along, and reviewing them now as I write this blog post, there's a number of items
@@ -100,7 +100,7 @@ I thought it would be worth mentioning here.
 While you might use an [OSI Approved License][osi-licences] for your open source project (e.g. Apache 2.0), it's important to check
 that _all_ the dependencies and components you use and distribute to others via your project are also compatible with that license.
 Including a dependency that uses a license that isn't compatible with closed source software, for example, could limit the number of
-people who can use your project. It's important to understand the disctinction between "open source" and "source open".
+people who can use your project. It's important to understand the distinction between "open source" and "source open".
 
 Tools such as [GitHub's dependency-review-action][dependency-review-action] can help automate the process of checking for license
 compatibility across your project's dependencies to help ensure that you do not accidentally add a dependency with an incompatible license.
@@ -162,7 +162,7 @@ source community at scale. 💖
 [fuzzing]: https://en.wikipedia.org/wiki/Fuzzing "Fuzzing on Wikipedia"
 [github-attestations]: https://docs.github.com/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations "Using artifact attestations to establish provenance for builds"
 [github-sosf]: https://resources.github.com/github-secure-open-source-fund/ "GitHub Secure Open Source Fund"
-[github-sosf-annoucement]: https://github.blog/news-insights/company-news/announcing-github-secure-open-source-fund/ "Announcing GitHub Secure Open Source Fund: Help secure the open source ecosystem for everyone"
+[github-sosf-announcement]: https://github.blog/news-insights/company-news/announcing-github-secure-open-source-fund/ "Announcing GitHub Secure Open Source Fund: Help secure the open source ecosystem for everyone"
 [github-sosf-session-2]: https://github.blog/open-source/maintainers/securing-the-supply-chain-at-scale-starting-with-71-important-open-source-projects/ "Securing the supply chain at scale: Starting with 71 important open source projects"
 [generate-sbom]: https://github.com/App-vNext/Polly/pull/2640 "Generate SBOM"
 [impostor-syndrome]: https://en.wikipedia.org/wiki/Impostor_syndrome "Impostor syndrome on Wikipedia"
