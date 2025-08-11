@@ -163,7 +163,7 @@ source community at scale. 💖
 [github-attestations]: https://docs.github.com/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations "Using artifact attestations to establish provenance for builds"
 [github-sosf]: https://resources.github.com/github-secure-open-source-fund/ "GitHub Secure Open Source Fund"
 [github-sosf-annoucement]: https://github.blog/news-insights/company-news/announcing-github-secure-open-source-fund/ "Announcing GitHub Secure Open Source Fund: Help secure the open source ecosystem for everyone"
-[github-sosf-session-2]: TODO "TODO"
+[github-sosf-session-2]: https://github.blog/open-source/maintainers/securing-the-supply-chain-at-scale-starting-with-71-important-open-source-projects/ "Securing the supply chain at scale: Starting with 71 important open source projects"
 [generate-sbom]: https://github.com/App-vNext/Polly/pull/2640 "Generate SBOM"
 [impostor-syndrome]: https://en.wikipedia.org/wiki/Impostor_syndrome "Impostor syndrome on Wikipedia"
 [irp]: https://github.com/App-vNext/Polly/pull/2661 "Add incident response plan"
