@@ -4,7 +4,7 @@ date: 2023-07-12
 tags: dotnet,preview,upgrade
 layout: post
 description: "Highlights from upgrading to .NET 8 previews 1-5"
-image: "https://cdn.martincostello.com/blog_dotnet-bot.png"
+cdnImage: "dotnet-bot.png"
 ---
 
 In the [previous post of this series][part-2] I described how with some
@@ -74,7 +74,7 @@ This opt-in change allows you to change from having a separate `bin` and `obj` f
 per project to instead have a single `artifacts` folder in the root of the solution
 directory that instead contains all of the output from your build and publish steps.
 
-<img class="img-fluid mx-auto d-block w-75" src="https://cdn.martincostello.com/blog_artifacts-output.png" alt="The new artifacts output folder" title="The new artifacts output folder">
+{{< cdn-image path="artifacts-output.png" title="The new artifacts output folder" class="img-fluid mx-auto d-block w-75" >}}
 
 This makes it much easier to find the output artifacts for your application and
 process them, such as when deploying an application to a remote server or

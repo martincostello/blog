@@ -21,10 +21,7 @@ some great performance improvements – in some cases **improving average respon
 
 ## Background
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_aspnet-core-releases.png"
-     alt="ASP.NET Core release timeline"
-     title="ASP.NET Core release timeline">
+{{< cdn-image path="aspnet-core-releases.png" title="ASP.NET Core release timeline" >}}
 
 .NET Core 1.0 was released almost 2 years ago now, [in June 2016][dotnet-core-10], and we’ve been using it
 in some form or another at Just Eat ever since. Early adoption was rather limited amongst our teams, mainly
@@ -52,10 +49,7 @@ run on .NET Framework 4.6.x.
 
 A simple illustration of how these applications fit together in our architecture is shown below.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_aws-network.png"
-     alt="Application architecture"
-     title="Application architecture">
+{{< cdn-image path="aws-network.png" title="Application architecture" >}}
 
 From Previews 1 and 2 to Release Candidate 1, we experimented with various new features and capabilities, as
 well as finding a few [bugs][bugs], [feature gaps][feature-gaps] and other changes along the way.
@@ -104,49 +98,31 @@ CPU statistics are collected separately on our AWS EC2 instances and also pushed
 
 ### API
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_api-response-times.png"
-     alt="Response times from the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="Response times from the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
+{{< cdn-image path="api-response-times.png" title="Response times from the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift." >}}
 
 The API averaged `107ms` per HTTP GET compared to `141ms` (**approximately a 24% improvement**), with much less deviation.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_api-requests.png"
-     alt="Request rate to the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="Request rate to the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
+{{< cdn-image path="api-requests.png" title="Request rate to the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift." >}}
 
 The overall request rate also is shown to give an indication of the relative load on the API.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_api-cpu.png"
-     alt="CPU utilisation of the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="CPU utilisation of the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
+{{< cdn-image path="api-cpu.png" title="CPU utilisation of the API between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift." >}}
 
 CPU usage is also illustrated, which again shows a slight overall improvement. The spike in the graph is where auto-scaling
 increased the number of EC2 instances in service based on average CPU load.
 
 ### Web
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_web-response-times.png"
-     alt="Response times from the web application between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="Response times from the web application between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
+{{< cdn-image path="web-response-times.png" title="Response times from the web application between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift." >}}
 
 The web app averaged `130ms` per page render compared to `230ms` (**approximately a 43% improvement**) which again shows
 much less deviation.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_web-requests.png"
-     alt="Request rate to the web application between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="Request rate to the web application between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
+{{< cdn-image path="web-requests.png" title="Request rate to the web application between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift." >}}
 
 The overall request rate also is shown to give an indication of the relative load on the web application.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_web-cpu.png"
-     alt="CPU utilisation of the website between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift."
-     title="CPU utilisation of the website between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift.">
+{{< cdn-image path="web-cpu.png" title="CPU utilisation of the website between 16:30 and 22:30 on 10/06/18 with a -7 day timeshift." >}}
 
 CPU usage is also illustrated, which again shows a slight overall improvement. The spikes in the graph is where auto-scaling
 increased the number of EC2 instances in service based on average CPU load.

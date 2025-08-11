@@ -4,10 +4,10 @@ date: 2024-05-02
 tags: containers,docker,dotnet
 layout: post
 description: "Publishing a .NET application as a container image using the .NET SDK without needing a Dockerfile and attesting the provenance of the image with GitHub Actions."
-image: "https://cdn.martincostello.com/blog_dotnet-containers.jpg"
+cdnImage: "dotnet-containers.jpg"
 ---
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_dotnet-containers.jpg" alt="A container ship being loaded with the .NET logo on the stern" title="A container ship being loaded with the .NET logo on the stern" height="384px" width="757px">
+{{< cdn-image path="dotnet-containers.jpg" title="A container ship being loaded with the .NET logo on the stern" height="384px" width="757px" >}}
 
 Containers have been a thing in the software ecosystem for a few years now, with lots of associated technologies and
 concepts - Docker, Kubernetes, Helm charts, sidecars and many more. Using containers simplifies the deployment of your

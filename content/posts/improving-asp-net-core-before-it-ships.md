@@ -4,7 +4,7 @@ date: 2022-05-03
 tags: dotnet,aspnetcore,performance
 layout: post
 description: "Upgrading to ASP.NET Core 2.1 can deliver serious performance improvements to your web applications as well as make you much more productive as a developer."
-image: "https://cdn.martincostello.com/blog_deadlock-parallel-stacks.webp"
+cdnImage: "deadlock-parallel-stacks.webp"
 ---
 
 > _This blog post was originally published by me on the [Just Eat Tech blog][original-post]._
@@ -54,10 +54,7 @@ system fired up and paged the on-call engineer for the application. Clients of t
 request timeouts and HTTP 503 errors. Looking at the AWS Auto Scaling Group for the app showed that there appeared
 to be no healthy instances. This seemed like a classic case of an application [deadlock][deadlock].
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_deadlock-request-rate.webp"
-     alt="HTTP requests to the application when the deadlock occurred."
-     title="HTTP requests to the application when the deadlock occurred.">
+{{< cdn-image path="deadlock-request-rate.webp" title="HTTP requests to the application when the deadlock occurred." >}}
 
 We deployed the changes hours ago and had no issues with previews and all our tests had passed — what had gone wrong?
 🤔 The app self-healed within 20 minutes, we rolled back to the old version and started to look into it.
@@ -122,10 +119,7 @@ stacks showed that one stack was waiting on another stack and vice-versa (there 
 Threads for user requests were waiting on a lock held by reloading the config. The thread reloading the config was
 waiting on a lock held by those user requests. Here was our deadlock!
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_deadlock-parallel-stacks.webp"
-     alt="The parallel stacks in the deadlocked application."
-     title="The parallel stacks in the deadlocked application.">
+{{< cdn-image path="deadlock-parallel-stacks.webp" title="The parallel stacks in the deadlocked application." >}}
 
 ## Getting the Bug Fixed 🐛🔧
 

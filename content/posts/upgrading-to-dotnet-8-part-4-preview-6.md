@@ -4,7 +4,7 @@ date: 2023-07-19
 tags: dotnet,preview,upgrade
 layout: post
 description: "Highlights from upgrading to .NET 8 preview 6"
-image: "https://cdn.martincostello.com/blog_dotnet-bot.png"
+cdnImage: "dotnet-bot.png"
 ---
 
 Following on from [part 3][part-3] of this series, I've been continuing

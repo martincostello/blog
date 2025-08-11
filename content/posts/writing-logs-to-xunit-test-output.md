@@ -95,7 +95,9 @@ public sealed class Calculator
 
 As you can see below, the logging output is available in the test results in Visual Studio. If the test were to fail, the output would also be written to the console, such as to diagnose a failing test running in [AppVeyor](https://www.appveyor.com/ "AppVeyor website").
 
+<!-- markdownlint-disable MD033 -->
 <img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/xunit-logging-vs-test-output.png" alt="Test output in Visual Studio" title="Test output in Visual Studio">
+<!-- markdownlint-enable MD033 -->
 
 There's also an example of registering the logger for a self-hosted ASP.NET Core application using `WebApplicationFactory<T>` for functional tests in the [sample integration tests](https://github.com/martincostello/xunit-logging/blob/c83d15591df4b5b31f2b40ee43d9b67cf8d628d5/tests/Logging.XUnit.Tests/Integration/HttpApplicationTests.cs "Example HTTP integration tests") in the library's own test project using a sample application.
 

@@ -4,7 +4,7 @@ date: 2023-10-13
 tags: dotnet,preview,upgrade
 layout: post
 description: "Highlights from upgrading to .NET 8 preview 7 and release candidates 1 and 2"
-image: "https://cdn.martincostello.com/blog_dotnet-bot.png"
+cdnImage: "dotnet-bot.png"
 ---
 
 This post is a bumper edition, covering three different releases:
@@ -190,7 +190,7 @@ response times for requests!
 
 Spot where the code change got deployed... 🕵️
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_jsonserializeroptions-too-slow.png" alt="A graph showing the performance impact of the bad change" title="A graph showing the performance impact of the bad change">
+{{< cdn-image path="jsonserializeroptions-too-slow.png" title="A graph showing the performance impact of the bad change" >}}
 
 While in this case the analyzer may not have helped as it was an issue with the dependency injection configuration, it's good to
 know that investment has been made to help avoid developers causing the same problem in different scenarios.

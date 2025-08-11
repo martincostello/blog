@@ -4,7 +4,7 @@ date: 2017-08-28
 tags: aws,cloudfront,lambda,lambda@edge,s3
 layout: post
 description: "Migrating a static website from being hosted with IIS in Azure to S3, CloudFront and Lambda@Edge in AWS."
-image: "https://cdn.martincostello.com/blog_amazon-simple-storage-service.png"
+cdnImage: "amazon-simple-storage-service.png"
 ---
 
 Since I set up my blog in March 2014, it's been running in IIS as part of an Azure App Service. Initially this was required as the blog was originally a WordPress site, so a server was required to run the PHP code for WordPress. However when I got fed up with keeping WordPress up-to-date and [migrated to a static Middleman site](/why-i-switched-from-wordpress-to-middleman/ "Why I Switched From WordPress To Middleman"), I left it hosted in Azure. This was mainly because it was the easiest option, as that's where it was already, but also because this allowed me to specify HTTP response headers still, such as for `X-Frame-Options`.
@@ -21,27 +21,23 @@ Things were already in a fairly good starting point for the migration. The code 
 
 So to start I needed an S3 bucket. I had actually already created an S3 bucket last year after I found out that your bucket has to have the _exact_ same name as your DNS hostname for the website you want to host, so I wanted to make sure it belonged to me. However, when I'd set it up I'd set it up in the wrong region. No biggie, I'll just delete it and recreate it right? Almost.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_one-does-not-simply-recreate-an-s3-bucket.jpg" alt="One does not simply recreate an S3 bucket" title="One does not simply recreate an S3 bucket">
+{{< cdn-image path="one-does-not-simply-recreate-an-s3-bucket.jpg" title="One does not simply recreate an S3 bucket" >}}
 
 Turns out that because S3 bucket names are global and because S3 is a distributed system, **fully** deleting an S3 bucket actually takes a non-trivial amount of time. Once I deleted the bucket from the AWS Console, I tried to recreate it in a new region. This failed immediately in the wizard for the first minute or so because it said that a DNS entry for the bucket already existed. Once that error resolved itself I could continue through the wizard to set things up, but it would then fail on the final step with the error:
 
-<blockquote class="blockquote">
-  <p class="mb-0">
-    A conflicting conditional operation is currently in progress against this resource. Please try again.
-  </p>
-</blockquote>
+> A conflicting conditional operation is currently in progress against this resource. Please try again.
 
 What? A quick search turns up this [answer on StackOverflow](https://stackoverflow.com/a/16553056/1064169 "Answer on StackOverflow for the error message"). Turns out I just need to wait. For an hour.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_homer-simpson-chair-goes-round.gif" alt="Chair goes round, chair goes round..." title="Chair goes round, chair goes round...">
+{{< cdn-image path="homer-simpson-chair-goes-round.gif" title="Chair goes round, chair goes round..." >}}
 
 With the S3 bucket effectively moved, it needs configuring to enable Static website hosting with the appropriate index and error pages.
 
 Once I've got the S3 bucket created in the correct region, I could press on. The steps were fairly simple:
 
   1. Add a deployment section to the `.travis.yml` file to copy the static content for the site to S3: [configuration](https://github.com/martincostello/blog/blob/5db3f6495e8accaaa567171b871a225c4e0f8d57/.travis.yml#L18-L28 "S3 deployment configuration in GitHub").
-  1. Copy my TLS certificate to Amazon Certificate Manager in `us-east-1`.
-  1. Set up a new CloudFront web distribution to serve the content from the S3 bucket (more waiting) with a CNAME for `blog.martincostello.com`.
+  2. Copy my TLS certificate to Amazon Certificate Manager in `us-east-1`.
+  3. Set up a new CloudFront web distribution to serve the content from the S3 bucket (more waiting) with a CNAME for `blog.martincostello.com`.
   1. Configure a custom 404 error page for the distribution.
 
 ## Migrating the HTTP Response Headers
@@ -66,9 +62,9 @@ One gotcha with Lambda@Edge though, is the way it handles deployment. The functi
 
 I hope that this is something AWS improve the developer experience for in the future so that it's easy to deploy on a rolling basis like the static content is to S3 from Travis CI, rather than something requiring continual manual intervention.
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-edge-function-trigger.png" alt="Lambda@Edge function trigger" title="Lambda@Edge function trigger">
+{{< cdn-image path="lambda-edge-function-trigger.png" title="Lambda@Edge function trigger" >}}
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-edge-function-replica.png" alt="Lambda@Edge function replica" title="Lambda@Edge function replica">
+{{< cdn-image path="lambda-edge-function-replica.png" title="Lambda@Edge function replica" >}}
 
 ### Permissions Policy
 

@@ -4,10 +4,10 @@ date: 2023-11-29
 tags: aot,aws,dotnet,lambda
 layout: post
 description: "Upgrading a .NET AWS Lambda function to use native AoT for improved cold-start performance by over 85%."
-image: "https://cdn.martincostello.com/blog_lambda-go-brr.png"
+cdnImage: "lambda-go-brr.png"
 ---
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_lambda-go-brr.png" alt="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" title="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" height="384px" width="384px">
+{{< cdn-image path="lambda-go-brr.png" title="The AWS Lambda logo overlaid with the .NET logo wth some fire emojis added" height="384px" width="384px" >}}
 
 Since 2017 I've been maintaining an Alexa skill, [_London Travel_][london-travel], that provides real-time information about the status of London Underground, London Overground, and the DLR (and the Elizabeth Line). The skill is an AWS Lambda function, [originally implemented in Node.js][publishing-my-first-alexa-skill], but [since 2019][integrating-testing-dotnet-lambda-functions] it  has been implemented in .NET.
 
@@ -227,7 +227,7 @@ All-in-all it was a fun learning experience converting my first .NET application
 
 I think this image of the _Duration minimum_ metric from CloudWatch for the Lambda function over the last 2 weeks says it all. Spot when the changes were deployed... 🚀
 
-<img class="img-fluid mx-auto d-block" src="https://cdn.martincostello.com/blog_aot-lambda-cloudwatch-metrics.png" alt="An AWS CloudWatch graph of the Duration minimum metric with a pronounced decrease and consistency of the Duration in milliseconds of the Lambda function invocations since 27th November" title="An AWS CloudWatch graph of the Duration minimum metric with a pronounced decrease and consistency of the Duration in milliseconds of the Lambda function invocations since 27th November">
+{{< cdn-image path="aot-lambda-cloudwatch-metrics.png" title="An AWS CloudWatch graph of the Duration minimum metric with a pronounced decrease and consistency of the Duration in milliseconds of the Lambda function invocations since 27th November" >}}
 
 To summarise, the net effect of converting my Alexa skill's Lambda function to use native AoT are:
 

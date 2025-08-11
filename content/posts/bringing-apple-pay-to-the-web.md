@@ -653,15 +653,9 @@ postcode provided by the user in the case of a delivery order.
 Once the user authorizes payment with their finger or thumb, the sheet is dismissed, they are logged in
 to a guest account if not already logged in, and redirected to the order confirmation page.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-step-1-ios.png"
-     alt="The Apple Pay button displayed during checkout in Safari on iOS 10."
-     title="The Apple Pay button displayed during checkout in Safari on iOS 10.">
+{{< cdn-image path="apple-pay-step-1-ios.png" title="The Apple Pay button displayed during checkout in Safari on iOS 10." >}}
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-step-2-ios.png"
-     alt="The Apple Pay payment sheet in iOS."
-     title="The Apple Pay payment sheet in iOS.">
+{{< cdn-image path="apple-pay-step-2-ios.png" title="The Apple Pay payment sheet in iOS." >}}
 
 ### macOS payment flow
 
@@ -671,10 +665,7 @@ delivered for (or be ready for collection) and an optional note for the restaura
 Here the user is shown the Apple Pay button in additional to the usual button to continue through checkout
 to provide their delivery and payment details.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-step-1-macos.png"
-     alt="The Apple Pay button displayed during checkout in Safari on macOS Sierra."
-     title="The Apple Pay button displayed during checkout in Safari on macOS Sierra.">
+{{< cdn-image path="apple-pay-step-1-macos.png" title="The Apple Pay button displayed during checkout in Safari on macOS Sierra." >}}
 
 The user clicks the Apple Pay button and the Apple sheet is displayed. The user selects their payment
 card as well as their delivery address. While this happens we asynchronously validate the merchant session
@@ -682,23 +673,14 @@ to enable the ability to authorize payment using an iPhone, iPad or Apple Watch 
 iCloud account, as well as validate that the restaurant selected delivers to the postcode provided by the
 user in the case of a delivery order.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-step-2-macos.png"
-     alt="The Apple Pay payment sheet in macOS Sierra."
-     title="The Apple Pay payment sheet in macOS Sierra.">
+{{< cdn-image path="apple-pay-step-2-macos.png" title="The Apple Pay payment sheet in macOS Sierra." >}}
 
 Once the merchant session is validated, the user is then prompted to authorize the payment on their paired
 device, for example using either an iPhone with TouchID or an Apple Watch.
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-step-3-macos.png"
-     alt="Payment confirmation for a purchase from macOS using Touch ID on an iPhone."
-     title="Payment confirmation for a purchase from macOS using Touch ID on an iPhone.">
+{{< cdn-image path="apple-pay-step-3-macos.png" title="Payment confirmation for a purchase from macOS using Touch ID on an iPhone." >}}
 
-<img class="img-fluid mx-auto d-block"
-     src="https://cdn.martincostello.com/blog_apple-pay-step-3-watchos.png"
-     alt="Payment confirmation for a purchase from macOS using Apple Watch."
-     title="Payment confirmation for a purchase from macOS using Apple Watch.">
+{{< cdn-image path="apple-pay-step-3-watchos.png" title="Payment confirmation for a purchase from macOS using Apple Watch." >}}
 
 Once the user authorizes payment with their finger or thumb with TouchID or by pressing a button on their
 Apple Watch, the sheet is dismissed, they are logged in to a guest account if not already logged in, and
