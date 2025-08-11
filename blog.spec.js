@@ -24,7 +24,7 @@ test('archive links are valid', async ({ page }) => {
 
   await expect(page).toHaveTitle(/Archive/);
 
-  const archiveLinks = await page.locator('a.archive-link');
+  const archiveLinks = page.locator('a.archive-link');
   await expect(archiveLinks).not.toHaveCount(0);
 
   const articles = [];
@@ -46,7 +46,7 @@ test('page images are valid', async ({ page }) => {
 
   await page.goto('/archive/');
 
-  const archiveLinks = await page.locator('a.archive-link');
+  const archiveLinks = page.locator('a.archive-link');
   await expect(archiveLinks).not.toHaveCount(0);
 
   const pageUrls = ['/', '/about-me/', '/archive/'];
@@ -59,7 +59,7 @@ test('page images are valid', async ({ page }) => {
     await page.goto(url);
     await page.waitForLoadState('networkidle');
 
-    const images = await page.locator('img');
+    const images = page.locator('img');
 
     for (const image of await images.elementHandles()) {
       const src = await image.getAttribute('src');
@@ -72,7 +72,7 @@ test('page images are valid', async ({ page }) => {
       }).toPass();
     }
 
-    const metaImage = await page.locator('meta[property="og:image"]');
+    const metaImage = page.locator('meta[property="og:image"]');
     if (metaImage) {
       await expect(async () => {
         const src = await metaImage.getAttribute('content');
