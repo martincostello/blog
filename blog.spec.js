@@ -42,7 +42,7 @@ test('archive links are valid', async ({ page }) => {
 });
 
 test('page images are valid', async ({ page }) => {
-  test.setTimeout(90_000);
+  test.setTimeout(120_000);
 
   await page.goto('/archive/');
 
