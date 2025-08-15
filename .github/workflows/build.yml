@@ -13,6 +13,8 @@ on:
 env:
   FORCE_COLOR: 3
   TERM: xterm
+  # renovate: datasource=github-releases depName=zizmor packageName=zizmorcore/zizmor
+  ZIZMOR_VERSION: '1.12.0'
 
 permissions: {}
 
@@ -30,6 +32,7 @@ jobs:
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         filter: 'tree:0'
+        persist-credentials: false
         show-progress: false
 
     - name: Setup Node
@@ -89,12 +92,18 @@ jobs:
   lint:
     runs-on: ubuntu-latest
 
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
     steps:
 
     - name: Checkout code
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         filter: 'tree:0'
+        persist-credentials: false
         show-progress: false
 
     - name: Add actionlint problem matcher
@@ -105,7 +114,13 @@ jobs:
       with:
         args: -color
 
-    - name: Lint markdown
+    - name: Lint workflows with zizmor
+      uses: zizmorcore/zizmor-action@5ca5fc7a4779c5263a3ffa0e1f693009994446d1 # v0.1.2
+      with:
+        persona: pedantic
+        version: ${{ env.ZIZMOR_VERSION }}
+
+    - name: Lint markdown with actionlint
       uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20.0.0
       with:
         config: '.markdownlint.json'
