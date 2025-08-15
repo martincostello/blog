@@ -14,13 +14,15 @@ env:
   FORCE_COLOR: 3
   TERM: xterm
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
 
     steps:
 
