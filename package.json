@@ -11,7 +11,7 @@
   },
   "description": "Martin Costello's Blog",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "license": "Apache-2.0",
   "prettier": {
