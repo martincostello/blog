@@ -61,7 +61,7 @@ jobs:
       shell: bash
       env:
         # renovate: datasource=github-releases depName=Hugo packageName=gohugoio/hugo
-        HUGO_VERSION: 'v0.152.1'
+        HUGO_VERSION: 'v0.152.2'
       run: |
         HUGO_FILE="hugo_extended_${HUGO_VERSION#v}_Linux-64bit.tar.gz"
         TEMP_DIR="${RUNNER_TEMP}/hugo-install"
