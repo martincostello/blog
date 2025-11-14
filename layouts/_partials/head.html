@@ -35,4 +35,7 @@
     <link href="https://{{ .Site.Params.cdnDomain }}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/sitemap.xml" rel="sitemap" type="application/xml" />
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Atom" />
+    <meta name="martincostello:blog:analytics-id" content="{{ .Site.Params.analyticsId }}" />
+    <meta name="martincostello:blog:render-analytics" content="{{ .Site.Params.renderAnalytics }}" />
+    <meta name="martincostello:blog:version" content="{{ substr (getenv "GIT_COMMIT_SHA" | default "main") 0 7 }}" />
 </head>

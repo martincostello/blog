@@ -8,17 +8,11 @@ if (self === top) {
 }
 
 const siteParameters = {
-  analyticsId: '',
-  renderAnalytics: false,
-  version: '',
+  analyticsId: document.querySelector('meta[name="martincostello:blog:analytics-id"]').content,
+  renderAnalytics:
+    document.querySelector('meta[name="martincostello:blog:render-analytics"]').content === 'true',
+  version: document.querySelector('meta[name="martincostello:blog:version"]').content,
 };
-
-const siteMetadata = document.getElementById('site-metadata');
-if (siteMetadata) {
-  siteParameters.analyticsId = siteMetadata.getAttribute('data-analytics-id') || '';
-  siteParameters.renderAnalytics = siteMetadata.getAttribute('data-render-analytics') === 'true';
-  siteParameters.version = siteMetadata.getAttribute('data-version') || '';
-}
 
 window.addEventListener('load', async () => {
   setTimeout(() => {
