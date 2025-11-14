@@ -7,6 +7,19 @@ if (self === top) {
   top.location = self.location;
 }
 
+const siteParameters = {
+  analyticsId: '',
+  renderAnalytics: false,
+  version: '',
+};
+
+const siteMetadata = document.getElementById('site-metadata');
+if (siteMetadata) {
+  siteParameters.analyticsId = siteMetadata.getAttribute('data-analytics-id') || '';
+  siteParameters.renderAnalytics = siteMetadata.getAttribute('data-render-analytics') === 'true';
+  siteParameters.version = siteMetadata.getAttribute('data-version') || '';
+}
+
 window.addEventListener('load', async () => {
   setTimeout(() => {
     const images = document.querySelectorAll('img.lazy');
@@ -20,7 +33,7 @@ window.addEventListener('load', async () => {
 
   if ('serviceWorker' in navigator) {
     try {
-      const version = window.siteParameters?.version || '';
+      const version = siteParameters?.version || '';
       await navigator.serviceWorker.register(
         '/service-worker.js?' + new URLSearchParams({ v: version })
       );
@@ -45,11 +58,11 @@ window.addEventListener('load', async () => {
 })(document, 'script', 'twitter-wjs');
 
 // Google Analytics
-if (window.siteParameters && window.siteParameters.renderAnalytics) {
+if (siteParameters.renderAnalytics) {
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', window.siteParameters.analyticsId);
+  gtag('config', siteParameters.analyticsId);
 }
