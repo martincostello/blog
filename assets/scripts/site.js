@@ -7,6 +7,13 @@ if (self === top) {
   top.location = self.location;
 }
 
+const siteParameters = {
+  analyticsId: document.querySelector('meta[name="martincostello:blog:analytics-id"]').content,
+  renderAnalytics:
+    document.querySelector('meta[name="martincostello:blog:render-analytics"]').content === 'true',
+  version: document.querySelector('meta[name="martincostello:blog:version"]').content,
+};
+
 window.addEventListener('load', async () => {
   setTimeout(() => {
     const images = document.querySelectorAll('img.lazy');
@@ -20,7 +27,7 @@ window.addEventListener('load', async () => {
 
   if ('serviceWorker' in navigator) {
     try {
-      const version = window.siteParameters?.version || '';
+      const version = siteParameters?.version || '';
       await navigator.serviceWorker.register(
         '/service-worker.js?' + new URLSearchParams({ v: version })
       );
@@ -45,11 +52,11 @@ window.addEventListener('load', async () => {
 })(document, 'script', 'twitter-wjs');
 
 // Google Analytics
-if (window.siteParameters && window.siteParameters.renderAnalytics) {
+if (siteParameters.renderAnalytics) {
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', window.siteParameters.analyticsId);
+  gtag('config', siteParameters.analyticsId);
 }
