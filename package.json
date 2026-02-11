@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.58.2",
-    "@types/node": "24.10.11",
+    "@types/node": "24.10.12",
     "prettier": "3.8.1"
   }
 }
