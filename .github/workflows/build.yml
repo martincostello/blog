@@ -19,7 +19,7 @@ permissions: {}
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: read
@@ -88,7 +88,7 @@ jobs:
         if-no-files-found: error
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     permissions:
       actions: read
@@ -148,7 +148,7 @@ jobs:
 
   deploy:
     if: github.event.repository.fork == false && github.ref_name == 'deploy'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ build, lint ]
 
     environment:
