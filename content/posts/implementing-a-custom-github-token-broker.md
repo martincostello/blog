@@ -4,8 +4,10 @@ date: 2026-06-16
 tags: dotnet,typescript,github,actions,jwt,oidc
 layout: post
 description: "Implementing a custom GitHub token broker to exchange GitHub Actions OIDC tokens for GitHub access tokens using C# and TypeScript."
-cdnImage: "" # TODO
+cdnImage: "github-token-broker.png"
 ---
+
+{{< cdn-image path="github-token-broker.png" title="The GitHub Actions, OIDC, and GitHub logos with an arrow pointing from one to the next" >}}
 
 With the recent surge in [supply chain attacks][shai-hulud] targeting open source projects, I wanted to improve
 the security of my GitHub Actions workflows, and by extension my GitHub account, by implementing a custom GitHub
