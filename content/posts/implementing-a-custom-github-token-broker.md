@@ -220,6 +220,9 @@ endpoint when the workflow completes. This minimises the risk if a token is exfi
 short the default one-hour lifetime of the token to the duration of the workflow run. In some cases, the tokens issued
 to my GitHub Actions workflows might only be valid for less than a minute.
 
+You can see diagrams of the overall architecture of the token broker and how it is used in a GitHub Actions workflow
+in the [sample repository][architecture].
+
 ## Creating your own GitHub token broker
 
 If you found this approach interesting and want to implement your own GitHub token broker, I've put together a
@@ -259,6 +262,7 @@ of your own GitHub Actions workflows and software supply chain.
 
 [actions-oidc]: https://docs.github.com/actions/concepts/security/openid-connect
 [actions-secrets]: https://docs.github.com/actions/concepts/security/secrets
+[architecture]: https://github.com/martincostello/github-token-broker-sample#design-overview
 [aws-oidc]: https://docs.github.com/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws
 [azure-oidc]: https://docs.github.com/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-azure
 [azure-key-vault]: https://learn.microsoft.com/azure/key-vault/general/overview
