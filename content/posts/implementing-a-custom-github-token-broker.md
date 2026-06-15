@@ -54,7 +54,7 @@ by using GitHub Actions secrets. However, if a malicious actor is able to execut
 workflows and extract these secrets, they would be able to pivot to other repositories and potentially compromise
 significant portions of your user account and/or GitHub organisation.
 
-Tools such as [Zizmor][zizmor] can help to mitigate this risk by scanning your GitHub Actions workflows and
+Tools such as [zizmor][zizmor] can help to mitigate this risk by scanning your GitHub Actions workflows and
 highlighting code patterns that can be refactored or removed to minimise risk, and [npm v12][npm-v12] will
 disable `npm install` scripts by default, but ultimately the secrets are still present in the workflows.
 
@@ -158,6 +158,35 @@ I can do this by updating the token broker configuration in Costellobot and re-d
 
 Tokens issued for a GitHub app installation are valid for a period of one hour (more on this later).
 
+Overall the response from the token broker endpoint will look something like this:
+
+```
+{
+  "token": "ghs_XXX",
+  "type": "app",
+  "appId": 1234567890,
+  "appPermissions": {
+    "contents": "write",
+    "pull_requests": "write"
+  },
+  "appRepositories": [
+    "repo-1",
+    "repo-2"
+  ],
+  "appSlug": "my-github-app",
+  "installationId": 9876543210
+}
+```
+
+or:
+
+```
+{
+  "token": "github_pat_XXX",
+  "type": "user"
+}
+```
+
 ## Using the GitHub token broker
 
 Now that there's a token broker endpoint that can exchange GitHub Actions OIDC tokens for GitHub access tokens,
@@ -178,6 +207,11 @@ to acquire a GitHub access token for the `benchmarks` profile described above:
 
 A subsequent workflow step can then use the token in the `token` output for its own needs. You can see a concrete
 example of this in use [in this workflow][example-usage].
+
+The action works by acquiring the OIDC token from the GitHub Actions runtime and making a request to the token broker
+endpoint to exchange it for a GitHub access token for the specified profile name. The action will then set the access
+token in the `token` output variable for use in subsequent steps in the workflow. It also [masks][mask-secret] the
+returned token as a secret so that it is not logged in the GitHub Actions workflow job run's logs.
 
 When the token returned by the action is a GitHub app installation access token, the action will automatically
 revoke the token when the workflow completes, so that it cannot be used again. This is done by defining a `post` step
@@ -210,12 +244,15 @@ necessary changes to ensure it meets your security and operational requirements.
 ## Conclusion
 
 Before I implemented my GitHub token broker, I was storing GitHub access tokens in GitHub Actions secrets, with the
-same broadly-scoped GitHub PAT being used across dozens of repositories. Now with the GitHub token broker, I've been
-able to delete _every single GitHub PAT_ from my GitHub Actions secrets. Where possible, every scenario now uses a
-GitHub app installation access token with the minimum permissions required scoped to only the repositories that need
-it. For the few scenarios where I still need to use a GitHub PAT, I have generated new tokens with the minimum scopes
-required and stored them in an [Azure Key Vault][azure-key-vault] instance. If any one token is compromised, I can
-revoke it and generate a new one without it affecting other repositories.
+same broadly-scoped GitHub PAT being used across dozens of repositories.
+
+Now with the GitHub token broker, I've been able to delete _every single GitHub PAT_ from my GitHub Actions secrets.
+Where possible, every scenario now uses a GitHub app installation access token with the minimum permissions required
+scoped to only the repositories that need it. For the few scenarios where I still need to use a GitHub PAT, I have
+generated new tokens with the minimum scopes required and stored them in an [Azure Key Vault][azure-key-vault]
+instance. If any one token is compromised, I can revoke it and generate a new one without it affecting other repositories.
+The token broker also has a "kill-switch", so if there's ever an issue with the token broker itself, I can disable it
+and revoke all tokens it has issued.
 
 I hope you've found this post interesting and that it has given you some ideas for how you can improve the security
 of your own GitHub Actions workflows and software supply chain.
@@ -227,7 +264,7 @@ of your own GitHub Actions workflows and software supply chain.
 [azure-key-vault]: https://learn.microsoft.com/azure/key-vault/general/overview
 [bearer-auth]: https://learn.microsoft.com/aspnet/core/security/authentication/configure-jwt-bearer-authentication
 [costellobot]: https://github.com/martincostello/costellobot
-[custom-action]: https://github.com/martincostello/github-automation/tree/main/actions/get-github-token
+[custom-action]: https://github.com/martincostello/github-automation/blob/b9fea94e76c95217a9c8185f41a89b4e07a637d9/actions/get-github-token/action.yml
 [custom-actions]: https://docs.github.com/actions/concepts/workflows-and-actions/custom-actions
 [dependabot]: https://docs.github.com/code-security/tutorials/secure-your-dependencies/dependabot-quickstart
 [example-usage]: https://github.com/martincostello/costellobot/blob/286793adc172887a2fc4d56aadba285c54609f91/.github/workflows/benchmark.yml#L71-L87
@@ -235,10 +272,11 @@ of your own GitHub Actions workflows and software supply chain.
 [github-environments]: https://docs.github.com/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments
 [github-apps]: https://docs.github.com/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps
 [github-pats]: https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
-[renovate]: https://github.com/renovatebot/renovate
 [github-token]: https://docs.github.com/actions/tutorials/authenticate-with-github_token
+[mask-secret]: https://docs.github.com/actions/reference/workflows-and-actions/workflow-commands#masking-a-value-in-a-log
 [npm-v12]: https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12/
 [oidc-claims]: https://docs.github.com/actions/reference/security/oidc#oidc-token-claims
+[renovate]: https://github.com/renovatebot/renovate
 [revoke-token]: https://docs.github.com/rest/apps/installations#revoke-an-installation-access-token
 [sample-repo]: https://github.com/martincostello/github-token-broker-sample
 [shai-hulud]: https://www.ncsc.gov.uk/blogs/software-supply-chain-attacks-check-your-dependencies
