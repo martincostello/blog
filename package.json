@@ -40,7 +40,7 @@
     "test": "npx playwright test"
   },
   "devDependencies": {
-    "@playwright/test": "1.61.1",
+    "@playwright/test": "1.62.0",
     "@types/node": "24.13.3",
     "prettier": "3.9.6"
   }
