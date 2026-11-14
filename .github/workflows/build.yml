@@ -59,9 +59,9 @@ jobs:
       shell: bash
       env:
         # renovate: datasource=github-releases depName=Hugo packageName=gohugoio/hugo
-        HUGO_VERSION: 'v0.169.0'
+        HUGO_VERSION: 'v0.170.0'
       run: |
-        HUGO_FILE="hugo_extended_${HUGO_VERSION#v}_Linux-64bit.tar.gz"
+        HUGO_FILE="hugo_${HUGO_VERSION#v}_Linux-64bit.tar.gz"
         TEMP_DIR="${RUNNER_TEMP}/hugo-install"
         mkdir --parents "${TEMP_DIR}" && cd "${TEMP_DIR}"
         curl --silent --location "https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/${HUGO_FILE}" --output "${HUGO_FILE}"
